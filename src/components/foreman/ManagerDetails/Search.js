@@ -8,6 +8,8 @@ function Search(props) {
  
 return(
   <div className={classes.search}>
+    <h1>Search Managers</h1>
+    <br></br>
       <input
           type="text"
           placeholder="Search..."
