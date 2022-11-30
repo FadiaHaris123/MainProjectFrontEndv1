@@ -28,7 +28,7 @@ const LaunchForm = () => {
       const responseData = await response.json();
 
       const loadedManager = [];
-      const newItemList = [...responseData]
+      const newItemList = [...responseData._embedded.manager]
       for (const key in newItemList) {
         loadedManager.push({
           id: key,

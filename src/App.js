@@ -13,6 +13,7 @@ import ChittyManagers from "./components/foreman/ManagerDetails/ChittyManagers"
 import Earnings from "./components/Earnings/Earnings"
 import Auction from './components/Customer/pages/CustomerAuction/Auction'
 import AvailableChits from './components/Customer/pages/AvailableChits/AvailableChit'
+import { GrLaunch } from "react-icons/gr";
 
 function App() {
   return (

@@ -9,15 +9,18 @@
   opacity: 0.5;
 }
 table{
+  align-items: center;
     position: fixed;
-    top: 190px;
-    left: 400px;
+ 
+    /* top: 190px;
+    left: 400px; */
 }
 table, th, td {
     border: 1px solid;
   }
   
 td .button {
+  /* align-items: center; */
     display: inline-block;
     border-radius: 4px;
     border: none;
@@ -25,11 +28,15 @@ td .button {
     text-align: center;
     font-size: 28px;
     padding: 20px;
-    width: 200px;
-    height: 100px;
+    width: 270px;
+    height: 120px;
+    margin-left: 5rem;
+    margin-right: -15rem;
+    margin-top: 3rem;
+    margin-bottom: -10rem;
     transition: all 0.5s;
     cursor: pointer;
-    margin: 5px;
+    /* margin: 5px; */
 
     display: inline-block;
     color: #fff;
@@ -75,6 +82,8 @@ td .button {
   }
   table,tr,td {border: none;
     border-collapse: separate;
-  border-spacing: 50px 50px;
+  border-spacing: 180px 40px;
+  margin-top: 6rem;
+  margin-left:5rem;
    }
    
