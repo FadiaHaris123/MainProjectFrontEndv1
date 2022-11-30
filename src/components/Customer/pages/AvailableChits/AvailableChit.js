@@ -79,12 +79,15 @@ const AvailableChit =()=>{
             <tr>
               {chits.map((chit)=>(
                 <td>{chit.chitNumber}</td>
+                
               ))}
               {chits.map((chit)=>(
                 <td>{chit.installment}</td>
+               
               ))}
               {chits.map((chit)=>(
                 <td>{chit.duration}</td>
+               
               ))}
             </tr>
           </tbody>
@@ -93,4 +96,5 @@ const AvailableChit =()=>{
     </React.Fragment>
     )
 }
+
 export default AvailableChit;
