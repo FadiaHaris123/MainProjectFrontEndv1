@@ -1,0 +1,15 @@
+.header_nav{
+    display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+
+.foreman_bg{
+    background-image: url("../../assets/images/foremanbg.jpg");
+    background-position: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    height: 100vh;
+} 
+

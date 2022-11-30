@@ -1,0 +1,24 @@
+
+.auction h1{
+font-family: 'Lora';
+font-size: 35px;
+color: #495e72;
+text-align: center;
+margin-top: 3%;
+}
+
+.auction h4 a{
+    text-decoration: none;
+    color: #162253;
+    font-size: 20px;
+    text-align: center;
+    margin: 2% 43%;
+    font-weight: 500;
+    font-family: auto;
+}
+
+.upcomingAuctions{
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+}
+

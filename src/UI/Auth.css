@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Montserrat&family=Teko:wght@500&display=swap');
+
+
+#submitButton{
+    margin: 2% 3%;
+    align-items: center;
+    text-align: center;
+    color: white;
+    background-color: rgb(20, 100, 165);
+    border-radius: 20px;
+    padding: 2% 38%;
+    cursor: pointer;
+    border: none;
+}
+
+.submitButton{
+    align-items: center;
+    margin-top: 2%;
+}
+
+
+#submitButton:hover{
+    margin: 2% 3%;
+    align-items: center;
+    text-align: center;
+    color: white;
+    background-color: rgb(16, 60, 97);
+    border-radius: 20px;
+    padding: 2% 38%;
+}

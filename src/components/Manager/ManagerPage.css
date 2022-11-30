@@ -1,0 +1,40 @@
+.manager-div-groups {
+  border: none;
+  color: #808080;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 6%;
+  background: none;
+  font-size: 18px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  display: flex;
+}
+
+.manager-section-groups {
+  margin: 1rem auto;
+  width: 90%;
+  max-width: 40rem;
+  text-align: center;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.manager-button-groups {
+  font: inherit;
+  cursor: pointer;
+  background: #485c78;
+  border: none;
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 20px;
+}
+
+.manager-button-groups:hover {
+  background-color: #a5a5b28c;
+  color: black;
+  font-size: large;
+}

@@ -1,0 +1,80 @@
+.backdrop {
+  position: fixed;
+  z-index: 1040;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  opacity: 0.5;
+}
+table{
+    position: fixed;
+    top: 190px;
+    left: 400px;
+}
+table, th, td {
+    border: 1px solid;
+  }
+  
+td .button {
+    display: inline-block;
+    border-radius: 4px;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    height: 100px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+
+    display: inline-block;
+    color: #fff;
+    background: linear-gradient(to bottom, #141212, #4d6a94);
+    /* font-size: 18px; */
+    font-weight: 500;
+    padding: 12px 26px;
+    border-radius: 100px;
+    /* A transparent border added for the outline button variation */
+    border: 3px solid transparent;
+    text-decoration: none;
+  }
+
+  td .button--outline {
+    background: transparent;
+    color: var(--color-brand-primary);
+    border-color: var(--color-brand-primary);
+  }
+  
+  td .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  td .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  td .button:hover span {
+    padding-right: 25px;
+  }
+  
+  td .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  table,tr,td {border: none;
+    border-collapse: separate;
+  border-spacing: 50px 50px;
+   }
+   

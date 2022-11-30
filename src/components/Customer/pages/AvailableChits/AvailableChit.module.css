@@ -1,0 +1,29 @@
+
+
+.container{
+    background-color: bisque;
+    position: relative;
+    text-align: center;
+    padding: 2%;
+    margin: auto;
+}
+
+.container h1{
+  font-size: 25px;
+  font-family: 'LORA';
+  color: #34347a;
+}
+
+.container ul{
+    list-style: none;
+}
+.chitsLoading {
+    text-align: center;
+    color: white;
+  }
+
+.chitsError {
+    text-align: center;
+    color: red;
+  }
+

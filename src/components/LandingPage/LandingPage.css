@@ -1,0 +1,111 @@
+/***    Landing Page     ***/
+.main-title,
+.main-para {
+    color: #f1f1f1;
+}
+
+.overlay{
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.904),rgba(0, 0, 0, 0.667));
+  height: 100vh;
+}
+
+.overlays{
+  background: linear-gradient(0deg, rgba(16, 15, 16, 0.416),rgba(26, 25, 26, 0.566));
+  height: 100vh;
+}
+
+
+.main-title {
+    padding-top: 10rem;
+    font-size: 4rem;
+    font-family: 'Lora', serif;
+    text-transform: uppercase
+}
+
+.main-para {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    text-Transform: capitalize;
+    color:rgb(157, 169, 188);
+}
+
+.info{
+  text-align: center;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  width: 70%;
+  color: #f1f1f1;
+  justify-content: center;
+  padding: 4% 5%;
+  align-items: center;
+  margin-left: 15%;
+}
+
+#log_btn span {
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#log_btn span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#log_btn:hover span {
+padding-right: 25px;
+}
+
+#log_btn:hover span:after {
+opacity: 1;
+right: 0;
+}
+
+#reg_btn span {
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+#reg_btn span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+#reg_btn:hover span {
+  padding-right: 25px;
+}
+
+#reg_btn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+.primary-button {
+  margin-top: 5rem;
+  margin-right: 1rem;
+  padding: .6rem;
+  width: 10rem;
+  background: rgba(255, 255, 255, 0.63);
+  border: none;
+  color: rgb(9, 56, 84);
+  font-size: 1.2rem;
+  font-weight: 900;
+  font-family: 'Montserrat', sans-serif;
+  transition: all .5s;
+  cursor: pointer;
+  text-transform: capitalize;
+  border-radius: 30px;
+  box-shadow: 5px 5px 100px rgba(255, 255, 255, 0.642);
+}
+
+

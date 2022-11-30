@@ -1,0 +1,36 @@
+.tablecontainer{
+    padding: 1% 3%;
+    width: 100%;
+    align-items: center;
+    margin: auto;
+}
+
+.tablecontainer .table{
+    background-color: rgb(255, 255, 255);
+    border-radius: 30px;
+    margin-top: 1%;
+    /* width: 100%; */
+    margin: auto;
+}
+
+.tablehead{
+    background-color: rgb(129, 134, 153);
+}
+
+.tablebody{
+    background-color: rgb(204, 206, 215);
+}
+
+
+.css_rqglhn_MuiTable_root {
+    display: table;
+    width: 80%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    left: 0;
+    top: 60%;
+}
+
+.autionTable{
+    align-items: center;
+}
