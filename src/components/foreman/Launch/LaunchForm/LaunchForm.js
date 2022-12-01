@@ -11,6 +11,7 @@ const LaunchForm = () => {
   const [installments, setInstallments] = useState(0)
   const [amount, setAmount] = useState(0)
   const [totalAmount, setTotalAmount] = useState(0)
+  const [date,setDate]=useState("")
 
   const [manager, setManager] = useState([]);
   const [category, setCategory] = useState([]);
@@ -188,13 +189,14 @@ const LaunchForm = () => {
           ></input>
         )}
 
-        <input className={classes.minimal}
-          id="date"
-          label="Choose your birthdate"
-          type="date"
+<br></br>
+        <label className="form__label">Select Launch Date </label>
+        <input 
+          label="Select Launch Date"
+          type="date" 
           defaultValue="Select launch date"
           InputLabelProps={{
-            shrink: true,
+            label:"Select Launch Date",
           }}
         />
 
