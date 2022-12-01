@@ -88,3 +88,7 @@ select,input {
 
     border-color:rgba(253, 240, 240, 0.767);
   }
+  input .anagha
+  {
+    top:3rem;
+  }
