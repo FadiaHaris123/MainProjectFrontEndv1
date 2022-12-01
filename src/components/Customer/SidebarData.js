@@ -6,8 +6,8 @@ import * as RiIcons from 'react-icons/ri';
 export const SidebarData = [
 
   {
-    title: 'Profile',
-    path: '/customer',
+    title: 'ID Card',
+    path: '/customer/profile',
     icon: <RiIcons.RiProfileLine />,
     cName: 'nav-text'
   },
@@ -28,7 +28,7 @@ export const SidebarData = [
   
   {
     title: 'Log Out',
-    path: '/logout',
+    path: '/',
     icon: <AiIcons.AiOutlineLogout />,
     cName: 'nav-text'
   }
