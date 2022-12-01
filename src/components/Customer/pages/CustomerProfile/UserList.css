@@ -1,0 +1,16 @@
+.wrapper{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
+    /* margin-left: 60rem; */
+    
+
+}
+.main-wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(30rem,30rem));
+    margin-left: 60rem;
+    gap: 2rem;
+    justify-content: center;
+    display: flex;
+    height: 12rem;
+}
