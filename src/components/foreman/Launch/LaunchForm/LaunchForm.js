@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom/client";
 import classes from './LaunchForm.module.css';
 
+
+
 const LaunchForm = () => {
 
   const [chittyCategory, setChittyCategory] = useState("")
@@ -9,6 +11,7 @@ const LaunchForm = () => {
   const [installments, setInstallments] = useState(0)
   const [amount, setAmount] = useState(0)
   const [totalAmount, setTotalAmount] = useState(0)
+  const [date,setDate]=useState("")
 
   const [manager, setManager] = useState([]);
   const [category, setCategory] = useState([]);
@@ -28,7 +31,7 @@ const LaunchForm = () => {
       const responseData = await response.json();
 
       const loadedManager = [];
-      const newItemList = [...responseData._embedded.manager]
+      const newItemList = [...responseData]
       for (const key in newItemList) {
         loadedManager.push({
           id: key,
@@ -171,20 +174,32 @@ const LaunchForm = () => {
         </select><br /><br />
 
         {totalAmount ? (
-          <input
+          <input 
             name="total"
             value={totalAmount}
             onClick={totalAmountHandler}
             readOnly
           ></input>
         ) : (
-          <input
+          <input 
             name="total"
             value="Total Price"
             onClick={totalAmountHandler}
             readOnly
           ></input>
         )}
+
+<br></br>
+        <label className="form__label">Select Launch Date </label>
+        <input 
+          label="Select Launch Date"
+          type="date" 
+          defaultValue="Select launch date"
+          InputLabelProps={{
+            label:"Select Launch Date",
+          }}
+        />
+
 
         <button type="submit">
           Launch
