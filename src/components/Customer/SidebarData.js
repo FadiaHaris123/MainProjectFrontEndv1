@@ -28,7 +28,7 @@ export const SidebarData = [
   
   {
     title: 'Log Out',
-    path: '/logout',
+    path: '/',
     icon: <AiIcons.AiOutlineLogout />,
     cName: 'nav-text'
   }

@@ -4,7 +4,8 @@
     float: left;
     z-index: 11;
     margin-left: 60%;
-    margin-top: 6%;
+    top:0;
+    margin-top: 1%;
   }
   .manage-nav-btn-group .button {
       border: none;
