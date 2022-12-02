@@ -25,6 +25,13 @@ export const SidebarData = [
     icon: <RiIcons.RiAuctionFill />,
     cName: 'nav-text'
   },
+
+  {
+    title: 'Payment',
+    path: '/customer/payment',
+    icon:  <IoIcons.IoIosPaper />,
+    cName: 'nav-text'
+  },
   
   {
     title: 'Log Out',

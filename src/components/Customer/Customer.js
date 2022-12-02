@@ -8,7 +8,8 @@ function Customer() {
     <div>
       <Navbar />
       <div className={classes.bgimg}>
-        <div className={classes.imge}> </div>
+        <div className={classes.imge}> 
+        <div className={classes.overlays}></div></div>
         <br></br>
         <br></br>
         <div className={classes.about}>
