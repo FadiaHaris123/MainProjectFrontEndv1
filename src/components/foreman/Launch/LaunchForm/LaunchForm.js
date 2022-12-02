@@ -189,12 +189,8 @@ const LaunchForm = () => {
           ></input>
         )}
 
-<br></br>
-        <label className="form__label">Select Launch Date </label>
         <input 
-          label="Select Launch Date"
           type="date" 
-          defaultValue="Select launch date"
           InputLabelProps={{
             label:"Select Launch Date",
           }}

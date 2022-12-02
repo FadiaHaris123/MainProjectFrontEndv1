@@ -7,7 +7,7 @@
     width:210vh;
 
   
-  margin-top: 20px;
+  /* margin-top: 20px; */
   margin-bottom:4px;
   margin-left: 0px;
   margin-right: 7px;
@@ -19,9 +19,14 @@
 
 .bgimg 
 {
-    height: 200vh;
+    height: 100vh;
 
 }
+
+.overlays{
+    background: linear-gradient(0deg, rgba(16, 15, 16, 0.416),rgba(26, 25, 26, 0.566));
+    height: 120vh;
+  }
 
 .bgimg .about
 {
