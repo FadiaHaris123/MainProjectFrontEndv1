@@ -67,29 +67,25 @@ const AvailableChit =()=>{
       <Navbar/>
        <div className={classes.container}>
         <h4>Available Chits</h4> 
-        <table>
-          <thead>
-            <tr>
+        <table className={classes.chitTable}>
+            <tr className={classes.chitTableHead}>
               <th>Chit Number</th>
               <th>Monthly Installment</th>
               <th>Duration in Months</th>
+              <th>Join Chit</th>
             </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {chits.map((chit)=>(
-                <td>{chit.chitNumber}</td>
-                
-              ))}
-              {chits.map((chit)=>(
-                <td>{chit.installment}</td>
-               
-              ))}
-              {chits.map((chit)=>(
-                <td>{chit.duration}</td>
-               
-              ))}
-            </tr>
+          <tbody className={classes.tableBody}>
+              {chits.map(chit=> {
+                return(
+                  <tr>
+                    <td>{chit.chitNumber}</td>
+                    <td>{chit.installment}</td>
+                    <td>{chit.duration}</td>
+                    <td><button className={classes.joinButton}>Join</button></td>
+                  </tr>
+                )
+              }
+              )}
           </tbody>
         </table>
        </div>
