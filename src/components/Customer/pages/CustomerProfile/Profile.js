@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import UserList from "./UserList";
 import './UserList.css'
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
@@ -6,8 +6,14 @@ import Users from './Users';
 import Image from './Image';
 import Navbar from '../../Navbar';
 import './profile.css'
+import ReactToPrint from 'react-to-print'
 
 function Profile() {
+  const componentRef = useRef()
+
+  const handlePrint = () => {
+    window.print()
+  }
   const [details, setDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -78,7 +84,12 @@ function Profile() {
     <div>
       <Navbar />
       <section className="vh-100" style={{ backgroundColor: '#f4f5f7' }}>
-        <MDBContainer className="py-5 h-100">
+        <ReactToPrint trigger={() => (
+          <button id="button">Generate PDF</button>
+        )}
+          content={() => componentRef.current}
+        />
+        <MDBContainer ref={componentRef} className="py-5 h-100">
           <MDBRow className="justify-content-center align-items-center h-100">
             <MDBCol lg="6" className="mb-4 mb-lg-0">
               <MDBCard className="mb-3" style={{ borderRadius: '.5rem' }}>
@@ -110,8 +121,6 @@ function Profile() {
           </MDBRow>
         </MDBContainer>
       </section>
-      <div>
-      </div>
     </div>
   );
 }

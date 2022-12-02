@@ -1,14 +1,12 @@
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
-// import jsPDF, { Text, AddPage, Line, Image, Table, Html } from 'jspdf-react'
 
 const Users = (props) => {
-    // var doc = new jsPDF();
     return (
-        <div >
+        <div>
             <section id="content" style={{ backgroundColor: '#f4f5f7' }}>
                 <MDBContainer>
                     <MDBCol >
-                        <MDBCardBody >
+                        <MDBCardBody id="makepdf">
                             <MDBTypography>User ID : {props.userid}</MDBTypography>
                             <MDBTypography>Username : {props.name}</MDBTypography>
                             <MDBTypography>Place : {props.place}</MDBTypography>
@@ -17,7 +15,6 @@ const Users = (props) => {
                     </MDBCol>
                 </MDBContainer>
             </section>
-            <button id="cmd">Generate PDF</button>
         </div>
     );
 }
