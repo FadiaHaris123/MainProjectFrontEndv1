@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
+import * as ImIcons from 'react-icons/im';
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import classes from './Navbar.css';
 import { IconContext } from 'react-icons';
+import ProfileOverlay from './pages/CustomerProfile/ProfileOverlay';
+import Collapsible from 'react-collapsible';
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
@@ -19,6 +22,11 @@ function Navbar() {
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
           <h1 className='tagName'>Eminence Chitty</h1>
+          <Collapsible trigger={<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp" style={{ width: '50px' }} />}>
+
+            <ProfileOverlay />
+
+          </Collapsible>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           <ul className='nav-menu-items' onClick={showSidebar}>

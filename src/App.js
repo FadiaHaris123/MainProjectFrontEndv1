@@ -12,6 +12,7 @@ import ChittyForm from "./components/ChittyForm/ChittyForm"
 import ChittyManagers from "./components/foreman/ManagerDetails/ChittyManagers"
 import Earnings from "./components/Earnings/Earnings"
 import Auction from './components/Customer/pages/CustomerAuction/Auction'
+import Profile from './components/Customer/pages/CustomerProfile/Profile'
 import AvailableChits from './components/Customer/pages/AvailableChits/AvailableChit'
 import { GrLaunch } from "react-icons/gr";
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/chittyform" component={ChittyForm}/>
           <Route path="/earnings" component={Earnings}/>
           <Route path='/customer/auction' component={Auction} />
+          <Route path='/customer/profile' component={Profile} />
           <Route path='/customer/availablechits' component={AvailableChits}/>
         </Switch>
       </Router>
