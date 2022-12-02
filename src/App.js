@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css" 
 import "./App.css"
-import {BrowserRouter as Router,Switch, Route } from "react-router-dom"
+import React, { useState, useEffect } from 'react';
+import {BrowserRouter as Router,Switch, Route, Redirect } from "react-router-dom"
 import Auth from "./UI/Auth"
 import registrationForm from "./UI/registrationForm"
 import foreman from "./components/foreman/foreman"
@@ -17,10 +18,34 @@ import AvailableChits from './components/Customer/pages/AvailableChits/Available
 import { GrLaunch } from "react-icons/gr";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const storedUserLoggedInformation = localStorage.getItem('isLoggedIn');
+
+    if (storedUserLoggedInformation === '1'){
+      setIsLoggedIn(true);
+    }
+  },[]);
+
+
+  const loginHandler = (email, password) => {
+    // We should of course check email and password
+    // But it's just a dummy/ demo anyways
+     
+     localStorage.setItem('isLoggedIn','1');
+     setIsLoggedIn(true);
+  };
+
+  const logoutHandler = () => {
+    localStorage.removeItem('isLoggedIn');
+    setIsLoggedIn(false);
+  };
+
   return (
       <Router>
         <Switch>
-          <Route exact path="/" component={ LandingPage } />
+          <Route exact path="/" component={LandingPage}/>
           <Route path="/login" component={Auth} />
           <Route path="/register" component={registrationForm}/>
           <Route path="/admin" component={foreman} />
