@@ -96,7 +96,7 @@ function Profile() {
                 <MDBRow className="g-0">
                   <MDBCol md="4" className="gradient-custom text-center text-white"
                     style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem' }}>
-                    <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                    <MDBCardImage src="./anaghafoto.jpeg"
                       alt="Avatar" className="my-5" style={{ width: '80px' }} fluid />
                   </MDBCol>
                   <MDBCol md="8">

@@ -15,6 +15,7 @@ import Auction from './components/Customer/pages/CustomerAuction/Auction'
 import Profile from './components/Customer/pages/CustomerProfile/Profile'
 import AvailableChits from './components/Customer/pages/AvailableChits/AvailableChit'
 import { GrLaunch } from "react-icons/gr";
+import Gpay from "./components/Customer/Gpay/Gpay"
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path='/customer/auction' component={Auction} />
           <Route path='/customer/profile' component={Profile} />
           <Route path='/customer/availablechits' component={AvailableChits}/>
+          <Route path='/customer/payment' component={Gpay}/>
         </Switch>
       </Router>
   )
