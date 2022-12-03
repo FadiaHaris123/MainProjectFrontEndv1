@@ -22,7 +22,7 @@ function Navbar() {
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
           <h1 className='tagName'>Eminence Chitty</h1>
-          <Collapsible trigger={<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp" style={{ width: '50px' }} />}>
+          <Collapsible trigger={<img src="" style={{ width: '50px' }} />}>
 
             <ProfileOverlay />
 
