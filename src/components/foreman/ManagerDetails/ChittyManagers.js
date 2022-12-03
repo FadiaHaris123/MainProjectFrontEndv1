@@ -2,6 +2,7 @@ import { TableContainer,TableHead,Table,TableBody,TableRow,TableCell,Paper} from
 import { useEffect, useState } from 'react';
 import classes from './ChittyManagers.module.css'
 import Search from "./Search";
+import DataTable from 'react-data-table-component';
 
 const ChittyManagers = () => {
 
@@ -9,6 +10,26 @@ const [managers, setManager] = useState([]);
 const [isLoading, setIsLoading] = useState(true);
 const [httpError, setHttpError] = useState();
 const [searchName, setSearchName] = useState("");
+
+const columns = [
+  {
+    name: 'First Name',
+    selector: 'firstName',
+    sortable: true,
+  },
+  {
+    name: 'Last Name',
+    selector: 'lastName',
+    sortable: true,
+  },
+  {
+    name: 'Email',
+    selector: 'email',
+    sortable: true,
+  },
+];
+
+
 
 
 const onSearchHandler = (name)=>{
@@ -72,26 +93,14 @@ if (httpError) {
 return(
     <section className={classes.tablecontainer}>
         <Search search={onSearchHandler}/>
-        <TableContainer className={classes.table} component={Paper} sx={{maxHeight:'200px'}}>
-        <Table className={classes.css_rqglhn_MuiTable_root} aria-label="simple table" stickyHeader>
-            <TableHead>
-                <TableRow className={classes.tablehead}>
-                    <TableCell align='center'>FirstName</TableCell>
-                    <TableCell align='center'>LastName</TableCell>
-                    <TableCell align='center'>email</TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody className={classes.tablebody}>
-                {managers.map(row=>(
-                    <TableRow sx={{'&:last-child td,&:last-child th':{border:0}}}>
-                        <TableCell align='center'>{row.firstName}</TableCell>
-                        <TableCell align='center'>{row.lastName}</TableCell>
-                        <TableCell align='center'>{row.email}</TableCell>
-                    </TableRow>
-                ))}
-            </TableBody>
-        </Table>
-    </TableContainer>
+     <DataTable
+        title="Managers"
+        columns={columns}
+        data={managers}
+        pageSizeOptions= {[5, 10, 20, 25, 50, 100]}
+        pagination
+        highlightOnHover
+      />
     </section>
 )
 
