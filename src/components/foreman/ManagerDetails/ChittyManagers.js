@@ -99,6 +99,7 @@ return(
         data={managers}
         pageSizeOptions= {[5, 10, 20, 25, 50, 100]}
         pagination
+        expandableRows 
         highlightOnHover
       />
     </section>
