@@ -16,7 +16,7 @@ import Auction from './components/Customer/pages/CustomerAuction/Auction'
 import Profile from './components/Customer/pages/CustomerProfile/Profile'
 import AvailableChits from './components/Customer/pages/AvailableChits/AvailableChit'
 import { GrLaunch } from "react-icons/gr";
-import Gpay from "./components/Customer/Gpay/Gpay"
+import RazorPay from "./components/Customer/RazorPay/payment"
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -55,11 +55,12 @@ function App() {
           <Route path="/employee/managerslist" component={ChittyManagers}/>
           <Route exact path="/customer" component={Customer}/>
           <Route path="/chittyform" component={ChittyForm}/>
+          {/* <Route path="/form" component={Form}/> */}
           <Route path="/earnings" component={Earnings}/>
           <Route path='/customer/auction' component={Auction} />
           <Route path='/customer/profile' component={Profile} />
           <Route path='/customer/availablechits' component={AvailableChits}/>
-          <Route path='/customer/payment' component={Gpay}/>
+          <Route path='/customer/payment' component={RazorPay}/>
         </Switch>
       </Router>
   )

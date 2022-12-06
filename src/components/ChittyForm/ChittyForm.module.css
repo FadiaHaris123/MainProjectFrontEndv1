@@ -5,6 +5,7 @@ body{
 .form{
     text-align:center;
     background-color: white;
+ 
     /* border-radius: 5px; */
     /* width: 1275px; */
     /* margin: 20px auto*/
@@ -44,7 +45,7 @@ body{
   }
 
   .form h1{
-    color:rgb(50, 107, 156);
+    color:rgb(38, 87, 133);
     align-items: center;
     /* font-style:normal;
     font-size: larger; */
