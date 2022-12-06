@@ -34,7 +34,7 @@ function submit(e){
   })
   .then(res=>{
     if(res.data != null){
-      alert("Registration Successful...")
+      alert("Registration Successful, Please check your email")
     }
     console.log(res.data)
   })
@@ -64,6 +64,7 @@ let [authMode, setAuthMode] = useState("signup")
             </div>
             <div className="form-group mt-3">
               <label>First Name</label>
+              <span class="required">*</span>
               <input
                 onChange={(e)=>handle(e)}
                 id="firstName"
@@ -71,10 +72,12 @@ let [authMode, setAuthMode] = useState("signup")
                 type="name"
                 className="form-control mt-1"
                 placeholder="e.g Jane "
+                required
               />
             </div>
             <div className="form-group mt-3">
               <label>Last Name</label>
+              <span class="required">*</span>
               <input
               onChange={(e)=>handle(e)}
               id="lastName"
@@ -82,10 +85,12 @@ let [authMode, setAuthMode] = useState("signup")
                 type="name"
                 className="form-control mt-1"
                 placeholder="e.g Doe"
+                required
               />
             </div>
             <div className="form-group mt-3">
               <label>Email</label>
+              <span class="required">*</span>
               <input
               onChange={(e)=>handle(e)}
               id="email"
@@ -93,10 +98,11 @@ let [authMode, setAuthMode] = useState("signup")
                 type="email"
                 className="form-control mt-1"
                 placeholder="e.g abc@gmail.com"
-              />
+              required/>
             </div>
             <div className="form-group mt-3">
               <label>Mobile No.</label>
+              <span class="required">*</span>
               <input
               onChange={(e)=>handle(e)}
               id="mobileNo"
@@ -104,10 +110,12 @@ let [authMode, setAuthMode] = useState("signup")
                 type="number"
                 className="form-control mt-1"
                 placeholder="Mobile No."
+                required
               />
             </div>
             <div className="form-group mt-3">
               <label>Password</label>
+              <span class="required">*</span>
               <input
               onChange={(e)=>handle(e)}
               id="passWord"

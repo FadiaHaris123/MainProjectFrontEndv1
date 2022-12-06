@@ -169,6 +169,7 @@ const Auth = (props) => {
                     value={emailCurrentState.enteredEmail}
                     onChange={emailChangeHandler}
                     onBlur={validateEmailHandler}
+                    required
                   />
                 </div>
               </div>
@@ -183,6 +184,7 @@ const Auth = (props) => {
                     value={passwordCurrentState.enteredPassword}
                     onChange={passwordChangeHandler}
                     onBlur={validatePasswordHandler}
+                    required
                   />
                 </div>
               </div>
