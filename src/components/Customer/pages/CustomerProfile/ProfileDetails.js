@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from 'react';
 import UserList from "./UserList";
-// import './UserList.css'
 
 const ProfileDetails=()=>{
     const[details,setDetails]=useState([]);

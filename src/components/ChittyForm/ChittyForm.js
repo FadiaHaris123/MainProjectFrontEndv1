@@ -6,7 +6,7 @@ import Header from './Header/Header'
 
 function ChittyForm() {
     
-    const [Name, setName] = useState(null);
+    const [Name, setName] = useState(null );
     const [address, setaddress] = useState(null);
     const [userPhone, setuserPhone] = useState(null);
     const [status,setstatus]=useState(null);
