@@ -93,3 +93,9 @@ select,input {
   {
     top:3rem;
   }
+
+  .required:before {
+    content: "*";
+    font-weight: bold;
+    color: red;
+}

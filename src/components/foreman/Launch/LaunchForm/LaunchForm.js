@@ -133,7 +133,7 @@ const LaunchForm = () => {
         ></input><br /><br />
 
 
-        <select className={classes.minimal} value={chittyCategory} onChange={handleChanger}>
+        <select className={classes.minimal} value={chittyCategory} onChange={handleChanger}  required>
           <option>Select Chitty Category</option>
           {category.map(category => (
             <option value={category.category_name}>{category.category_name}</option>
@@ -142,7 +142,7 @@ const LaunchForm = () => {
           }
         </select><br /><br />
 
-        <select className={classes.minimal} value={employee} onChange={handleChange}>
+        <select className={classes.minimal} value={employee} onChange={handleChange}  required>
           <option>Chitty Manager</option>
           {manager.map(manager => (
             <option value={manager.firstName}>{manager.firstName}</option>
@@ -151,7 +151,7 @@ const LaunchForm = () => {
           }
         </select><br /><br />
 
-        <select id={classes.month} value={installments} className={classes.minimal} onChange={installmentsHandler}>
+        <select id={classes.month} value={installments} className={classes.minimal} onChange={installmentsHandler}  required>
           <option name="Select Months" value="">Select duration</option>
           {chittyCategory === "Long Term Chitty" ? (<>
             <option name="100" value="120">120 Months</option>
@@ -164,7 +164,7 @@ const LaunchForm = () => {
 
 
         </select><br /><br />
-        <select id={classes.amount} className={classes.minimal} value={amount} onChange={amountHandler}>
+        <select id={classes.amount} className={classes.minimal} value={amount} onChange={amountHandler}  required>
           <option name="Select Amount" value="">Select Installment</option>
           <option name="10000" value="10000">10000</option>
           <option name="5000" value="5000">5000</option>
@@ -178,6 +178,7 @@ const LaunchForm = () => {
             value={totalAmount}
             onClick={totalAmountHandler}
             readOnly
+            required
           ></input>
         ) : (
           <input 
@@ -185,10 +186,12 @@ const LaunchForm = () => {
             value="Total Price"
             onClick={totalAmountHandler}
             readOnly
+            required
           ></input>
         )}
 
         <input 
+         required
           type="date" 
           InputLabelProps={{
             label:"Select Launch Date",
@@ -200,6 +203,7 @@ const LaunchForm = () => {
           Launch
         </button>
       </div>
+     
     </form>
   )
 }

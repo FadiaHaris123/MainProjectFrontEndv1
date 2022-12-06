@@ -3,7 +3,7 @@ import UserList from "./UserList";
 import './UserList.css'
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 import Users from './Users';
-import Image from './Image';
+import Image from '../../../../assets/images/profile1.jpg';
 import Navbar from '../../Navbar';
 import './profile.css'
 import ReactToPrint from 'react-to-print'
@@ -96,23 +96,12 @@ function Profile() {
                 <MDBRow className="g-0">
                   <MDBCol md="4" className="gradient-custom text-center text-white"
                     style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem' }}>
-                    <MDBCardImage src="./anaghafoto.jpeg"
+                    <MDBCardImage src={Image}
                       alt="Avatar" className="my-5" style={{ width: '80px' }} fluid />
                   </MDBCol>
                   <MDBCol md="8">
                     <MDBCardBody className="p-4">
                       <MDBTypography tag="h6">{content}</MDBTypography>
-                      {/* <hr className="mt-0 mb-4" />
-                      <MDBRow className="pt-1">
-                        <MDBCol size="6" className="mb-3">
-                          <MDBTypography tag="h6">Email</MDBTypography>
-                          <MDBCardText className="text-muted">{content}</MDBCardText>
-                        </MDBCol>
-                        <MDBCol size="6" className="mb-3">
-                          <MDBTypography tag="h6">Phone</MDBTypography>
-                          <MDBCardText className="text-muted">123 456 789</MDBCardText>
-                        </MDBCol>
-                      </MDBRow> */}
                     </MDBCardBody>
                   </MDBCol>
                 </MDBRow>
