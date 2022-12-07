@@ -72,7 +72,7 @@ const Manager = () => {
 
 
 
-					<a href='https://experiontechnologies-my.sharepoint.com/:x:/r/personal/anagha_r_experionglobal_com/Documents/Book1.xlsx?d=wa79df8c53c6548f1ac9a719792c8aac6&csf=1&web=1&e=ybEZHa'>
+					<a href='https://experiontechnologies-my.sharepoint.com/personal/anagha_r_experionglobal_com/_layouts/15/download.aspx?e=xXOdny&share=EcX4nadlPPFIrJpxl5LIqsYBJnM1z0lRaIjd061WTjlP8Q'>
 
 
 
