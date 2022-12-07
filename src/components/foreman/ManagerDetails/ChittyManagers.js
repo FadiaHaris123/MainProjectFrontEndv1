@@ -94,6 +94,8 @@ return(
     <section className={classes.tablecontainer}>
         <Search search={onSearchHandler}/>
      <DataTable
+        scrollY
+        maxHeight="200px"
         title="Managers"
         columns={columns}
         data={managers}

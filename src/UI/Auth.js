@@ -161,6 +161,7 @@ const Auth = (props) => {
                 <div className={`${classes.control} ${emailCurrentState.emailIsValid === false ? classes.invalid : ''
                   }`}>
                   <label>Email address</label>
+                  <span class="required">*</span>
                   <input
                     id="email"
                     type="email"
@@ -177,6 +178,7 @@ const Auth = (props) => {
                 <div className={`${classes.control} ${passwordCurrentState.passwordIsValid === false ? classes.invalid : ''
                   }`}>
                   <label>Password</label>
+                  <span class="required">*</span>
                   <input
                     type="password"
                     className="form-control mt-1"

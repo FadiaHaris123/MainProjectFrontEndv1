@@ -52,7 +52,6 @@ function Profile() {
   }, []);
 
   let content;
-  console.log("Sreeni" + details.userid)
   if (details.length > 0) {
     content = <UserList details={details} />;
   }
