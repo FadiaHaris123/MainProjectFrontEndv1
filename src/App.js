@@ -56,7 +56,6 @@ function App() {
           <Route path="/employee/managerslist" component={ChittyManagers}/>
           <Route exact path="/customer" component={Customer}/>
           <Route path="/chittyform" component={ChittyForm}/>
-          {/* <Route path="/form" component={Form}/> */}
           <Route path="/earnings" component={Earnings}/>
           <Route path='/customer/auction' component={Auction} />
           <Route path='/customer/profile' component={Profile} />

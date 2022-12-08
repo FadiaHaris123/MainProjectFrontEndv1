@@ -23,7 +23,7 @@
 
   .upload button{
     background-color: #192d44;
-    padding: 3% 3%;
+    padding: 2% 2%;
     margin: 5px 5px;
     color: white;
     border: none;
@@ -31,7 +31,7 @@
     font-size: 15px;
     font-weight: 500;
     width: 150px;
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 .upload button:hover{

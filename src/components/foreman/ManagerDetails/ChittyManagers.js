@@ -99,7 +99,8 @@ return(
         title="Managers"
         columns={columns}
         data={managers}
-        pageSizeOptions= {[5, 10, 20, 25, 50, 100]}
+        paginationTotalRows={5}
+        paginationRowsPerPageOptions={[2,5,8,12,15,20,50]}
         pagination
         expandableRows 
         highlightOnHover
