@@ -4,18 +4,19 @@
     position: fixed;
     top: 0;
     width: 100%;
-    height: 4rem;
-    background-color: rgb(38, 87, 133);
+    height: 5rem;
+    background-color:rgb(31, 61, 88);
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     align-items: center;
     color:#ffffff ;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 1.75);
     z-index: 10;
   }
 
+ 
 .sideheader{
   font-family: 'Lora', serif;
   font-size: 2rem;
-  margin-left: 35%;
+  margin-left: 37%;
 }

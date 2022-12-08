@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <Fragment>
       <header className={classes.header}> 
-      <h1 className={classes.sideheader}>Chitty Application Form</h1>
+      <h1 className={classes.sideheader}>Payment Portal</h1>
       </header>
     </Fragment>
   );
