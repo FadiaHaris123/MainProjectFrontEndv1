@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import classes from './Manager.module.css';
 import image from './excel.png'
+import AddManager from './AddManager';
 
 const Manager = () =>
  {
@@ -51,6 +52,8 @@ const Manager = () =>
 		}
 	};
 
+	
+
 	return (
 		<div className={classes.manage}>
 			<h1 className={classes.header}>
@@ -75,9 +78,6 @@ const Manager = () =>
 					</button>
 				</div>
 				<div className={classes.filedata}>{fileData()}</div>
-				<Link to="/employee/managerslist">
-					<button className={classes.button}><span>Show</span></button>
-				</Link>
 			</div>
 		</div>
 	);

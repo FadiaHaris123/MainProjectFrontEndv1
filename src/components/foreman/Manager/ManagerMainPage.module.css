@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Montserrat&family=Rubik&family=Teko:wght@500&display=swap');
+
+
+.wrap {
+  height: auto;
+  width: 100%;
+  padding-top: 4rem;
+  padding-bottom: 3rem;
+}
+
+.tab {
+  font-family: 'Lora', sans-serif;
+  box-sizing: border-box;
+  background-color: #0c2133;
+  padding-bottom: 1rem;
+  margin: 70px 200px;
+  border: 1px;
+  box-shadow: 1px 0 5px black;
+}
+
+.all_tab {
+  font-family: 'Lora', sans-serif;
+  width: 100%;
+}
+
+.tab_wrap {
+  border: 1px;
+  border-radius: 30px;
+}
+
