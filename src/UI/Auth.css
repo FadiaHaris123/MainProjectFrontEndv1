@@ -28,3 +28,9 @@
     border-radius: 20px;
     padding: 2% 38%;
 }
+
+.required {
+    content: "*";
+    font-weight: bold;
+    color: rgb(122, 16, 16);
+}

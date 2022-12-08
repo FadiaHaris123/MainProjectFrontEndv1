@@ -17,6 +17,7 @@ import Profile from './components/Customer/pages/CustomerProfile/Profile'
 import AvailableChits from './components/Customer/pages/AvailableChits/AvailableChit'
 import { GrLaunch } from "react-icons/gr";
 import RazorPay from "./components/Customer/RazorPay/payment"
+import MainManagerPage from "./components/foreman/Manager/MainManagerPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,12 +51,11 @@ function App() {
           <Route path="/login" component={Auth} />
           <Route path="/register" component={registrationForm}/>
           <Route path="/admin" component={foreman} />
-          <Route exact path="/employee" component={Manager}/>
+          <Route exact path="/employee" component={MainManagerPage}/>
           <Route path="/manager" component={ManagerPage}/>
           <Route path="/employee/managerslist" component={ChittyManagers}/>
           <Route exact path="/customer" component={Customer}/>
           <Route path="/chittyform" component={ChittyForm}/>
-          {/* <Route path="/form" component={Form}/> */}
           <Route path="/earnings" component={Earnings}/>
           <Route path='/customer/auction' component={Auction} />
           <Route path='/customer/profile' component={Profile} />

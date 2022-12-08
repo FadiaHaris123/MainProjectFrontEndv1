@@ -52,8 +52,8 @@
   background-color: rgb(176, 178, 183);
     overflow: hidden;}
 
-   .Auth-form .required {
+    .required {
       content: "*";
       font-weight: bold;
-      color: red;
+      color: rgb(122, 16, 16);
   }
