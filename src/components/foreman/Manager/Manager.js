@@ -4,11 +4,8 @@ import classes from './Manager.module.css';
 import image from './excel.png'
 import AddManager from './AddManager';
 
-
-
-
-const Manager = () => {
-
+const Manager = () =>
+ {
 	const [selectedFile, setState] = useState(null);
 
 	// On file select (from the pop up) 
@@ -32,7 +29,6 @@ const Manager = () => {
 				}
 			});
 	};
-
 
 	const fileData = () => {
 		if (selectedFile) {
@@ -68,10 +64,11 @@ const Manager = () => {
 					Upload employee details
 				</h4>
 				<div className={classes.sample}>
-					<h5>Download Template here :</h5>
-					<a href='https://experiontechnologies-my.sharepoint.com/:x:/r/personal/anagha_r_experionglobal_com/Documents/Book1.xlsx?d=wa79df8c53c6548f1ac9a719792c8aac6&csf=1&web=1&e=ybEZHa'>
-						<img src={image} height="20px" width="20px" alt="img" />
+					<h5>Dowload Template here :</h5>
+					<a href='https://experiontechnologies-my.sharepoint.com/personal/anagha_r_experionglobal_com/_layouts/15/download.aspx?e=xXOdny&share=EcX4nadlPPFIrJpxl5LIqsYBJnM1z0lRaIjd061WTjlP8Q'>
+					<img src={image} height="20px" width="20px" alt="img" />
 					</a>
+
 				</div>
 				<div>
 					<br></br>
@@ -85,7 +82,6 @@ const Manager = () => {
 		</div>
 	);
 }
-
 
 export default Manager;
 

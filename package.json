@@ -16,6 +16,8 @@
     "chart.js": "^4.0.1",
     "date-fns": "^2.29.3",
     "mdb-react-ui-kit": "^5.0.0",
+    "mdb-ui-kit": "^6.0.1",
+    "mdbreact": "^5.2.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.0.1",
     "react-collapsible": "^2.10.0",
