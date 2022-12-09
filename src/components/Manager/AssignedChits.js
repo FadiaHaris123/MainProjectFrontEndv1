@@ -1,9 +1,9 @@
 import { Fragment } from "react";
 import React, { useState, useCallback } from 'react';
-import Header from "./Header";
-import ManagerNav from "./ManagerNav";
+import Header from "../../Header";
+import Navbar from '../../Navbar'
 import "./ManagerPage.css";
-import ChitList from './ChitList';
+import ChitList from '../../ChitList';
 
 const ManagerPage = () => {
     const [chits, setChit] = useState([]);
@@ -82,17 +82,11 @@ const ManagerPage = () => {
     }
     return (
         <Fragment>
-            <div className="header_nav">
-                <Header></Header>
-                <ManagerNav></ManagerNav>
-            </div>
+            <Navbar/>
             <div className="manager-div-groups">
                 <section className="manager-section-groups">
                     <button className="manager-button-groups" onClick={assignchits}>Assigned Chits</button>
                     {content}
-                </section>
-                <section className="manager-section-groups">
-                    <button className="manager-button-groups">Add Customers</button>
                 </section>
             </div>
         </Fragment>)

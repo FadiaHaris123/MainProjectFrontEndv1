@@ -18,7 +18,7 @@ const [data,setData] = useState({
 
 function handle(e){
   const newdata = {...data}
-  newdata[e.target.id] = e.target.value
+  newdata[e.target.id] = e.target.value 
   setData(newdata)
   console.log(newdata)
 }
