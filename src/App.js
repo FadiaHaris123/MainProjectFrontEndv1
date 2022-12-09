@@ -3,10 +3,14 @@ import "./App.css"
 import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router,Switch, Route, Redirect } from "react-router-dom"
 import Auth from "./UI/Auth"
+import ForgotPassword from "./UI/ForgetPassword/ForgetPassword"
 import registrationForm from "./UI/registrationForm"
 import foreman from "./components/foreman/foreman"
-import Manager from "./components/foreman/Manager/Manager"
-import ManagerPage from "./components/Manager/ManagerPage"
+import Manager from "./components/foreman/Manager/MainManagerPage"
+import ManagerPage from "./components/Manager/Manager"
+import AssignedChits from "./components/Manager/pages/AssignedChits/AssignedChits"
+import ChangePassword from "./components/Manager/pages/ForgetPassword/ForgetPassword"
+import ResetPassword from "./components/Manager/pages/ForgetPassword/ResetPassword"
 import Customer from "./components/Customer/Customer"
 import LandingPage from "./components/LandingPage/LandingPage"
 import ChittyForm from "./components/ChittyForm/ChittyForm"
@@ -49,8 +53,14 @@ function App() {
         <Switch>
           <Route exact path="/" component={LandingPage}/>
           <Route path="/login" component={Auth} />
+          <Route path="/forgotpassword" component={ForgotPassword} />
           <Route path="/register" component={registrationForm}/>
           <Route path="/admin" component={foreman} />
+          <Route exact path="/employee" component={Manager}/>
+          <Route exact path="/manager" component={ManagerPage}/>
+          <Route path="/manager/assignedchits" component={AssignedChits}/>
+          <Route path="/manager/changepassword" component={ChangePassword}/>
+          <Route path="/manager/resetpassword" component={ResetPassword}/>
           <Route exact path="/employee" component={MainManagerPage}/>
           <Route path="/manager" component={ManagerPage}/>
           <Route path="/employee/managerslist" component={ChittyManagers}/>
