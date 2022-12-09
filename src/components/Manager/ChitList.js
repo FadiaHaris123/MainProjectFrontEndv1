@@ -14,6 +14,7 @@ const ChitList = (props) => {
           chitType={chit.chitType}
           days={chit.days}
           members={chit.members}
+          totalMembers={chit.totalMembers}
           startDate={chit.startDate}
         />
       ))}

@@ -8,6 +8,7 @@ const Chit = (props) => {
         const loadedChit = [];
         loadedChit.push({
             members: props.members,
+            totalMembers: props.totalMembers,
             days: props.days,
             startDate: props.startDate,
         });
