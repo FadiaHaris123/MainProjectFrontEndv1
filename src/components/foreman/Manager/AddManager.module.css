@@ -16,17 +16,15 @@
       box-shadow: 0 0px 10px rgba(40, 40, 40, 0.75);
       border-radius: 1cm;
       padding: 20px;
-      width: 65%;
-      height: 85vh;
-      margin: auto;
+      width: 50%;
+      height: 60vh;
+      margin: 7% 25%;
   }
-
-
 
   .upload button{
     background-color: #192d44;
     padding: 2% 2%;
-    margin: auto;
+    margin: 5px 5px;
     color: white;
     border: none;
     font-family: 'Lora', serif;
