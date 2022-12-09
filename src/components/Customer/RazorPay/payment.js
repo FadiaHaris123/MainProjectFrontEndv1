@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import mainbg from './img/main-bg.png'
+import mainbg from './img/pay1.png'
 import shape from './img/shape.png'
 import icons from './img/icons.png'
+import Header from './Header/Header'
+import { Fragment } from "react"
+import './payment.css';
 
 
 function Payment() {
@@ -40,7 +43,9 @@ function Payment() {
         }
     }
     return (
+        <Fragment>
         <section className='main'>
+        <Header></Header>
             {/* <div className="page-shape">
                 <img src={shape} alt="razorpay paygateway integration" />
             </div> */}
@@ -48,16 +53,19 @@ function Payment() {
                 <div className='row'>
                     <div className='col-lg-8'>
                         <div className='column-wrap justify-content-between'>
-                            <div className="banner-img">
-                                <img src={mainbg} alt="Razorpay demo reacjs" />
-                            </div>
-                            <div className="title">
+                        <div className="title">
                                 <div className="title-content">
-                                    <h1>Razorpay Payment Gateway </h1>
+                                    <br></br>
+                                    <h2>Online Payment </h2>
                                     {/* <p className='mt-3'>I hope the tutorial has helped you learn how to integrate Paytm payment gateway in ReactJS.</p>
                                     <a href="https://dev.to/rajamanickam/how-to-integrate-razorpay-payment-gateway-in-reactjs-5fnb" target="_blank" className='btn btn-success'>View Tutorial</a> */}
                                 </div>
                             </div>
+                            <div className="banner-img">
+                                
+                                <img src={mainbg} alt="Razorpay demo reacjs" height="530px" width="650px"/>
+                            </div>
+                           
                             <div className="technology">
                                 {/* <div className="tech-logo">
                                     <img src={icons} alt="Razorpay test payment" />
@@ -69,15 +77,18 @@ function Payment() {
                         <div className="column-wrap justify-content-center">
                             <div className="fxt-form">
                                 <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
                                 <h3 className='mb-3'>Complete your payment here </h3>
-                                <p>Enter the amount to be transferred to the account as the <strong>initial payment.</strong></p>
+                                <p>Enter the amount to be transferred to the account as the <strong>chitty installment.</strong></p>
                                 <form>
                                     <div className="form-group mt-5">
-                                        <input type="text" className="form-control" value={amount} onChange={(e) => setamount(e.target.value)} placeholder="Enter amount" />
+                                        <input type="text" className="form-control" value={amount} onChange={(e) => setamount(e.target.value)} placeholder="Enter chitty amount" />
                                     </div>
                                     <div className="form-group">
                                         <br></br>
-                                        <button type="submit" onClick={handlesubmit} className="btn-submit">Pay</button>
+                                        <button type="submit" onClick={handlesubmit} className="btn-submit" >Pay</button>
                                     </div>
                                 </form>
                             </div>
@@ -87,7 +98,9 @@ function Payment() {
                 </div>
             </div>
         </section>
+        </Fragment>
     );
+    
 }
 
 export default Payment;

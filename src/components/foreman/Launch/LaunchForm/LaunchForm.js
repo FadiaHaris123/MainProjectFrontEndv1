@@ -4,6 +4,10 @@ import classes from './LaunchForm.module.css';
 
 
 const LaunchForm = () => {
+
+  // const [data,setDate] = useState({
+    
+  // })
   
   const [chittyCategory, setChittyCategory] = useState("")
   const [employee, setEmployee] = useState("")
@@ -30,7 +34,7 @@ const LaunchForm = () => {
       const responseData = await response.json();
 
       const loadedManager = [];
-      const newItemList = [...responseData]
+      const newItemList = [...responseData._embedded.manager]
       for (const key in newItemList) {
         loadedManager.push({
           id: key,
