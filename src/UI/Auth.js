@@ -196,7 +196,7 @@ const Auth = (props) => {
                 </button>
               </div>
               <p className="text-center mt-2">
-                Forgot <a href="#">password?</a>
+                Forgot <a href="/forgotpassword">password?</a>
               </p>
             </div>
           </form>
