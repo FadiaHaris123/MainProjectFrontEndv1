@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 
-function Manager() {
+function ManagerPage() {
   return (
     <div>
       <Navbar />
@@ -9,4 +9,4 @@ function Manager() {
   );
 }
 
-export default Manager;
+export default ManagerPage;

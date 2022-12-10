@@ -8,7 +8,7 @@ import CreateNewPassword from "./UI/ForgetPassword/ResetPassword"
 import registrationForm from "./UI/registrationForm"
 import foreman from "./components/foreman/foreman"
 import Manager from "./components/foreman/Manager/MainManagerPage"
-import ManagerPage from "./components/Manager/Manager"
+import ManagerPage from "./components/Manager/ManagerPage"
 import AssignedChits from "./components/Manager/pages/AssignedChits/AssignedChits"
 import StartChit from "./components/Manager/pages/StartedChits/StartedChits"
 import ChangePassword from "./components/Manager/pages/ChangePassword/ChangePassword"
@@ -58,9 +58,6 @@ function App() {
           <Route path="/createnewpassword" component={CreateNewPassword} />
           <Route path="/register" component={registrationForm}/>
           <Route path="/admin" component={foreman} />
-          <Route path="/chittyform" component={ChittyForm}/>
-          <Route path="/earnings" component={Earnings}/>
-          <Route exact path="/employee" component={Manager}/>
           <Route exact path="/manager" component={ManagerPage}/>
           <Route path="/manager/assignedchits" component={AssignedChits}/>
           <Route path="/manager/changepassword" component={ChangePassword}/>

@@ -13,8 +13,15 @@ export const SidebarData = [
   },
 
   {
-    title: 'Started Chits',
+    title: 'Chits Started',
     path: '/manager/startchit',
+    icon: <RiIcons.RiAuctionFill />,
+    cName: 'nav-text'
+  },
+
+  {
+    title: 'Auction Details',
+    path: '/manager/auctiondetails',
     icon: <RiIcons.RiAuctionFill />,
     cName: 'nav-text'
   },
