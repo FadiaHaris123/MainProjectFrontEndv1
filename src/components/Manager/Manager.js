@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 
-function Customer() {
+function Manager() {
   return (
     <div>
       <Navbar />
@@ -9,4 +9,4 @@ function Customer() {
   );
 }
 
-export default Customer;
+export default Manager;

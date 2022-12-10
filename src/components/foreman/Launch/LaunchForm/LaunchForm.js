@@ -1,16 +1,69 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom/client";
 import classes from './LaunchForm.module.css';
+import Axios from 'axios';
 
 
 const LaunchForm = () => {
+
+  const url = "http://localhost:8080/api/chitty/add"
+
+  const [data,setData] = useState({
+    chitNumber:"",
+    currentNumberOfChittal:0,
+    category:"",
+    launchDate:"",
+    startDate:null,
+    status:"launched"
+  })
+
+  function handle(e){
+    const newdata = {...data}
+    newdata[e.target.id] = e.target.value
+    setData(newdata)
+    console.log(newdata)
+    }
+    
+    function submit(e){
+    e.preventDefault();
+    Axios.post(url,{
+    chitNumber:data.chitNumber,
+    installment:parseInt(amount),
+    duration:parseInt(installments),
+    manager:parseInt(employeeId),
+    numberOfChittal:parseInt(installments),
+    currentNumberOfChittal:data.currentNumberOfChittal,
+    category:parseInt(chittyCategoryId),
+    totalAmount:totalAmount,
+    launchDate:formattedlaunchDate,
+    startDate:data.startDate,
+    status:data.status
+    })
+    .then(res=>{
+      if(res.data != null){
+      alert("Chitty launched successfully")
+      }
+      console.log(res.data)
+    })
+    }
+ 
+
+  function pad2(n) {
+    return (n < 10 ? '0' : '') + n;
+  }
   
-  const [chittyCategory, setChittyCategory] = useState("")
-  const [employee, setEmployee] = useState("")
+  var launchDate = new Date();
+  var month = pad2(launchDate.getMonth()+1);//months (0-11)
+  var day = pad2(launchDate.getDate());//day (1-31)
+  var year= launchDate.getFullYear();
+
+  var formattedlaunchDate=  year+"-"+month+"-"+day;
+  
+  const [chittyCategoryId, setChittyCategoryId] = useState()
+  const [employeeId, setEmployeeId] = useState()
   const [installments, setInstallments] = useState(0)
   const [amount, setAmount] = useState(0)
   const [totalAmount, setTotalAmount] = useState(0)
-  const [date,setDate]=useState("")
 
   const [manager, setManager] = useState([]);
   const [category, setCategory] = useState([]);
@@ -30,10 +83,11 @@ const LaunchForm = () => {
       const responseData = await response.json();
 
       const loadedManager = [];
-      const newItemList = [...responseData]
+      const newItemList = [...responseData._embedded.manager]
       for (const key in newItemList) {
         loadedManager.push({
           id: key,
+          emp_id: newItemList[key].emp_id,
           firstName: newItemList[key].firstName,
           emp_lastname: newItemList[key].emp_lastname,
           email: newItemList[key].email,
@@ -67,6 +121,7 @@ const LaunchForm = () => {
       for (const key in newItemList) {
         loadedCategory.push({
           id: key,
+          category_id: newItemList[key].id,
           category_name: newItemList[key].categoryName,
         });
       }
@@ -96,16 +151,14 @@ const LaunchForm = () => {
 
 
   const handleChange = (event) => {
-    setEmployee(event.target.value);
+    setEmployeeId(event.target.value);
   }
   const handleChanger = (event) => {
-    setChittyCategory(event.target.value);
+    setChittyCategoryId(event.target.value);
+    console.log("select"+event.target.value);
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  }
-
+ 
   const installmentsHandler = (event) => {
     setInstallments(parseInt(event.target.value))
     console.log(event.target.value)
@@ -123,29 +176,31 @@ const LaunchForm = () => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submit}>
       <div className={classes.forms}>
 
         <input className="minimal"
           name="chitty_no"
+          id="chitNumber"
+          value={data.chitNumber}
+          onChange={handle}
           placeholder="Chitty No.eg:15/22"
           required
         ></input><br /><br />
 
 
-        <select className={classes.minimal} value={chittyCategory} onChange={handleChanger}  required>
+        <select className={classes.minimal} onChange={handleChanger}  required>
           <option>Select Chitty Category</option>
           {category.map(category => (
-            <option value={category.category_name}>{category.category_name}</option>
-
+            <option value={category.category_id} name={category.category_name}>{category.category_name}</option>
           ))
           }
         </select><br /><br />
 
-        <select className={classes.minimal} value={employee} onChange={handleChange}  required>
+        <select className={classes.minimal} onChange={handleChange}  required>
           <option>Chitty Manager</option>
           {manager.map(manager => (
-            <option value={manager.firstName}>{manager.firstName}</option>
+            <option value={manager.emp_id}>{manager.firstName}</option>
 
           ))
           }
@@ -153,7 +208,7 @@ const LaunchForm = () => {
 
         <select id={classes.month} value={installments} className={classes.minimal} onChange={installmentsHandler}  required>
           <option name="Select Months" value="">Select duration</option>
-          {chittyCategory === "Long Term Chitty" ? (<>
+          {chittyCategoryId == 1 ? (<>
             <option name="100" value="120">120 Months</option>
             <option name="50" value="100">100 Months</option>
             <option name="50" value="60">60 Months</option></>) : (<>
@@ -189,15 +244,6 @@ const LaunchForm = () => {
             required
           ></input>
         )}
-
-        <input 
-         required
-          type="date" 
-          InputLabelProps={{
-            label:"Select Launch Date",
-          }}
-        />
-
 
         <button type="submit">
           Launch

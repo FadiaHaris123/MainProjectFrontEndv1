@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 // import { sendEmail } from '../util/sendEmail';
 
- const ForgotPasswordPage = () => {
+const ForgotPasswordPage = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [success, setSuccess] = useState(false);
     const [emailValue, setEmailValue] = useState('');
@@ -14,28 +14,6 @@ import axios from 'axios';
             await axios.post("http://localhost:8080/send-password", {
                 email: `${emailValue}`
             });
-            
-            // await axios.get("http://localhost:8080/send-password");
-            // setSuccess(true);
-
-            // setTimeout(() => {
-            //     history.push('/login');
-            // }, 3000);
-            // await sendEmail({
-            //     to: 'sarath.s@experionglobal.com',
-            //     from: 'vivin.abraham@experionglobal.com',
-            //     subject: 'Password Reset',
-            //     text: `
-            //         To reset your password, click this link:
-            //         http://localhost:3000/resetpassword/
-            //     `
-            // });
-            
-            // await axios.put(`/api/forgot-password/${emailValue}`);
-            // setSuccess(true);
-            // setTimeout(() => {
-            //     history.push('/login');
-            // }, 3000);
         } catch (e) {
             setErrorMessage(e.message);
         }
@@ -47,18 +25,31 @@ import axios from 'axios';
             <p>Check your email for a reset link</p>
         </div>
     ) : (
-        <div className="content-container">
-            <h1>Forgot Password</h1>
-            <p>Enter your email and we'll send you a reset link</p>
-            {errorMessage && <div className="fail">{errorMessage}</div>}
-            <input
-                value={emailValue}
-                onChange={e => setEmailValue(e.target.value)}
-                placeholder="someone@gmail.com" />
-            <button
-                disabled={!emailValue}
-                onClick={onSubmitClicked}
-            >Send Reset Link</button>
+        <div className="overlays">
+            <div className="Auth-form-container">
+                <div className="Auth-form" >
+                    <div className="Auth-form-content" >
+                        <h3 className="Auth-form-title">Forgot Password</h3>
+                        {errorMessage && <div className="fail">{errorMessage}</div>}
+                        <div className="form-group mt-3" >
+                            <label>Email address</label>
+                            <span class="required">*</span>
+                            <input
+                                id="email"
+                                type="email"
+                                className="form-control mt-1"
+                                value={emailValue}
+                                onChange={e => setEmailValue(e.target.value)}
+                                placeholder="someone@gmail.com" />
+                            <button
+                                id="submitButton"
+                                disabled={!emailValue}
+                                onClick={onSubmitClicked}
+                            >Send Reset Link</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

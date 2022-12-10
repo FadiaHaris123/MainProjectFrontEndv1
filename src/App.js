@@ -4,13 +4,14 @@ import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router,Switch, Route, Redirect } from "react-router-dom"
 import Auth from "./UI/Auth"
 import ForgotPassword from "./UI/ForgetPassword/ForgetPassword"
+import CreateNewPassword from "./UI/ForgetPassword/ResetPassword"
 import registrationForm from "./UI/registrationForm"
 import foreman from "./components/foreman/foreman"
 import Manager from "./components/foreman/Manager/MainManagerPage"
 import ManagerPage from "./components/Manager/Manager"
 import AssignedChits from "./components/Manager/pages/AssignedChits/AssignedChits"
-import ChangePassword from "./components/Manager/pages/ForgetPassword/ForgetPassword"
-import ResetPassword from "./components/Manager/pages/ForgetPassword/ResetPassword"
+import StartChit from "./components/Manager/pages/StartedChits/StartedChits"
+import ChangePassword from "./components/Manager/pages/ChangePassword/ChangePassword"
 import Customer from "./components/Customer/Customer"
 import LandingPage from "./components/LandingPage/LandingPage"
 import ChittyForm from "./components/ChittyForm/ChittyForm"
@@ -54,19 +55,19 @@ function App() {
           <Route exact path="/" component={LandingPage}/>
           <Route path="/login" component={Auth} />
           <Route path="/forgotpassword" component={ForgotPassword} />
+          <Route path="/createnewpassword" component={CreateNewPassword} />
           <Route path="/register" component={registrationForm}/>
           <Route path="/admin" component={foreman} />
+          <Route path="/chittyform" component={ChittyForm}/>
+          <Route path="/earnings" component={Earnings}/>
           <Route exact path="/employee" component={Manager}/>
           <Route exact path="/manager" component={ManagerPage}/>
           <Route path="/manager/assignedchits" component={AssignedChits}/>
           <Route path="/manager/changepassword" component={ChangePassword}/>
-          <Route path="/manager/resetpassword" component={ResetPassword}/>
+          <Route path="/manager/startchit" component={StartChit}/>
           <Route exact path="/employee" component={MainManagerPage}/>
-          <Route path="/manager" component={ManagerPage}/>
           <Route path="/employee/managerslist" component={ChittyManagers}/>
           <Route exact path="/customer" component={Customer}/>
-          <Route path="/chittyform" component={ChittyForm}/>
-          <Route path="/earnings" component={Earnings}/>
           <Route path='/customer/auction' component={Auction} />
           <Route path='/customer/profile' component={Profile} />
           <Route path='/customer/availablechits' component={AvailableChits}/>
