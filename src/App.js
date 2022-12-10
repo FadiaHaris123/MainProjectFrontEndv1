@@ -7,7 +7,7 @@ import ForgotPassword from "./UI/ForgetPassword/ForgetPassword"
 import registrationForm from "./UI/registrationForm"
 import foreman from "./components/foreman/foreman"
 import Manager from "./components/foreman/Manager/MainManagerPage"
-import ManagerPage from "./components/Manager/Manager"
+import ManagerPage from "./components/Manager/ManagerPage"
 import AssignedChits from "./components/Manager/pages/AssignedChits/AssignedChits"
 import ChangePassword from "./components/Manager/pages/ForgetPassword/ForgetPassword"
 import ResetPassword from "./components/Manager/pages/ForgetPassword/ResetPassword"
@@ -56,13 +56,11 @@ function App() {
           <Route path="/forgotpassword" component={ForgotPassword} />
           <Route path="/register" component={registrationForm}/>
           <Route path="/admin" component={foreman} />
-          <Route exact path="/employee" component={Manager}/>
           <Route exact path="/manager" component={ManagerPage}/>
           <Route path="/manager/assignedchits" component={AssignedChits}/>
           <Route path="/manager/changepassword" component={ChangePassword}/>
           <Route path="/manager/resetpassword" component={ResetPassword}/>
           <Route exact path="/employee" component={MainManagerPage}/>
-          <Route path="/manager" component={ManagerPage}/>
           <Route path="/employee/managerslist" component={ChittyManagers}/>
           <Route exact path="/customer" component={Customer}/>
           <Route path="/chittyform" component={ChittyForm}/>
