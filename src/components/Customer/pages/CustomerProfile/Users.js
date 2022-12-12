@@ -9,8 +9,8 @@ const Users = (props) => {
                         <MDBCardBody id="makepdf">
                             <MDBTypography>User ID : {props.userid}</MDBTypography>
                             <MDBTypography>Username : {props.name}</MDBTypography>
-                            <MDBTypography>Place : {props.place}</MDBTypography>
-                            <MDBTypography>Mail ID : {props.email}</MDBTypography>
+                            {/* <MDBTypography>Place : {props.place}</MDBTypography>
+                            <MDBTypography>Mail ID : {props.email}</MDBTypography> */}
                         </MDBCardBody>
                     </MDBCol>
                 </MDBContainer>

@@ -13,7 +13,7 @@ import ChangePassword from "./components/Manager/pages/ForgetPassword/ForgetPass
 import ResetPassword from "./components/Manager/pages/ForgetPassword/ResetPassword"
 import Customer from "./components/Customer/Customer"
 import LandingPage from "./components/LandingPage/LandingPage"
-import ChittyForm from "./components/ChittyForm/ChittyForm"
+import ChittyForm from './components/ChittyForm/ChittyForm'
 import ChittyManagers from "./components/foreman/ManagerDetails/ChittyManagers"
 import Earnings from "./components/Earnings/Earnings"
 import Auction from './components/Customer/pages/CustomerAuction/Auction'
