@@ -59,7 +59,7 @@
   align-items: center;
   padding: 0 16px;
   border-radius: 7px;
-  border: 1px solid rgb(245, 238, 238);
+  /* border: 1px solid rgb(245, 238, 238); */
 }
 
 .nav-text a:hover {
@@ -82,7 +82,7 @@
 }
 
 .Collapsible {
-  margin-top: -4.5%;
+  margin-top: -6%;
 
   /* position: fixed; */
 }
@@ -98,6 +98,7 @@
 .navbar .img
 {
   margin-left: 5rem;
+  margin-top:-0.7rem;
  
  
   /* border-color: #ffffff;

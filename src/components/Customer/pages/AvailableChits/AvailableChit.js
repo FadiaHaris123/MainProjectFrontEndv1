@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect,Link, useState } from 'react';
+import { useHistory } from "react-router-dom";
 import Navbar from '../../Navbar';
 import classes from './AvailableChit.module.css'
+import {BrowserRouter as Router,Switch, Route, Redirect } from "react-router-dom"
+import ChittyForm from '../../ChittyForm/ChittyForm';
 
 const AvailableChit =()=>{
 
   const [chits, setChits] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState();
+  const history=useHistory();
 
   useEffect(() => {
     const fetchChits = async () => {
@@ -61,6 +65,12 @@ const AvailableChit =()=>{
       </section>
     );
   }
+  const handleClick = () => {
+    
+    history.push("/customer/chittyform");
+
+  };
+
 
    return(
    <React.Fragment>
@@ -81,7 +91,16 @@ const AvailableChit =()=>{
                     <td>{chit.chitNumber}</td>
                     <td>{chit.installment}</td>
                     <td>{chit.duration}</td>
-                    <td><button className={classes.joinButton}>Join</button></td>
+                    {/* <Router>
+                      <Switch> */}
+                    <td><button className={classes.joinButton} onClick={handleClick}>Join</button></td>
+
+                    
+            
+            
+                    {/* <Route path="/customer/chittyform" component={ChittyForm} /> */}
+        {/* </Switch>
+      </Router> */}
                   </tr>
                 )
               }

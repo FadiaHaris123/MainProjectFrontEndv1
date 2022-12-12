@@ -2,7 +2,7 @@ import { useHistory } from "react-router-dom"
 import React, { Fragment, useEffect, useState } from 'react';
 import Navbar from '../../Navbar'
 import DataTable from 'react-data-table-component';
-import StartChit from "../StartedChits/StartedChits";
+// import StartChit from "../StartedChits/StartedChits";
 
 const AssignedChits = () => {
 
