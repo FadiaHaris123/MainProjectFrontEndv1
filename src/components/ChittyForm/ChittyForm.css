@@ -1,0 +1,110 @@
+body{
+    background-image: fixed;
+}
+
+.form{
+    text-align:center;
+    background-color: rgb(237, 240, 243);
+    /* flex-direction: row; */
+    /* border-radius: 5px; */
+    /* width: 1275px; */
+    /* margin: 20px auto*/
+     padding: 20px 0px 20px 100px ; 
+    /* height: 600px; */
+    display: flex;
+    height: 110vh;
+    margin-top: 5rem;
+    border:2px solid rgb(7, 45, 66);
+    border-radius: 2rem;
+    margin-left:3rem;
+    margin-right:3rem;
+    margin-bottom:2rem;
+
+}
+
+.form-body{
+    text-align: left;
+    padding: 20px 10px 10px 20px;
+    
+}
+
+.form-body h2
+{
+    color:rgb(22, 41, 74);
+}
+
+.form-body > *{
+    padding: 7px;
+}
+
+.form__label{
+    width: 70%;
+    color:rgb(14, 13, 13);
+    text-size-adjust: auto;
+}
+
+#name::after{
+ position: absolute;
+ content:"*";
+ color:rgb(210, 42, 42);  
+}
+
+.form_input{
+    width: 60%;
+}
+
+.form__input
+{
+    margin-left:1rem;
+    padding:7px 10px 7px 10px;
+}
+
+/* .status
+{
+    padding:20px 10px 7px 10px;
+    flex-direction:column-reverse;
+
+} */
+
+.footer{
+    text-align: center;
+}
+
+.topnav {
+    background-color: rgb(24, 43, 67);
+    overflow: hidden;
+  }
+
+  .topnav h1
+  {
+    color:white
+  }
+
+  .form h1{
+    color:rgb(22, 41, 74);
+    align-items: center;
+    /* font-style:normal;
+    font-size: larger; */
+  }
+
+  .nominee {
+    margin: 1rem 15rem 7rem 15rem;
+    color:rgb(22, 41, 74);
+    
+  }
+
+  .nominee > *{
+    padding: 7px;
+   
+}
+
+  .btn
+  {
+    padding:0.5rem 1rem 0.5rem 1rem;
+    border-radius:10px;
+    background-color: rgb(54, 164, 56);
+    color:white;
+    border-color: aliceblue;
+    /* margin:1rem 3rem 4rem 2rem; */
+  }
+
