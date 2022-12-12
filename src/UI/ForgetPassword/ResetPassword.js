@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import Navbar from '../../Navbar'
 import { PasswordResetSuccess } from './PasswordResetSuccess';
 import { PasswordResetFail } from './PasswordResetFail';
 // import { N } from 'chart.js/dist/chunks/helpers.core';
@@ -26,23 +25,37 @@ const PasswordResetLandingPage = () => {
     if (isSuccess) return <PasswordResetSuccess />
 
     return (
-        <div className="content-container">
-            <h1>Reset Password</h1>
-            <p>Please enter a new password</p>
-            <input
-                type='password'
-                value={passwordValue}
-                onChange={e => setPasswordValue(e.target.value)}
-                placeholder="Password" />
-            <input
-                type='password'
-                value={confirmPasswordValue}
-                onChange={e => setConfirmPasswordValue(e.target.value)}
-                placeholder="Confirm Password" />
-            <button
-                disabled={!passwordValue || !confirmPasswordValue || passwordValue !== confirmPasswordValue}
-                onClick={onResetClicked}
-            >Reset Password</button>
+        <div className="overlays">
+            <div className="Auth-form-container">
+                <div className="Auth-form" >
+                    <div className="Auth-form-content" >
+                        <h3 className="Auth-form-title">Reset Password</h3>
+                        <div className="form-group mt-3" >
+                            <label>New Password</label>
+                            <span class="required">*</span>
+                            <input
+                                className="form-control mt-1"
+                                type='password'
+                                value={passwordValue}
+                                onChange={e => setPasswordValue(e.target.value)}
+                                placeholder="Password" />
+                            <label>Confirm Password</label>
+                            <span class="required">*</span>
+                            <input
+                                className="form-control mt-1"
+                                type='password'
+                                value={confirmPasswordValue}
+                                onChange={e => setConfirmPasswordValue(e.target.value)}
+                                placeholder="Confirm Password" />
+                            <button
+                                id="submitButton"
+                                disabled={!passwordValue || !confirmPasswordValue || passwordValue !== confirmPasswordValue}
+                                onClick={onResetClicked}
+                            >Reset Password</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
