@@ -6,7 +6,9 @@ import BackgroundImage from '../../assets/images/BigImage.jpg'
 
 export default function LandingPage() {
     return (
+        <div className='full'>
         <header style={ HeaderStyle }>
+            
             <div className='overlay'>
                 <h1 className="main-title text-center">EMINENCE CHITTY</h1>
                 <p className="main-para text-center">join us now</p>
@@ -18,10 +20,14 @@ export default function LandingPage() {
                         <button className="primary-button" id="reg_btn"><span>register </span></button>
                     </Link>
                 </div>
-                <p className='info'>A unique financial savings scheme, designed to ensure safe savings of your hard earned money. A chitty scheme with insurance coverage and pension plan, software that allows you to join chits, pay installments, and 
-        take part in chitty auction from anywhere, anytime.</p>
+                <p className='info'>A unique financial savings scheme, designed to ensure safe savings of 
+                your hard earned money. A chitty scheme with insurance coverage and pension plan, software
+                 that allows you to join chits, pay installments, and take part in chitty auction from 
+                 anywhere, anytime.</p>
             </div>
+            
         </header>
+        </div>
     )
 }
 

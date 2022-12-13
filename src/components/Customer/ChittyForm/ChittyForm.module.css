@@ -1,0 +1,91 @@
+body{
+  background-image: fixed;
+}
+
+.form{
+  background-color: rgb(237, 240, 243);
+  display: flex;
+  height: 118vh;
+  margin-top: 5rem;
+  border:2px solid rgb(7, 45, 66);
+  border-radius: 2rem;
+  margin-left:3rem;
+  margin-right:3rem;
+  margin-bottom:2rem;
+
+}
+
+.form_body h2
+{
+  color:rgb(22, 41, 74);
+}
+.form_body
+{
+  height:100vh;
+}
+.form_body > *{
+  padding: 8px ;
+}
+
+
+#name::after{
+position: absolute;
+content:"*";
+color:rgb(210, 42, 42);  
+}
+
+.form_input{
+  width: 90%;
+}
+
+.form__input
+{
+  margin-left:1rem;
+  padding:7px 10px 7px 10px;
+}
+
+.topnav {
+  background-color: rgb(24, 43, 67);
+  overflow: hidden;
+}
+
+.topnav h1
+{
+  color:white
+}
+
+.form h1{
+  color:rgb(22, 41, 74);
+
+}
+
+.nominee {
+  margin: 0.5rem 15rem 7rem 15rem;
+  color:rgb(22, 41, 74);
+  
+}
+
+.nominee > *{
+  padding: 7px;
+ 
+}
+
+.btn
+{
+  padding:0.5rem 1rem 0.5rem 1rem;
+  border-radius:10px;
+  background-color: rgb(54, 164, 56);
+  color:white;
+  border-color: aliceblue;
+  margin-top: 10rem;
+  margin-left:-1.6rem;
+  /* margin:1rem 3rem 4rem 2rem; */
+}
+
+/* .username{
+margin: 0rem;
+} */
+/* .dob
+{
+margin: 0rem;
+} */
