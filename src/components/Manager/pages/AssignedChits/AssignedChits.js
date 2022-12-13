@@ -8,7 +8,7 @@ const AssignedChits = () => {
     const [chits, setChits] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState();
-    
+
     const columns = ([
         {
             name: 'Chit Number',
@@ -94,7 +94,7 @@ const AssignedChits = () => {
                     launchDate: newItemList[key].launchDate,
                     started: newItemList[key].status,
                     status: (newItemList[key].currentNumberOfChittal < newItemList[key].numberOfChittal) ? 'Not Ready to start' : 'Ready to start',
-                    });
+                });
             }
             setChits(loadedChitties);
             setIsLoading(false);
@@ -119,7 +119,7 @@ const AssignedChits = () => {
     }
     const ExpandedComponent = ({ data }) => <pre>
         Installment : ₹{JSON.stringify(data.installment)} <br />
-        Duration : {JSON.stringify(data.duration)} days<br />
+        Duration : {JSON.stringify(data.duration)} months<br />
         Current Chittals : <span style={{ color: data.status.includes('Not') ? 'red' : '' }}>
             {JSON.stringify(data.currentNumberOfChittal)} </span> <br />
         Total Chittals : {JSON.stringify(data.numberOfChittal)} <br />
