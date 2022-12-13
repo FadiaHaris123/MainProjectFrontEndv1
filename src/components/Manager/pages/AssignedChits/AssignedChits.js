@@ -2,9 +2,8 @@ import { useHistory } from "react-router-dom"
 import React, { Fragment, useEffect, useState } from 'react';
 import Navbar from '../../Navbar'
 import Axios from 'axios'
-import _ from "lodash";
 import DataTable from 'react-data-table-component';
-// import StartChit from "../StartedChits/StartedChits";
+import toDate from "date-fns/esm/fp/toDate";
 
 const AssignedChits = () => {
 
@@ -12,7 +11,6 @@ const AssignedChits = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState();
     const [isReady, setisReady] = useState(false);
-    const [selectedData, setSelectedData] = useState('');
     const history = useHistory();
     console.log(chits);
     const columns = ([
@@ -117,31 +115,19 @@ const AssignedChits = () => {
             }),
         },
     ];
-
-    const handleChange = (state) => {
-        setSelectedData(state.selectedRows);
-        console.log(selectedData);
-    };
-
+    function limit (string = '', limit = 0) {  
+        return string.substring(0, limit)
+      }
     const ExpandedComponent = ({ data }) => <pre>
         Installment : ₹{JSON.stringify(data.installment)} <br />
         Duration : {JSON.stringify(data.duration)} days<br />
         Current Chittals : <span style={{ color: data.status.includes('Not') ? 'red' : '' }}>
             {JSON.stringify(data.currentNumberOfChittal)} </span> <br />
         Total Chittals : {JSON.stringify(data.numberOfChittal)} <br />
-        Launch Date : {JSON.stringify(Date(data.launchDate))} <br /> <br />
+        Launch Date : {(limit(data.launchDate, 10))} <br /> <br />
         <button style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }}>Requested Chittals</button>
     </pre>;
-  const addRowNumberColumn = () => {
-    if (!_.find(columns, { id: "row_number" })) {
-      columns.unshift({
-        id: "row_number",
-        width: 50,
-        filterable: false,
-        disableSortBy: true
-      });
-    }
-  };
+    
     return (
         <Fragment>
             <Navbar />
@@ -158,8 +144,6 @@ const AssignedChits = () => {
                 expandableRowsComponent={ExpandedComponent}
                 expandOnRowClicked
                 highlightOnHover
-                selectableRows
-                onSelectedRowsChange={handleChange}
                 conditionalRowStyles={conditionalRowStyles}
             />
         </Fragment>
