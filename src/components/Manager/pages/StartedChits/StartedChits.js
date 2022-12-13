@@ -65,7 +65,7 @@ const StartedChits = () => {
     }
     const ExpandedComponent = ({ data }) => <pre>
         Installment : ₹{JSON.stringify(data.installment)} <br />
-        Duration : {JSON.stringify(data.duration)} days<br />
+        Duration : {JSON.stringify(data.duration)} months<br />
         Started Date : {(limit(data.startDate, 10))} <br /> <br />
     </pre>;
 
