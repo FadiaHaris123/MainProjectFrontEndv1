@@ -44,7 +44,7 @@ function Customer() {
     <footer class="footer">
   
     <ul class="menu">
-      <li class="menu__item"><a class="menu__link" href="http://localhost:3000/customer#">Home</a></li>
+      <li class="menu__item"><a class="menu__link" href="#">Home</a></li>
       <li class="menu__item"><a class="menu__link" href="#">About</a></li>
       <li class="menu__item"><a class="menu__link" href="#">Services</a></li>
       <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
