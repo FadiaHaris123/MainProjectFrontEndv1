@@ -118,7 +118,7 @@ const Auth = (props) => {
     setMailMode(emailCurrentState.enteredEmail);
     setPasswordMode(passwordCurrentState.enteredPassword);
     const response = await fetch(
-      'http://localhost:8080/api/user-profile'
+      'http://localhost:8080/api/userlogin'
     );
 
     if (!response.ok) {
@@ -127,13 +127,13 @@ const Auth = (props) => {
 
     const responseData = await response.json();
 
-    const newItemList = [...responseData._embedded.userprofile]
+    const newItemList = [...responseData._embedded.userlogin]
     for (const key in newItemList) {
       if ((mail === newItemList[key].email) && password == newItemList[key].passWord){
         if (mail.includes("admin@exp")){
           history.push("/admin"); break;
         }
-        else if (mail.includes("manager@exp")) {
+        else if (mail.includes("anagha@gmail.com")) {
           history.push("/manager"); break;
         }
         else {

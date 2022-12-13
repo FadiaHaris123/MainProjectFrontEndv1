@@ -1,7 +1,10 @@
 import { TableContainer,TableHead,Table,TableBody,TableRow,TableCell,Paper} from "@mui/material";
 import { useEffect, useState } from 'react';
-import classes from './BasicTable.module.css'
+import classes from './BasicTable.module.css';
+import { Link } from 'react-router-dom';
 import Search from "./Search";
+import DataTable from 'react-data-table-component';
+
 
 const BasicTable = () => {
 
@@ -68,33 +71,68 @@ if (httpError) {
   );
 }
 
+const data = [
+  {
+    'Chit Number': "1001",
+    'Eligible Chittals': "25",
+    'Installment No.':"2",
+    'Auction Type': "Online"
+  },
+  {
+    'Chit Number': "1002",
+    'Eligible Chittals': "25",
+    'Installment No.':"2",
+    'Auction Type': "Online"
+  },
+  {
+    'Chit Number': "1001",
+    'Eligible Chittals': "25",
+    'Installment No.':"2",
+    'Auction Type': "Online"
+  }
+]
+
+const columns = [
+  {
+    name: 'Chit Number',
+    sortable: true,
+  },
+  {
+    name: 'Eligible Chittals',
+    sortable: true,
+  },
+  {
+    name: 'Installment No.',
+    sortable: true,
+  },
+  {
+    name: 'Auction Type',
+    sortable: true,
+  },
+  {
+    name: 'Auction Room',
+    cell: () => <Link to="/customer/auction/auctionroom"><button>Enter</button></Link>,
+    sortable: true,
+  },
+ 
+];
+
+
 return(
     <section className={classes.tablecontainer}>
         <Search search={onSearchHandler}/>
-        <div className={classes.autionTable}>
-        <TableContainer className={classes.table} component={Paper}>
-        <Table className={classes.css_rqglhn_MuiTable_root}>
-            <TableHead>
-                <TableRow className={classes.tablehead}>
-                    <TableCell align='center'>Chit No.</TableCell>
-                    <TableCell align='center'>Eligible Chittals</TableCell>
-                    <TableCell align='center'>Installment No.</TableCell>
-                    <TableCell align='center'>Auction Type</TableCell>
-                    <TableCell align='center'>Auction Room</TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody className={classes.tablebody}>
-                    <TableRow>
-                        <TableCell align='center'>01/2021</TableCell>
-                        <TableCell align='center'>abc</TableCell>
-                        <TableCell align='center'>2</TableCell>
-                        <TableCell align='center'>online</TableCell>
-                        <TableCell align='center'><button>Enter</button></TableCell>
-                    </TableRow>
-            </TableBody>
-        </Table>
-    </TableContainer>
-        </div>
+         <DataTable
+        scrollY
+        maxHeight="200px"
+        title=""
+        columns={columns}
+        data={data}
+        paginationTotalRows={5}
+        paginationRowsPerPageOptions={[2,5,8,12,15,20,50]}
+        pagination
+        expandableRows 
+        highlightOnHover
+      />
     </section>
 )
 

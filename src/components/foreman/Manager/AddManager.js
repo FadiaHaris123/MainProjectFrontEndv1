@@ -12,7 +12,8 @@ const [data,setData] = useState({
 	emp_lastname:"",
 	email:"",
 	mobileNumber:"",
-	passWord:"manager@123"
+	passWord:"manager@123",
+  roleId:2
 })
 
 function handle(e){
@@ -30,7 +31,8 @@ function handle(e){
 		emp_lastname:data.emp_lastname,
 		email:data.email,
 		mobileNumber:parseInt(data.mobileNumber),
-		passWord:data.passWord
+		passWord:data.passWord,
+    roleId:data.roleId
 	})
 	.then(res=>{
 	  if(res.data != null){
