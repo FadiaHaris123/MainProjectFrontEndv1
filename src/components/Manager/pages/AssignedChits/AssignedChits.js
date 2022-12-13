@@ -23,8 +23,8 @@ const AssignedChits = () => {
         {
             name: 'Start Chit',
             selector: 'start',
-            cell: ({ id, status }) => (<button value={id}
-                disabled={status.includes('Not') ? true : false}
+            cell: ({ id, status, started }) => (<button value={id}
+                disabled={status.includes('Not') || started.includes('started') ? true : false}
                 style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }}
                 onClick={(e) => submit(e.target.value)}>Start</button>),
             ignoreRowClick: true,
@@ -92,6 +92,7 @@ const AssignedChits = () => {
                     currentNumberOfChittal: newItemList[key].currentNumberOfChittal,
                     totalAmount: newItemList[key].totalAmount,
                     launchDate: newItemList[key].launchDate,
+                    started: newItemList[key].status,
                     status: (newItemList[key].currentNumberOfChittal < newItemList[key].numberOfChittal) ? 'Not Ready to start' : 'Ready to start',
                     });
             }
