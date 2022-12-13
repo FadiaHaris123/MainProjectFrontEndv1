@@ -1,4 +1,3 @@
-import { useHistory } from "react-router-dom"
 import React, { Fragment, useEffect, useState } from 'react';
 import Navbar from '../../Navbar'
 import Axios from 'axios'
@@ -9,9 +8,7 @@ const AssignedChits = () => {
     const [chits, setChits] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState();
-    const [isReady, setisReady] = useState(false);
-    const history = useHistory();
-    console.log(chits);
+    
     const columns = ([
         {
             name: 'Chit Number',
@@ -26,13 +23,16 @@ const AssignedChits = () => {
         {
             name: 'Start Chit',
             selector: 'start',
-            cell: ({id}) => (<button value = {id} style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }} onClick={(e)=>submit(e.target.value)}>Start</button>),
-            // cell: () => <button disabled={!isReady} style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }} onClick={startChit}>Start</button>,
+            cell: ({ id, status }) => (<button value={id}
+                disabled={status.includes('Not') ? true : false}
+                style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }}
+                onClick={(e) => submit(e.target.value)}>Start</button>),
             ignoreRowClick: true,
             allowOverflow: true,
             // button: true,
         },
     ]);
+
     const url = "http://localhost:8080/api/chitty/update"
 
     function submit(value) {
@@ -93,8 +93,7 @@ const AssignedChits = () => {
                     totalAmount: newItemList[key].totalAmount,
                     launchDate: newItemList[key].launchDate,
                     status: (newItemList[key].currentNumberOfChittal < newItemList[key].numberOfChittal) ? 'Not Ready to start' : 'Ready to start',
-                    start: setisReady(newItemList[key].currentNumberOfChittal === newItemList[key].numberOfChittal),
-                });
+                    });
             }
             setChits(loadedChitties);
             setIsLoading(false);
@@ -114,9 +113,9 @@ const AssignedChits = () => {
             }),
         },
     ];
-    function limit (string = '', limit = 0) {  
+    function limit(string = '', limit = 0) {
         return string.substring(0, limit)
-      }
+    }
     const ExpandedComponent = ({ data }) => <pre>
         Installment : ₹{JSON.stringify(data.installment)} <br />
         Duration : {JSON.stringify(data.duration)} days<br />
@@ -126,7 +125,7 @@ const AssignedChits = () => {
         Launch Date : {(limit(data.launchDate, 10))} <br /> <br />
         <button style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }}>Requested Chittals</button>
     </pre>;
-    
+
     return (
         <Fragment>
             <Navbar />
