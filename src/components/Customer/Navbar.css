@@ -7,14 +7,25 @@
   text-align: right;
 }
 
-.navbar .tagName {
+.navbar .tagNamee {
+  font-family: 'Lora';
+ 
+  color: #ffffff;
+  text-align: center;
+  margin-top: -4%;
+  margin-left: 77%;
+}
+
+
+.navbar .tag {
   font-family: 'Lora';
   font-size: 35px;
   color: #ffffff;
   text-align: center;
-  margin-top: 0.5%;
-  margin-left: 65%;
+  margin-top: 1%;
+  margin-left: 5%;
 }
+
 
 .menu-bars {
   margin-left: 1rem;
@@ -97,8 +108,8 @@
 
 .navbar .img
 {
-  margin-left: 5rem;
-  margin-top:-0.7rem;
+  margin-left: 4rem;
+  margin-top:-0.8rem;
  
  
   /* border-color: #ffffff;
