@@ -93,7 +93,9 @@ const AssignedChits = () => {
                     totalAmount: newItemList[key].totalAmount,
                     launchDate: newItemList[key].launchDate,
                     started: newItemList[key].status,
-                    status: (newItemList[key].currentNumberOfChittal < newItemList[key].numberOfChittal) ? 'Not Ready to start' : 'Ready to start',
+                    status: ((newItemList[key].currentNumberOfChittal < newItemList[key].numberOfChittal) ?
+                        'Not Ready to start' :
+                        (newItemList[key].status.includes('started') ? "Chit Started" : "Ready to start")),
                 });
             }
             setChits(loadedChitties);
