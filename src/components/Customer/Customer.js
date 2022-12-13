@@ -1,18 +1,17 @@
 import React from 'react';
 import Navbar from './Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import classes from './Customer.module.css'
+import './Customer.css'
 
 function Customer() {
   return (
     <div>
       <Navbar />
-      <div className={classes.bgimg}>
-        <div className={classes.imge}> 
-        <div className={classes.overlays}></div></div>
-        <br></br>
-        <br></br>
-        <div className={classes.about}>
+      <div className='bgimg'>
+        <div className='imge'> 
+        </div>
+      
+        {/* <div className={classes.about}>
           <h1>About us</h1>
           <br></br>
           <p>A  unique  financial  savings  scheme, designed to ensure safe savings of your hard earned money. A chitty scheme with insurance coverage and pension plan, software that allows you to join chits, pay installments, and
@@ -39,7 +38,22 @@ function Customer() {
 
         </div>
 
-      </div>
+      </div> */}
+     
+    </div>
+    <footer class="footer">
+  
+    <ul class="menu">
+      <li class="menu__item"><a class="menu__link" href="http://localhost:3000/customer#">Home</a></li>
+      <li class="menu__item"><a class="menu__link" href="#">About</a></li>
+      <li class="menu__item"><a class="menu__link" href="#">Services</a></li>
+      <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
+      <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
+
+    </ul>
+    {/* <p>&copy;2021 Eminence Chitty | All Rights Reserved</p> */}
+  </footer>
+  
     </div>
   );
 }

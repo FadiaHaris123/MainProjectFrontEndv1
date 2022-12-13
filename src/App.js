@@ -14,7 +14,7 @@ import StartChit from "./components/Manager/pages/StartedChits/StartedChits"
 import ChangePassword from "./components/Manager/pages/ChangePassword/ChangePassword"
 import Customer from "./components/Customer/Customer"
 import LandingPage from "./components/LandingPage/LandingPage"
-import ChittyForm from "./components/ChittyForm/ChittyForm"
+import ChittyForm from "./components/Customer/ChittyForm/ChittyForm";
 import ChittyManagers from "./components/foreman/ManagerDetails/ChittyManagers"
 import Earnings from "./components/Earnings/Earnings"
 import Auction from './components/Customer/pages/CustomerAuction/Auction'
@@ -71,6 +71,7 @@ function App() {
           <Route path='/customer/availablechits' component={AvailableChits}/>
           <Route path='/customer/payment' component={RazorPay}/>
           <Route path='/customer/auction/auctionroom' component={AuctionRoom}/>
+          <Route path='/customer/chittyform' component={ChittyForm}/>
         </Switch>
       </Router>
   )

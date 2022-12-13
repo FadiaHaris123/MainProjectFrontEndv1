@@ -8,7 +8,7 @@ import classes from './Navbar.css';
 import { IconContext } from 'react-icons';
 import ProfileOverlay from './pages/CustomerProfile/ProfileOverlay';
 import Collapsible from 'react-collapsible';
-import Image from '../../assets/images/profile1.jpg';
+import Image from '../../assets/images/ann.jpeg';
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
@@ -23,9 +23,14 @@ function Navbar() {
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
           <h1 className='tagName'>Eminence Chitty</h1>
-          <Collapsible trigger={<img src={Image} style={{ width: '50px'}} />}>
+          <div className='img'>
+          <Collapsible trigger={<img src={Image} style={{ width: '60px',border: '1px solid black',borderRadius:'2rem'}} />}>
+        
           <ProfileOverlay />
+          
           </Collapsible>
+          </div>
+          
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           <ul className='nav-menu-items' onClick={showSidebar}>

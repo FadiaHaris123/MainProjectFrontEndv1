@@ -1,70 +1,41 @@
-import { Fragment } from "react";
-import React, { useEffect, useState } from 'react';
+import { useHistory } from "react-router-dom"
+import React, { Fragment, useEffect, useState } from 'react';
 import Navbar from '../../Navbar'
+import Axios from 'axios'
+import _ from "lodash";
 import DataTable from 'react-data-table-component';
 import StartChit from "../StartedChits/StartedChits";
-import classes from "./AssignedChits.css";
-import Axios from 'axios';
 
 const AssignedChits = () => {
 
-    const url = "http://localhost:8080/api/chitty/update"
-
-   
-    function submit(e){
-        e.preventDefault();
-        Axios.post(url,{
-        chitNumber:parseInt(chits.chitNumber),
-        installment:parseInt(chits.installment),
-        duration:parseInt(chits.duration),
-        manager:parseInt(1001),
-        numberOfChittal:parseInt(chits.duration),
-        currentNumberOfChittal:parseInt(chits.currentNumberOfChittal),
-        category:parseInt(chittyCategoryId),
-        totalAmount:parseInt(chits.totalAmount),
-        launchDate:chits.launchDate,
-        startDate:formattedstartDate,
-        status:"started"
-        })
-        .then(res=>{
-          if(res.data != null){
-          alert("Chitty started successfully")
-          }
-          console.log(res.data)
-        })
-        }
-     
-    
-      function pad2(n) {
-        return (n < 10 ? '0' : '') + n;
-      }
-      
-      var startDate = new Date();
-      var month = pad2(startDate.getMonth()+1);//months (0-11)
-      var day = pad2(startDate.getDate());//day (1-31)
-      var year= startDate.getFullYear();
-    
-      var formattedstartDate=  year+"-"+month+"-"+day;
-      
-
-    const [chittyCategoryId,setChittyCategoryId] = useState();
     const [chits, setChits] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState();
-    // const [searchName, setSearchName] = useState("");
-
-    const columns = [
+    const [isReady, setisReady] = useState(false);
+    const [selectedData, setSelectedData] = useState('');
+    const history = useHistory();
+    console.log(chits);
+    const columns = ([
+        // {
+        //     {row.cells.map((cell, cellIndex) => {
+        //       const rowNumberCell = cellIndex === 0;
+              
+        //       return (
+        //         <td>
+        //           {rowNumberCell ? index + 1 : cell.render('Cell')}
+        //         </td>
+        //       );
+        //     })}
+        // },
+        {  
+            name: 'No.',
+            selector: 'id',
+            sortable: true,
+        },
         {
             name: 'Chit Number',
             selector: 'chitNumber',
             sortable: true,
-        },
-        {
-            name: 'View Details',
-            cell: () => <button props style={{ borderRadius: '10px' }} onClick={startedChit}>Details</button>,
-            ignoreRowClick: true,
-            allowOverflow: true,
-            // button: true,
         },
         {
             name: 'Status',
@@ -72,50 +43,55 @@ const AssignedChits = () => {
             sortable: true,
         },
         {
-            name: 'Start Chit',
-            cell: () => <button style={{ borderRadius: '10px' }} onClick={submit}>Start</button>,
+            name: 'Start Chit', 
+            selector: 'start',
+            cell: () => (<button style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }} onClick={submit}>Start</button>),
+            // cell: () => <button disabled={!isReady} style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }} onClick={startChit}>Start</button>,
             ignoreRowClick: true,
             allowOverflow: true,
-            // button: true,
+            button: true,
         },
-    ];
+    ]);
+    const url = "http://localhost:8080/api/chitty/update"
+
+    function submit() {
+        // e.preventDefault();
+        // console.log("hi"+props.row);
+        const key = 1;
+        Axios.put(url, {
+            chitNumber: chits[key].chitNumber,
+            installment: chits[key].installment,
+            duration: chits[key].duration,
+            manager: 1002,
+            numberOfChittal: chits[key].numberOfChittal,
+            currentNumberOfChittal: chits[key].currentNumberOfChittal,
+            category: 1,
+            totalAmount: chits[key].totalAmount,
+            launchDate: chits[key].launchDate,
+            startDate: formattedstartDate,
+            status: ""
+        })
+            .then(res => {
+                if (res.data != null) {
+                    alert("Chitty started successfully")
+                }
+                console.log(res.data)
+            })
+    }
+    function pad2(n) {
+        return (n < 10 ? '0' : '') + n;
+    }
+    var startDate = new Date();
+    var month = pad2(startDate.getMonth() + 1);//months (0-11)
+    var day = pad2(startDate.getDate());//day (1-31)
+    var year = startDate.getFullYear();
+    var formattedstartDate = year + "-" + month + "-" + day;
 
     useEffect(() => {
         const fetchAssignedChits = async () => {
             const response = await fetch(
-                'http://localhost:8080/api/chitty/'+chits.chitNumber+'/category'
-            );
-
-            if (!response.ok) {
-                throw new Error('Something went wrong!');
-            }
-
-            const responseData = await response.json();
-
-            const chitCategory = [];
-            const newItemList = [...responseData]
-
-            for (const key in newItemList) {
-                chitCategory.push({
-                    id: key,
-                    chitCategoryId:newItemList[key].id
-                });
-            }
-            setChittyCategoryId(chitCategory.chitCategoryId);
-            setIsLoading(false);
-        };
-
-        fetchAssignedChits().catch((error) => {
-            setIsLoading(false);
-            setHttpError(error.message);
-        });
-    }, []);
-    
-
-    useEffect(() => {
-        const fetchAssignedChits = async () => {
-            const response = await fetch(
-                'http://localhost:8080/api/managers/1001/chits'
+                'http://localhost:8080/api/managers/1002/chits'
+                // 'http://localhost:8080/api/managers/' + id + '/chits'
             );
 
             if (!response.ok) {
@@ -137,7 +113,8 @@ const AssignedChits = () => {
                     currentNumberOfChittal: newItemList[key].currentNumberOfChittal,
                     totalAmount: newItemList[key].totalAmount,
                     launchDate: newItemList[key].launchDate,
-                    status: newItemList[key].status,
+                    status: (newItemList[key].currentNumberOfChittal < newItemList[key].numberOfChittal) ? 'Not Ready to start' : 'Ready to start',
+                    start: setisReady(newItemList[key].currentNumberOfChittal === newItemList[key].numberOfChittal),
                 });
             }
             setChits(loadedChitties);
@@ -158,35 +135,265 @@ const AssignedChits = () => {
             }),
         },
     ];
-    let content;
 
-    if (chits.length > 0) {
-        content = <StartChit chits={chits}></StartChit>
+    const handleChange = (state) => {
+        setSelectedData(state.selectedRows);
+        console.log(selectedData);
+    };
+
+    const ExpandedComponent = ({ data }) => <pre>
+        Installment : ₹{JSON.stringify(data.installment)} <br />
+        Duration : {JSON.stringify(data.duration)} days<br />
+        Current Chittals : <span style={{ color: data.status.includes('Not') ? 'red' : '' }}>
+            {JSON.stringify(data.currentNumberOfChittal)} </span> <br />
+        Total Chittals : {JSON.stringify(data.numberOfChittal)} <br />
+        Launch Date : {JSON.stringify(Date(data.launchDate))} <br /> <br />
+        <button style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }}>Requested Chittals</button>
+    </pre>;
+  const addRowNumberColumn = () => {
+    if (!_.find(columns, { id: "row_number" })) {
+      columns.unshift({
+        id: "row_number",
+        width: 50,
+        filterable: false,
+        disableSortBy: true
+      });
     }
-
-    const startedChit = () => {
-        console.log({content})
-    }
-
+  };
     return (
         <Fragment>
             <Navbar />
-            <div className={classes.assignedchitlist}>
-                <DataTable
-                    scrollY
-                    maxHeight="200px"
-                    title="Assigned Chits"
-                    columns={columns}
-                    data={chits}
-                    paginationTotalRows={5}
-                    paginationRowsPerPageOptions={[2, 5, 8, 12, 15, 20, 50]}
-                    pagination
-                    expandableRows
-                    highlightOnHover
-                    conditionalRowStyles={conditionalRowStyles}
-                />
-            </div>
+            <DataTable
+                // value={rows} paginator={true} rows={20} let-i="rowIndex"
+                // int_rownumber = {chits.Rows.IndexOf(row)+1}
+                scrollY
+                maxHeight="200px"
+                title="Assigned Chits"
+                columns={columns}
+                data={chits}
+                enableRowNumbers={addRowNumberColumn}
+                rowNumberMode="static" //default
+                paginationTotalRows={5}
+                paginationRowsPerPageOptions={[1, 5, 10, 15, 20, 50]}
+                pagination
+                expandableRows
+                expandableRowsComponent={ExpandedComponent}
+                expandOnRowClicked
+                highlightOnHover
+                selectableRows
+                onSelectedRowsChange={handleChange}
+                conditionalRowStyles={conditionalRowStyles}
+            />
+            {/* <div>{selectedData[0] ? selectedData[0].chitNumber : ''}</div> */}
         </Fragment>
     )
 }
 export default AssignedChits;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { useHistory } from "react-router-dom"
+// import React, { Fragment, useEffect, useState } from 'react';
+// import Navbar from '../../Navbar'
+// import DataTable from 'react-data-table-component';
+// import StartChit from "../StartedChits/StartedChits";
+// import classes from "./AssignedChits.css";
+// import Axios from 'axios';
+
+// const AssignedChits = () => {
+
+//     const url = "http://localhost:8080/api/chitty/update"
+
+   
+//     function submit(e){
+//         e.preventDefault();
+//         Axios.post(url,{
+//         chitNumber:parseInt(chits.chitNumber),
+//         installment:parseInt(chits.installment),
+//         duration:parseInt(chits.duration),
+//         manager:parseInt(1001),
+//         numberOfChittal:parseInt(chits.duration),
+//         currentNumberOfChittal:parseInt(chits.currentNumberOfChittal),
+//         category:parseInt(chittyCategoryId),
+//         totalAmount:parseInt(chits.totalAmount),
+//         launchDate:chits.launchDate,
+//         startDate:formattedstartDate,
+//         status:"started"
+//         })
+//         .then(res=>{
+//           if(res.data != null){
+//           alert("Chitty started successfully")
+//           }
+//           console.log(res.data)
+//         })
+//         }
+     
+    
+//       function pad2(n) {
+//         return (n < 10 ? '0' : '') + n;
+//       }
+      
+//       var startDate = new Date();
+//       var month = pad2(startDate.getMonth()+1);//months (0-11)
+//       var day = pad2(startDate.getDate());//day (1-31)
+//       var year= startDate.getFullYear();
+    
+//       var formattedstartDate=  year+"-"+month+"-"+day;
+      
+
+//     const [chittyCategoryId,setChittyCategoryId] = useState();
+//     const [chits, setChits] = useState([]);
+//     const [isLoading, setIsLoading] = useState(true);
+//     const [httpError, setHttpError] = useState();
+//     const [isReady, setisReady] = useState(false);
+//     const history = useHistory();
+//     console.log(chits);
+//     const columns = [
+//         {
+//             name: 'Chit Number',
+//             selector: 'chitNumber',
+//             sortable: true,
+//         },
+//         {
+//             name: 'Status',
+//             selector: 'status',
+//             sortable: true,
+//         },
+//         {
+//             name: 'Start Chit',
+//             cell: () => <button style={{ borderRadius: '10px' }} onClick={submit}>Start</button>,
+//             ignoreRowClick: true,
+//             allowOverflow: true,
+//             // button: true,
+//         },
+//     ];
+
+//     const startChit = () => {
+//         history.push("/manager/startchit");
+//     }
+//     useEffect(() => {
+//         const fetchAssignedChits = async () => {
+//             const response = await fetch(
+//                 'http://localhost:8080/api/chitty/'+chits.chitNumber+'/category'
+//             );
+
+//             if (!response.ok) {
+//                 throw new Error('Something went wrong!');
+//             }
+
+//             const responseData = await response.json();
+
+//             const chitCategory = [];
+//             const newItemList = [...responseData]
+
+//             for (const key in newItemList) {
+//                 chitCategory.push({
+//                     id: key,
+//                     chitCategoryId:newItemList[key].id
+//                 });
+//             }
+//             setChittyCategoryId(chitCategory.chitCategoryId);
+//             setIsLoading(false);
+//         };
+
+//         fetchAssignedChits().catch((error) => {
+//             setIsLoading(false);
+//             setHttpError(error.message);
+//         });
+//     }, []);
+    
+
+//     useEffect(() => {
+//         const fetchAssignedChits = async () => {
+//             const response = await fetch(
+//                 'http://localhost:8080/api/managers/1001/chits'
+//                 // 'http://localhost:8080/api/managers/' + id + '/chits'
+//             );
+
+//             if (!response.ok) {
+//                 throw new Error('Something went wrong!');
+//             }
+
+//             const responseData = await response.json();
+
+//             const loadedChitties = [];
+//             const newItemList = [...responseData._embedded.chitty]
+
+//             for (const key in newItemList) {
+//                 loadedChitties.push({
+//                     id: key,
+//                     chitNumber: newItemList[key].chitNumber,
+//                     installment: newItemList[key].installment,
+//                     duration: newItemList[key].duration,
+//                     numberOfChittal: newItemList[key].numberOfChittal,
+//                     currentNumberOfChittal: newItemList[key].currentNumberOfChittal,
+//                     totalAmount: newItemList[key].totalAmount,
+//                     launchDate: newItemList[key].launchDate,
+//                     status: (newItemList[key].currentNumberOfChittal < newItemList[key].numberOfChittal) ? 'Not Ready to start' : 'Ready to start',
+//                     // start: setisReady(newItemList[key].currentNumberOfChittal === newItemList[key].numberOfChittal),
+//                 });
+//             }
+//             setChits(loadedChitties);
+//             setIsLoading(false);
+//         };
+
+//         fetchAssignedChits().catch((error) => {
+//             setIsLoading(false);
+//             setHttpError(error.message);
+//         });
+//     }, []);
+
+//     const conditionalRowStyles = [
+//         {
+//             when: row => row,
+//             style: row => ({
+//                 color: row.status.includes('Not') ? 'red' : 'green',
+//             }),
+//         },
+//     ];
+
+//     const ExpandedComponent = ({ data }) => <pre>
+//         Installment : ₹{JSON.stringify(data.installment)} <br />
+//         Duration : {JSON.stringify(data.duration)} days<br />
+//         Current Chittals : <span  style={{color: data.status.includes('Not') ? 'red' : ''}}>
+//             {JSON.stringify(data.currentNumberOfChittal)} </span> <br/>
+//         Total Chittals : {JSON.stringify(data.numberOfChittal)} <br />
+//         Launch Date : {JSON.stringify(Date(data.launchDate))} <br /> <br />
+//         <button style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }}>Requested Chittals</button>
+//     </pre>;
+
+//     return (
+//         <Fragment>
+//             <Navbar />
+//             <DataTable
+//                 scrollY
+//                 maxHeight="200px"
+//                 title="Assigned Chits"
+//                 columns={columns}
+//                 data={chits}
+//                 paginationTotalRows={5}
+//                 paginationRowsPerPageOptions={[1, 5, 10, 15, 20, 50]}
+//                 pagination
+//                 expandableRows
+//                 expandableRowsComponent={ExpandedComponent}
+//                 expandOnRowClicked
+//                 highlightOnHover
+//                 conditionalRowStyles={conditionalRowStyles}
+//             />
+//         </Fragment>
+//     )
+// }
+// export default AssignedChits;

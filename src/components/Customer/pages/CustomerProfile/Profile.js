@@ -3,7 +3,7 @@ import UserList from "./UserList";
 import './UserList.css'
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 import Users from './Users';
-import Image from '../../../../assets/images/profile1.jpg';
+import Image from '../../../../assets/images/profile2.jpeg';
 import Navbar from '../../Navbar';
 import './profile.css'
 import ReactToPrint from 'react-to-print'
@@ -21,7 +21,7 @@ function Profile() {
   useEffect(() => {
     const userdetails = async () => {
       const response = await fetch(
-        'https://userdetai-default-rtdb.firebaseio.com/users.json'
+        'https://routingapp-51bff-default-rtdb.firebaseio.com/user.json'
       );
 
       if (!response.ok) {
@@ -33,11 +33,11 @@ function Profile() {
       const loadeddetails = [];
       for (const key in responseData) {
         loadeddetails.push({
-          id: key,
-          userid: responseData[key].userid,
+          // id: key,
+          userid: responseData[key].id,
           name: responseData[key].name,
-          place: responseData[key].place,
-          email: responseData[key].email,
+          // place: responseData[key].place,
+          // email: responseData[key].email,
         });
       }
 
