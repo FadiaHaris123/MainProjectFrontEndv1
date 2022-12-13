@@ -68,7 +68,7 @@ return(
                 value={data.firstName}
                 type="name"
                 className="form-control mt-1"
-                placeholder="e.g Jane "
+                placeholder="e.g Anagha "
                 required
               />
             </div>
@@ -81,7 +81,7 @@ return(
 				value={data.emp_lastname}
                 type="name"
                 className="form-control mt-1"
-                placeholder="e.g Doe"
+                placeholder="e.g Rajeev"
                 required
               />
             </div>
@@ -94,7 +94,7 @@ return(
 				value={data.email}
                 type="email"
                 className="form-control mt-1"
-                placeholder="e.g abc@gmail.com"
+                placeholder="e.g anagha@gmail.com"
               required/>
             </div>
             <div className="form-group mt-3">

@@ -4,6 +4,11 @@
     color: #f1f1f1;
 }
 
+.full
+{
+  height:50%;
+}
+
 .overlay{
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.904),rgba(0, 0, 0, 0.667));
   height: 100vh;

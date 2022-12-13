@@ -17,14 +17,14 @@
       border-radius: 1cm;
       padding: 20px;
       width: 50%;
-      height: 60vh;
+      height: 80vh;
       margin: 7% 25%;
   }
 
   .upload button{
     background-color: #192d44;
     padding: 2% 2%;
-    margin: 5px 5px;
+    margin: 75px 100px;
     color: white;
     border: none;
     font-family: 'Lora', serif;
