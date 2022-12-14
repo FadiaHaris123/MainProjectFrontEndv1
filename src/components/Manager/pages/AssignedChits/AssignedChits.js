@@ -69,7 +69,7 @@ const AssignedChits = () => {
     useEffect(() => {
         const fetchAssignedChits = async () => {
             const response = await fetch(
-                'http://localhost:8080/api/managers/1002/chits'
+                'http://localhost:8080/api/managers/1001/chits'
                 // 'http://localhost:8080/api/managers/' + id + '/chits'
             );
 
