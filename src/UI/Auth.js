@@ -1,15 +1,18 @@
 import React, { useEffect, useState, useReducer } from "react"
 import { Link, useHistory } from "react-router-dom"
 import Image from '../assets/images/login.jpg'
+import Axios from 'axios';
 import '../App.css'
 import './Auth.css'
 
 import classes from './Login.module.css';
 import foreman from "../components/foreman/foreman"
+import AssignedChits from "../components/Manager/pages/AssignedChits/AssignedChits";
 
 const Auth = (props) => {
 
   let [authMode, setAuthMode] = useState("signin")
+  let [userId, setuserId] = useState("")
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin")
   }
@@ -117,30 +120,24 @@ const Auth = (props) => {
   const loginHandler = async () => {
     setMailMode(emailCurrentState.enteredEmail);
     setPasswordMode(passwordCurrentState.enteredPassword);
-    const response = await fetch(
-      'http://localhost:8080/api/user-profile'
-    );
-
-    if (!response.ok) {
-      throw new Error('Something went wrong!');
-    }
-
-    const responseData = await response.json();
-
-    const newItemList = [...responseData._embedded.userprofile]
-    for (const key in newItemList) {
-      if ((mail === newItemList[key].email) && password == newItemList[key].passWord){
-        if (mail.includes("admin@exp")){
-          history.push("/admin"); break;
+    Axios.post('http://localhost:8080/api/user/userlogin', {
+      email: mail,
+      userPassword: password
+    })
+      .then(res => {
+        if (res.data.roleId == 1) {
+          history.push("/admin");
         }
-        else if (mail.includes("manager@exp")) {
-          history.push("/manager"); break;
+        if (res.data.roleId == 2) {
+          console.log(res.data.userId);
+          localStorage.setItem('userId', res.data.userId);
+          history.push("/manager");
         }
-        else {
-          history.push("/customer"); break;
+        if (res.data.roleId == 3) {
+          history.push("/customer");
         }
-      }
-    }
+      })
+
   };
   return (
     <header style={HeaderStyle}>

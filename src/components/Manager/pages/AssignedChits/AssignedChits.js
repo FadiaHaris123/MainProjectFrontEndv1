@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Navbar from '../../Navbar'
+import { useHistory } from "react-router-dom"
 import Axios from 'axios'
 import DataTable from 'react-data-table-component';
 
@@ -8,6 +9,7 @@ const AssignedChits = () => {
     const [chits, setChits] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState();
+    const id = window.localStorage.getItem('userId');
 
     const columns = ([
         {
@@ -34,14 +36,14 @@ const AssignedChits = () => {
     ]);
 
     const url = "http://localhost:8080/api/chitty/update"
-
+    const history = useHistory();
     function submit(value) {
         const key = value;
         Axios.put(url, {
             chitNumber: chits[key].chitNumber,
             installment: chits[key].installment,
             duration: chits[key].duration,
-            manager: 1002,
+            manager: id,
             numberOfChittal: chits[key].numberOfChittal,
             currentNumberOfChittal: chits[key].currentNumberOfChittal,
             category: 1,
@@ -56,6 +58,7 @@ const AssignedChits = () => {
                 }
                 console.log(res.data)
             })
+            return (history.push("/manager/startchit"));
     }
     function pad2(n) {
         return (n < 10 ? '0' : '') + n;
@@ -69,34 +72,35 @@ const AssignedChits = () => {
     useEffect(() => {
         const fetchAssignedChits = async () => {
             const response = await fetch(
-                'http://localhost:8080/api/managers/1002/chits'
-                // 'http://localhost:8080/api/managers/' + id + '/chits'
+                'http://localhost:8080/api/managers/' + id + '/chits'
             );
 
             if (!response.ok) {
                 throw new Error('Something went wrong!');
             }
-
+            // console.log({props.id})
             const responseData = await response.json();
 
             const loadedChitties = [];
             const newItemList = [...responseData._embedded.chitty]
 
             for (const key in newItemList) {
-                loadedChitties.push({
-                    id: key,
-                    chitNumber: newItemList[key].chitNumber,
-                    installment: newItemList[key].installment,
-                    duration: newItemList[key].duration,
-                    numberOfChittal: newItemList[key].numberOfChittal,
-                    currentNumberOfChittal: newItemList[key].currentNumberOfChittal,
-                    totalAmount: newItemList[key].totalAmount,
-                    launchDate: newItemList[key].launchDate,
-                    started: newItemList[key].status,
-                    status: ((newItemList[key].currentNumberOfChittal < newItemList[key].numberOfChittal) ?
-                        'Not Ready to start' :
-                        (newItemList[key].status.includes('started') ? "Chit Started" : "Ready to start")),
-                });
+                if (newItemList[key].status != "started") {
+                    loadedChitties.push({
+                        id: key,
+                        chitNumber: newItemList[key].chitNumber,
+                        installment: newItemList[key].installment,
+                        duration: newItemList[key].duration,
+                        numberOfChittal: newItemList[key].numberOfChittal,
+                        currentNumberOfChittal: newItemList[key].currentNumberOfChittal,
+                        totalAmount: newItemList[key].totalAmount,
+                        launchDate: newItemList[key].launchDate,
+                        started: newItemList[key].status,
+                        status: ((newItemList[key].currentNumberOfChittal < newItemList[key].numberOfChittal) ?
+                            'Not Ready to start' :
+                            (newItemList[key].status.includes('started') ? "Chit Started" : "Ready to start")),
+                    });
+                }
             }
             setChits(loadedChitties);
             setIsLoading(false);
