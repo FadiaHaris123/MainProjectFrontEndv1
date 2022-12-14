@@ -26,15 +26,12 @@ function Navbar() {
       if (!response.ok) {
         throw new Error('Something went wrong!');
       }
-      // console.log({props.id})
       const responseData = await response.json();
+      const manager = [...responseData._embedded.manager]
 
-      const loadedManager = [];
-      const newItemList = [...responseData._embedded.manager]
-
-      for (const key in newItemList) {
-        if (newItemList[key].emp_id == id) {
-            setManagerName(newItemList[key].firstName)
+      for (const key in manager) {
+        if (manager[key].emp_id == id) {
+            setManagerName(manager[key].firstName)
         }
       }
     };
