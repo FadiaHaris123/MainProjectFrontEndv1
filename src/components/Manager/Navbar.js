@@ -22,6 +22,7 @@ function Navbar() {
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
           <h1 className='tagName'>Eminence Chitty</h1>
+          <h5 className='tagNamee'>Welcome Fadia!</h5>
           <Collapsible trigger={<img src="" style={{ width: '50px' }} />}>
 
             {/* <ProfileOverlay /> */}
