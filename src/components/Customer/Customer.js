@@ -9,6 +9,9 @@ function Customer() {
       <Navbar />
       <div className='bgimg'>
         <div className='imge'> 
+        {/* <div className='text' >
+          <h3>Start a new beginning with Eminence Chitty</h3>
+          </div> */}
             </div>
      </div>
     <footer class="footer">
