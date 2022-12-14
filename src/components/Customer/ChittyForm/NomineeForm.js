@@ -78,11 +78,18 @@ const handleSubmit = () => {
                     <label className={classes.form__label} for="nomineePhone">Contact number </label>
                     <input type="nomineePhone" id="nomineePhone" className={classes.form__input} value={nomineeData.phone} onChange={(e) => handleInputChange(e)} placeholder="+91  " />
                 </div>
-
+                </div>
+                <div className={classes.footer}>
+                
+                <button onClick={() => handleSubmit()} type="submit" className={classes.btn}>Submit</button>
+        
+           
+           
+        </div>
             
             </div>
         
-        </div>
+     
     );
 }
 
