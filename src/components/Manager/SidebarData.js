@@ -31,5 +31,11 @@ export const SidebarData = [
     path: '/manager/changepassword',
     icon: <RiIcons.RiAuctionFill />,
     cName: 'nav-text'
+  },
+  {
+    title: 'Log Out',
+    path: '/',
+    icon: <AiIcons.AiOutlineLogout />,
+    cName: 'nav-text'
   }
 ];
