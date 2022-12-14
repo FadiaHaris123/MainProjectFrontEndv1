@@ -8,93 +8,33 @@ import { isDisabled } from '@testing-library/user-event/dist/utils';
 
 function ChittyForm() {
 
-    const [Name, setName] = useState(null);
-    const [age, setage] = useState(null);
-    const [address, setaddress] = useState(null);
-    const [pincode, setpincode] = useState(null);
-    const [userPhone, setuserPhone] = useState(null);
-    const [dob, setdob] = useState(null);
-    const [status, setstatus] = useState(null);
-    const [income, setincome] = useState(null);
-    const [nomineeName, setnomineeName] = useState(null);
-    const [nomineeAge, setnomineeAge] = useState(null);
-    const [chittyType, setchittyType] = useState(null);
-    const [aadhar, setaadhar] = useState(null);
-    const [nomineedob, setnomineedob] = useState(null);
-    const [nomineePhone, setnomineePhone] = useState(null);
-    const [nomineeAddress, setnomineeAddress] = useState(null);
-    const [nomineePincode, setnomineePincode] = useState(null);
-    const [nomineeAd, setnomineeAd] = useState(null);
-    const [date, setDate] = useState("");
-    const [relation, setrelation] = useState("");
+    const [chittalData,setChittalData] = useState({
+        chittalId:,
+        userId:"",
+        chittyId:"",
+        age:"",
+        address:"",
+        pinCode:"",
+        userPhone:"",
+        dob:"",
+        status:"",
+        income:"",
+        aadhar:""
+    })
 
-    const handleInputChange = (e) => {
-        const { id, value } = e.target;
-        if (id === "Name") {
-            setName(value);
-        }
+    const [nomineeData,setNomineeData] = useState({
+            nomineeId:"",
+            chittalId:"",
+            name:"",
+            age:"",
+            dob:"",
+            phone:"",
+            address:"",
+            pincode:"",
+            aadhar:""
+    })
 
-        if (id === "age") {
-            setage(value);
-        }
-
-        if (id === "dob") {
-            setdob(value);
-        }
-
-        if (id === "relation") {
-            setrelation(value);
-        }
-
-        if (id === "nomineedob") {
-            setnomineedob(value);
-        }
-
-        if (id === "address") {
-            setaddress(value);
-        }
-
-        if (id === "pincode") {
-            setpincode(value);
-        }
-        if (id === "userPhone") {
-            setuserPhone(userPhone);
-        }
-        if (id === "status") {
-            setstatus(status);
-        }
-        if (id === "income") {
-            setincome(income);
-        }
-        if (id === "nomineeName") {
-            setnomineeName(value);
-        }
-
-        if (id === "nomineeAge") {
-            setnomineeAge(value);
-        }
-        if (id === "chittyType") {
-            setchittyType(value);
-        }
-        if (id === "aadhar") {
-            setaadhar(value);
-        }
-        if (id === "nomineePhone") {
-            setnomineePhone(value);
-        }
-
-        if (id === "nomineePincode") {
-            setnomineePincode(value);
-        }
-        if (id === "nomineeAddress") {
-            setnomineeAddress(value);
-        }
-
-        if (id === "nomineeAd") {
-            setnomineeAd(value);
-        }
-    }
-
+    
     const handleSubmit = () => {
         console.log(Name, age, dob, address, nomineedob, pincode, relation, userPhone, status, income, chittyType, aadhar, nomineeName, nomineeAge, nomineePincode, nomineePhone, nomineeAddress, nomineeAd);
     }

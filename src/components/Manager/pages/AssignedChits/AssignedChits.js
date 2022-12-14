@@ -21,7 +21,7 @@ const AssignedChits = () => {
             sortable: true,
         },
         {
-            name: 'Start Chit', 
+            name: 'Start Chit',
             selector: 'start',
             cell: ({ id, status, started }) => (<button value={id}
                 disabled={status.includes('Not') || started.includes('started') ? true : false}
@@ -29,7 +29,7 @@ const AssignedChits = () => {
                 onClick={(e) => submit(e.target.value)}>Start</button>),
             ignoreRowClick: true,
             allowOverflow: true,
-            button: true,
+            // button: true,
         },
     ]);
 
@@ -69,7 +69,7 @@ const AssignedChits = () => {
     useEffect(() => {
         const fetchAssignedChits = async () => {
             const response = await fetch(
-                'http://localhost:8080/api/managers/1002/chits'
+                'http://localhost:8080/api/managers/1001/chits'
                 // 'http://localhost:8080/api/managers/' + id + '/chits'
             );
 
@@ -128,29 +128,16 @@ const AssignedChits = () => {
         Launch Date : {(limit(data.launchDate, 10))} <br /> <br />
         <button style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }}>Requested Chittals</button>
     </pre>;
-  const addRowNumberColumn = () => {
-    if (!_.find(columns, { id: "row_number" })) {
-      columns.unshift({
-        id: "row_number",
-        width: 50,
-        filterable: false,
-        disableSortBy: true
-      });
-    }
-  };
+
     return (
         <Fragment>
             <Navbar />
             <DataTable
-                // value={rows} paginator={true} rows={20} let-i="rowIndex"
-                // int_rownumber = {chits.Rows.IndexOf(row)+1}
                 scrollY
                 maxHeight="200px"
                 title="Assigned Chits"
                 columns={columns}
                 data={chits}
-                enableRowNumbers={addRowNumberColumn}
-                rowNumberMode="static" //default
                 paginationTotalRows={5}
                 paginationRowsPerPageOptions={[1, 5, 10, 15, 20, 50]}
                 pagination
@@ -158,28 +145,9 @@ const AssignedChits = () => {
                 expandableRowsComponent={ExpandedComponent}
                 expandOnRowClicked
                 highlightOnHover
-                selectableRows
-                onSelectedRowsChange={handleChange}
                 conditionalRowStyles={conditionalRowStyles}
             />
-            {/* <div>{selectedData[0] ? selectedData[0].chitNumber : ''}</div> */}
         </Fragment>
     )
 }
 export default AssignedChits;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
