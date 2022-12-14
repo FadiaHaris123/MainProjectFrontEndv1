@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as ImIcons from 'react-icons/im';
@@ -11,8 +11,39 @@ import Collapsible from 'react-collapsible';
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [httpError, setHttpError] = useState();
   const showSidebar = () => setSidebar(!sidebar);
+  const id = window.localStorage.getItem('userId');
+  const [managerName, setManagerName] = useState();
+
+  useEffect(() => {
+    const fetchAssignedChits = async () => {
+      const response = await fetch(
+        'http://localhost:8080/api/managers'
+      );
+
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
+      // console.log({props.id})
+      const responseData = await response.json();
+
+      const loadedManager = [];
+      const newItemList = [...responseData._embedded.manager]
+
+      for (const key in newItemList) {
+        if (newItemList[key].emp_id == id) {
+            setManagerName(newItemList[key].firstName)
+        }
+      }
+    };
+    fetchAssignedChits().catch((error) => {
+      setIsLoading(false);
+      setHttpError(error.message);
+    });
+  }, []);
+ 
 
   return (
     <>
@@ -22,7 +53,7 @@ function Navbar() {
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
           <h1 className='tagName'>Eminence Chitty</h1>
-          <h5 className='tagNamee'>Welcome Fadia!</h5>
+          <h5 className='tagNamee'>Welcome {managerName}</h5>
           <Collapsible trigger={<img src="" style={{ width: '50px' }} />}>
 
             {/* <ProfileOverlay /> */}

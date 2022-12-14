@@ -4,15 +4,11 @@ import Image from '../assets/images/login.jpg'
 import Axios from 'axios';
 import '../App.css'
 import './Auth.css'
-
 import classes from './Login.module.css';
-import foreman from "../components/foreman/foreman"
-import AssignedChits from "../components/Manager/pages/AssignedChits/AssignedChits";
 
 const Auth = (props) => {
 
   let [authMode, setAuthMode] = useState("signin")
-  let [userId, setuserId] = useState("")
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin")
   }
