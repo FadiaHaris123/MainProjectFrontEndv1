@@ -1,12 +1,23 @@
+.heading
+{
+  color:rgb(12, 53, 83);
+/*  
+  border:3px solid rgb(59, 82, 116);
+  border-radius: 1.5rem; */
+  margin-left: 7rem;
+  margin-right: 24rem;
+ margin-top: 12rem;
+}
+
 
 .bgimg .imge
 {
-    background-image:('./manager.webp');
+    background-image:url('./manager.webp');
     background-size: cover;
     height: 
     81vh;
     width:212vh;
-  margin-top: -25px;
+  margin-top: -260px;
   background-repeat:no-repeat; 
 }
 
@@ -25,6 +36,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
 }
 
 .social-icon,

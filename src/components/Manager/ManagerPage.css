@@ -2,8 +2,12 @@
 
 .bimg .img
 {
-    background-image:('./man.webp');
+    background-image:url('./manager13.webp');
     background-size: cover;
+    height: 
+    101vh;
+    width:212.6vh;
+  margin-top: -90px;
    
   background-repeat:no-repeat; 
 }
