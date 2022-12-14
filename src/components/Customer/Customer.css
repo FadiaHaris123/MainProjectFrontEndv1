@@ -1,10 +1,10 @@
 
-.bgimg  .imge
+.bgimg .imge
 {
-    background-image: url('');
+    background-image:('./manager.webp');
     background-size: cover;
     height: 
-    85vh;
+    81vh;
     width:212vh;
   margin-top: -25px;
   background-repeat:no-repeat; 

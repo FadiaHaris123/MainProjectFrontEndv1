@@ -8,14 +8,14 @@ export const SidebarData = [
   {
     title: 'Assigned Chits',
     path: '/manager/assignedchits',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <RiIcons.RiPlayListAddFill />,
     cName: 'nav-text'
   },
 
   {
     title: 'Chits Started',
     path: '/manager/startchit',
-    icon: <RiIcons.RiAuctionFill />,
+    icon: <IoIcons.IoIosPaper />,
     cName: 'nav-text'
   },
 
@@ -29,7 +29,14 @@ export const SidebarData = [
   {
     title: 'Change Password',
     path: '/manager/changepassword',
-    icon: <RiIcons.RiAuctionFill />,
+    icon: <RiIcons.RiLockPasswordLine />,
+    cName: 'nav-text'
+  },
+
+  {
+    title: 'Log Out',
+    path: '/',
+    icon: <AiIcons.AiOutlineLogout />,
     cName: 'nav-text'
   },
   {
