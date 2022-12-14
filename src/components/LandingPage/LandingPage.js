@@ -5,6 +5,7 @@ import './LandingPage.css'
 import BackgroundImage from '../../assets/images/BigImage.jpg'
 
 export default function LandingPage() {
+    localStorage.setItem('userId', '');
     return (
         <div className='full'>
         <header style={ HeaderStyle }>
