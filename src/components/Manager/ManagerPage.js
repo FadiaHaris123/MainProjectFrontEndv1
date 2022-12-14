@@ -5,8 +5,11 @@ function ManagerPage() {
   return (
     <div>
       <Navbar />
-      <div className='bgimg'>
-        </div>
+      <div className='bimg'>
+        <div className='img'>
+            </div>
+     </div>
+        
     </div>
   );
 }

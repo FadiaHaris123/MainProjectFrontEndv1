@@ -9,11 +9,11 @@
     display: flex;
     /* justify-content: space-between; */
     align-items: center;
-    color:#ffffff ;
   }
 
 .sideheader{
   font-family: serif;
   font-size: 2rem;
   margin-left: 35%;
+  color:#ffffff ;
 }
