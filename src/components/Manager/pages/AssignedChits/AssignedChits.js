@@ -1,18 +1,15 @@
-import { useHistory } from "react-router-dom"
 import React, { Fragment, useEffect, useState } from 'react';
 import Navbar from '../../Navbar'
+import Axios from 'axios'
 import DataTable from 'react-data-table-component';
-// import StartChit from "../StartedChits/StartedChits";
 
 const AssignedChits = () => {
 
     const [chits, setChits] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState();
-    const [isReady, setisReady] = useState(false);
-    const history = useHistory();
-    console.log(chits);
-    const columns = [
+
+    const columns = ([
         {
             name: 'Chit Number',
             selector: 'chitNumber',
@@ -26,16 +23,49 @@ const AssignedChits = () => {
         {
             name: 'Start Chit',
             selector: 'start',
-            cell: () => <button disabled={!isReady} style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }} onClick={startChit}>Start</button>,
+            cell: ({ id, status, started }) => (<button value={id}
+                disabled={status.includes('Not') || started.includes('started') ? true : false}
+                style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }}
+                onClick={(e) => submit(e.target.value)}>Start</button>),
             ignoreRowClick: true,
             allowOverflow: true,
             // button: true,
         },
-    ];
+    ]);
 
-    const startChit = () => {
-        history.push("/manager/startchit");
+    const url = "http://localhost:8080/api/chitty/update"
+
+    function submit(value) {
+        const key = value;
+        Axios.put(url, {
+            chitNumber: chits[key].chitNumber,
+            installment: chits[key].installment,
+            duration: chits[key].duration,
+            manager: 1002,
+            numberOfChittal: chits[key].numberOfChittal,
+            currentNumberOfChittal: chits[key].currentNumberOfChittal,
+            category: 1,
+            totalAmount: chits[key].totalAmount,
+            launchDate: chits[key].launchDate,
+            startDate: formattedstartDate,
+            status: "started"
+        })
+            .then(res => {
+                if (res.data != null) {
+                    alert("Chitty started successfully")
+                }
+                console.log(res.data)
+            })
     }
+    function pad2(n) {
+        return (n < 10 ? '0' : '') + n;
+    }
+    var startDate = new Date();
+    var month = pad2(startDate.getMonth() + 1);//months (0-11)
+    var day = pad2(startDate.getDate());//day (1-31)
+    var year = startDate.getFullYear();
+    var formattedstartDate = year + "-" + month + "-" + day;
+
     useEffect(() => {
         const fetchAssignedChits = async () => {
             const response = await fetch(
@@ -62,8 +92,10 @@ const AssignedChits = () => {
                     currentNumberOfChittal: newItemList[key].currentNumberOfChittal,
                     totalAmount: newItemList[key].totalAmount,
                     launchDate: newItemList[key].launchDate,
-                    status: (newItemList[key].currentNumberOfChittal < newItemList[key].numberOfChittal) ? 'Not Ready to start' : 'Ready to start',
-                    // start: setisReady(newItemList[key].currentNumberOfChittal === newItemList[key].numberOfChittal),
+                    started: newItemList[key].status,
+                    status: ((newItemList[key].currentNumberOfChittal < newItemList[key].numberOfChittal) ?
+                        'Not Ready to start' :
+                        (newItemList[key].status.includes('started') ? "Chit Started" : "Ready to start")),
                 });
             }
             setChits(loadedChitties);
@@ -84,14 +116,16 @@ const AssignedChits = () => {
             }),
         },
     ];
-
+    function limit(string = '', limit = 0) {
+        return string.substring(0, limit)
+    }
     const ExpandedComponent = ({ data }) => <pre>
         Installment : ₹{JSON.stringify(data.installment)} <br />
-        Duration : {JSON.stringify(data.duration)} days<br />
-        Current Chittals : <span  style={{color: data.status.includes('Not') ? 'red' : ''}}>
-            {JSON.stringify(data.currentNumberOfChittal)} </span> <br/>
+        Duration : {JSON.stringify(data.duration)} months<br />
+        Current Chittals : <span style={{ color: data.status.includes('Not') ? 'red' : '' }}>
+            {JSON.stringify(data.currentNumberOfChittal)} </span> <br />
         Total Chittals : {JSON.stringify(data.numberOfChittal)} <br />
-        Launch Date : {JSON.stringify(Date(data.launchDate))} <br /> <br />
+        Launch Date : {(limit(data.launchDate, 10))} <br /> <br />
         <button style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }}>Requested Chittals</button>
     </pre>;
 
