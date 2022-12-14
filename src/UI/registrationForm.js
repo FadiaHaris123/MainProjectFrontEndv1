@@ -6,14 +6,15 @@ import Image from '../assets/images/joinus.jpg'
 
 const Auth = (props) => {
 
-const url = "http://localhost:8080/api/user-profile"
+const url = "http://localhost:8080/api/user/user-profile"
 
 const [data,setData] = useState({
   firstName:"",
   lastName:"",
   email:"",
   mobileNo:"",
-  passWord:""
+  passWord:"",
+  roleId:3
 })
 
 function handle(e){
@@ -30,7 +31,8 @@ function submit(e){
     lastName:data.lastName,
     email:data.email,
     mobileNo:parseInt(data.mobileNo),
-    passWord:data.passWord
+    passWord:data.passWord,
+    roleId:data.roleId
   })
   .then(res=>{
     if(res.data != null){

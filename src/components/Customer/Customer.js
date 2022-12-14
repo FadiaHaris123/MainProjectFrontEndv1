@@ -6,11 +6,20 @@ import './Customer.css'
 function Customer() {
   return (
     <div>
+    
       <Navbar />
+      <div className="heading">
+          <h3>Start a new beginning with Eminence Chitty!</h3>
+</div>
       <div className='bgimg'>
+      
         <div className='imge'> 
+    
             </div>
+            
      </div>
+     
+    
     <footer class="footer">
   
     <ul class="menu">

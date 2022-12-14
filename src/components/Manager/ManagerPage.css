@@ -1,17 +1,14 @@
-.bgimg 
+.bimg .img
 {
-    /* background-image: url('./manager.webp'); */
+    background-image:url('./admin4.webp');
     background-size: cover;
     height: 
-    85vh;
-    width:212vh;
-  margin-top: -50px;
+    101.5vh;
+    width:212.9vh;
+  margin-top: -90px;
+   
   background-repeat:no-repeat; 
 }
-
-
-
-
 
 .manager-div-groups {
   border: none;
@@ -53,3 +50,4 @@
   color: black;
   font-size: large;
 }
+

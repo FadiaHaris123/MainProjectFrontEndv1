@@ -30,8 +30,6 @@ const columns = [
 ];
 
 
-
-
 const onSearchHandler = (name)=>{
     console.log(name)
     setSearchName(name);

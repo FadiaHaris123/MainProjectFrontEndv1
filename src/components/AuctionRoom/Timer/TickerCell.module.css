@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Montserrat&family=Roboto:wght@300;700&family=Rubik&family=Teko:wght@500&display=swap');
+
+.tickerCell {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 5% 1%;
+}
+
+.tickerCellValue {
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
+}
+

@@ -26,12 +26,12 @@ const LaunchForm = () => {
     function submit(e){
     e.preventDefault();
     Axios.post(url,{
-    chitNumber:data.chitNumber,
+    chitNumber:parseInt(data.chitNumber),
     installment:parseInt(amount),
     duration:parseInt(installments),
     manager:parseInt(employeeId),
     numberOfChittal:parseInt(installments),
-    currentNumberOfChittal:data.currentNumberOfChittal,
+    currentNumberOfChittal:parseInt(data.currentNumberOfChittal),
     category:parseInt(chittyCategoryId),
     totalAmount:totalAmount,
     launchDate:formattedlaunchDate,

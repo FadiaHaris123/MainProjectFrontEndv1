@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router,Switch, Route, Redirect } from "react-router-dom"
 import Auth from "./UI/Auth"
 import ForgotPassword from "./UI/ForgetPassword/ForgetPassword"
+import NomineeForm from "./components/Customer/ChittyForm/NomineeForm";
 import CreateNewPassword from "./UI/ForgetPassword/ResetPassword"
 import registrationForm from "./UI/registrationForm"
 import foreman from "./components/foreman/foreman"
@@ -23,6 +24,7 @@ import AvailableChits from './components/Customer/pages/AvailableChits/Available
 import { GrLaunch } from "react-icons/gr";
 import RazorPay from "./components/Customer/RazorPay/payment"
 import MainManagerPage from "./components/foreman/Manager/MainManagerPage";
+import AuctionRoom from "./components/AuctionRoom/AuctionRoom";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -65,11 +67,13 @@ function App() {
           <Route exact path="/employee" component={MainManagerPage}/>
           <Route path="/employee/managerslist" component={ChittyManagers}/>
           <Route exact path="/customer" component={Customer}/>
-          <Route path='/customer/auction' component={Auction} />
+          <Route exact path='/customer/auction' component={Auction} />
           <Route path='/customer/profile' component={Profile} />
           <Route path='/customer/availablechits' component={AvailableChits}/>
           <Route path='/customer/payment' component={RazorPay}/>
+          <Route path='/customer/auction/auctionroom' component={AuctionRoom}/>
           <Route path='/customer/chittyform' component={ChittyForm}/>
+          <Route path='./customer/nomineeform' component={NomineeForm}/>
         </Switch>
       </Router>
   )
