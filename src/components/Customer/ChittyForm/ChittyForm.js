@@ -37,12 +37,6 @@ function ChittyForm() {
             setChangePwd(true)
     
         }
-       
-         
-
-
-    
-
  
     return (
         // <header style={ HeaderStyle }>
