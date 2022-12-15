@@ -1,35 +1,79 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Fragment } from "react";
+import { useHistory } from "react-router-dom"
 import Navbar from '../../Navbar'
 
 const ForgotPasswordPage = () => {
 
-    const [changePwd, setChangePwd] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
+    const [httpError, setHttpError] = useState();
+    const id = window.localStorage.getItem('userId');
+    const [managerEmail, setManagerEmail] = useState();
+    const history = useHistory();
+
+    const [data, setData] = useState({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+    })
+
+    useEffect(() => {
+        const fetchManagers = async () => {
+            const response = await fetch(
+                'http://localhost:8080/api/managers'
+            );
+
+            if (!response.ok) {
+                throw new Error('Something went wrong!');
+            }
+            const responseData = await response.json();
+            const manager = [...responseData._embedded.manager]
+
+            for (const key in manager) {
+                if (manager[key].emp_id == id) {
+                    setManagerEmail(manager[key].email)
+                }
+            }
+        };
+        fetchManagers().catch((error) => {
+            setIsLoading(false);
+            setHttpError(error.message);
+        });
+    }, []);
 
     const changePasswordHandler = (event) => {
         event.preventDefault();
-
-        fetch("http://localhost:8080/api/user-profile", {
-
-            headers: { "Content-Type": "application/json" },
-            method: "POST",
-            body: JSON.stringify({
-                email: "admin@exp",
-                // props.employeeId
-                newPassword: changePwd,
-            })
-        }).then(response => {
-            console.log("hello change");
-            console.log("request: ", response);
-            return response.json();
-        })
-            .then(resJson => {
-                alert("Password Change Successfully")
-            })
-
+        if (data == null) {
+            if (data.newPassword == data.confirmPassword) {
+                fetch("http://localhost:8080/api/user/change-password", {
+                    headers: { "Content-Type": "application/json" },
+                    method: "POST",
+                    body: JSON.stringify({
+                        email: managerEmail,
+                        newPassword: data.newPassword,
+                        currentPassword: data.currentPassword,
+                    })
+                }).then(response => {
+                    alert("Password Change Successfully")
+                    return (
+                        response.json(),
+                        history.push("/manager")
+                    );
+                })
+            }
+            else {
+                alert("Password doesnot match.")
+            }
+        }
+        else {
+            alert("Enter password")
+        }
     };
-    const passwordChange = (event) => {
-        setChangePwd(event.target.value)
+
+    function passwordChange(e) {
+        const newdata = { ...data }
+        newdata[e.target.id] = e.target.value
+        setData(newdata)
     }
 
     return (
@@ -43,22 +87,30 @@ const ForgotPasswordPage = () => {
                             <div className="form-group mt-3">
                                 <label>Current Password</label>
                                 <input
+                                    onChange={(e) => passwordChange(e)}
+                                    id="currentPassword"
+                                    value={data.currentPassword}
                                     className="form-control mt-1"
                                     type="password"
-                                    placeholder='********'
+                                    placeholder='*******'
                                 /><br></br>
                                 <label>New Password</label>
                                 <input
+                                    onChange={(e) => passwordChange(e)}
+                                    id="newPassword"
+                                    value={data.newPassword}
                                     className="form-control mt-1"
                                     type="password"
-                                    placeholder='********'
+                                    placeholder='*******'
                                 /><br></br>
                                 <label>Confirm Password</label>
                                 <input
+                                    onChange={(e) => passwordChange(e)}
+                                    id="confirmPassword"
+                                    value={data.confirmPassword}
                                     className="form-control mt-1"
-                                    onChange={passwordChange}
                                     type="password"
-                                    placeholder='********'
+                                    placeholder='*******'
                                 /><br></br>
                                 <button id="submitButton">Change Password</button>
                             </div>
