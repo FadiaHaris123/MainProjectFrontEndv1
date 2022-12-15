@@ -6,7 +6,7 @@ import Image from '../assets/images/joinus.jpg'
 
 const Auth = (props) => {
 
-const url = "http://localhost:8080/api/user/user-profile"
+const url = "http://localhost:8080/api/user-profile"
 
 const [data,setData] = useState({
   firstName:"",

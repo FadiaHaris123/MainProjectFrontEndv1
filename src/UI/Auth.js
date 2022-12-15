@@ -130,6 +130,7 @@ const Auth = (props) => {
           history.push("/manager");
         }
         if (res.data.roleId == 3) {
+          localStorage.setItem('userid',res.data.userId)
           history.push("/customer");
         }
       })
