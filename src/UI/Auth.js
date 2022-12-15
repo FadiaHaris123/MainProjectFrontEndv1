@@ -126,10 +126,12 @@ const Auth = (props) => {
         }
         if (res.data.roleId == 2) {
           console.log(res.data.userId);
-          localStorage.setItem('userId', res.data.userId);
+          localStorage.setItem('managerId', res.data.userId);
           history.push("/manager");
         }
         if (res.data.roleId == 3) {
+          console.log(res.data.userId);
+          localStorage.setItem('userId', res.data.userId);
           history.push("/customer");
         }
       })

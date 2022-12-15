@@ -30,12 +30,14 @@ const AvailableChit =()=>{
       const newItemList = [...responseData._embedded.chitty]
 
       for (const key in newItemList) {
-        loadedChits.push({
-          id: key,
-          chitNumber: newItemList[key].chitNumber,
-          installment: newItemList[key].installment,
-          duration: newItemList[key].duration,
-        });
+        if(newItemList[key].status != "started"){
+          loadedChits.push({
+            id: key,
+            chitNumber: newItemList[key].chitNumber,
+            installment: newItemList[key].installment,
+            duration: newItemList[key].duration,
+          });
+        }
       }
 
       setChits(loadedChits);

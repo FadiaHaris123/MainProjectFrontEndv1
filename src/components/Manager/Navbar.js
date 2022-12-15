@@ -14,7 +14,7 @@ function Navbar() {
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState();
   const showSidebar = () => setSidebar(!sidebar);
-  const id = window.localStorage.getItem('userId');
+  const id = window.localStorage.getItem('managerId');
   const [managerName, setManagerName] = useState();
 
   useEffect(() => {

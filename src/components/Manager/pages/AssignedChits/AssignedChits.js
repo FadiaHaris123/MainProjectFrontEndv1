@@ -9,7 +9,7 @@ const AssignedChits = () => {
     const [chits, setChits] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState();
-    const id = window.localStorage.getItem('userId');
+    const id = window.localStorage.getItem('managerId');
 
     const columns = ([
         {

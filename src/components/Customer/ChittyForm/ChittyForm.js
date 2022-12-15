@@ -9,8 +9,8 @@ import { isDisabled } from '@testing-library/user-event/dist/utils';
 import NomineeForm from './NomineeForm';
 
 function ChittyForm() {
-    const [changePwd, setChangePwd] = useState(false);
-
+    
+    const id = window.localStorage.getItem('userId');
     const [chittalData,setChittalData] = useState({
         userId:"",
         chittyId:"",
@@ -32,22 +32,15 @@ function ChittyForm() {
     }
     
     const handleSubmit = () => {
-      
-
-            setChangePwd(true)
-    
+          
         }
        
          
-
-
-    
-
  
     return (
         // <header style={ HeaderStyle }>
         <Fragment>
-            <Header></Header>
+            <Header/>
             <div className={classes.form}>
 
 
