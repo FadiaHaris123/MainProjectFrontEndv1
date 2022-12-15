@@ -113,42 +113,27 @@ const Auth = (props) => {
   let [password, setPasswordMode] = useState("")
   const history = useHistory();
 
-  const url = "http://localhost:8080/api/user/userlogin"
-
-const [data,setData] = useState({
-  email:"",
-  passWord:""
-})
-
-function handle(e){
-  const newdata = {...data}
-  newdata[e.target.id] = e.target.value 
-  setData(newdata)
-  console.log(newdata)
-}
-
-function submit(e){
-  e.preventDefault();
-  Axios.post(url,{
-    email:data.email,
-    userPassword:data.passWord,
-  })
-  .then(res=>{
-    if(res.data != null){
-      console.log(res.data.roleid)
-      localStorage.setItem('roleId',res.data.roleId);
-      localStorage.setItem('userid',res.data.userId)
-      alert("Login successful")
-      if(res.data.roleId == 1)
-        history.push("/admin");
-      else if(res.data.roleId == 2 && res.data.userId == 1001)
-        history.push("/manager");
-      else 
-        history.push("/customer"); 
-    }
-    console.log(res.data)
-  })
-}
+  const loginHandler = async () => {
+    setMailMode(emailCurrentState.enteredEmail);
+    setPasswordMode(passwordCurrentState.enteredPassword);
+    Axios.post('http://localhost:8080/api/user/userlogin', {
+      email: mail,
+      userPassword: password
+    })
+      .then(res => {
+        if (res.data.roleId == 1) {
+          history.push("/admin");
+        }
+        if (res.data.roleId == 2) {
+          console.log(res.data.userId);
+          localStorage.setItem('userId', res.data.userId);
+          history.push("/manager");
+        }
+        if (res.data.roleId == 3) {
+          localStorage.setItem('userid',res.data.userId)
+          history.push("/customer");
+        }
+      })
 
   };
   return (
@@ -213,7 +198,7 @@ function submit(e){
       </div>
     </header>
   )
-
+}
 
 const HeaderStyle = {
   width: "210vh",
