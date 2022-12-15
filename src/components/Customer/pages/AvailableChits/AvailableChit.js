@@ -1,4 +1,5 @@
-import React, { useEffect,Link, useState } from 'react';
+import React, { useEffect,useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import Navbar from '../../Navbar';
 import classes from './AvailableChit.module.css'
@@ -67,11 +68,11 @@ const AvailableChit =()=>{
       </section>
     );
   }
-  const handleClick = () => {
+  // const handleClick = () => {
     
-    history.push("/customer/chittyform");
-
-  };
+  //   // history.push("/customer/chittyform");
+  //   <Link to="/customer/chittyform"/>
+  // };
 
 
    return(
@@ -93,16 +94,9 @@ const AvailableChit =()=>{
                     <td>{chit.chitNumber}</td>
                     <td>{chit.installment}</td>
                     <td>{chit.duration}</td>
-                    {/* <Router>
-                      <Switch> */}
-                    <td><button className={classes.joinButton} onClick={handleClick}>Join</button></td>
-
-                    
-            
-            
-                    {/* <Route path="/customer/chittyform" component={ChittyForm} /> */}
-        {/* </Switch>
-      </Router> */}
+                    <td>
+                    <NavLink to={{pathname:'/customer/chittyform',state:{id:chit.chitNumber}}}><button className={classes.joinButton}>Join</button></NavLink>
+                      </td>
                   </tr>
                 )
               }

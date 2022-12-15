@@ -77,7 +77,7 @@ const Auth = (props) => {
       console.log("validity check");
 
       setFormIsValid(
-        emailCurrentState.enteredEmail.includes('@') && passwordCurrentState.enteredPassword.trim().length > 6
+        emailCurrentState.enteredEmail.includes('@') && passwordCurrentState.enteredPassword.trim().length >= 6
       );
     }, 500);
     return () => {
