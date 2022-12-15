@@ -7,7 +7,7 @@ import DataTable from 'react-data-table-component';
 const AssignedChits = () => {
 
     const [chits, setChits] = useState([]);
-    const id = window.localStorage.getItem('userId');
+    const id = window.localStorage.getItem('managerId');
 
     const columns = ([
         {

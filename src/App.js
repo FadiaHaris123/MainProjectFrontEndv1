@@ -73,7 +73,7 @@ function App() {
           <Route path='/customer/payment' component={RazorPay}/>
           <Route path='/customer/auction/auctionroom' component={AuctionRoom}/>
           <Route path='/customer/chittyform' component={ChittyForm}/>
-          <Route path='./customer/nomineeform' component={NomineeForm}/>
+          <Route path='/customer/nomineeform' component={NomineeForm}/>
         </Switch>
       </Router>
   )

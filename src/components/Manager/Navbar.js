@@ -12,7 +12,7 @@ import Collapsible from 'react-collapsible';
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
-  const id = window.localStorage.getItem('userId');
+  const id = window.localStorage.getItem('managerId');
   const [managerName, setManagerName] = useState([]);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function Navbar() {
           <FaIcons.FaBars onClick={showSidebar} />
         </Link>
         <h1 className='tagName'>Eminence Chitty</h1>
-        <h5 className='tagNamee'>Hi {managerName}</h5>
+        <h5 className='tagNamee'>Hi, {managerName}</h5>
         {/* <Collapsible trigger={<img src="" style={{ width: '50px' }} />}>
             <ProfileOverlay />
           </Collapsible> */}

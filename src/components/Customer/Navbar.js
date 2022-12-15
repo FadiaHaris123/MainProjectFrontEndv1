@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import * as ImIcons from 'react-icons/im';
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons';
@@ -12,7 +11,7 @@ import axios from "axios";
 import './Navbar.css'
 
 function Navbar() {
-  const userid = window.localStorage.getItem('userid');
+  const userid = window.localStorage.getItem('userId');
   const [sidebar, setSidebar] = useState(false);
   const [name, setName] = useState([]);
   const [error, setError] = useState([]);

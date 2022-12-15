@@ -2,22 +2,12 @@ import { Link } from "react-router-dom";
 import  { useState, setState, Fragment } from 'react';
 import React from "react";
 import classes from './NomineeForm.module.css'
+import Axios from 'axios';
 
-function NomineeForm() {
-    const [chittalData,setChittalData] = useState({
-        userId:"",
-        chittyId:"",
-        age:"",
-        address:"",
-        pinCode:"",
-        userPhone:"",
-        dob:"",
-        status:"",
-        income:"",
-        aadhar:""
-    })
-
- 
+function NomineeForm(props) {
+   
+    const url="http://localhost:8080/api/nominee/add";
+    // console.log(props.chittalId)
     const [nomineeData,setNomineeData] = useState({
         chittalId:"",
         name:"",
@@ -30,15 +20,32 @@ function NomineeForm() {
 })
 
 function handleInputChange(e){
-    const newdata = {...chittalData}
+    const newdata = {...nomineeData}
     newdata[e.target.id] = e.target.value
-    setChittalData(newdata)
+    setNomineeData(newdata)
     console.log(newdata)
-}
-
-const handleSubmit = () => {
-     }
-
+    }
+    
+    function handleSubmit(e){
+    e.preventDefault();
+    Axios.post(url,{
+        chittalId:props.chittalId,
+        name:nomineeData.name,
+        age:nomineeData.age,
+        dob:nomineeData.dob,
+        phone:nomineeData.phone,
+        address:nomineeData.address,
+        pincode:nomineeData.pincode,
+        aadhar:nomineeData.aadhar
+    })
+    .then(res=>{
+      if(res.data != null){
+      alert("Nominee Added")
+      }
+      console.log(res.data)
+    })
+    }
+ 
     return(
         <div className={classes.form}>
 
@@ -47,41 +54,41 @@ const handleSubmit = () => {
                 <h3>Nominee details</h3>
                 <div className={classes.nomineeName}>
                     <label className={classes.form__label} for="nomineeName">Name </label>
-                    <input type="nomineeName" id="nomineeName" className={classes.form__input} value={nomineeData.name} onChange={(e) => handleInputChange(e)} placeholder="Name" />
+                    <input type="nomineeName" id="name" className={classes.form__input} value={nomineeData.name} onChange={(e) => handleInputChange(e)} placeholder="Name" />
                 </div>
 
                 <div className={classes.nomineeAge}>
                     <label className={classes.form__label} for="nomineeAge">Age </label>
-                    <input type="nomineeAge" id="nomineeAge" className={classes.form__input} value={nomineeData.age} onChange={(e) => handleInputChange(e)} placeholder="In years" />
+                    <input type="nomineeAge" id="age" className={classes.form__input} value={nomineeData.age} onChange={(e) => handleInputChange(e)} placeholder="In years" />
                 </div>
 
                 <div className={classes.nomineedob}>
                     <label className="form__label" for="nomineedob" id="nomineedob"> Date of birth </label>
-                    <input className={classes.form__input} type="text" value={nomineeData.dob} onChange={(e) => handleInputChange(e)} id="nomineedob" placeholder="dd/mm/yyyy" />
+                    <input className={classes.form__input} type="text" value={nomineeData.dob} onChange={(e) => handleInputChange(e)} id="dob" placeholder="yyyy-mm-dd" />
                 </div>
 
                 <div className={classes.nomineeAddress}>
                     <label className="form__label" for="nomineeAddress">Address </label>
-                    <input type="nomineeAddress" id="nomineeAddress" className={classes.form__input} value={nomineeData.address} onChange={(e) => handleInputChange(e)} placeholder="Address" />
+                    <input type="nomineeAddress" id="address" className={classes.form__input} value={nomineeData.address} onChange={(e) => handleInputChange(e)} placeholder="Address" />
                 </div>
 
                 <div className={classes.nomineePincode}>
                     <label className="form__label" for="nomineePincode"> Pincode </label>
-                    <input type="nomineePincode" id="nomineePincode" className={classes.form__input} value={nomineeData.pincode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" />
+                    <input type="nomineePincode" id="pincode" className={classes.form__input} value={nomineeData.pincode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" />
                 </div>
                 <div className={classes.nomineeAd}>
                     <label className="form__label" for="nomineeAd"> Aadhar </label>
-                    <input type="nomineeAd" id="nomineeAd" className={classes.form__input} value={nomineeData.aadhar} onChange={(e) => handleInputChange(e)} placeholder="Eg.2054 3605 7419" />
+                    <input type="nomineeAd" id="aadhar" className={classes.form__input} value={nomineeData.aadhar} onChange={(e) => handleInputChange(e)} placeholder="Eg.2054 3605 7419" />
                 </div>
 
                 <div className={classes.nomineePhone}>
                     <label className={classes.form__label} for="nomineePhone">Contact number </label>
-                    <input type="nomineePhone" id="nomineePhone" className={classes.form__input} value={nomineeData.phone} onChange={(e) => handleInputChange(e)} placeholder="+91  " />
+                    <input type="nomineePhone" id="phone" className={classes.form__input} value={nomineeData.phone} onChange={(e) => handleInputChange(e)} placeholder="+91  " />
                 </div>
                 </div>
                 <div className={classes.footer}>
                 
-                <button onClick={() => handleSubmit()} type="submit" className={classes.btn}>Submit</button>
+                <button onClick={handleSubmit} type="submit" className={classes.btn}>Submit</button>
         
            
            

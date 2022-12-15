@@ -1,5 +1,5 @@
-import React, { useState, setState, Fragment } from 'react';
-import { Link } from "react-router-dom"
+import React, { useState,setState, Fragment } from 'react';
+import { Link,useLocation } from "react-router-dom"
 import classes from './ChittyForm.module.css'
 import Header from './Header/Header'
 import Image from './Header/form.jpg'
@@ -7,10 +7,16 @@ import { getByDisplayValue } from '@testing-library/react';
 import { isDOMComponent } from 'react-dom/test-utils';
 import { isDisabled } from '@testing-library/user-event/dist/utils';
 import NomineeForm from './NomineeForm';
+import Axios from 'axios';
 
 function ChittyForm() {
-    const [changePwd, setChangePwd] = useState(false);
 
+  let location = useLocation();
+  const chittyId = location.state.id;
+    const url= "http://localhost:8080/api/chittal/add";
+    const [chittalId,setChittalId] = useState(0);
+    const [showNominee, setShowNominee] = useState(false);
+    const id = window.localStorage.getItem('userId');
     const [chittalData,setChittalData] = useState({
         userId:"",
         chittyId:"",
@@ -31,27 +37,36 @@ function ChittyForm() {
         console.log(newdata)
     }
     
-    const handleSubmit = () => {
-      
-
-            setChangePwd(true)
-    
-        }
-       
+    function handleSubmit(e){
+        e.preventDefault();
+        Axios.post(url,{
+            userId:id,
+            chittyId:parseInt(chittyId),
+            age:parseInt(chittalData.age),
+            address:chittalData.address,
+            pinCode:chittalData.pinCode,
+            userPhone:parseInt(chittalData.userPhone),
+            dob:chittalData.dob,
+            status:chittalData.status,
+            income:chittalData.income,
+            aadhar:chittalData.aadhar
+        })
+        .then(res=>{
+          if(res.data != null){
+            alert("Chittal added")
+          }
+        //   console.log("chittalID"+res.data.chittalId)
+        // when chittal information is passed chittal id is obtained as response
+          setChittalId(res.data.chittalId)
+        })
+        setShowNominee(true);
+      }
          
-
-
-    
-
  
     return (
-        // <header style={ HeaderStyle }>
         <Fragment>
-            <Header></Header>
+            <Header/>
             <div className={classes.form}>
-
-
-                {/* <h1>Chitty Application Form</h1> */}
                 <br></br>
 
                 <div className={classes.form_body}>
@@ -61,13 +76,13 @@ function ChittyForm() {
                         <input className={classes.form__input} type="text"  id="Name" placeholder="Name" />
                     </div>
                     <div>
-                        <label className={classes.form__label} for="age" id="age"> Age </label>
-                        <input className={classes.form__input} type="text" value={chittalData.age} onChange={(e) => handleInputChange(e)} id="Name" placeholder="In years" />
+                        <label className={classes.form__label} for="age"> Age </label>
+                        <input className={classes.form__input} type="text" value={chittalData.age} onChange={(e) => handleInputChange(e)} id="age" placeholder="In years" />
                     </div>
 
                     <div className={classes.dob}>
-                        <label className={classes.form__label} for="dob" id="dob"> Date of birth </label>
-                        <input className={classes.form__input} type="text" value={chittalData.dob} onChange={(e) => handleInputChange(e)} id="Name" placeholder="dd/mm/yyyy" />
+                        <label className={classes.form__label} for="dob"> Date of birth </label>
+                        <input className={classes.form__input} type="text" value={chittalData.dob} onChange={(e) => handleInputChange(e)} id="dob" placeholder="yyyy-mm-dd" />
                     </div>
 
 
@@ -78,7 +93,7 @@ function ChittyForm() {
 
                     <div className={classes.pincode}>
                         <label className={classes.form__label} for="address">Pincode </label>
-                        <input type="pincode" id="pincode" className={classes.form__input} value={chittalData.pinCode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" />
+                        <input type="pincode" id="pinCode" className={classes.form__input} value={chittalData.pinCode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" />
                     </div>
 
 
@@ -93,7 +108,6 @@ function ChittyForm() {
                                 <option disabled={isDisabled} value={chittalData.status} >Select marital status</option>
                                 <option value="Single">Single</option>
                                 <option value="Married">Married</option>
-                                <option value="Widowed">Widowed</option>
                                 <option value="Divorced">Divorced</option>
                             </select>
                         </label>
@@ -123,10 +137,9 @@ function ChittyForm() {
 
                 <div className={classes.footer}>
                 
-                    <button onClick={() => handleSubmit()} type="submit" className={classes.btn}>Next</button>
-              {changePwd && <NomineeForm/>}
+                    <button onClick={handleSubmit} type="submit" className={classes.btn}>Next</button>
+              {showNominee && <NomineeForm chittalId={chittalId}/>}
                 </div>
-                {/* </div> */}
             </div>
         </Fragment>
     )

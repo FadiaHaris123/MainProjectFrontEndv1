@@ -77,7 +77,7 @@ const Auth = (props) => {
       console.log("validity check");
 
       setFormIsValid(
-        emailCurrentState.enteredEmail.includes('@') && passwordCurrentState.enteredPassword.trim().length > 6
+        emailCurrentState.enteredEmail.includes('@') && passwordCurrentState.enteredPassword.trim().length >= 6
       );
     }, 500);
     return () => {
@@ -126,11 +126,12 @@ const Auth = (props) => {
         }
         if (res.data.roleId == 2) {
           console.log(res.data.userId);
-          localStorage.setItem('userId', res.data.userId);
+          localStorage.setItem('managerId', res.data.userId);
           history.push("/manager");
         }
         if (res.data.roleId == 3) {
-          localStorage.setItem('userid',res.data.userId)
+          console.log(res.data.userId);
+          localStorage.setItem('userId', res.data.userId);
           history.push("/customer");
         }
       })
