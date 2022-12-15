@@ -4,9 +4,7 @@ import Image from '../assets/images/login.jpg'
 import Axios from 'axios';
 import '../App.css'
 import './Auth.css'
-
 import classes from './Login.module.css';
-
 
 const Auth = (props) => {
 
@@ -79,7 +77,7 @@ const Auth = (props) => {
       console.log("validity check");
 
       setFormIsValid(
-        emailCurrentState.enteredEmail.includes('@') && passwordCurrentState.enteredPassword.trim().length > 6
+        emailCurrentState.enteredEmail.includes('@') && passwordCurrentState.enteredPassword.trim().length >= 6
       );
     }, 500);
     return () => {
@@ -91,7 +89,6 @@ const Auth = (props) => {
 
 
   const emailChangeHandler = (event) => {
-    handle(event)
     dispatchEmail({ type: 'emailchange', payload: event.target.value })
   };
 
@@ -100,7 +97,6 @@ const Auth = (props) => {
   };
 
   const passwordChangeHandler = (event) => {
-    handle(event)
     dispatchPassword({ type: 'passwordchange', payload: event.target.value })
   };
 
@@ -113,43 +109,34 @@ const Auth = (props) => {
     props.onLogin(emailCurrentState.enteredEmail, passwordCurrentState.enteredPassword);
   };
 
-
+  let [mail, setMailMode] = useState("")
+  let [password, setPasswordMode] = useState("")
   const history = useHistory();
 
-  const url = "http://localhost:8080/api/user/userlogin"
+  const loginHandler = async () => {
+    setMailMode(emailCurrentState.enteredEmail);
+    setPasswordMode(passwordCurrentState.enteredPassword);
+    Axios.post('http://localhost:8080/api/user/userlogin', {
+      email: mail,
+      userPassword: password
+    })
+      .then(res => {
+        if (res.data.roleId == 1) {
+          history.push("/admin");
+        }
+        if (res.data.roleId == 2) {
+          console.log(res.data.userId);
+          localStorage.setItem('managerId', res.data.userId);
+          history.push("/manager");
+        }
+        if (res.data.roleId == 3) {
+          console.log(res.data.userId);
+          localStorage.setItem('userId', res.data.userId);
+          history.push("/customer");
+        }
+      })
 
-const [data,setData] = useState({
-  email:"",
-  passWord:""
-})
-
-function handle(e){
-  const newdata = {...data}
-  newdata[e.target.id] = e.target.value 
-  setData(newdata)
-  console.log(newdata)
-}
-
-function submit(e){
-  e.preventDefault();
-  Axios.post(url,{
-    email:data.email,
-    userPassword:data.passWord,
-  })
-  .then(res=>{
-    if(res.data != null){
-      alert("Login successful")
-      if(res.data.roleId == 1)
-        history.push("/admin");
-      else if(res.data.roleId == 2 && res.data.userId == 1001)
-        history.push("/manager");
-      else 
-        history.push("/customer"); 
-    }
-    console.log(res.data)
-  })
-}
-
+  };
   return (
     <header style={HeaderStyle}>
       <div className="overlays">
@@ -175,7 +162,7 @@ function submit(e){
                     type="email"
                     className="form-control mt-1"
                     placeholder="Enter email"
-                    value={data.email}
+                    value={emailCurrentState.enteredEmail}
                     onChange={emailChangeHandler}
                     onBlur={validateEmailHandler}
                     required
@@ -189,10 +176,9 @@ function submit(e){
                   <span class="required">*</span>
                   <input
                     type="password"
-                    id="passWord"
                     className="form-control mt-1"
                     placeholder="Enter password"
-                    value={data.passWord}
+                    value={passwordCurrentState.enteredPassword}
                     onChange={passwordChangeHandler}
                     onBlur={validatePasswordHandler}
                     required
@@ -200,7 +186,7 @@ function submit(e){
                 </div>
               </div>
               <div className="submitButton">
-                <button id="submitButton" type="submit" disabled={!formIsValid} onClick={submit}>
+                <button id="submitButton" type="submit" disabled={!formIsValid} onClick={loginHandler}>
                   Submit
                 </button>
               </div>

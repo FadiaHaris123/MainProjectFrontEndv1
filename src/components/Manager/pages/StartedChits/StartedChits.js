@@ -8,7 +8,7 @@ const StartedChits = () => {
     const [chits, setChits] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState();
-
+    const id = window.localStorage.getItem('managerId');
     const columns = ([
         {
             name: 'Chit Number',
@@ -25,8 +25,7 @@ const StartedChits = () => {
     useEffect(() => {
         const fetchAssignedChits = async () => {
             const response = await fetch(
-                'http://localhost:8080/api/managers/1002/chits'
-                // 'http://localhost:8080/api/managers/' + id + '/chits'
+                'http://localhost:8080/api/managers/' + id + '/chits'
             );
 
             if (!response.ok) {
