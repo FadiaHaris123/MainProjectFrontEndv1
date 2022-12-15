@@ -42,23 +42,19 @@ const StartedChits = () => {
                         installment: newItemList[key].installment,
                         duration: newItemList[key].duration,
                         totalAmount: newItemList[key].totalAmount,
-                        startDate: limit(newItemList[key].startDate, 10),
+                        startDate: newItemList[key].startDate,
                     });
                 }
             }
             setChits(loadedChitties);
         };
-
         fetchStartedChits();
     }, []);
 
-    function limit(string = '', limit = 0) {
-        return string.substring(0, limit)
-    }
     const ExpandedComponent = ({ data }) => <pre>
         Installment : ₹{JSON.stringify(data.installment)} <br />
         Duration : {JSON.stringify(data.duration)} months<br />
-        Started Date : {(limit(data.startDate, 10))} <br /> <br />
+        Started Date : {data.startDate} <br /> <br />
     </pre>;
 
     return (
