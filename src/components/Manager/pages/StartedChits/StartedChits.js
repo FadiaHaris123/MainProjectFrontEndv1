@@ -1,13 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Navbar from '../../Navbar'
-import Axios from 'axios'
 import DataTable from 'react-data-table-component';
 
 const StartedChits = () => {
 
     const [chits, setChits] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [httpError, setHttpError] = useState();
     const id = window.localStorage.getItem('userId');
     const columns = ([
         {
@@ -23,7 +20,7 @@ const StartedChits = () => {
     ]);
 
     useEffect(() => {
-        const fetchAssignedChits = async () => {
+        const fetchStartedChits = async () => {
             const response = await fetch(
                 'http://localhost:8080/api/managers/' + id + '/chits'
             );
@@ -50,13 +47,9 @@ const StartedChits = () => {
                 }
             }
             setChits(loadedChitties);
-            setIsLoading(false);
         };
 
-        fetchAssignedChits().catch((error) => {
-            setIsLoading(false);
-            setHttpError(error.message);
-        });
+        fetchStartedChits();
     }, []);
 
     function limit(string = '', limit = 0) {
