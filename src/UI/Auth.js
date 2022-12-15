@@ -138,6 +138,9 @@ function submit(e){
   })
   .then(res=>{
     if(res.data != null){
+      console.log(res.data.roleid)
+      localStorage.setItem('roleId',res.data.roleId);
+      localStorage.setItem('userid',res.data.userId)
       alert("Login successful")
       if(res.data.roleId == 1)
         history.push("/admin");
