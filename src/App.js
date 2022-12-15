@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router,Switch, Route, Redirect } from "react-router-dom"
 import Auth from "./UI/Auth"
 import ForgotPassword from "./UI/ForgetPassword/ForgetPassword"
+import NomineeForm from "./components/Customer/ChittyForm/NomineeForm";
 import CreateNewPassword from "./UI/ForgetPassword/ResetPassword"
 import registrationForm from "./UI/registrationForm"
 import foreman from "./components/foreman/foreman"
@@ -72,6 +73,7 @@ function App() {
           <Route path='/customer/payment' component={RazorPay}/>
           <Route path='/customer/auction/auctionroom' component={AuctionRoom}/>
           <Route path='/customer/chittyform' component={ChittyForm}/>
+          <Route path='./customer/nomineeform' component={NomineeForm}/>
         </Switch>
       </Router>
   )
