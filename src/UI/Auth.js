@@ -4,9 +4,7 @@ import Image from '../assets/images/login.jpg'
 import Axios from 'axios';
 import '../App.css'
 import './Auth.css'
-
 import classes from './Login.module.css';
-
 
 const Auth = (props) => {
 
@@ -91,7 +89,6 @@ const Auth = (props) => {
 
 
   const emailChangeHandler = (event) => {
-    handle(event)
     dispatchEmail({ type: 'emailchange', payload: event.target.value })
   };
 
@@ -100,7 +97,6 @@ const Auth = (props) => {
   };
 
   const passwordChangeHandler = (event) => {
-    handle(event)
     dispatchPassword({ type: 'passwordchange', payload: event.target.value })
   };
 
@@ -113,7 +109,8 @@ const Auth = (props) => {
     props.onLogin(emailCurrentState.enteredEmail, passwordCurrentState.enteredPassword);
   };
 
-
+  let [mail, setMailMode] = useState("")
+  let [password, setPasswordMode] = useState("")
   const history = useHistory();
 
   const url = "http://localhost:8080/api/user/userlogin"
@@ -153,6 +150,7 @@ function submit(e){
   })
 }
 
+  };
   return (
     <header style={HeaderStyle}>
       <div className="overlays">
@@ -178,7 +176,7 @@ function submit(e){
                     type="email"
                     className="form-control mt-1"
                     placeholder="Enter email"
-                    value={data.email}
+                    value={emailCurrentState.enteredEmail}
                     onChange={emailChangeHandler}
                     onBlur={validateEmailHandler}
                     required
@@ -192,10 +190,9 @@ function submit(e){
                   <span class="required">*</span>
                   <input
                     type="password"
-                    id="passWord"
                     className="form-control mt-1"
                     placeholder="Enter password"
-                    value={data.passWord}
+                    value={passwordCurrentState.enteredPassword}
                     onChange={passwordChangeHandler}
                     onBlur={validatePasswordHandler}
                     required
@@ -203,7 +200,7 @@ function submit(e){
                 </div>
               </div>
               <div className="submitButton">
-                <button id="submitButton" type="submit" disabled={!formIsValid} onClick={submit}>
+                <button id="submitButton" type="submit" disabled={!formIsValid} onClick={loginHandler}>
                   Submit
                 </button>
               </div>
@@ -216,7 +213,7 @@ function submit(e){
       </div>
     </header>
   )
-}
+
 
 const HeaderStyle = {
   width: "210vh",
