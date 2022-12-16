@@ -1,9 +1,11 @@
 .bimg {
   background-image: url('./admin4.webp');
   background-size: cover;
-  height: 101.5vh;
-  width: 210.1vh;
+  height: 101.6vh;
+  width: 212.9vh;
   margin-top: -90px;
-
   background-repeat: no-repeat;
+  color:aliceblue;
 }
+
+
