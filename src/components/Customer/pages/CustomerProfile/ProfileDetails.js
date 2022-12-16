@@ -3,13 +3,11 @@ import UserList from "./UserList";
 
 const ProfileDetails=()=>{
     const[details,setDetails]=useState([]);
-    const[isLoading,setIsLoading]=useState(false);
-    const[error,setError]=useState(null);
 
     useEffect(() => {
         const userdetails = async () => {
           const response = await fetch(
-            'https://userdetai-default-rtdb.firebaseio.com/users.json'
+            '---------------URL-----------------'
           );
       
           if (!response.ok) {
@@ -19,8 +17,6 @@ const ProfileDetails=()=>{
           const responseData = await response.json();
       
           const loadeddetails = [];
-        //   const newItemList = [...responseData._embedded.manager]
-          //manager is the classname
       
           for (const key in responseData) {
             loadeddetails.push({
@@ -33,13 +29,8 @@ const ProfileDetails=()=>{
           }
       
           setDetails(loadeddetails);
-          setIsLoading(false);
         };
-      
-        userdetails().catch((error) => {
-          setIsLoading(false);
-          setError(error.message);
-        });
+        userdetails();
       }, []);
       
     let content;
@@ -47,29 +38,6 @@ const ProfileDetails=()=>{
         content = <UserList details={details} />;
     }
 
-    if (error) {
-        content = <p>{error}</p>;
-    }
-
-    if (isLoading) {
-        content = <p>Loading...</p>;
-    }
-      
-      if (isLoading) {
-        return (
-          <section>
-            <p>Loading...</p>
-          </section>
-        );
-      }
-      
-      if (error) {
-        return (
-          <section>
-            <p>{error}</p>
-          </section>
-        );
-      }
     return (
         <div className="main-wrapper">
             {content}
