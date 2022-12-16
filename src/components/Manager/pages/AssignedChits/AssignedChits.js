@@ -7,6 +7,7 @@ import DataTable from 'react-data-table-component';
 const AssignedChits = () => {
 
     const [chits, setChits] = useState([]);
+    const [categoryId, setCategoryId] = useState([]);
     const id = window.localStorage.getItem('managerId');
 
     const columns = ([
@@ -35,28 +36,34 @@ const AssignedChits = () => {
 
     const url = "http://localhost:8080/api/chitty/update"
     const history = useHistory();
-    function submit(value) {
+    
+    async function submit(value) {
         const key = value;
-        Axios.put(url, {
-            chitNumber: chits[key].chitNumber,
-            installment: chits[key].installment,
-            duration: chits[key].duration,
-            manager: id,
-            numberOfChittal: chits[key].numberOfChittal,
-            currentNumberOfChittal: chits[key].currentNumberOfChittal,
-            category: 1,
-            totalAmount: chits[key].totalAmount,
-            launchDate: chits[key].launchDate,
-            startDate: formattedstartDate,
-            status: "started"
+        Axios.get('http://localhost:8080/api/chitty/' + chits[key].chitNumber + '/category').then((response) => {
+            setCategoryId(response.data.id);
         })
-            .then(res => {
-                if (res.data != null) {
-                    alert("Chitty started successfully")
-                }
-                console.log(res.data)
+            .then(() => {
+                    Axios.put(url, {
+                        chitNumber: chits[key].chitNumber,
+                        installment: chits[key].installment,
+                        duration: chits[key].duration,
+                        manager: id,
+                        numberOfChittal: chits[key].numberOfChittal,
+                        currentNumberOfChittal: chits[key].currentNumberOfChittal,
+                        category: categoryId,
+                        totalAmount: chits[key].totalAmount,
+                        launchDate: chits[key].launchDate,
+                        startDate: formattedstartDate,
+                        status: "started"
+                    })
+                        .then(res => {
+                            if (res.data != null) {
+                                alert("Chitty started successfully")
+                            }
+                            console.log(res.data)
+                        })
+                    return (history.push("/manager/startchit"));
             })
-            return (history.push("/manager/startchit"));
     }
     function pad2(n) {
         return (n < 10 ? '0' : '') + n;
@@ -66,7 +73,7 @@ const AssignedChits = () => {
     }
     var startDate = new Date();
     var month = pad2(startDate.getMonth() + 1);//months (0-11)
-    var day = pad2(startDate.getDate() );//day (1-31)
+    var day = pad2(startDate.getDate());//day (1-31)
     var year = startDate.getFullYear();
     var formattedstartDate = year + "-" + month + "-" + day;
 
@@ -79,7 +86,7 @@ const AssignedChits = () => {
             if (!response.ok) {
                 throw new Error('Something went wrong!');
             }
-            
+
             const responseData = await response.json();
 
             const loadedChitties = [];
