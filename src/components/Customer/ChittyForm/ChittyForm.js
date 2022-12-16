@@ -8,6 +8,7 @@ import { isDOMComponent } from 'react-dom/test-utils';
 import { isDisabled } from '@testing-library/user-event/dist/utils';
 import NomineeForm from './NomineeForm';
 import Axios from 'axios';
+import Navbar from '../Navbar';
 
 function ChittyForm() {
 
@@ -65,6 +66,7 @@ function ChittyForm() {
  
     return (
         <Fragment>
+            <Navbar/>
             <Header/>
             <div className={classes.form}>
                 <br></br>
