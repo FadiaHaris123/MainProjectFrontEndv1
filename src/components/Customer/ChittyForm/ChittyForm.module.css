@@ -6,6 +6,7 @@ body{
   background-color: rgb(237, 240, 243);
   display: flex;
   height: 127vh;
+  width:125vh;
   margin-top: 5rem;
   border:2px solid rgb(7, 45, 66);
   border-radius: 2rem;
@@ -13,6 +14,11 @@ body{
   margin-right:14rem;
   margin-bottom:2rem;
 
+}
+
+.form__label
+{
+  margin-left: 1rem;
 }
 
 .form_body h2
@@ -35,14 +41,15 @@ content:"*";
 color:rgb(210, 42, 42);  
 }
 
-.form_input{
+/* .form_input{
   width: 90%;
-}
+} */
 
 .form__input
 {
-  margin-right:10rem;
-  padding:7px 10px 7px 10px;
+  /* margin-right:10rem; */
+  margin-left:9rem;
+  padding:3px 3px 6px 10px;
   width:20rem;
 }
 
