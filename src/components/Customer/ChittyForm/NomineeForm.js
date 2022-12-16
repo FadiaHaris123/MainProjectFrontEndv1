@@ -63,21 +63,21 @@ function handleInputChange(e){
                 </div>
 
                 <div className={classes.nomineedob}>
-                    <label className="form__label" for="nomineedob" id="nomineedob"> Date of birth </label>
+                    <label className={classes.form__label} for="nomineedob" id="nomineedob"> Date of birth </label>
                     <input className={classes.form__input} type="text" value={nomineeData.dob} onChange={(e) => handleInputChange(e)} id="dob" placeholder="yyyy-mm-dd" />
                 </div>
 
                 <div className={classes.nomineeAddress}>
-                    <label className="form__label" for="nomineeAddress">Address </label>
+                    <label className={classes.form__label} for="nomineeAddress">Address </label>
                     <input type="nomineeAddress" id="address" className={classes.form__input} value={nomineeData.address} onChange={(e) => handleInputChange(e)} placeholder="Address" />
                 </div>
 
                 <div className={classes.nomineePincode}>
-                    <label className="form__label" for="nomineePincode"> Pincode </label>
+                    <label className={classes.form__label} for="nomineePincode"> Pincode </label>
                     <input type="nomineePincode" id="pincode" className={classes.form__input} value={nomineeData.pincode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" />
                 </div>
                 <div className={classes.nomineeAd}>
-                    <label className="form__label" for="nomineeAd"> Aadhar </label>
+                    <label className={classes.form__label} for="nomineeAd"> Aadhar </label>
                     <input type="nomineeAd" id="aadhar" className={classes.form__input} value={nomineeData.aadhar} onChange={(e) => handleInputChange(e)} placeholder="Eg.2054 3605 7419" />
                 </div>
 

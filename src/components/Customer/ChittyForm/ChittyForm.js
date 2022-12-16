@@ -40,6 +40,7 @@ function ChittyForm() {
     }
     
     function handleSubmit(e){
+        
         e.preventDefault();
         Axios.post(url,{
             userId:id,
@@ -56,6 +57,7 @@ function ChittyForm() {
         .then(res=>{
           if(res.data != null){
             alert("Chittal added")
+         
           }
         //   console.log("chittalID"+res.data.chittalId)
         // when chittal information is passed chittal id is obtained as response
@@ -64,17 +66,17 @@ function ChittyForm() {
         setShowNominee(true);
       }
          
- 
+
     return (
         <Fragment>
             <Navbar/>
-            <SidebarData/>
+            <h2 className={classes.head}>Chitty Application Form</h2>
             {/* <Header/> */}
             <div className={classes.form}>
                 <br></br>
 
                 <div className={classes.form_body}>
-                    <h3>Member details</h3>
+                    <h3>Chittal details</h3>
                     <div>
                         <label className={classes.form__label} for="Name" id="name"> Name: </label>
                         <input className={classes.form__input} type="text"  id="Name" placeholder="Name" />
@@ -142,8 +144,12 @@ function ChittyForm() {
                 <div className={classes.footer}>
                 
                     <button onClick={handleSubmit} type="submit" className={classes.btn}>Next</button>
-              {showNominee && <NomineeForm chittalId={chittalId}/>}
+                    
+              {/* {showNominee && <NomineeForm chittalId={chittalId}/>} */}
                 </div>
+            </div>
+            <div className={classes.nominee}>
+            {showNominee && <NomineeForm chittalId={chittalId} />}
             </div>
         </Fragment>
     )
