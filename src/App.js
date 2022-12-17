@@ -69,7 +69,7 @@ function App() {
           <Route path="/login">
             {!isLoggedIn ? <Auth onLogin={loginHandler} /> : <Redirect to='/admin'/>}
             {isManagerLoggedIn && <Redirect to="/manager"/>}
-            {isCustomerLoggedIn && <Redirect to="/manager"/>}
+            {isCustomerLoggedIn && <Redirect to="/customer"/>}
           </Route>
           {/* <Route path="/login" component={Auth}/>           */}
           <Route path="/forgotpassword" component={ForgotPassword} />
