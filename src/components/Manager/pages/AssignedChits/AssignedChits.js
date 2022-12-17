@@ -7,6 +7,8 @@ import DataTable from 'react-data-table-component';
 const AssignedChits = () => {
 
     const [chits, setChits] = useState([]);
+    const [categoryId, setCategoryId] = useState([]);
+    const [chitNumber, setChitNumber] = useState([]);
     const id = window.localStorage.getItem('managerId');
 
     const columns = ([
@@ -29,35 +31,51 @@ const AssignedChits = () => {
                 onClick={(e) => submit(e.target.value)}>Start</button>),
             ignoreRowClick: true,
             allowOverflow: true,
-            // button: true,
         },
     ]);
 
     const url = "http://localhost:8080/api/chitty/update"
     const history = useHistory();
+
+    useEffect(() => {
+        function getCategoryId() {
+            Axios.get('http://localhost:8080/api/chitty/' + chitNumber + '/category').then((response) => {
+                setCategoryId(response.data.id)
+            });
+        }
+        getCategoryId();
+    })
+
     function submit(value) {
         const key = value;
-        Axios.put(url, {
-            chitNumber: chits[key].chitNumber,
-            installment: chits[key].installment,
-            duration: chits[key].duration,
-            manager: id,
-            numberOfChittal: chits[key].numberOfChittal,
-            currentNumberOfChittal: chits[key].currentNumberOfChittal,
-            category: 1,
-            totalAmount: chits[key].totalAmount,
-            launchDate: chits[key].launchDate,
-            startDate: formattedstartDate,
-            status: "started"
+        setChitNumber(chits[key].chitNumber);
+        Axios.get('http://localhost:8080/api/chitty/' + chitNumber + '/category').then((response) => {
+            // setCategoryId(response.data.id)
         })
-            .then(res => {
-                if (res.data != null) {
-                    alert("Chitty started successfully")
-                }
-                console.log(res.data)
+            .then(() => {
+                Axios.put(url, {
+                    chitNumber: chits[key].chitNumber,
+                    installment: chits[key].installment,
+                    duration: chits[key].duration,
+                    manager: id,
+                    numberOfChittal: chits[key].numberOfChittal,
+                    currentNumberOfChittal: chits[key].currentNumberOfChittal,
+                    category: categoryId,
+                    totalAmount: chits[key].totalAmount,
+                    launchDate: chits[key].launchDate,
+                    startDate: formattedstartDate,
+                    status: "started"
+                })
+                    .then(res => {
+                        if (res.data != null) {
+                            alert("Chitty started successfully")
+                        }
+                        console.log(res.data)
+                    })
+                return (history.push("/manager/startchit"));
             })
-            return (history.push("/manager/startchit"));
     }
+
     function pad2(n) {
         return (n < 10 ? '0' : '') + n;
     }
@@ -66,7 +84,7 @@ const AssignedChits = () => {
     }
     var startDate = new Date();
     var month = pad2(startDate.getMonth() + 1);//months (0-11)
-    var day = pad2(startDate.getDate() );//day (1-31)
+    var day = pad2(startDate.getDate());//day (1-31)
     var year = startDate.getFullYear();
     var formattedstartDate = year + "-" + month + "-" + day;
 
@@ -79,7 +97,7 @@ const AssignedChits = () => {
             if (!response.ok) {
                 throw new Error('Something went wrong!');
             }
-            
+
             const responseData = await response.json();
 
             const loadedChitties = [];
@@ -119,6 +137,7 @@ const AssignedChits = () => {
     function limit(string = '', limit = 0) {
         return string.substring(0, limit)
     }
+
     const ExpandedComponent = ({ data }) => <pre>
         Installment : ₹{JSON.stringify(data.installment)} <br />
         Duration : {JSON.stringify(data.duration)} months<br />
@@ -150,4 +169,5 @@ const AssignedChits = () => {
         </Fragment>
     )
 }
+
 export default AssignedChits;

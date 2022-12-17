@@ -20,6 +20,12 @@ export const SidebarData = [
   },
 
   {
+    title: 'Joined Chits',
+    path: '/customer/joinedchits',
+    icon: <IoIcons.IoIosPaper />,
+    cName: 'nav-text'
+  },
+  {
     title: 'Auction',
     path: '/customer/auction',
     icon: <RiIcons.RiAuctionFill />,
