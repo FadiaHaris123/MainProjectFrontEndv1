@@ -68,12 +68,6 @@ const AvailableChit =()=>{
       </section>
     );
   }
-  // const handleClick = () => {
-    
-  //   // history.push("/customer/chittyform");
-  //   <Link to="/customer/chittyform"/>
-  // };
-
 
    return(
    <React.Fragment>

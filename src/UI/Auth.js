@@ -122,15 +122,18 @@ const Auth = (props) => {
     })
       .then(res => {
         if (res.data.roleId == 1) {
+          props.onLogin(true,res.data.roleId)
           history.push("/admin");
         }
         if (res.data.roleId == 2) {
           console.log(res.data.userId);
           localStorage.setItem('managerId', res.data.userId);
+          props.onLogin(true,res.data.roleId)
           history.push("/manager");
         }
         if (res.data.roleId == 3) {
           console.log(res.data.userId);
+          props.onLogin(true,res.data.roleId)
           localStorage.setItem('userId', res.data.userId);
           history.push("/customer");
         }

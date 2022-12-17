@@ -27,23 +27,34 @@ import MainManagerPage from "./components/foreman/Manager/MainManagerPage";
 import AuctionRoom from "./components/AuctionRoom/AuctionRoom";
 
 function App() {
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isManagerLoggedIn, setIsManagerLoggedIn] = useState(false);
+  const [isCustomerLoggedIn, setIsCustomerLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const storedUserLoggedInformation = localStorage.getItem('isLoggedIn');
+  // useEffect(() => {
+  //   const storedUserLoggedInformation = localStorage.getItem('isLoggedIn');
 
-    if (storedUserLoggedInformation === '1'){
-      setIsLoggedIn(true);
+  //   if (storedUserLoggedInformation === '1'){
+  //     setIsLoggedIn(true);
+  //   }
+  // },[]);
+
+
+  const loginHandler = (isLoggedIn,roleId) => {    
+    if(roleId===1){
+      localStorage.setItem('isLoggedIn','1');
+     setIsLoggedIn(isLoggedIn);
     }
-  },[]);
-
-
-  const loginHandler = (email, password) => {
-    // We should of course check email and password
-    // But it's just a dummy/ demo anyways
+    else if(roleId===2){
+      localStorage.setItem('isLoggedIn','2');
+      setIsManagerLoggedIn(isLoggedIn);
+    }
+    else if(roleId===3){
+      localStorage.setItem('isLoggedIn','3');
+      setIsCustomerLoggedIn(isLoggedIn);
+    }
      
-     localStorage.setItem('isLoggedIn','1');
-     setIsLoggedIn(true);
   };
 
   const logoutHandler = () => {
@@ -55,7 +66,12 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={LandingPage}/>
-          <Route path="/login" component={Auth} />
+          <Route path="/login">
+            {!isLoggedIn ? <Auth onLogin={loginHandler} /> : <Redirect to='/admin'/>}
+            {isManagerLoggedIn && <Redirect to="/manager"/>}
+            {isCustomerLoggedIn && <Redirect to="/manager"/>}
+          </Route>
+          {/* <Route path="/login" component={Auth}/>           */}
           <Route path="/forgotpassword" component={ForgotPassword} />
           <Route path="/createnewpassword" component={CreateNewPassword} />
           <Route path="/register" component={registrationForm}/>
@@ -74,6 +90,9 @@ function App() {
           <Route path='/customer/auction/auctionroom' component={AuctionRoom}/>
           <Route path='/customer/chittyform' component={ChittyForm}/>
           <Route path='/customer/nomineeform' component={NomineeForm}/>
+          {/* <Route path="/home" exact>
+              {isLoggedIn ? <SuperAdminHome onLogout={logoutHandler} name={employeeName} employeeId={employeeId} tracker={employeeTracker}/> : <Redirect to='/login' /> }
+          </Route> */}
         </Switch>
       </Router>
   )

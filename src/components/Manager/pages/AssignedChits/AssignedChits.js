@@ -7,8 +7,6 @@ import DataTable from 'react-data-table-component';
 const AssignedChits = () => {
 
     const [chits, setChits] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [httpError, setHttpError] = useState();
     const id = window.localStorage.getItem('managerId');
 
     const columns = ([
@@ -63,9 +61,12 @@ const AssignedChits = () => {
     function pad2(n) {
         return (n < 10 ? '0' : '') + n;
     }
+    function limit(string = '', limit = 0) {
+        return string.substring(0, limit)
+    }
     var startDate = new Date();
     var month = pad2(startDate.getMonth() + 1);//months (0-11)
-    var day = pad2(startDate.getDate());//day (1-31)
+    var day = pad2(startDate.getDate() );//day (1-31)
     var year = startDate.getFullYear();
     var formattedstartDate = year + "-" + month + "-" + day;
 
@@ -78,7 +79,7 @@ const AssignedChits = () => {
             if (!response.ok) {
                 throw new Error('Something went wrong!');
             }
-            // console.log({props.id})
+            
             const responseData = await response.json();
 
             const loadedChitties = [];
@@ -103,13 +104,8 @@ const AssignedChits = () => {
                 }
             }
             setChits(loadedChitties);
-            setIsLoading(false);
         };
-
-        fetchAssignedChits().catch((error) => {
-            setIsLoading(false);
-            setHttpError(error.message);
-        });
+        fetchAssignedChits();
     }, []);
 
     const conditionalRowStyles = [
