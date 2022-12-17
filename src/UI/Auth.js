@@ -131,7 +131,6 @@ const Auth = (props) => {
           setauthenticated(true)
           localStorage.setItem("authenticated", true);
           localStorage.setItem('managerId', res.data.userId);
-          props.onLogin(true,res.data.roleId)
           history.push("/manager");
         }
         if (res.data.roleId == 3) {
