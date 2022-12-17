@@ -42,9 +42,9 @@ function ChittyForm() {
         setChittalData(newdata)
         console.log(newdata)
     }
-    
-    function handleSubmit(e){
-        
+
+    function handleSubmit(e) {
+
         e.preventDefault();
         Axios.post(url, {
             userId: id,
@@ -86,34 +86,12 @@ function ChittyForm() {
         Axios.get('http://localhost:8080/api/chitty/' + chittyId + '/category').then((response) => {
             setCategoryId(response.data.id);
         });
-        updateCurrentChittals();
-    }
-
-    const updateCurrentChittals = () => {
-        Axios.put('http://localhost:8080/api/chitty/update', {
-            chitNumber: chits.chitNumber,
-            installment: chits.installment,
-            duration: chits.duration,
-            manager: managerId,
-            numberOfChittal: chits.numberOfChittal,
-            currentNumberOfChittal: chits.currentNumberOfChittal + 1,
-            category: categoryId,
-            totalAmount: chits.totalAmount,
-            launchDate: chits.launchDate,
-            startDate: "",
-            status: "launched"
-        })
-            .then(res => {
-                if (res.data != null) {
-                    alert("Chittal added successfully")
-                }
-                console.log(res.data)
-            });
     }
 
     return (
         <Fragment>
-            <Header />
+            <Navbar />
+            <h2 className={classes.head}>Chitty Application Form</h2>
             <div className={classes.form}>
                 <br></br>
 
@@ -121,7 +99,7 @@ function ChittyForm() {
                     <h3>Chittal details</h3>
                     <div>
                         <label className={classes.form__label} for="Name" id="name"> Name: </label>
-                        <input className={classes.form__input} type="text"  id="Name" placeholder="Name" />
+                        <input className={classes.form__input} type="text" id="Name" placeholder="Name" />
                     </div>
                     <div>
                         <label className={classes.form__label} for="age"> Age: </label>
@@ -184,14 +162,11 @@ function ChittyForm() {
                 </div>
 
                 <div className={classes.footer}>
-                
                     <button onClick={handleSubmit} type="submit" className={classes.btn}>Next</button>
-                    
-              {/* {showNominee && <NomineeForm chittalId={chittalId}/>} */}
                 </div>
             </div>
             <div className={classes.nominee}>
-            {showNominee && <NomineeForm chittalId={chittalId} />}
+                {showNominee && <NomineeForm chittalId={chittalId} chits={chits} managerId={managerId} categoryId={categoryId}/>}
             </div>
         </Fragment>
     )

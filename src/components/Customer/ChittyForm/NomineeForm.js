@@ -1,56 +1,77 @@
 import { Link } from "react-router-dom";
-import  { useState, setState, Fragment } from 'react';
+import { useState, useEffect } from 'react';
 import React from "react";
 import classes from './NomineeForm.module.css'
 import Axios from 'axios';
 
 function NomineeForm(props) {
-   
-    const url="http://localhost:8080/api/nominee/add";
-    // console.log(props.chittalId)
-    const [nomineeData,setNomineeData] = useState({
-        chittalId:"",
-        name:"",
-        age:"",
-        dob:"",
-        phone:"",
-        address:"",
-        pincode:"",
-        aadhar:""
-})
 
-function handleInputChange(e){
-    const newdata = {...nomineeData}
-    newdata[e.target.id] = e.target.value
-    setNomineeData(newdata)
-    console.log(newdata)
-    }
-    
-    function handleSubmit(e){
-    e.preventDefault();
-    Axios.post(url,{
-        chittalId:props.chittalId,
-        name:nomineeData.name,
-        age:nomineeData.age,
-        dob:nomineeData.dob,
-        phone:nomineeData.phone,
-        address:nomineeData.address,
-        pincode:nomineeData.pincode,
-        aadhar:nomineeData.aadhar
+    const url = "http://localhost:8080/api/nominee/add";
+    const [chits, setChits] = useState([]);
+    const [nomineeData, setNomineeData] = useState({
+        chittalId: "",
+        name: "",
+        age: "",
+        dob: "",
+        phone: "",
+        address: "",
+        pincode: "",
+        aadhar: ""
     })
-    .then(res=>{
-      if(res.data != null){
-      alert("Nominee Added")
-      }
-      console.log(res.data)
-    })
+
+    function handleInputChange(e) {
+        const newdata = { ...nomineeData }
+        newdata[e.target.id] = e.target.value
+        setNomineeData(newdata)
+        console.log(newdata)
     }
- 
-    return(
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        setChits(props.chits);
+        Axios.post(url, {
+            chittalId: props.chittalId,
+            name: nomineeData.name,
+            age: nomineeData.age,
+            dob: nomineeData.dob,
+            phone: nomineeData.phone,
+            address: nomineeData.address,
+            pincode: nomineeData.pincode,
+            aadhar: nomineeData.aadhar
+        })
+        
+            .then(() => {
+                alert("Nominee added");
+            })
+    }
+
+    useEffect(() => {
+        const updateChittal = () => {
+            Axios.put('http://localhost:8080/api/chitty/update', {
+                chitNumber: chits.chitNumber,
+                installment: chits.installment,
+                duration: chits.duration,
+                manager: props.managerId,
+                numberOfChittal: chits.numberOfChittal,
+                currentNumberOfChittal: chits.currentNumberOfChittal + 1,
+                category: props.categoryId,
+                totalAmount: chits.totalAmount,
+                launchDate: chits.launchDate,
+                startDate: "",
+                status: "launched"
+            })
+                .then(res => {
+                    if (res.data != null) {
+                        alert("Chittal added successfully")
+                    }
+                });
+        }
+        updateChittal();
+    })
+    return (
         <div className={classes.form}>
+            <div className={classes.nominee}>
 
-                <div className={classes.nominee}>
-                    
                 <h3>Nominee details</h3>
                 <div className={classes.nomineeName}>
                     <label className={classes.form__label} for="nomineeName">Name </label>
@@ -85,18 +106,18 @@ function handleInputChange(e){
                     <label className={classes.form__label} for="nomineePhone">Contact number </label>
                     <input type="nomineePhone" id="phone" className={classes.form__input} value={nomineeData.phone} onChange={(e) => handleInputChange(e)} placeholder="+91  " />
                 </div>
-                </div>
-                <div className={classes.footer}>
-                
-                <button onClick={handleSubmit} type="submit" className={classes.btn}>Submit</button>
-        
-           
-           
-        </div>
-            
             </div>
-        
-     
+            <div className={classes.footer}>
+
+                <button onClick={handleSubmit} type="submit" className={classes.btn}>Submit</button>
+
+
+
+            </div>
+
+        </div>
+
+
     );
 }
 
