@@ -9,6 +9,7 @@ import classes from './Login.module.css';
 const Auth = (props) => {
 
   let [authMode, setAuthMode] = useState("signin")
+  const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated") || false));
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin")
   }
@@ -114,32 +115,44 @@ const Auth = (props) => {
   const history = useHistory();
 
   const loginHandler = async (e) => {
-   
+
     setMailMode(emailCurrentState.enteredEmail);
     setPasswordMode(passwordCurrentState.enteredPassword);
-    const data =JSON.stringify({
+    const data = JSON.stringify({
       email: mail,
       password: password
-  }) ;
-  console.log(data);
-  const response = await axios.post("http://localhost:8080/authenticate",data
-  //  JSON.stringify(data),
-,
-  {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true
-  })
-  sessionStorage.setItem('jwt', JSON.stringify(response?.data?.jwtToken));
-  sessionStorage.setItem('userId', JSON.stringify(response?.data?.userId));
-  sessionStorage.setItem('roleId', JSON.stringify(response?.data?.roleId));
-  if(response?.data?.roleId==1)
-  history.push("/admin");
-  else if(response?.data?.roleId==2)
-  history.push("/manager");
-  else
-  history.push("/customer");
-};
-    
+    });
+    console.log(data);
+    const response = await axios.post("http://localhost:8080/authenticate", data
+      //  JSON.stringify(data),
+      ,
+      {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true
+      })
+    sessionStorage.setItem('jwt', JSON.stringify(response?.data?.jwtToken));
+    sessionStorage.setItem('userId', JSON.stringify(response?.data?.userId));
+    sessionStorage.setItem('roleId', JSON.stringify(response?.data?.roleId));
+    if (response?.data?.roleId == 1) {
+      setauthenticated(true)
+      localStorage.setItem("authenticated", true);
+      history.push("/admin");
+    }
+
+    else if (response?.data?.roleId == 2) {
+      setauthenticated(true)
+      localStorage.setItem("authenticated", true);
+      history.push("/manager");
+    }
+
+    else {
+      setauthenticated(true)
+      localStorage.setItem("authenticated", true);
+      history.push("/customer");
+    }
+
+  };
+
   //   Axios.post('http://localhost:8080/api/user/userlogin', {
   //     email: mail,
   //     userPassword: password

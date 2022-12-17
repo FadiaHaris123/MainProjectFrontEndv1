@@ -6,6 +6,7 @@ import AddManager from "./AddManager";
 import Manager from "./Manager";
 import ChittyManagers from "../ManagerDetails/ChittyManagers";
 import Header from "../Header/Header";
+import Navigation from "../Navigation/Navigation";
 
 
 
@@ -45,7 +46,8 @@ const MainManagerPage = () => {
 
   return (
     <div>
-        <Header/>
+        <Header></Header>
+        
     <div className={classes.wrap}>
     <div className={classes.tab}>
       <ButtonGroup>

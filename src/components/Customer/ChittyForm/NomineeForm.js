@@ -124,15 +124,11 @@ function NomineeForm(props) {
 
                 <button onClick={handleSubmit} type="submit" className={classes.btn}>Submit</button>
 
-
-
             </div>
 
         </div>
 
-
     );
 }
-
 
 export default NomineeForm;

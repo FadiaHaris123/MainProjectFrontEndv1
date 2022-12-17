@@ -72,12 +72,13 @@ const Navigation = () => {
         ))}
         </div>
       </div>
-      <button class={classes.button}>Customer Service</button>
+      <Link to='/admin/launchedchits'>
+      <button class={classes.button}>Launched Chits</button>
+      </Link>
       <Link to="/">
         <button class={classes.logout_button}>Log Out</button>
       </Link>
     </div>
   )
-
 }
 export default Navigation;

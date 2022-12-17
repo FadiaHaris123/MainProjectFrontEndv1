@@ -27,7 +27,6 @@ export default function LandingPage() {
                  that allows you to join chits, pay installments, and take part in chitty auction from 
                  anywhere, anytime.</p>
             </div>
-            
         </header>
         </div>
     )
