@@ -22,11 +22,10 @@ const Manager = () =>
 
 		const formData = new FormData();
 		formData.append('file', selectedFile);
-		fetch('http://localhost:8080/managers/upload', { method: 'post', body: formData },{
-			headers:{
-			  'Authorization':token
-			  
-			}})
+		fetch('http://localhost:8080/managers/upload', { method: 'post',headers:{
+			'Authorization':token
+			
+		  }, body: formData })
 			.then(res => {
 				if (res.ok) {
 					console.log(res.data);

@@ -17,11 +17,11 @@ const [data,setData] = useState({
   roleId:2
 })
 
-function handle(e){
-	const newdata = {...data}
-	newdata[e.target.id] = e.target.value
-	setData(newdata)
-	console.log(newdata)
+  function handle(e) {
+    const newdata = { ...data }
+    newdata[e.target.id] = e.target.value
+    setData(newdata)
+    console.log(newdata)
   }
   
   function submit(e){
@@ -46,17 +46,17 @@ function handle(e){
 	  console.log(res.data)
 	})
   }
-  
-return(
+
+  return (
     <div className={classes.manage}>
-        <div className={classes.upload}>
-            <div className={classes.filedata}>
-			<form onSubmit={(e)=>submit(e)}>
-			<div className="form-group mt-3">
+      <div className={classes.upload}>
+        <div className={classes.filedata}>
+          <form onSubmit={(e) => submit(e)}>
+            <div className="form-group mt-3">
               <label>Employee Id</label>
               <span class="required">*</span>
               <input
-                onChange={(e)=>handle(e)}
+                onChange={(e) => handle(e)}
                 id="emp_id"
                 value={data.emp_id}
                 type="text"
@@ -68,7 +68,7 @@ return(
               <label>First Name</label>
               <span class="required">*</span>
               <input
-                onChange={(e)=>handle(e)}
+                onChange={(e) => handle(e)}
                 id="firstName"
                 value={data.firstName}
                 type="name"
@@ -81,9 +81,9 @@ return(
               <label>Last Name</label>
               <span class="required">*</span>
               <input
-				onChange={(e)=>handle(e)}
-				id="emp_lastname"
-				value={data.emp_lastname}
+                onChange={(e) => handle(e)}
+                id="emp_lastname"
+                value={data.emp_lastname}
                 type="name"
                 className="form-control mt-1"
                 placeholder="e.g Rajeev"
@@ -94,21 +94,21 @@ return(
               <label>Email</label>
               <span class="required">*</span>
               <input
-				onChange={(e)=>handle(e)}
-				id="email"
-				value={data.email}
+                onChange={(e) => handle(e)}
+                id="email"
+                value={data.email}
                 type="email"
                 className="form-control mt-1"
                 placeholder="e.g anagha@gmail.com"
-              required/>
+                required />
             </div>
             <div className="form-group mt-3">
               <label>Mobile No.</label>
               <span class="required">*</span>
               <input
-              onChange={(e)=>handle(e)}
-              id="mobileNumber"
-              value={data.mobileNumber}
+                onChange={(e) => handle(e)}
+                id="mobileNumber"
+                value={data.mobileNumber}
                 type="text"
                 className="form-control mt-1"
                 placeholder="Mobile No."
@@ -120,12 +120,12 @@ return(
                 Add
               </button>
             </div>
-         
-        </form>
-            </div>
+
+          </form>
         </div>
-	</div>
-)
+      </div>
+    </div>
+  )
 }
 
 export default AddManager;

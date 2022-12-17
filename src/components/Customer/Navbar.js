@@ -10,6 +10,7 @@ import Image from '../../assets/images/pro1.jpg';
 import axios from "axios";
 import './Navbar.css'
 import { RiGitRepositoryPrivateLine } from 'react-icons/ri';
+import { Fragment } from 'react';
 
 function Navbar() {
   // const roleid = window.localStorage.getItem('roleId');
@@ -21,8 +22,9 @@ function Navbar() {
   // const history = useHistory();
 
   let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
-  let roleid = JSON.parse(sessionStorage.getItem('roleId'));
   let userid = JSON.parse(sessionStorage.getItem('userId'));
+  let roleid = JSON.parse(sessionStorage.getItem('roleId'));
+ 
   console.log(userid)
 
   // const api = `http://localhost:8080/user-details/${userid}`
@@ -39,6 +41,7 @@ function Navbar() {
 
   })
 
+  // const showSidebar = () => setSidebar(!sidebar);
 
   // useEffect(() => {
   //   const getData = async () => {
@@ -58,7 +61,7 @@ function Navbar() {
   // }, []);
 
   return (
-    <>
+    <Fragment>
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className='navbar'>
           <Link to='#' className='menu-bars'>
@@ -76,28 +79,34 @@ function Navbar() {
             </Collapsible>
           </div>
 
+        <div className='img'>
+          <Collapsible trigger={<img src={Image} style={{ width: '50px', height: '70px', border: '1px solid black', borderRadius: '2rem' }} />}>
+            <ProfileOverlay />
+          </Collapsible>
         </div>
-        <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-          <ul className='nav-menu-items' onClick={showSidebar}>
-            <li className='navbar-toggle'>
-              <Link to='#' className='menu-bars'>
-                <AiIcons.AiOutlineClose />
-              </Link>
-            </li>
-            {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path}>
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </IconContext.Provider>
-    </>
+
+      </div>
+      <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+        <ul className='nav-menu-items' onClick={showSidebar}>
+          <li className='navbar-toggle'>
+            <Link to='#' className='menu-bars'>
+              <AiIcons.AiOutlineClose />
+            </Link>
+          </li>
+          {SidebarData.map((item, index) => {
+            return (
+              <li key={index} className={item.cName}>
+                <Link to={item.path}>
+                  {item.icon}
+                  <span>{item.title}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </IconContext.Provider>
+    </Fragment>
   );
 }
 

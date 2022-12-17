@@ -5,8 +5,6 @@ import Navbar from '../../Navbar'
 
 const ForgotPasswordPage = () => {
 
-    const [isLoading, setIsLoading] = useState(true);
-    const [httpError, setHttpError] = useState();
     const id = window.localStorage.getItem('userId');
     const [managerEmail, setManagerEmail] = useState();
     const history = useHistory();
@@ -35,15 +33,12 @@ const ForgotPasswordPage = () => {
                 }
             }
         };
-        fetchManagers().catch((error) => {
-            setIsLoading(false);
-            setHttpError(error.message);
-        });
+        fetchManagers();
     }, []);
 
     const changePasswordHandler = (event) => {
         event.preventDefault();
-        if (data == null) {
+        if (data != null) {
             if (data.newPassword == data.confirmPassword) {
                 fetch("http://localhost:8080/api/user/change-password", {
                     headers: { "Content-Type": "application/json" },
@@ -54,7 +49,7 @@ const ForgotPasswordPage = () => {
                         currentPassword: data.currentPassword,
                     })
                 }).then(response => {
-                    alert("Password Change Successfully")
+                    alert("Password Changed Successfully")
                     return (
                         response.json(),
                         history.push("/manager")

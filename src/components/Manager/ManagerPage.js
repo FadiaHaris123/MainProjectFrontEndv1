@@ -1,16 +1,14 @@
 import React from 'react';
 import Navbar from './Navbar';
 import './ManagerPage.css'
+import { Fragment } from 'react';
 function ManagerPage() {
   return (
-    <div>
+    <Fragment>
       <Navbar />
       <div className='bimg'>
-        <div className='img'>
-            </div>
-     </div>
-        
-    </div>
+      </div>
+    </Fragment>
   );
 }
 

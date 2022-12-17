@@ -7,9 +7,11 @@ import DataTable from 'react-data-table-component';
 const AssignedChits = () => {
 
     const [chits, setChits] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [httpError, setHttpError] = useState();
-    const id = window.localStorage.getItem('managerId');
+    const [categoryId, setCategoryId] = useState([]);
+    const [chitNumber, setChitNumber] = useState([]);
+    // const id = window.localStorage.getItem('managerId');
+    let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+    let id = JSON.parse(sessionStorage.getItem('userId'));
 
     const columns = ([
         {
@@ -31,37 +33,71 @@ const AssignedChits = () => {
                 onClick={(e) => submit(e.target.value)}>Start</button>),
             ignoreRowClick: true,
             allowOverflow: true,
-            // button: true,
         },
     ]);
 
-    const url = "http://localhost:8080/api/chitty/update"
+    const url = "http://localhost:8080/chitty/update"
     const history = useHistory();
+
+    useEffect(() => {
+        function getCategoryId() {
+            Axios.get(`http://localhost:8080/chitty/${chitNumber}/category`,{
+                headers:{
+                  'Authorization':token
+                  
+                }}).then((response) => {
+                setCategoryId(response.data.id)
+            });
+        }
+        getCategoryId();
+    })
+
     function submit(value) {
         const key = value;
-        Axios.put(url, {
-            chitNumber: chits[key].chitNumber,
-            installment: chits[key].installment,
-            duration: chits[key].duration,
-            manager: id,
-            numberOfChittal: chits[key].numberOfChittal,
-            currentNumberOfChittal: chits[key].currentNumberOfChittal,
-            category: 1,
-            totalAmount: chits[key].totalAmount,
-            launchDate: chits[key].launchDate,
-            startDate: formattedstartDate,
-            status: "started"
+        setChitNumber(chits[key].chitNumber);
+        Axios.get(`http://localhost:8080/chitty/${chitNumber}/category`,
+            // 'http://localhost:8080/chitty/' + chitNumber + '/category',
+        {
+            headers:{
+              'Authorization':token
+              
+            }}).then((response) => {
+            // setCategoryId(response.data.id)
         })
-            .then(res => {
-                if (res.data != null) {
-                    alert("Chitty started successfully")
-                }
-                console.log(res.data)
+            .then(() => {
+                Axios.put(url, {
+                    chitNumber: chits[key].chitNumber,
+                    installment: chits[key].installment,
+                    duration: chits[key].duration,
+                    manager: id,
+                    numberOfChittal: chits[key].numberOfChittal,
+                    currentNumberOfChittal: chits[key].currentNumberOfChittal,
+                    category: categoryId,
+                    totalAmount: chits[key].totalAmount,
+                    launchDate: chits[key].launchDate,
+                    startDate: formattedstartDate,
+                    status: "started"
+                },
+                {
+                    headers:{
+                      'Authorization':token
+                      
+                    }})
+                    .then(res => {
+                        if (res.data != null) {
+                            alert("Chitty started successfully")
+                        }
+                        console.log(res.data)
+                    })
+                return (history.push("/manager/startchit"));
             })
-            return (history.push("/manager/startchit"));
     }
+
     function pad2(n) {
         return (n < 10 ? '0' : '') + n;
+    }
+    function limit(string = '', limit = 0) {
+        return string.substring(0, limit)
     }
     var startDate = new Date();
     var month = pad2(startDate.getMonth() + 1);//months (0-11)
@@ -72,13 +108,19 @@ const AssignedChits = () => {
     useEffect(() => {
         const fetchAssignedChits = async () => {
             const response = await fetch(
-                'http://localhost:8080/api/managers/' + id + '/chits'
+                // 'http://localhost:8080/managers/' + id + '/chits',
+                `http://localhost:8080/managers/${id}/chits`,
+                {
+                    headers:{
+                      'Authorization':token
+                      
+                    }}
             );
 
             if (!response.ok) {
                 throw new Error('Something went wrong!');
             }
-            // console.log({props.id})
+
             const responseData = await response.json();
 
             const loadedChitties = [];
@@ -103,13 +145,8 @@ const AssignedChits = () => {
                 }
             }
             setChits(loadedChitties);
-            setIsLoading(false);
         };
-
-        fetchAssignedChits().catch((error) => {
-            setIsLoading(false);
-            setHttpError(error.message);
-        });
+        fetchAssignedChits();
     }, []);
 
     const conditionalRowStyles = [
@@ -123,6 +160,7 @@ const AssignedChits = () => {
     function limit(string = '', limit = 0) {
         return string.substring(0, limit)
     }
+
     const ExpandedComponent = ({ data }) => <pre>
         Installment : ₹{JSON.stringify(data.installment)} <br />
         Duration : {JSON.stringify(data.duration)} months<br />
@@ -154,4 +192,5 @@ const AssignedChits = () => {
         </Fragment>
     )
 }
+
 export default AssignedChits;
