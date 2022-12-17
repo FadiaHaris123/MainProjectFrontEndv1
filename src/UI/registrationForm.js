@@ -26,6 +26,31 @@ function handle(e){
 
 function submit(e){
   e.preventDefault();
+  // fetch(url, {
+  //   method: 'POST',
+  //   body: JSON.stringify({
+  //     firstName:data.firstName,
+  //   lastName:data.lastName,
+  //   email:data.email,
+  //   mobileNo:parseInt(data.mobileNo),
+  //   passWord:data.passWord,
+  //   roleId:data.roleId
+  //   }),
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  // }).then((res) => {
+  //     if (res.ok) {
+  //       alert("Registration Successful, Please check your email")
+  //       return res.json();
+  //     } else {
+  //       return res.json().then((data) => {
+  //         let errorMessage = 'Dupilcate Mail Id';
+  //         console.log(data)
+  //         if (data && data.error && data.error.message) {
+  //           errorMessage = data.error.message;
+  //           console.log(JSON.stringify(errorMessage))
+  //         }})}})
   Axios.post(url,{
     firstName:data.firstName,
     lastName:data.lastName,
@@ -35,10 +60,13 @@ function submit(e){
     roleId:data.roleId
   })
   .then(res=>{
-    if(res.data != null){
-      alert("Registration Successful, Please check your email")
+    if(res.data == "Duplicate email"){
+      console.log(res.data)
+      alert("Duplicate Email ID entered")
     }
-    console.log(res.data)
+    else{
+        alert("Registration Successful")
+    }
   })
 }
 
