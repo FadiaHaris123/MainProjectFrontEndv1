@@ -92,7 +92,6 @@ function App() {
           <Route path='/customer/chittyform' component={ChittyForm}/>
           <Route path='/customer/nomineeform' component={NomineeForm}/>
           <Route path='/admin/launchedchits' component={LaunchedChits}/>
-          
         </Switch>
       </Router>
   )
