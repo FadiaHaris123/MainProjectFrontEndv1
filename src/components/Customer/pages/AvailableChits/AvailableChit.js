@@ -13,10 +13,16 @@ const AvailableChit =()=>{
   const [httpError, setHttpError] = useState();
   const history=useHistory();
 
+  let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+
   useEffect(() => {
     const fetchChits = async () => {
       const response = await fetch(
-        'http://localhost:8080/api/chitty'
+        'http://localhost:8080/chitty',{
+          headers:{
+            'Authorization':token
+            
+          }}
       );
 
       console.log(response);

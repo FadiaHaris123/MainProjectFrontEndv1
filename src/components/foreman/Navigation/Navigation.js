@@ -8,11 +8,16 @@ const Navigation = () => {
   const [category, setCategory] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState();
+  let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
 
     useEffect(() => {
       const fetchChittyCategory = async () => {
         const response = await fetch(
-          'http://localhost:8080/api/chittycategory'
+          'http://localhost:8080/chittycategory',{
+            headers:{
+              'Authorization':token
+              
+            }}
         );
   
         if (!response.ok) {

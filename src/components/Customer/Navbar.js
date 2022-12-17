@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useHistory } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
@@ -9,30 +9,53 @@ import Collapsible from 'react-collapsible';
 import Image from '../../assets/images/pro1.jpg';
 import axios from "axios";
 import './Navbar.css'
+import { RiGitRepositoryPrivateLine } from 'react-icons/ri';
 
 function Navbar() {
-  const roleid = window.localStorage.getItem('roleId');
-  const userid = window.localStorage.getItem('userId');
+  // const roleid = window.localStorage.getItem('roleId');
+  // const userid = window.localStorage.getItem('userId');
   const [sidebar, setSidebar] = useState(false);
   const [name, setName] = useState([]);
   const [error, setError] = useState([]);
   const showSidebar = () => setSidebar(!sidebar);
+  // const history = useHistory();
+
+  let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+  let roleid = JSON.parse(sessionStorage.getItem('roleId'));
+  let userid = JSON.parse(sessionStorage.getItem('userId'));
+  console.log(userid)
+
+  // const api = `http://localhost:8080/user-details/${userid}`
+  // axios.get(api, { headers: { "Authorization": `Bearer ${token}` } })
+  const api=axios.get(`http://localhost:8080/user-details/${userid}`,{
+  headers:{
+    'Authorization':token
+    
+  }}
+)
+  .then(response=>{
+    console.log(response.data)
+    setName(response.data.firstName);
+
+  })
 
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/api/user-details/${userid}`);
-        setName(response.data.firstName);
-      } catch (err) {
-        setError(err.message);
-        setName(null);
-      } 
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     try {
+  //       const response = await axios.get(api);
+  //       setName(response.data.firstName);
+  //       console.log(response.data.firstName)
+  //     } catch (err) {
+  //       setError(err.message);
+  //       setName(null);
+  //     } 
 
-    };
-    getData();
+  //   };
+  //   console.log(name)
+  //   getData();
 
-  }, []);
+  // }, []);
 
   return (
     <>
@@ -42,7 +65,7 @@ function Navbar() {
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
           <h1 className='tag'>Eminence Chitty</h1>
-
+    
           <h5 className='tagNamee'>Hi, {name} !</h5>
 
           <div className='img'>

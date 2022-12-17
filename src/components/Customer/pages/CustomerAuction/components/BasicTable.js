@@ -21,7 +21,7 @@ const onSearchHandler = (name)=>{
 useEffect(() => {
   const fetchManagers = async () => {
     const response = await fetch(
-      'http://localhost:8080/api/managers/search/findByfirstNameContaining?name='+searchName
+      'http://localhost:8080/api/managers/search/findByfirstNameContaining?name='+searchName,
     );
 
     if (!response.ok) {

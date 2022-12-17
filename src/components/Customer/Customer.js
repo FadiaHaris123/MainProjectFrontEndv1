@@ -1,9 +1,19 @@
 import React from 'react';
 import Navbar from './Navbar';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route,useHistory } from 'react-router-dom';
 import './Customer.css'
+import axios from 'axios';
 
 function Customer() {
+  // const history = useHistory();
+  // let token = JSON.parse(sessionStorage.getItem('jwt'));
+ 
+  // if (token == null) {
+  //   history.push("/");
+  // }
+  // const api = `http://localhost:8080/customer`
+  // axios.get(api, { headers: { "Authorization": `Bearer ${token}` } })
+  
   return (
     <div>
     

@@ -4,8 +4,8 @@ import classes from './LaunchForm.module.css';
 import Axios from 'axios';
 
 const LaunchForm = () => {
-
-  const url = "http://localhost:8080/api/chitty/add"
+  let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+  const url = "http://localhost:8080/chitty/add"
 
   const [data,setData] = useState({
     chitNumber:"",
@@ -37,7 +37,11 @@ const LaunchForm = () => {
     launchDate:formattedlaunchDate,
     startDate:data.startDate,
     status:data.status
-    })
+    },{
+      headers:{
+        'Authorization':token
+        
+      }})
     .then(res=>{
       if(res.data != null){
       alert("Chitty launched successfully")
@@ -72,7 +76,11 @@ const LaunchForm = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       const response = await fetch(
-        'http://localhost:8080/api/managers'
+        'http://localhost:8080/managers',{
+          headers:{
+            'Authorization':token
+            
+          }}
       );
 
       if (!response.ok) {
@@ -106,7 +114,12 @@ const LaunchForm = () => {
   useEffect(() => {
     const fetchChittyCategory = async () => {
       const response = await fetch(
-        'http://localhost:8080/api/chittycategory'
+        'http://localhost:8080/chittycategory',
+        {
+          headers:{
+            'Authorization':token
+            
+          }}
       );
 
       if (!response.ok) {

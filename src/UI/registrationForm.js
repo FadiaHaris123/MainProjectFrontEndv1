@@ -6,7 +6,7 @@ import Image from '../assets/images/joinus.jpg'
 
 const Auth = (props) => {
 
-const url = "http://localhost:8080/api/user-profile"
+const url = "http://localhost:8080/user-profile"
 
 const [data,setData] = useState({
   firstName:"",
@@ -33,7 +33,14 @@ function submit(e){
     mobileNo:parseInt(data.mobileNo),
     passWord:data.passWord,
     roleId:data.roleId
-  })
+  },
+  
+  // {
+  //     headers: { 'Content-Type': 'application/json' },
+  //     withCredentials: true
+  // }
+  
+  )
   .then(res=>{
     if(res.data != null){
       alert("Registration Successful, Please check your email")

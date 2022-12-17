@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useReducer } from "react"
 import { Link, useHistory } from "react-router-dom"
 import Image from '../assets/images/login.jpg'
-import Axios from 'axios';
+import axios from 'axios';
 import '../App.css'
 import './Auth.css'
 import classes from './Login.module.css';
@@ -113,30 +113,54 @@ const Auth = (props) => {
   let [password, setPasswordMode] = useState("")
   const history = useHistory();
 
-  const loginHandler = async () => {
+  const loginHandler = async (e) => {
+   
     setMailMode(emailCurrentState.enteredEmail);
     setPasswordMode(passwordCurrentState.enteredPassword);
-    Axios.post('http://localhost:8080/api/user/userlogin', {
+    const data =JSON.stringify({
       email: mail,
-      userPassword: password
-    })
-      .then(res => {
-        if (res.data.roleId == 1) {
-          history.push("/admin");
-        }
-        if (res.data.roleId == 2) {
-          console.log(res.data.userId);
-          localStorage.setItem('managerId', res.data.userId);
-          history.push("/manager");
-        }
-        if (res.data.roleId == 3) {
-          console.log(res.data.userId);
-          localStorage.setItem('userId', res.data.userId);
-          history.push("/customer");
-        }
-      })
+      password: password
+  }) ;
+  console.log(data);
+  const response = await axios.post("http://localhost:8080/authenticate",data
+  //  JSON.stringify(data),
+,
+  {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true
+  })
+  sessionStorage.setItem('jwt', JSON.stringify(response?.data?.jwtToken));
+  sessionStorage.setItem('userId', JSON.stringify(response?.data?.userId));
+  sessionStorage.setItem('roleId', JSON.stringify(response?.data?.roleId));
+  if(response?.data?.roleId==1)
+  history.push("/admin");
+  else if(response?.data?.roleId==2)
+  history.push("/manager");
+  else
+  history.push("/customer");
+};
+    
+  //   Axios.post('http://localhost:8080/api/user/userlogin', {
+  //     email: mail,
+  //     userPassword: password
+  //   })
+  //     .then(res => {
+  //       if (res.data.roleId == 1) {
+  //         history.push("/admin");
+  //       }
+  //       if (res.data.roleId == 2) {
+  //         console.log(res.data.userId);
+  //         localStorage.setItem('managerId', res.data.userId);
+  //         history.push("/manager");
+  //       }
+  //       if (res.data.roleId == 3) {
+  //         console.log(res.data.userId);
+  //         localStorage.setItem('userId', res.data.userId);
+  //         history.push("/customer");
+  //       }
+  //     })
 
-  };
+  // };
   return (
     <header style={HeaderStyle}>
       <div className="overlays">

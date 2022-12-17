@@ -4,7 +4,8 @@ import classes from './AddManager.module.css';
 import Axios from 'axios';
 
 const AddManager=()=>{
-	const url = "http://localhost:8080/api/addmanager"
+	const url = "http://localhost:8080/addmanager"
+let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
 
 const [data,setData] = useState({
 	emp_id:"",
@@ -12,7 +13,7 @@ const [data,setData] = useState({
 	emp_lastname:"",
 	email:"",
 	mobileNumber:"",
-	passWord:"manager@123",
+	passWord:"$2a$10$z5gwKRfEH3nTy5kquLIdeelC6eGZvyQ4AlKufhbpFWZMCUnQ459.a",
   roleId:2
 })
 
@@ -33,7 +34,11 @@ function handle(e){
 		mobileNumber:parseInt(data.mobileNumber),
 		passWord:data.passWord,
     roleId:data.roleId
-	})
+	},{
+    headers:{
+      'Authorization':token
+      
+    }})
 	.then(res=>{
 	  if(res.data != null){
 		alert("Manager added successfully")
