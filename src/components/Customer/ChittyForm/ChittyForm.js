@@ -1,5 +1,5 @@
-import React, { useState,setState, Fragment } from 'react';
-import { Link,useLocation } from "react-router-dom"
+import React, { useState, Fragment } from 'react';
+import { useLocation } from "react-router-dom"
 import classes from './ChittyForm.module.css'
 import Header from './Header/Header'
 import Navbar from '../Navbar';
@@ -13,65 +13,85 @@ import { SidebarData } from '../SidebarData';
 
 function ChittyForm() {
 
-  let location = useLocation();
-  const chittyId = location.state.id;
-    const url= "http://localhost:8080/api/chittal/add";
-    const [chittalId,setChittalId] = useState(0);
+    const location = useLocation();
+    const chittyId = location.state.id;
+    const url = "http://localhost:8080/api/chittal/add";
+    const [chits, setChits] = useState([]);
+    const [chittalId, setChittalId] = useState(0);
     const [showNominee, setShowNominee] = useState(false);
+    const [managerId, setManagerId] = useState([]);
+    const [categoryId, setCategoryId] = useState([]);
     const id = window.localStorage.getItem('userId');
-    const [chittalData,setChittalData] = useState({
-        userId:"",
-        chittyId:"",
-        age:"",
-        address:"",
-        pinCode:"",
-        userPhone:"",
-        dob:"",
-        status:"",
-        income:"",
-        aadhar:""
+
+    const [chittalData, setChittalData] = useState({
+        userId: "",
+        chittyId: "",
+        age: "",
+        address: "",
+        pinCode: "",
+        userPhone: "",
+        dob: "",
+        status: "",
+        income: "",
+        aadhar: ""
     })
 
-    function handleInputChange(e){
-        const newdata = {...chittalData}
+    function handleInputChange(e) {
+        const newdata = { ...chittalData }
         newdata[e.target.id] = e.target.value
         setChittalData(newdata)
         console.log(newdata)
     }
-    
-    function handleSubmit(e){
-        
+
+    function handleSubmit(e) {
+
         e.preventDefault();
-        Axios.post(url,{
-            userId:id,
-            chittyId:parseInt(chittyId),
-            age:parseInt(chittalData.age),
-            address:chittalData.address,
-            pinCode:chittalData.pinCode,
-            userPhone:parseInt(chittalData.userPhone),
-            dob:chittalData.dob,
-            status:chittalData.status,
-            income:chittalData.income,
-            aadhar:chittalData.aadhar
+        Axios.post(url, {
+            userId: id,
+            chittyId: parseInt(chittyId),
+            age: parseInt(chittalData.age),
+            address: chittalData.address,
+            pinCode: chittalData.pinCode,
+            userPhone: parseInt(chittalData.userPhone),
+            dob: chittalData.dob,
+            status: chittalData.status,
+            income: chittalData.income,
+            aadhar: chittalData.aadhar
         })
-        .then(res=>{
-          if(res.data != null){
-            alert("Chittal added")
-         
-          }
-        //   console.log("chittalID"+res.data.chittalId)
-        // when chittal information is passed chittal id is obtained as response
-          setChittalId(res.data.chittalId)
-        })
-        setShowNominee(true);
-      }
-         
+            .then(res => {
+                if (res.data != null) {
+                    alert("Chittal added")
+                    fetchChitDetail();
+                }
+                setShowNominee(true);
+                setChittalId(res.data.chittalId)
+            })
+    }
+
+    const fetchChitDetail = () => {
+        Axios.get('http://localhost:8080/api/chitty/' + chittyId).then((response) => {
+            setChits(response.data);
+        });
+        getManagerId();
+    }
+
+    const getManagerId = () => {
+        Axios.get('http://localhost:8080/api/chitty/' + chittyId + '/manager').then((response) => {
+            setManagerId(response.data.emp_id);
+        });
+        getCategoryId();
+    }
+
+    const getCategoryId = () => {
+        Axios.get('http://localhost:8080/api/chitty/' + chittyId + '/category').then((response) => {
+            setCategoryId(response.data.id);
+        });
+    }
 
     return (
         <Fragment>
-            <Navbar/>
+            <Navbar />
             <h2 className={classes.head}>Chitty Application Form</h2>
-            {/* <Header/> */}
             <div className={classes.form}>
                 <br></br>
 
@@ -79,7 +99,7 @@ function ChittyForm() {
                     <h3>Chittal details</h3>
                     <div>
                         <label className={classes.form__label} for="Name" id="name"> Name: </label>
-                        <input className={classes.form__input} type="text"  id="Name" placeholder="Name" />
+                        <input className={classes.form__input} type="text" id="Name" placeholder="Name" />
                     </div>
                     <div>
                         <label className={classes.form__label} for="age"> Age: </label>
@@ -142,14 +162,11 @@ function ChittyForm() {
                 </div>
 
                 <div className={classes.footer}>
-                
                     <button onClick={handleSubmit} type="submit" className={classes.btn}>Next</button>
-                    
-              {/* {showNominee && <NomineeForm chittalId={chittalId}/>} */}
                 </div>
             </div>
             <div className={classes.nominee}>
-            {showNominee && <NomineeForm chittalId={chittalId} />}
+                {showNominee && <NomineeForm chittalId={chittalId} chits={chits} managerId={managerId} categoryId={categoryId}/>}
             </div>
         </Fragment>
     )
