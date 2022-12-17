@@ -5,7 +5,7 @@ import classes from './NomineeForm.module.css'
 import Axios from 'axios';
 
 function NomineeForm(props) {
-   
+    
     const url="http://localhost:8080/api/nominee/add";
     // console.log(props.chittalId)
     const [nomineeData,setNomineeData] = useState({
@@ -47,6 +47,7 @@ function handleInputChange(e){
     }
  
     return(
+        
         <div className={classes.form}>
 
                 <div className={classes.nominee}>
@@ -89,16 +90,12 @@ function handleInputChange(e){
                 <div className={classes.footer}>
                 
                 <button onClick={handleSubmit} type="submit" className={classes.btn}>Submit</button>
-        
-           
-           
+
         </div>
             
             </div>
-        
-     
+            
     );
 }
-
 
 export default NomineeForm;
