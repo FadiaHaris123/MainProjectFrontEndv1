@@ -21,6 +21,7 @@ import Earnings from "./components/Earnings/Earnings"
 import Auction from './components/Customer/pages/CustomerAuction/Auction'
 import Profile from './components/Customer/pages/CustomerProfile/Profile'
 import AvailableChits from './components/Customer/pages/AvailableChits/AvailableChit'
+import JoinedChits from "./components/Customer/pages/JoinedChits/JoinedChits";
 import { GrLaunch } from "react-icons/gr";
 import RazorPay from "./components/Customer/RazorPay/payment"
 import MainManagerPage from "./components/foreman/Manager/MainManagerPage";
@@ -70,6 +71,7 @@ function App() {
           <Route exact path='/customer/auction' component={Auction} />
           <Route path='/customer/profile' component={Profile} />
           <Route path='/customer/availablechits' component={AvailableChits}/>
+          <Route path='/customer/joinedchits' component={JoinedChits}/>
           <Route path='/customer/payment' component={RazorPay}/>
           <Route path='/customer/auction/auctionroom' component={AuctionRoom}/>
           <Route path='/customer/chittyform' component={ChittyForm}/>
