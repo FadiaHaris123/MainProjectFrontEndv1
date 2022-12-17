@@ -67,7 +67,9 @@ const Navigation = () => {
         ))}
         </div>
       </div>
-      <button class={classes.button}>Launched Chitties</button>
+      <Link to='/admin/launchedchits'>
+      <button class={classes.button}>Launched Chits</button>
+      </Link>
       <Link to="/">
         <button class={classes.logout_button}>Log Out</button>
       </Link>

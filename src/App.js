@@ -8,7 +8,6 @@ import NomineeForm from "./components/Customer/ChittyForm/NomineeForm";
 import CreateNewPassword from "./UI/ForgetPassword/ResetPassword"
 import registrationForm from "./UI/registrationForm"
 import foreman from "./components/foreman/foreman"
-import Manager from "./components/foreman/Manager/MainManagerPage"
 import ManagerPage from "./components/Manager/ManagerPage"
 import AssignedChits from "./components/Manager/pages/AssignedChits/AssignedChits"
 import StartChit from "./components/Manager/pages/StartedChits/StartedChits"
@@ -17,7 +16,6 @@ import Customer from "./components/Customer/Customer"
 import LandingPage from "./components/LandingPage/LandingPage"
 import ChittyForm from "./components/Customer/ChittyForm/ChittyForm";
 import ChittyManagers from "./components/foreman/ManagerDetails/ChittyManagers"
-import Earnings from "./components/Earnings/Earnings"
 import Auction from './components/Customer/pages/CustomerAuction/Auction'
 import Profile from './components/Customer/pages/CustomerProfile/Profile'
 import AvailableChits from './components/Customer/pages/AvailableChits/AvailableChit'
@@ -26,6 +24,7 @@ import { GrLaunch } from "react-icons/gr";
 import RazorPay from "./components/Customer/RazorPay/payment"
 import MainManagerPage from "./components/foreman/Manager/MainManagerPage";
 import AuctionRoom from "./components/AuctionRoom/AuctionRoom";
+import LaunchedChits from "./components/foreman/ManagerDetails/LaunchedChits";
 
 function App() {
 
@@ -76,7 +75,7 @@ function App() {
           <Route path="/forgotpassword" component={ForgotPassword} />
           <Route path="/createnewpassword" component={CreateNewPassword} />
           <Route path="/register" component={registrationForm}/>
-          <Route path="/admin" component={foreman} />
+          <Route exact path="/admin" component={foreman} />
           <Route exact path="/manager" component={ManagerPage}/>
           <Route path="/manager/assignedchits" component={AssignedChits}/>
           <Route path="/manager/changepassword" component={ChangePassword}/>
@@ -92,9 +91,8 @@ function App() {
           <Route path='/customer/auction/auctionroom' component={AuctionRoom}/>
           <Route path='/customer/chittyform' component={ChittyForm}/>
           <Route path='/customer/nomineeform' component={NomineeForm}/>
-          {/* <Route path="/home" exact>
-              {isLoggedIn ? <SuperAdminHome onLogout={logoutHandler} name={employeeName} employeeId={employeeId} tracker={employeeTracker}/> : <Redirect to='/login' /> }
-          </Route> */}
+          <Route path='/admin/launchedchits' component={LaunchedChits}/>
+          
         </Switch>
       </Router>
   )
