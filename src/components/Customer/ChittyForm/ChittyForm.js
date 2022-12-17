@@ -131,7 +131,7 @@ function ChittyForm() {
                     <div className={classes.status}>
                         <label className={classes.form__label}>Marital status:
                             <select name="" className={classes.form__input}>
-                                <option disabled={isDisabled} value={chittalData.status} >Select marital status</option>
+                                <option disabled={isDisabled} value={chittalData.status} >Select marital status 🔻 </option>
                                 <option value="Single">Single</option>
                                 <option value="Married">Married</option>
                                 <option value="Divorced">Divorced</option>
@@ -147,10 +147,10 @@ function ChittyForm() {
                     <div className={classes.Chitty_Type}>
                         <label className={classes.form__label}>Chitty Type:
                             <select name="" className={classes.form__input}>
-                                <option disabled={isDisabled}>Select chitty type </option>
-                                <option value="Onam">Onam</option>
-                                <option value="Monsoon">Monsoon</option>
-                                <option value="Autumn">Autumn</option>
+                                <option disabled={isDisabled}>Select chitty type🔻 </option>
+                                <option value="Long Term">Long Term</option>
+                                <option value="Short Term">Short Term</option>
+                                <option value="Multidivision">Multidivision</option>
                             </select>
                         </label>
                     </div>
