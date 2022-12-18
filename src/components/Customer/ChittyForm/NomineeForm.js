@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import React from "react";
 import classes from './NomineeForm.module.css'
 import Axios from 'axios';
@@ -69,10 +69,12 @@ function NomineeForm(props) {
         updateChittal();
     })
     return (
+        <Fragment>
+        {/* <h3 className={classes.head}>Please fill the nominee details below</h3> */}
         <div className={classes.form}>
             <div className={classes.nominee}>
-
-                <h3>Nominee details</h3>
+            
+                <h3 className={classes.head1}>Nominee details</h3>
                 <div className={classes.nomineeName}>
                     <label className={classes.form__label} for="nomineeName">Name </label>
                     <input type="nomineeName" id="name" className={classes.form__input} value={nomineeData.name} onChange={(e) => handleInputChange(e)} placeholder="Name" />
@@ -114,6 +116,7 @@ function NomineeForm(props) {
             </div>
 
         </div>
+        </Fragment>
 
     );
 }

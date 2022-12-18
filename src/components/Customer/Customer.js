@@ -6,7 +6,6 @@ import './Customer.css'
 function Customer() {
   return (
     <div>
-
       <Navbar />
       <div className="heading">
         <h3>Start a new beginning with Eminence Chitty!</h3>
@@ -14,7 +13,6 @@ function Customer() {
       <div className='bgimg'>
 
       </div>
-
 
       <footer class="footer">
 
