@@ -7,18 +7,20 @@ import {BrowserRouter as Router,Switch, Route, Redirect } from "react-router-dom
 import ChittyForm from '../../ChittyForm/ChittyForm';
 
 const JoinedChits =()=>{
+  const userid = window.localStorage.getItem('userId');
   const [chits, setChits] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState();
   const history=useHistory();
 
+
   useEffect(() => {
     const fetchChits = async () => {
       const response = await fetch(
-        'http://localhost:8080/api/chitty'
+        'http://localhost:8080/api/chittal-details'
       );
 
-      console.log(response);
+      console.log();
 
       if (!response.ok) {
         throw new Error('Something went wrong!');
@@ -27,9 +29,10 @@ const JoinedChits =()=>{
       const responseData = await response.json();
 
       const loadedChits = [];
-      const newItemList = [...responseData._embedded.chitty]
+      const newItemList = [...responseData._embedded.chittaldetails]
 
       for (const key in newItemList) {
+        
         if(newItemList[key].status != "started"){
           loadedChits.push({
             id: key,

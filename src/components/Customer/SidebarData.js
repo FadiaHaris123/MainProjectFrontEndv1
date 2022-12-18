@@ -1,5 +1,6 @@
 import React from 'react';
 import * as AiIcons from 'react-icons/ai';
+import { FaGoodreads } from 'react-icons/fa';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 
@@ -18,7 +19,7 @@ export const SidebarData = [
     icon: <IoIcons.IoIosPaper />,
     cName: 'nav-text'
   },
-
+  
   {
     title: 'Joined Chits',
     path: '/customer/joinedchits',
@@ -46,3 +47,5 @@ export const SidebarData = [
     cName: 'nav-text'
   }
 ];
+
+
