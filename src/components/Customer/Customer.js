@@ -22,9 +22,8 @@ function Customer() {
           <li class="menu__item"><a class="menu__link" href="#">Services</a></li>
           <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
           <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
-
         </ul>
-        {/* <p>&copy;2021 Eminence Chitty | All Rights Reserved</p> */}
+        {/* <p>&copy;2000 Eminence Chitty | All Rights Reserved</p> */}
       </footer>
 
     </div>

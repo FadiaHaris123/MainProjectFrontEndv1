@@ -9,6 +9,7 @@ import classes from './Login.module.css';
 const Auth = (props) => {
 
   let [authMode, setAuthMode] = useState("signin")
+  const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated") || false));
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin")
   }
@@ -122,15 +123,19 @@ const Auth = (props) => {
     })
       .then(res => {
         if (res.data.roleId == 1) {
+          setauthenticated(true)
+          localStorage.setItem("authenticated", true);
           history.push("/admin");
         }
         if (res.data.roleId == 2) {
-          console.log(res.data.userId);
+          setauthenticated(true)
+          localStorage.setItem("authenticated", true);
           localStorage.setItem('managerId', res.data.userId);
           history.push("/manager");
         }
         if (res.data.roleId == 3) {
-          console.log(res.data.userId);
+          setauthenticated(true)
+          localStorage.setItem("authenticated", true);
           localStorage.setItem('userId', res.data.userId);
           history.push("/customer");
         }
