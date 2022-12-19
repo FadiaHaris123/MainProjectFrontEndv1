@@ -8,7 +8,7 @@ function AuctionRoom(props) {
     return (
       <div className={styles.App}>
         <Header/>
-        <AuctionChitDetails userId={props.userId}/>
+        <AuctionChitDetails userId={props.userId} chittyId={props.chittyId} amount={props.amount}/>
         <BidDetails/>
       </div>
     );
