@@ -29,17 +29,17 @@ import AuctionRoom from "./components/AuctionRoom/AuctionRoom";
 
 function App() {
 
-  const history = useHistory();
-  const [authenticated, setauthenticated] = useState(null);
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("authenticated");
-    if (loggedInUser) {
-      setauthenticated(loggedInUser);
-    }
-  }, []);
-  if (!authenticated) {
-    history.push("/login");
-  } else {
+  // const history = useHistory();
+  // const [authenticated, setauthenticated] = useState(null);
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem("authenticated");
+  //   if (loggedInUser) {
+  //     setauthenticated(loggedInUser);
+  //   }
+  // }, []);
+  // if (!authenticated) {
+  //   history.push("/login");
+  // } else {
     return (
       <Router>
         <Switch>
@@ -69,6 +69,6 @@ function App() {
       </Router>
     )
   }
-}
+// }
 
 export default App
