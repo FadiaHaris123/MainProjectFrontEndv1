@@ -98,20 +98,17 @@ const columns = [
     sortable: true,
   },
   {
-    name: 'Eligible Chittals',
-    sortable: true,
-  },
-  {
-    name: 'Installment No.',
+    name: 'Total Installments',
     sortable: true,
   },
   {
     name: 'Auction Type',
+    default: 'Online',
     sortable: true,
   },
   {
     name: 'Auction Room',
-    cell: () => <Link to="/customer/auction/auctionroom"><button>Enter</button></Link>,
+    cell: () => <Link to="/customer/auction/auctionroom"><button className={classes.enterAuctionRoomBtn}>Enter</button></Link>,
     sortable: true,
   },
  
@@ -121,7 +118,8 @@ const columns = [
 return(
     <section className={classes.tablecontainer}>
         <Search search={onSearchHandler}/>
-         <DataTable
+        <div className={classes.auctionDetailsTable}>
+        <DataTable
         scrollY
         maxHeight="200px"
         title=""
@@ -133,6 +131,7 @@ return(
         expandableRows 
         highlightOnHover
       />
+        </div>
     </section>
 )
 
