@@ -90,7 +90,7 @@ function ChittyForm() {
 
     return (
         <Fragment>
-            <Navbar />
+            <Navbar/>
             <h2 className={classes.head}>Chitty Application Form</h2>
             <div className={classes.form}>
                 <br></br>
@@ -126,7 +126,9 @@ function ChittyForm() {
                         <input type="text" id="userPhone" className={classes.form__input} value={chittalData.userPhone} onChange={(e) => handleInputChange(e)} placeholder="+91 " />
                     </div>
 
+                    <br></br>
                     <div className={classes.status}>
+                      
                         <label className={classes.form__label}>Marital status:
                             <select name="" className={classes.form__input}>
                                 <option disabled={isDisabled} value={chittalData.status} >Select marital status ⬇️ </option>

@@ -12,6 +12,7 @@ import LaunchedChits from "./components/foreman/ManagerDetails/LaunchedChits"
 import ManagerPage from "./components/Manager/ManagerPage"
 import AssignedChits from "./components/Manager/pages/AssignedChits/AssignedChits"
 import StartChit from "./components/Manager/pages/StartedChits/StartedChits"
+import ManagerAuctionRoom from "./components/Manager/pages/AuctionRoom/AuctionRoom"
 import ChangePassword from "./components/Manager/pages/ChangePassword/ChangePassword"
 import Customer from "./components/Customer/Customer"
 import LandingPage from "./components/LandingPage/LandingPage"
@@ -22,10 +23,11 @@ import Auction from './components/Customer/pages/CustomerAuction/Auction'
 import Profile from './components/Customer/pages/CustomerProfile/Profile'
 import AvailableChits from './components/Customer/pages/AvailableChits/AvailableChit'
 import JoinedChits from "./components/Customer/pages/JoinedChits/JoinedChits";
-import { GrLaunch } from "react-icons/gr";
+import AuctionDetails from "./components/Manager/pages/AuctionDetails/AuctionDetails";
 import RazorPay from "./components/Customer/RazorPay/payment"
 import MainManagerPage from "./components/foreman/Manager/MainManagerPage";
 import AuctionRoom from "./components/AuctionRoom/AuctionRoom";
+import Otp from "./components/Customer/Otp/Otp";
 
 function App() {
 
@@ -38,7 +40,7 @@ function App() {
   //   }
   // }, []);
   // if (!authenticated) {
-  //   history.push("/login");
+  //   history.push("/");
   // } else {
     return (
       <Router>
@@ -49,22 +51,26 @@ function App() {
           <Route path="/createnewpassword" component={CreateNewPassword} />
           <Route path="/register" component={registrationForm} />
           <Route exact path="/admin" component={foreman} />
+          <Route path='/admin/launchedchits' component={LaunchedChits}/>
+          <Route exact path="/employee" component={MainManagerPage} />
+          <Route path="/employee/managerslist" component={ChittyManagers} />
           <Route exact path="/manager" component={ManagerPage} />
           <Route path="/manager/assignedchits" component={AssignedChits} />
           <Route path="/manager/changepassword" component={ChangePassword} />
           <Route path="/manager/startchit" component={StartChit} />
-          <Route exact path="/employee" component={MainManagerPage} />
-          <Route path="/employee/managerslist" component={ChittyManagers} />
+          <Route eaxct path="/manager/auctiondetails" component={AuctionDetails} />
+          <Route path="/manager/auction/auctionroom" component={ManagerAuctionRoom} />
           <Route exact path="/customer" component={Customer} />
-          <Route path='/customer/auction' component={Auction} />
+          <Route exact path='/customer/auction' component={Auction} />
           <Route path='/customer/profile' component={Profile} />
           <Route path='/customer/availablechits' component={AvailableChits} />
           <Route path='/customer/joinedchits' component={JoinedChits} />
-          <Route path='/customer/payment' component={RazorPay} />
+          <Route path='/customer/otp/payment' component={RazorPay} />
+          <Route path='/customer/otp' component={Otp} />
           <Route path='/customer/auction/auctionroom' component={AuctionRoom} />
           <Route path='/customer/chittyform' component={ChittyForm} />
           <Route path='/customer/nomineeform' component={NomineeForm} />
-          <Route path='/admin/launchedchits' component={LaunchedChits}/>
+          <Route path="/customer/otp" component={Otp} />
         </Switch>
       </Router>
     )
