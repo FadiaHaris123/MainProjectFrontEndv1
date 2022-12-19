@@ -22,6 +22,7 @@ class Otp extends React.Component {
       defaultCountry: "IN"
     });
   }
+  
   onSignInSubmit = (e) => {
     e.preventDefault()
     this.configureCaptcha()
@@ -62,18 +63,20 @@ class Otp extends React.Component {
         <Navbar/>
       <div>
         <h3 className={classes.heading}>OTP VERIFICATION</h3>
+        <div  className={classes.box}>
         <h4 className={classes.head}>Mobile number</h4>
         <form onSubmit={this.onSignInSubmit}>
           <div id="sign-in-button"></div>
-          <input type="number" name="mobile" placeholder="Mobile number" required onChange={this.handleChange}/>
-          <button type="submit">Submit</button>
+          <input type="number" className={classes.input} name="mobile" placeholder="Mobile number" required onChange={this.handleChange}/>
+          <button type="submit" className={classes.button} >Proceed</button>
         </form>
 
         <h4 className={classes.head}>Enter OTP</h4>
         <form onSubmit={this.onSubmitOTP}>
-          <input type="number" name="otp" placeholder="OTP Number" required onChange={this.handleChange}/>
-          <button type="submit">Submit</button>
+          <input type="number" className={classes.input}  name="otp" placeholder="OTP Number" required onChange={this.handleChange}/>
+          <button type="submit" className={classes.button}>Submit</button>
         </form>
+      </div>
       </div>
       </Fragment>
     )
