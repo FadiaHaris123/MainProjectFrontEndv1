@@ -90,7 +90,7 @@ function ChittyForm() {
 
     return (
         <Fragment>
-            <Navbar />
+            <Navbar/>
             <h2 className={classes.head}>Chitty Application Form</h2>
             <div className={classes.form}>
                 <br></br>
