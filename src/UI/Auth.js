@@ -2,6 +2,8 @@ import React, { useEffect, useState, useReducer } from "react"
 import { Link, useHistory } from "react-router-dom"
 import Image from '../assets/images/login.jpg'
 import axios from 'axios';
+import { AxiosResponse, AxiosError } from 'axios'
+
 import '../App.css'
 import './Auth.css'
 import classes from './Login.module.css';
@@ -9,7 +11,7 @@ import classes from './Login.module.css';
 const Auth = (props) => {
 
   let [authMode, setAuthMode] = useState("signin")
-  const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated") || false));
+  // const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated") || false));
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin")
   }
@@ -30,6 +32,7 @@ const Auth = (props) => {
       return {
         enteredEmail: action.payload,
         emailIsValid: action.payload.includes('@')
+
       }
     }
     if (action.type === 'emailvalidity') {
@@ -38,10 +41,10 @@ const Auth = (props) => {
         emailIsValid: prevState.enteredEmail.includes('@')
       }
     }
-    return {
-      enteredEmail: '',
-      emailIsValid: false
-    }
+    // return {
+    //   enteredEmail: '',
+    //   emailIsValid: false
+    // }
   };
 
   const passwordHandler = (prevState, action) => {
@@ -58,10 +61,10 @@ const Auth = (props) => {
         passwordIsValid: prevState.enteredPassword.trim().length > 6
       }
     }
-    return {
-      enteredPassword: '',
-      passwordIsValid: false
-    }
+    // return {
+    //   enteredPassword: '',
+    //   passwordIsValid: false
+    // }
   };
 
 
@@ -105,54 +108,104 @@ const Auth = (props) => {
     dispatchPassword({ type: 'passwordvalidity' })
   };
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    props.onLogin(emailCurrentState.enteredEmail, passwordCurrentState.enteredPassword);
-  };
+  // const submitHandler = (event) => {
+  //   event.preventDefault();
+  //   props.onLogin(emailCurrentState.enteredEmail, passwordCurrentState.enteredPassword);
+  // };
 
   let [mail, setMailMode] = useState("")
   let [password, setPasswordMode] = useState("")
   const history = useHistory();
 
   const loginHandler = async (e) => {
-
-    setMailMode(emailCurrentState.enteredEmail);
-    setPasswordMode(passwordCurrentState.enteredPassword);
-    const data = JSON.stringify({
-      email: mail,
-      password: password
-    });
-    console.log(data);
-    const response = await axios.post("http://localhost:8080/authenticate", data
-      //  JSON.stringify(data),
-      ,
+   
+    e.preventDefault();
+    // setMailMode(emailCurrentState.enteredEmail);
+    // setPasswordMode(passwordCurrentState.enteredPassword);
+    const data =JSON.stringify({
+      email: emailCurrentState.enteredEmail,
+      password: passwordCurrentState.enteredPassword
+  }) ;
+  // console.log(data);
+  const response = await axios.post("http://localhost:8080/authenticate",data
+  //  JSON.stringify(data),
+,
+  {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true
+  }).then()
+    //alert("checking"))
+  .catch(function(error) {
+    // if (axios.isAxiosError(error)) {
+      // // Handle 400
+      // console.log(error)
+      // console.log("message",error.response?.data)
+      if(error.response)
       {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true
-      })
+        console.log("data",error.response.data)
+        console.log("status",error.request.status)
+        console.log("request",error.request)
+        console.log(JSON.stringify(error))
+        console.log(data)
+        alert("UnAuthorized")
+      }
+
+      else{
+        alert("hello")
+      }
+      // else
+      // alert("Authorized gfhjj")
+      throw error
+    // }
+    // } else {
+    //   // Handle else
+    // }
+    // console.log(reason.message)
+  })
+  let token=null;
+  token = JSON.stringify(response?.data?.jwtToken);
+  console.log(token)
+  // console.log(response.ok)
+
+   if(token!=null)
+   {
     sessionStorage.setItem('jwt', JSON.stringify(response?.data?.jwtToken));
+    
     sessionStorage.setItem('userId', JSON.stringify(response?.data?.userId));
     sessionStorage.setItem('roleId', JSON.stringify(response?.data?.roleId));
-    if (response?.data?.roleId == 1) {
-      setauthenticated(true)
-      localStorage.setItem("authenticated", true);
+    alert("Authorised User");
+    if(response?.data?.roleId==1)
+    {
+      // setauthenticated(true)
+      // localStorage.setItem("authenticated", true);
       history.push("/admin");
     }
-
-    else if (response?.data?.roleId == 2) {
-      setauthenticated(true)
-      localStorage.setItem("authenticated", true);
+  
+    else if(response?.data?.roleId==2){
+      // setauthenticated(true)
+      // localStorage.setItem("authenticated", true);
       history.push("/manager");
     }
-
-    else {
-      setauthenticated(true)
-      localStorage.setItem("authenticated", true);
+  
+    else{
+      // setauthenticated(true)
+      // localStorage.setItem("authenticated", true);
       history.push("/customer");
     }
-
-  };
-
+    console.log("authorized")
+  }
+  
+  // else{
+  //   // alert("Unauthorised User");
+  //   // console.log("unauthorized")
+  //   throw new console.error();
+  // }
+  
+  
+  props.onLogin(emailCurrentState.enteredEmail, passwordCurrentState.enteredPassword);
+ 
+};
+    
   //   Axios.post('http://localhost:8080/api/user/userlogin', {
   //     email: mail,
   //     userPassword: password
@@ -178,7 +231,7 @@ const Auth = (props) => {
     <header style={HeaderStyle}>
       <div className="overlays">
         <div className="Auth-form-container">
-          <form className="Auth-form" onSubmit={submitHandler}>
+          <form className="Auth-form" onSubmit={loginHandler}>
             <div className="Auth-form-content" >
               <h3 className="Auth-form-title">Log In</h3>
               <div className="text-center">
@@ -223,7 +276,7 @@ const Auth = (props) => {
                 </div>
               </div>
               <div className="submitButton">
-                <button id="submitButton" type="submit" disabled={!formIsValid} onClick={loginHandler}>
+                <button id="submitButton" type="submit" disabled={!formIsValid} >
                   Submit
                 </button>
               </div>

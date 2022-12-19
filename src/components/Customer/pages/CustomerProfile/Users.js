@@ -3,13 +3,21 @@ import axios from "axios";
 import React, { useState, useEffect } from 'react';
 
 const Users = (props) => {
-    const userid = window.localStorage.getItem('userid');
+    // const userid = window.localStorage.getItem('userid');
+    let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+    let userid = JSON.parse(sessionStorage.getItem('userId'));
 const [name, setName] = useState([]);
 const [error, setError] = useState([]);
 useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/user-details/${userid}`);
+        const response = await axios.get(`http://localhost:8080/user-details/${userid}`,
+        {
+          headers:{
+            'Authorization':token
+            
+          }}
+        );
         setName(response.data.firstName);
        
       } catch (err) {

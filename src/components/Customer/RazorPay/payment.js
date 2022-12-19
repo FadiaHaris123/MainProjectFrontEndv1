@@ -56,7 +56,7 @@ function Payment() {
                         <div className="title">
                                 <div className="title-content">
                                     <br></br>
-                                    <h2>Online Payment </h2>
+                                    <h2>Pay Online </h2>
                                     {/* <p className='mt-3'>I hope the tutorial has helped you learn how to integrate Paytm payment gateway in ReactJS.</p>
                                     <a href="https://dev.to/rajamanickam/how-to-integrate-razorpay-payment-gateway-in-reactjs-5fnb" target="_blank" className='btn btn-success'>View Tutorial</a> */}
                                 </div>

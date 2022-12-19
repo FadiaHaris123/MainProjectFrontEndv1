@@ -5,6 +5,13 @@ import * as RiIcons from 'react-icons/ri';
 
 export const SidebarData = [
 
+  
+  {
+    title: 'Home',
+    path: '/customer',
+    icon: <RiIcons.RiBankLine />,
+    cName: 'nav-text'
+  },
   {
     title: 'ID Card',
     path: '/customer/profile',

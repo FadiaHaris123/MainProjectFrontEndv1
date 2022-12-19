@@ -4,7 +4,7 @@ import classes from './Navigation.module.css';
 
 const Navigation = () => {
 
-
+ 
   const [category, setCategory] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState();
@@ -64,17 +64,29 @@ const Navigation = () => {
 
   return (
     <div id={classes.navs} class={classes.btn_group}>
+         <Link to="/admin">
+        <button class={classes.button}>Home</button>
+        </Link>
+      <Link to="/admin/ForemanAuction">
       <button class={classes.button}>Auction</button>
+      </Link>
+   
       <div class={classes.dropdown}>
         <button class={classes.button}>Chitty</button>
-        <div class={classes.dropdown_content}>{category.map(category => (
-          <a href="#" value={category.category_name}>{category.category_name}</a>
-        ))}
-        </div>
-      </div>
-      <Link to='/admin/launchedchits'>
+
+        <div class={classes.dropdown_content}>
+        <Link to='/admin/launchedchits'>
       <button class={classes.button}>Launched Chits</button>
       </Link>
+          {/* {category.map(category => (
+          <a href="#" value={category.category_name}>{category.category_name}</a>
+        ))} */}
+        </div>
+      </div>
+     
+      {/* <Link to="/admin">
+        <button class={classes.button}>Home</button>
+      </Link> */}
       <Link to="/">
         <button class={classes.logout_button}>Log Out</button>
       </Link>

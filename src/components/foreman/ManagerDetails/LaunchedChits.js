@@ -7,6 +7,7 @@ import DataTable from 'react-data-table-component';
 import Header from '../Header/Header';
 
 const LaunchedChits = () => {
+    let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
 
     const [chits, setChits] = useState([]);
 
@@ -26,7 +27,12 @@ const LaunchedChits = () => {
     useEffect(() => {
         const fetchAssignedChits = async () => {
             const response = await fetch(
-                'http://localhost:8080/api/chitty'
+                'http://localhost:8080/chitty'
+                ,{
+                    headers:{
+                      'Authorization':token
+                      
+                    }}
             );
 
             if (!response.ok) {

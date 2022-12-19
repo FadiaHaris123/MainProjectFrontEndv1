@@ -6,16 +6,22 @@ import classes from './JoinedChits.module.css'
 import {BrowserRouter as Router,Switch, Route, Redirect } from "react-router-dom"
 import ChittyForm from '../../ChittyForm/ChittyForm';
 
+
 const JoinedChits =()=>{
   const [chits, setChits] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState();
   const history=useHistory();
 
+  let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
   useEffect(() => {
     const fetchChits = async () => {
       const response = await fetch(
-        'http://localhost:8080/api/chitty'
+        'http://localhost:8080/chitty',{
+          headers:{
+            'Authorization':token
+            
+          }}
       );
 
       console.log(response);
@@ -36,6 +42,10 @@ const JoinedChits =()=>{
             chitNumber: newItemList[key].chitNumber,
             installment: newItemList[key].installment,
             duration: newItemList[key].duration,
+            numberOfChittal:newItemList[key].numberOfChittal,
+            currentNumberOfChittal:newItemList[key].currentNumberOfChittal,
+            totalAmount:newItemList[key].totalAmount,
+            startDate:newItemList[key].startDate
           });
         }
       }
@@ -82,11 +92,15 @@ const JoinedChits =()=>{
         <table className={classes.chitTable}>
             <tr className={classes.chitTableHead}>
               <th>Chit Number</th>
-              <th>Chittal Id</th>
+              {/* <th>Chittal Id</th> */}
               <th>Monthly Installment</th>
-              <th>Start date</th>
               <th>Duration in Months</th>
               <th>Number of chittals</th>
+              <th>Joined chittals</th>
+              <th>Prize Amount</th>
+              <th>Start date</th>
+             
+              
              
             </tr>
           <tbody className={classes.tableBody}>
@@ -94,9 +108,13 @@ const JoinedChits =()=>{
                 return(
                   <tr>
                     <td>{chit.chitNumber}</td>
-                    <td>{chit.id}</td>
+                    {/* <td>{chit.id}</td> */}
                     <td>{chit.installment}</td>
                     <td>{chit.duration}</td>
+                    <td>{chit.numberOfChittal}</td>
+                    <td>{chit.currentNumberOfChittal}</td>
+                    <td>{chit.totalAmount}</td>
+                    <td>{chit.startDate}</td>
                   
                   </tr>
                 )

@@ -1,10 +1,11 @@
-import React, { useState } from "react"
+import React, { useState,useHistory } from "react"
 import { Link } from "react-router-dom"
 import Axios from 'axios';
 
 import Image from '../assets/images/joinus.jpg'
 
 const Auth = (props) => {
+// const history = useHistory();
 
 const url = "http://localhost:8080/user-profile"
 
@@ -73,6 +74,7 @@ function submit(e){
     }
     else{
         alert("Registration Successful")
+        // return (history.push("/"));
     }
   })
 }

@@ -6,8 +6,10 @@ import { SidebarData } from './SidebarData';
 import './Navbar.css'
 import axios from "axios";
 import { IconContext } from 'react-icons';
+import { BsFillPersonFill } from "react-icons/ri";
 // import ProfileOverlay from './pages/CustomerProfile/ProfileOverlay';
 import Collapsible from 'react-collapsible';
+
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
@@ -45,7 +47,9 @@ function Navbar() {
           <FaIcons.FaBars onClick={showSidebar} />
         </Link>
         <h1 className='tagName'>Eminence Chitty</h1>
-        <h5 className='tagNamee'>Hi, Mngr. {managerName}</h5>
+        <h5 className='tagNamee'>Hi, Mngr. {managerName}  < FaIcons.FaUser /></h5>
+        
+       
         {/* <Collapsible trigger={<img src="" style={{ width: '50px' }} />}>
             <ProfileOverlay />
           </Collapsible> */}

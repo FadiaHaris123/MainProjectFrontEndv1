@@ -26,7 +26,7 @@ const Option =()=>{
                 </td>
                 
                 <td>
-                <Link to="/auction">
+                <Link to="/admin/ForemanAuction">
                     <button className={classes.button}><span><RiAuctionFill/> Auction</span></button>
                 </Link>
                 </td>
@@ -38,7 +38,7 @@ const Option =()=>{
                     </Link>
                 </td>
                 <td>
-                <Link to="/earnings">
+                <Link to="/admin/Earnings">
                     <button className={classes.button}><span><TbCurrencyRupee/>Earnings</span></button>
                 </Link>
                 </td>

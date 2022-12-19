@@ -12,6 +12,7 @@ const [managers, setManager] = useState([]);
 const [isLoading, setIsLoading] = useState(true);
 const [httpError, setHttpError] = useState();
 const [searchName, setSearchName] = useState("");
+let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
 
 
 const onSearchHandler = (name)=>{
@@ -21,7 +22,12 @@ const onSearchHandler = (name)=>{
 useEffect(() => {
   const fetchManagers = async () => {
     const response = await fetch(
-      'http://localhost:8080/api/managers/search/findByfirstNameContaining?name='+searchName,
+      'http://localhost:8080/managers/search/findByfirstNameContaining?name='+searchName,
+      {
+        headers:{
+          'Authorization':token
+          
+        }}
     );
 
     if (!response.ok) {
