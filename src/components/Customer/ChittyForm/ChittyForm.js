@@ -8,7 +8,7 @@ import { isDOMComponent } from 'react-dom/test-utils';
 import { isDisabled } from '@testing-library/user-event/dist/utils';
 import NomineeForm from './NomineeForm';
 import Axios from 'axios';
-import { SidebarData } from '../SidebarData';
+import JoinedChits from '../pages/JoinedChits/JoinedChits';
 import Navbar from '../Navbar';
 
 function ChittyForm() {
@@ -96,7 +96,7 @@ function ChittyForm() {
                 <br></br>
 
                 <div className={classes.form_body}>
-                    <h3>Chittal details</h3>
+                    <h3 className={classes.head1}>Chittal details</h3>
                     <div>
                         <label className={classes.form__label} for="Name" id="name"> Name: </label>
                         <input className={classes.form__input} type="text" id="Name" placeholder="Name" />
@@ -111,27 +111,27 @@ function ChittyForm() {
                         <input className={classes.form__input} type="text" value={chittalData.dob} onChange={(e) => handleInputChange(e)} id="dob" placeholder="yyyy-mm-dd" />
                     </div>
 
-
                     <div className={classes.address}>
                         <label className={classes.form__label} for="address">Address </label>
                         <input type="address" id="address" className={classes.form__input} value={chittalData.address} onChange={(e) => handleInputChange(e)} placeholder="Address" />
                     </div>
 
                     <div className={classes.pincode}>
-                        <label className={classes.form__label} for="address">Pincode: </label>
+                        <label className={classes.form__label} for="pincode">Pincode: </label>
                         <input type="pincode" id="pinCode" className={classes.form__input} value={chittalData.pinCode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" />
                     </div>
-
 
                     <div className={classes.userPhone}>
                         <label className={classes.form__label} for="userPhone">Contact number: </label>
                         <input type="text" id="userPhone" className={classes.form__input} value={chittalData.userPhone} onChange={(e) => handleInputChange(e)} placeholder="+91 " />
                     </div>
 
+                    <br></br>
                     <div className={classes.status}>
+                      
                         <label className={classes.form__label}>Marital status:
-                        <select name="" className={classes.form__input} id="status" value={chittalData.status} onChange={(e) => handleInputChange(e)} >
-                                <option disabled={isDisabled} value={chittalData.status} >Select marital status</option>
+                            <select name="" className={classes.form__input}>
+                                <option disabled={isDisabled} value={chittalData.status} >Select marital status ⬇️ </option>
                                 <option value="Single">Single</option>
                                 <option value="Married">Married</option>
                                 <option value="Divorced">Divorced</option>
@@ -141,13 +141,13 @@ function ChittyForm() {
 
                     <div className={classes.income}>
                         <label className={classes.form__label} for="income">Annual Income: </label>
-                        <input type="text" id="income" className={classes.form__input} value={chittalData.income} onChange={(e) => handleInputChange(e)} placeholder="$" />
+                        <input type="text" id="income" className={classes.form__input} value={chittalData.income} onChange={(e) => handleInputChange(e)} placeholder="₹" />
                     </div>
 
                     <div className={classes.Chitty_Type}>
                         <label className={classes.form__label}>Chitty Type:
                             <select name="" className={classes.form__input}>
-                                <option disabled={isDisabled}>Select chitty type🔻 </option>
+                                <option disabled={isDisabled}>Select chitty type ⬇️ </option>
                                 <option value="Long Term">Long Term</option>
                                 <option value="Short Term">Short Term</option>
                                 <option value="Multidivision">Multidivision</option>
@@ -168,9 +168,9 @@ function ChittyForm() {
             <div className={classes.nominee}>
                 {showNominee && <NomineeForm chittalId={chittalId} chits={chits} managerId={managerId} categoryId={categoryId}/>}
             </div>
+            {/* <JoinedChits chittyId = {chittyId}/> */}
         </Fragment>
     )
 }
-
 
 export default ChittyForm;
