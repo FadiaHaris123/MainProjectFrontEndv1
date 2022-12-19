@@ -9,3 +9,7 @@
     background: linear-gradient(to right bottom, rgb(20, 42, 126), rgb(102, 124, 213))
   }
   
+  #button
+  {
+    margin:10rem 6rem 2rem 6rem;
+  }

@@ -21,8 +21,8 @@ function Navbar() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/users/${userid}`);
-        setName(response.data.email);
+        const response = await axios.get(`http://localhost:8080/api/user-details/${userid}`);
+        setName(response.data.firstName);
       } catch (err) {
         setError(err.message);
         setName(null);
@@ -72,3 +72,4 @@ function Navbar() {
 }
 
 export default Navbar;
+

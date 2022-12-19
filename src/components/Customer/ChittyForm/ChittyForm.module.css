@@ -43,25 +43,22 @@ body{
 {
   color:rgb(22, 41, 74);
 }
+
 .form_body
 {
   min-height:100vh;
   margin-left: 5rem;
 }
+
 .form_body > *{
   padding: 8px ;
 }
-
 
 #name::after{
 position: absolute;
 content:"*";
 color:rgb(210, 42, 42);  
 }
-
-/* .form_input{
-  width: 90%;
-} */
 
 .form__input
 {

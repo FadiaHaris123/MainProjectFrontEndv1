@@ -5,7 +5,7 @@ import Navbar from '../../Navbar'
 
 const ForgotPasswordPage = () => {
 
-    const id = window.localStorage.getItem('userId');
+    const id = window.localStorage.getItem('managerId');
     const [managerEmail, setManagerEmail] = useState();
     const history = useHistory();
 

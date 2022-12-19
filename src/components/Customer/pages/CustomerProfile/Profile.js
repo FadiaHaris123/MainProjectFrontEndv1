@@ -21,7 +21,7 @@ function Profile() {
   useEffect(() => {
     const userdetails = async () => {
       const response = await fetch(
-        'https://routingapp-51bff-default-rtdb.firebaseio.com/user.json'
+        'http://localhost:8080/api/chittal-details/'
       );
 
       if (!response.ok) {
@@ -33,11 +33,14 @@ function Profile() {
       const loadeddetails = [];
       for (const key in responseData) {
         loadeddetails.push({
-          // id: key,
-          userid: responseData[key].id,
-          name: responseData[key].name,
-          // place: responseData[key].place,
-          // email: responseData[key].email,
+          chittalId: responseData[key].chittalId,
+          age: responseData[key].age,
+          address: responseData[key].address,
+          pincode: responseData[key].pincode,
+          userPhone: responseData[key].pincode,
+          dob: responseData[key].dob,
+          status: responseData[key].status,
+          income : responseData[key].income,
         });
       }
 
