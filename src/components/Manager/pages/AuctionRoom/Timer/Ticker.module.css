@@ -1,0 +1,16 @@
+.warning{
+    padding-top: 1%;
+    color: red;
+}
+
+.ticker{
+    display: flex;
+    font-size: 15px;
+    padding: 2% 3%;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.separator{
+    font-size: 25px;
+}

@@ -86,6 +86,7 @@ const LaunchedChits = () => {
             <Header/>
             <Navigation/>
             <h1 className={classes.heading}>Launched Chits</h1>
+            <div className={classes.launchedChitsTable}>
             <DataTable className={classes.datatable}
                 scroll
                 maxHeight="200px"
@@ -101,6 +102,7 @@ const LaunchedChits = () => {
                 highlightOnHover
                 conditionalRowStyles={conditionalRowStyles}
             />
+            </div>
         </Fragment>
     )
 }

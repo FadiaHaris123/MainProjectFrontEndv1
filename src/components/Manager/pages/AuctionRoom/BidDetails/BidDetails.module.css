@@ -1,0 +1,110 @@
+.bidcontainer{
+    top: 172px;
+    background-color: #eff1f5;
+    position: relative;
+    /* position: fixed; */
+    z-index: 20;
+    height: 70vh;
+    width: 80%;
+    margin: 0% 10%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+.currentbid{
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 30px;
+    display: flex;
+}
+
+.currentbid h3{
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+    color: rgb(35, 35, 77);
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.amount{
+    margin-top: 10px;
+    margin-left: 25px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+    font-weight: 900;
+    color: rgb(35, 125, 35);
+}
+
+.bidhistory{
+    position: absolute;
+    margin: 5% 10%;
+    width: 75%;
+}
+
+.bidhistory h3{
+    font-family: 'Lora', sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+    color: rgb(87, 87, 121);
+    letter-spacing: 1px;
+    left: 0;
+    margin-left: 5px;
+}
+
+.buttongrp{
+    display: flex;
+    position: absolute;
+    margin-top: 28%;
+    margin-left: 5%;
+    left: 0;
+}
+
+.hundreds button{
+   display: inline;
+    padding: 12px 32px;
+    border-radius: 4px;
+    background-color: rgb(49, 49, 95);
+    color: aliceblue;
+    border: none;
+    margin: 2% 2%;
+}
+
+.thousand button{
+    display: inline;
+    padding: 12px 32px;
+    border-radius: 4px;
+    background-color: rgb(49, 49, 95);
+    color: aliceblue;
+    border: none;
+    margin: 2% 2%;
+    left: 0;
+}
+
+.customamount{
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+    color: rgb(35, 35, 77);
+    width: 50%;
+    left: 0;
+    margin-left: 50px;
+}
+
+.send{
+    padding: 10px 10px;
+    margin: 1% 0;
+    border-radius: 4px;
+    background-color: rgb(134, 134, 171);
+    color: aliceblue;
+    border-radius: 50px;
+    border: none;
+}
+
+.customamount input{
+    padding: 5% 2%;
+    border: none;
+    margin: 1% 1%;
+    width: 100px;
+}
