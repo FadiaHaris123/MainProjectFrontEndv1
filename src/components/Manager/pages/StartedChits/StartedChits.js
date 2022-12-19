@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Navbar from '../../Navbar'
 import DataTable from 'react-data-table-component';
+import classes from './StartedChits.module.css';
 
 const StartedChits = () => {
 
@@ -60,7 +61,8 @@ const StartedChits = () => {
     return (
         <Fragment>
             <Navbar />
-            <DataTable
+           <div className={classes.startedChitsTable}>
+           <DataTable
                 scrollY
                 maxHeight="200px"
                 title="Started Chits"
@@ -74,6 +76,7 @@ const StartedChits = () => {
                 expandOnRowClicked
                 highlightOnHover
             />
+           </div>
         </Fragment>
     )
 }

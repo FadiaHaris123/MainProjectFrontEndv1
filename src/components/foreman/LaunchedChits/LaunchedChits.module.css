@@ -1,0 +1,15 @@
+.datatable{
+    /* position: absolute; */
+    margin-top:1%
+}
+.heading {
+    margin-bottom: 3%;
+    font-family: 'Lora,sans-serif';
+}
+
+.launchedChitsTable{
+    padding: 3%;
+    background-color: rgb(195, 195, 224);
+    border-radius: 10px;
+    margin: 2%;
+}

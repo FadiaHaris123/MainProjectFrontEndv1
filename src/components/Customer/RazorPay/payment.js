@@ -5,6 +5,7 @@ import icons from './img/icons.png'
 import Header from './Header/Header'
 import { Fragment } from "react"
 import './payment.css';
+import Navbar from '../Navbar';
 
 
 function Payment() {
