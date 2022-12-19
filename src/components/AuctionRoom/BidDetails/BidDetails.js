@@ -14,19 +14,19 @@ const BidDetails = () =>{
                     <div className={classes.amount}>6000</div>
                 </div> 
                 <div className={classes.bidhistory}>
-                    <h3>Bid History</h3>
+                    <h3>Bidding On Air !!!</h3>
                     <BidHistory/>
                 </div>
                 <div className={classes.buttongrp}>
                     <div className={classes.hundreds}>
-                        <button>+100</button>
-                        <button>+200</button>
-                        <button>+500</button>
+                        <button type='submit'>+100</button>
+                        <button type='submit'>+200</button>
+                        <button type='submit'>+500</button>
                     </div>
                     <div className={classes.thousand}>
-                        <button>+1,000</button>
-                        <button>+5,000</button>
-                        <button>+10,000</button>
+                        <button type='submit'>+1,000</button>
+                        <button type='submit'>+5,000</button>
+                        <button type='submit'>+10,000</button>
                     </div>
                     <div className={classes.customamount}>
                         <label>Custom amount </label>
