@@ -2,7 +2,6 @@ import React, { useState, Fragment } from 'react';
 import { useLocation } from "react-router-dom"
 import classes from './ChittyForm.module.css'
 import Header from './Header/Header'
-import Navbar from '../Navbar';
 import Image from './Header/form.jpg'
 import { getByDisplayValue } from '@testing-library/react';
 import { isDOMComponent } from 'react-dom/test-utils';
@@ -10,6 +9,7 @@ import { isDisabled } from '@testing-library/user-event/dist/utils';
 import NomineeForm from './NomineeForm';
 import Axios from 'axios';
 import { SidebarData } from '../SidebarData';
+import Navbar from '../Navbar';
 
 function ChittyForm() {
 
@@ -90,7 +90,7 @@ function ChittyForm() {
 
     return (
         <Fragment>
-            <Navbar />
+            <Navbar/>
             <h2 className={classes.head}>Chitty Application Form</h2>
             <div className={classes.form}>
                 <br></br>
@@ -130,7 +130,7 @@ function ChittyForm() {
 
                     <div className={classes.status}>
                         <label className={classes.form__label}>Marital status:
-                            <select name="" className={classes.form__input}>
+                        <select name="" className={classes.form__input} id="status" value={chittalData.status} onChange={(e) => handleInputChange(e)} >
                                 <option disabled={isDisabled} value={chittalData.status} >Select marital status</option>
                                 <option value="Single">Single</option>
                                 <option value="Married">Married</option>
