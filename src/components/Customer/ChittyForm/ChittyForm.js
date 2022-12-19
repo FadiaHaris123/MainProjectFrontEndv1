@@ -96,7 +96,7 @@ function ChittyForm() {
                 <br></br>
 
                 <div className={classes.form_body}>
-                    <h3>Chittal details</h3>
+                    <h3 className={classes.head1}>Chittal details</h3>
                     <div>
                         <label className={classes.form__label} for="Name" id="name"> Name: </label>
                         <input className={classes.form__input} type="text" id="Name" placeholder="Name" />
@@ -128,10 +128,12 @@ function ChittyForm() {
                         <input type="text" id="userPhone" className={classes.form__input} value={chittalData.userPhone} onChange={(e) => handleInputChange(e)} placeholder="+91 " />
                     </div>
 
+                    <br></br>
                     <div className={classes.status}>
+                      
                         <label className={classes.form__label}>Marital status:
                             <select name="" className={classes.form__input}>
-                                <option disabled={isDisabled} value={chittalData.status} >Select marital status 🔻 </option>
+                                <option disabled={isDisabled} value={chittalData.status} >Select marital status 🔽 </option>
                                 <option value="Single">Single</option>
                                 <option value="Married">Married</option>
                                 <option value="Divorced">Divorced</option>
@@ -147,7 +149,7 @@ function ChittyForm() {
                     <div className={classes.Chitty_Type}>
                         <label className={classes.form__label}>Chitty Type:
                             <select name="" className={classes.form__input}>
-                                <option disabled={isDisabled}>Select chitty type🔻 </option>
+                                <option disabled={isDisabled}>Select chitty type 🔽 </option>
                                 <option value="Long Term">Long Term</option>
                                 <option value="Short Term">Short Term</option>
                                 <option value="Multidivision">Multidivision</option>

@@ -7,6 +7,13 @@ body{
   margin-top:1rem;
   text-align: center;
   color:rgb(29, 74, 22);
+  font-family:Georgia, 'Times New Roman', Times, serif;
+}
+.head1
+{
+  text-align: center;
+  color:rgb(44, 52, 75);
+  font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 .form{
@@ -16,7 +23,8 @@ body{
   height: fit-content;
   width:125vh;
   margin-top: 3rem;
-  border:2px solid rgb(7, 45, 66);
+  /* border:1px solid rgb(26, 26, 27); */
+  box-shadow: 2px solid rgb(103, 99, 99);
   border-radius: 2rem;
   margin-left:14rem;
   margin-right:14rem;
@@ -61,6 +69,7 @@ color:rgb(210, 42, 42);
   margin-left:5rem;
   padding:3px 3px 6px 10px;
   width:20rem;
+  border-color: white;
 }
 
 .status select{
@@ -108,4 +117,3 @@ color:rgb(210, 42, 42);
 .nominee{
   margin:0 45%;
 }
-
