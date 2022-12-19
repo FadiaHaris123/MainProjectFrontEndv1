@@ -5,7 +5,6 @@ import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 
 export const SidebarData = [
-
   {
     title: 'ID Card',
     path: '/customer/profile',
@@ -26,6 +25,7 @@ export const SidebarData = [
     icon: <IoIcons.IoIosPaper />,
     cName: 'nav-text'
   },
+  
   {
     title: 'Auction',
     path: '/customer/auction',

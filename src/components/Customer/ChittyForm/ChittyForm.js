@@ -126,7 +126,9 @@ function ChittyForm() {
                         <input type="text" id="userPhone" className={classes.form__input} value={chittalData.userPhone} onChange={(e) => handleInputChange(e)} placeholder="+91 " />
                     </div>
 
+                    <br></br>
                     <div className={classes.status}>
+                      
                         <label className={classes.form__label}>Marital status:
                             <select name="" className={classes.form__input} id="status" value={chittalData.status} onChange={(e) => handleInputChange(e)} >
                                 <option>Select marital status</option>
