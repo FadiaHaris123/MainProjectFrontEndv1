@@ -130,8 +130,8 @@ function ChittyForm() {
 
                     <div className={classes.status}>
                         <label className={classes.form__label}>Marital status:
-                            <select name="" className={classes.form__input}>
-                                <option disabled={isDisabled} value={chittalData.status} >Select marital status</option>
+                            <select name="" className={classes.form__input} id="status" value={chittalData.status} onChange={(e) => handleInputChange(e)} >
+                                <option>Select marital status</option>
                                 <option value="Single">Single</option>
                                 <option value="Married">Married</option>
                                 <option value="Divorced">Divorced</option>

@@ -125,6 +125,7 @@ const Auth = (props) => {
         if (res.data.roleId == 1) {
           setauthenticated(true)
           localStorage.setItem("authenticated", true);
+          localStorage.setItem('adminId', res.data.userId);
           history.push("/admin");
         }
         if (res.data.roleId == 2) {
