@@ -29,7 +29,7 @@ const JoinedChits = () => {
 
   useEffect(() => {
     const fetchJoinedChits = async () => {
-      const response = await fetch('http://localhost:8080/api/getchitties/2'
+      const response = await fetch('http://localhost:8080/api/getchitties/' + userid
         // 'http://localhost:8080/api/getchitties'+userid
       );
       if (!response.ok) {
@@ -46,21 +46,17 @@ const JoinedChits = () => {
       }
       setJoinedChits(loadedJoinedChits);
       return (
-        fetchChitDetails(loadedJoinedChits)
+        fetchChitDetails(joinedChits)
       );
     };
 
     fetchJoinedChits();
   }, []);
 
-  // console.log(joinedChits[1]);
-  // console.log(joinedChits[1]);
-  // useEffect(() => {
+
   const fetchChitDetails = (joinedChits) => {
 
-    // console.log(joinedChits[1]);
     axios.get('http://localhost:8080/api/chitty/').then((response) => {
-      // setChits(response.data._embedded.chitty);
       const newItemList = [...response.data._embedded.chitty]
       const chitDetails = [];
       for (const key in newItemList) {
@@ -73,39 +69,10 @@ const JoinedChits = () => {
           console.log(joinedChits[key])
         }
         setChits(chitDetails);
-        // console.log(newItemList[key])
       }
 
     });
-    // console.log(joinedChits[0]);
-    // const response = await fetch(
-    //   'http://localhost:8080/api/chitty'
-    // );
-
-    // if (!response.ok) {
-    //   throw new Error('Something went wrong!');
-    // }
-    // const responseData = await response.json();
-    // const loadedChits = [];
-    // const newItemList = [...responseData.embedded.chitty]
-    // for (const key in newItemList) {
-    //   console.log("joinedChits[1]");
-    //   if (joinedChits[key] == newItemList[key].chitNumber) {
-    //     loadedChits.push({
-    //       id: key,
-    //       chitNumber: newItemList[key].chitNumber,
-    //       startDate: newItemList[key].startDate,
-    //       duration: newItemList[key].duration,
-    //       numberOfChittals: newItemList[key].numberOfChittal,
-    //     });
-    //   }
-    // }
-    // setChits(loadedChits);
-    // console.log(response.data);
   };
-
-  // fetchChitDetails();
-  // }, []);
 
   return (
     <React.Fragment>
@@ -123,30 +90,6 @@ const JoinedChits = () => {
         highlightOnHover
       />
     </React.Fragment>
-    // <React.Fragment>
-    //   <Navbar />
-    //   <div className={classes.container}>
-    //     <h3>Joined Chits</h3>
-    //     <table className={classes.chitTable}>
-    //       <tr className={classes.chitTableHead}>
-    //         <th>Chit Number</th>
-    //         <th>Start date</th>
-    //         <th>Duration in Months</th>
-    //         <th>Number of chittals</th>
-    //       </tr>
-    //       <tbody className={classes.tableBody}>
-    //           {chits.map(chit=> {
-    //             return(
-    //               <tr>
-    //                 <td>{chit.chitNumber}</td>
-    //               </tr>
-    //             )
-    //           }
-    //           )}
-    //       </tbody>
-    //     </table>
-    //   </div>
-    // </React.Fragment>
   )
 }
 
