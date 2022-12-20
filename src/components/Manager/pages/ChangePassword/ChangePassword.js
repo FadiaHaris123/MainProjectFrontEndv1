@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import { Fragment } from "react";
 import { useHistory } from "react-router-dom"
 import Navbar from '../../Navbar'
-import './ChangePassword.css'
 
-const ForgotPasswordPage = () => {
+const ChangePasswordPage = () => {
 
     const id = window.localStorage.getItem('managerId');
     const [managerEmail, setManagerEmail] = useState();
@@ -75,6 +74,7 @@ const ForgotPasswordPage = () => {
     return (
         <Fragment>
             <Navbar />
+            <div className="overlays">
                 <div className="Auth-form-container">
                     <form className="Auth-form" onSubmit={changePasswordHandler}>
                         <div className="Auth-form-content" >
@@ -112,8 +112,9 @@ const ForgotPasswordPage = () => {
                         </div>
                     </form>
                 </div>
-         
+            </div>
         </Fragment>
     );
 }
-export default ForgotPasswordPage;
+export default ChangePasswordPage;
+
