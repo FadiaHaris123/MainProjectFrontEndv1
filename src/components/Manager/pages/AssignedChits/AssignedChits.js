@@ -3,6 +3,7 @@ import Navbar from '../../Navbar'
 import { useHistory } from "react-router-dom"
 import Axios from 'axios'
 import DataTable from 'react-data-table-component';
+import classes from './AssignedChits.module.css'
 
 const AssignedChits = () => {
 
@@ -174,6 +175,7 @@ const AssignedChits = () => {
     return (
         <Fragment>
             <Navbar />
+            <div className={classes.assignedChits}>
             <DataTable
                 scrollY
                 maxHeight="200px"
@@ -189,6 +191,8 @@ const AssignedChits = () => {
                 highlightOnHover
                 conditionalRowStyles={conditionalRowStyles}
             />
+            </div>
+
         </Fragment>
     )
 }

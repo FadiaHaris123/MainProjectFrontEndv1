@@ -6,8 +6,10 @@ import classes from './AvailableChit.module.css'
 const AvailableChit = () => {
 
   const [chits, setChits] = useState([]);
+  // const [chitNumber, setChitNumber] = useState([]);
 
   let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+  // sessionStorage.setItem('id', JSON.stringify(chit.chitNumber))
 
   useEffect(() => {
     const fetchChits = async () => {
@@ -45,6 +47,7 @@ const AvailableChit = () => {
 
   }, []);
 
+
   return (
     <React.Fragment>
       <Navbar />
@@ -59,16 +62,27 @@ const AvailableChit = () => {
           </tr>
           <tbody className={classes.tableBody}>
             {chits.map(chit => {
+              const SubmitHandler=()=>{
+                console.log("chitty"+chit.chitNumber)
+                sessionStorage.setItem('chittyId', chit.chitNumber);
+              }
+              
               return (
                 <tr>
                   <td>{chit.chitNumber}</td>
                   <td>{chit.installment}</td>
                   <td>{chit.duration}</td>
+                  
                   <td>
-                    <NavLink to={{ pathname: '/customer/chittyform', state: { id: chit.chitNumber } }}><button className={classes.joinButton}>Join</button></NavLink>
+                    <NavLink to={{ pathname: '/customer/chittyform',
+                    
+                     state: { id1: chit.chitNumber }
+                    
+                    }}><button className={classes.joinButton} onClick={SubmitHandler}>Join</button></NavLink>
                   </td>
                 </tr>
               )
+        
             }
             )}
           </tbody>

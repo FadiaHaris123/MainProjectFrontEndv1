@@ -19,16 +19,29 @@ useEffect(() => {
           }}
         );
         setName(response.data.firstName);
+    // const userid = window.localStorage.getItem('userid');
+// const [name, setName] = useState([]);
+// const [error, setError] = useState([]);
+// useEffect(() => {
+//     const getData = async () => {
+//       try {
+//         const response = await axios.get(`http://localhost:8080/api/user-details/${userid}`);
+//         setName(response.data.firstName);
        
-      } catch (err) {
-        setError(err.message);
-        setName(null);
-      } 
+//       } catch (err) {
+//         setError(err.message);
+//         setName(null);
+//       } 
 
-    };
-    getData();
+//     };
+//     getData();
 
-  }, []);
+  } 
+  catch (err) {
+    setError(err.message);
+    setName(null);
+} 
+}});
     return (
         <div>
             <section id="content" style={{ backgroundColor: '#f4f5f7' }}>
@@ -37,7 +50,7 @@ useEffect(() => {
                         <MDBCardBody id="makepdf">
                             {/* <MDBTypography>User ID : {props.userid}</MDBTypography> */}
                             {/* <MDBTypography>{name}</MDBTypography> */}
-                            <MDBTypography>Your Profile</MDBTypography>
+                            <MDBTypography>Your Profile : {props.age}</MDBTypography>
                             <MDBTypography>Your Chitts</MDBTypography>
                             <MDBTypography>Payment Due</MDBTypography>
                             <MDBTypography>Upcoming Auction</MDBTypography>

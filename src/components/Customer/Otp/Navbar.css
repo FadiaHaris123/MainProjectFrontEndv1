@@ -16,6 +16,7 @@
   margin-left: 77%;
 }
 
+
 .navbar .tag {
   font-family: 'Lora';
   font-size: 35px;
@@ -24,6 +25,7 @@
   margin-top: 1%;
   margin-left: 5%;
 }
+
 
 .menu-bars {
   margin-left: 1rem;
@@ -96,6 +98,7 @@
   /* position: fixed; */
 }
 
+
 .Collapsible__contentInner {
   margin-top: 2rem;
   text-align: justify;
@@ -112,4 +115,3 @@
   /* border-color: #ffffff;
   border-radius: 4rem; */
 }
-

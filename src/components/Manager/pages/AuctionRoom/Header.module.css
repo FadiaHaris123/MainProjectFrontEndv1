@@ -1,0 +1,26 @@
+.headerContainer{
+    margin: 0;
+    top: 0;
+    height: 10vh;
+    width: 100%;
+    background-color: #233656;
+    position: fixed;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+}
+
+.headerContainer h2{
+    font-size: 20px;
+    font-family: "Lora";
+    color: #fff;
+    padding-left: 4%;
+}
+
+.headerContainer h4{
+    font-size: 15px;
+    font-family: "Lora";
+    color: #fff;
+    padding-left: 1%;
+}
