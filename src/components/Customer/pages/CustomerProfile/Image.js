@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // const imageUrl = "./profile1.jpg";
-import ImageUrl from '../../../../assets/images/profile2.jpeg';
+// import ImageUrl from '../../../../assets/images/profile2.jpeg';
 
 const Image =()=>{
     const [img,setImg]=useState();
