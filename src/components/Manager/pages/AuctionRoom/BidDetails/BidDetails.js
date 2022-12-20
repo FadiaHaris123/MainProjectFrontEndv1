@@ -2,12 +2,25 @@ import React, { useState } from 'react';
 import classes from './BidDetails.module.css';
 import {IoMdArrowDropupCircle} from 'react-icons/io';
 import {AiOutlineSend} from 'react-icons/ai';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 
 
 const BidDetails = () =>{
   
     //initial amount obtained from temporary auction table
+    const geturl = "http://localhost:8080/api/auction"
+    const [currentBid, setCurrentBid] = useState(null)
+
+    useEffect(() => {
+        function getId() {
+            axios.get(geturl).then((response) => {
+                setCurrentBid(response.data._embedded.auction[0].currentBid)
+            });
+        }
+        getId();
+    })
     
     const [currentAmount,setCurrentAmount] = useState(0)
    
@@ -18,7 +31,7 @@ const BidDetails = () =>{
                     <h3>Bidding On Air !!!</h3>
                     <div className={classes.currentBid}>
                     <label><IoMdArrowDropupCircle color='green' size={20}/>Current Bid Amount</label>
-                    <input className={classes.bidamount} value={currentAmount} readOnly/>
+                    <input className={classes.bidamount} value={currentBid} readOnly/>
                     </div>
                 </div>
             </div>

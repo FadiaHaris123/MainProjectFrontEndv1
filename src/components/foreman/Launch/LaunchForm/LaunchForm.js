@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom/client";
 import classes from './LaunchForm.module.css';
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const LaunchForm = () => {
   
@@ -46,6 +47,13 @@ const LaunchForm = () => {
     .then(res=>{
       if(res.data != null){
       alert("Chitty launched successfully")
+      setData({
+        chitNumber:""
+      })
+      setTotalAmount('')
+      setInstallments('')
+      setAmount('')
+      setEmployeeId("")
       }
       console.log(res.data)
     })
@@ -259,9 +267,11 @@ const LaunchForm = () => {
           ></input>
         )}
 
+      
         <button type="submit">
           Launch
         </button>
+      
       </div>
      
     </form>

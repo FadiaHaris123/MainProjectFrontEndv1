@@ -45,8 +45,9 @@ function Profile() {
     <div>
       <Navbar />
       <section className="vh-100" style={{ backgroundColor: '#f4f5f7' }}>
+        <div className='containerofid'>
         <MDBContainer ref={componentRef} className="py-5 h-100">
-          <MDBRow className="justify-content-center align-items-center h-100">
+          <MDBRow  className="justify-content-center align-items-center h-100">
             <MDBCol lg="6" className="mb-4 mb-lg-0">
               <MDBCard className="mb-3" style={{ borderRadius: '.5rem' }}>
                 <MDBRow className="g-0">
@@ -59,8 +60,8 @@ function Profile() {
                     <MDBCardBody className="p-4">
                       <h5 className="headingofid">Eminence Chitty</h5>
                       <br></br>
-                    <MDBTypography tag="h6">Name:{name}</MDBTypography>
-                      <MDBTypography tag="h6">User ID:{userid}</MDBTypography>
+                    <MDBTypography tag="h6">Name : {name}</MDBTypography>
+                      <MDBTypography tag="h6">User ID : {userid}</MDBTypography>
           
                     </MDBCardBody>
           
@@ -69,13 +70,16 @@ function Profile() {
               </MDBCard>
             </MDBCol>
           </MDBRow>
-          <ReactToPrint trigger={() => (
+        
+        
+         
+        </MDBContainer>
+        <ReactToPrint trigger={() => (
           <button id="button">Get a copy</button>
         )}
           content={() => componentRef.current}
         />
-         
-        </MDBContainer>
+        </div>
         
        
       </section>
