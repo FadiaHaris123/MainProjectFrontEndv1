@@ -53,7 +53,7 @@ useEffect(() => {
     }
     setJoinedChits(loadedJoinedChits);
     return (
-      fetchChitDetails(joinedChits)
+      fetchChits(joinedChits)
     );
   };
 
@@ -64,7 +64,7 @@ useEffect(() => {
 
 return(
     <section className={classes.tablecontainer}>
-        <Search search={onSearchHandler}/>
+        {/* <Search search={onSearchHandler}/> */}
         <div className={classes.auctionDetailsTable}>
         <DataTable
         scrollY
