@@ -6,7 +6,6 @@ import DataTable from 'react-data-table-component';
 
 const JoinedChits = () => {
   const userid = window.localStorage.getItem('userId');
-  const [joinedChits, setJoinedChits] = useState([]);
   const [chits, setChits] = useState([]);
 
   const columns = ([
@@ -30,8 +29,8 @@ const JoinedChits = () => {
   useEffect(() => {
     const fetchJoinedChits = async () => {
       const response = await fetch(
-        'http://localhost:8080/api/getchitties/2'
-        // `http://localhost:8080/api/getchitties/${userid}`
+        // 'http://localhost:8080/api/getchitties/2'
+        `http://localhost:8080/api/getchitties/${userid}`
       );
       if (!response.ok) {
         throw new Error('Something went wrong!');
@@ -41,43 +40,40 @@ const JoinedChits = () => {
       const loadedJoinedChits = [];
       for (const key in responseData) {
         loadedJoinedChits.push({
-          // id: key,
           chitNumber: responseData[key],
         });
       }
-      setJoinedChits(loadedJoinedChits);
       return (
-        fetchChitDetails(joinedChits)
+        fetchChitDetails(loadedJoinedChits)
       );
     };
 
     fetchJoinedChits();
   }, []);
 
-  const fetchChitDetails = (joinedChits) => {
+  const fetchChitDetails = (loadedJoinedChits) => {
     axios.get('http://localhost:8080/api/chitty/').then((response) => {
 
       const newItemList = [...response.data._embedded.chitty]
       const chitDetails = [];
-      for (const key in newItemList) {
-        if (joinedChits[key].chitNumber == newItemList[key].chitNumber) {
-          chitDetails.push({
-            chitNumber: newItemList[key].chitNumber,
-            startDate: newItemList[key].startDate,
-            duration: newItemList[key].duration,
-          })
-          console.log(joinedChits[key])
+      for (const key2 in loadedJoinedChits) {
+        for (const key in newItemList) {
+          if (loadedJoinedChits[key2].chitNumber == newItemList[key].chitNumber) {
+            chitDetails.push({
+              chitNumber: newItemList[key].chitNumber,
+              startDate: newItemList[key].startDate,
+              duration: newItemList[key].duration,
+            })
+          }
         }
         chitDetails.map((chits) => {
           if (chits.startDate == null) {
             chits.startDate = "Not Started"
           }
         })
-        setChits(chitDetails);
       }
-
+      setChits(chitDetails);
     });
-
   };
 
   return (
