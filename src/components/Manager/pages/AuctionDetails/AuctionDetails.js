@@ -91,7 +91,7 @@ const AuctionDetails = () => {
         Axios.post(`http://localhost:8080/auction/add`, {
             chittyId: chits[key].chitNumber,
             userId: id,
-            currentBid: chits[key].totalAmount * 0.05,
+            currentBid: chits[key].totalAmount * 0.05
         },
         {
             headers:{
