@@ -3,33 +3,34 @@ import classes from "./AuctionChitDetails.module.css"
 import { AiFillCaretDown } from 'react-icons/ai';
 import Timer from "./Timer/Timer";
 
+const AuctionChitDetails = (props) => {
 
-
-const AuctionChitDetails = () => {
+    const amount = (props.amount * 5) / 100;
+    const maxAmount = (props.amount * 35) / 100;
 
     return(
         <React.Fragment>
             <div className={classes.chitdetailscontainer}>
                 <div className={classes.flexboxes}>
                     <h3>Chit Number:</h3>
-                    <h4>EC1001</h4>
-                    <h4>1,00,000</h4>
+                    <h4>{props.chittyId}</h4>
+                    <h4>₹{props.amount}</h4>
                 </div>
                 <div className={classes.flexboxes}>
-                    <h3>Maximum Discount Allowed</h3>
-                    <h4>40,000</h4>
+                    <h3>Maximum Call Allowed</h3>
+                    <h4>{maxAmount}</h4>
                 </div>
                 <div className={classes.flexboxes}>
                   <h3><AiFillCaretDown color="red"/> Bid Starts at</h3>
-                    <h4>5,000</h4>
+                    <h4>{amount}</h4>
                 </div>
                 <div className={classes.flexboxes}>
                     <h3>Ticket No</h3>
                     <h4>24</h4>
                 </div>
                 <div className={classes.flexboxes}>
-                    <h3>Installment</h3>
-                    <h4>2</h4>
+                    <h3>User Id</h3>
+                    <h4>{props.userId}</h4>
                 </div>
                 <div className={classes.flexboxes.timer}>
                  <h3 className={classes.timer}><Timer/></h3>
