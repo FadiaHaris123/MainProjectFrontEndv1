@@ -1,21 +1,20 @@
-import React, { Link, Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Navbar from '../../Navbar'
 import { NavLink } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import Axios from 'axios'
-import { Redirect, useHistory } from "react-router-dom"
-import AuctionRoom from '../AuctionRoom/AuctionRoom';
+import { Redirect } from "react-router-dom"
 
 const AuctionDetails = () => {
 
     const [chits, setChits] = useState([]);
     const id = window.localStorage.getItem('managerId');
     const [auctionChit, setAuctionChit] = useState(false);
-    
-    function refresh(){
+
+    function refresh() {
         window.location.reload(false);
     }
-    
+
     const columns = ([
         {
             button: 'true'
@@ -28,10 +27,9 @@ const AuctionDetails = () => {
         {
             name: 'Start Auction',
             selector: 'startAuction',
-            cell: ({ id }) => (
-                <button value={id}
-                    style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }}
-                    onClick={(e) => submit(e.target.value)}>Start</button>
+            cell: ({ id }) => (<button value={id}
+                style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }}
+                onClick={(e) => submit(e.target.value)}>Start</button>
             ),
             ignoreRowClick: true,
             allowOverflow: true,
@@ -81,14 +79,11 @@ const AuctionDetails = () => {
                 alert("Auction started");
                 setAuctionChit(true);
             })
-            return(
-                <Redirect to="/manager/auction/auctionroom"/>
-            );
     }
 
     return (
         <Fragment>
-            <Navbar/> {refresh}
+            <Navbar /> {refresh}
             <DataTable
                 scrollY
                 maxHeight="200px"
@@ -96,10 +91,15 @@ const AuctionDetails = () => {
                 columns={columns}
                 data={chits}
             />
-            {auctionChit && 
-            <AuctionRoom userId={id} chittyId={chits[0].chitNumber} amount={chits[0].totalAmount}/>}
+            {auctionChit &&
+                <Redirect to={{
+                    pathname: '/manager/auction/auctionroom',
+                    state: { userId: id, chittyId: chits[0].chitNumber, amount: chits[0].totalAmount }
+                }} />
+            }
         </Fragment>
     )
+    
 }
 
 export default AuctionDetails;
