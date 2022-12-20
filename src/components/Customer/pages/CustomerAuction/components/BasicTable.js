@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import classes from './BasicTable.module.css';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Search from "./Search";
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 
 
 const BasicTable = () => {
-  
+
   const userid = window.localStorage.getItem('userId');
   const [chits, setChits] = useState([]);
+  const [amount, setChitAmount] = useState(null);
+  const [chittyId, setChittyId] = useState(null);
   const [searchName, setSearchName] = useState("");
+  const [auctionChit, setAuctionChit] = useState(false);
 
   const columns = [
     {
@@ -30,7 +33,9 @@ const BasicTable = () => {
     },
     {
       name: 'Auction Room',
-      cell: () => <Link to="/customer/auction/auctionroom"><button className={classes.enterAuctionRoomBtn}>Enter</button></Link>,
+      cell: ({ id }) => (<button value={id} className={classes.enterAuctionRoomBtn}
+        onClick={(e) => submit(e.target.value)}>Enter</button>
+      ),
       sortable: true,
     },
 
@@ -79,15 +84,19 @@ const BasicTable = () => {
 
       const newItemList = [...response.data._embedded.chitty]
       const chitDetails = [];
+      let keyId = 0;
       for (const key2 in loadedJoinedChits) {
         for (const key in newItemList) {
           if (loadedJoinedChits[key2].chitNumber == newItemList[key].chitNumber) {
             if (newItemList[key].status == "started") {
               chitDetails.push({
+                id: keyId,
                 chitNumber: newItemList[key].chitNumber,
                 installment: newItemList[key].installment,
+                totalAmount: newItemList[key].totalAmount,
                 auctionType: 'Online'
-              })
+              });
+              keyId++
             }
           }
         }
@@ -95,6 +104,12 @@ const BasicTable = () => {
       setChits(chitDetails);
     });
   };
+
+  function submit(key) {
+    setChittyId(chits[key].chitNumber);
+    setChitAmount(chits[key].totalAmount);
+    setAuctionChit(true);
+  }
 
   return (
     <section className={classes.tablecontainer}>
@@ -113,6 +128,12 @@ const BasicTable = () => {
           highlightOnHover
         />
       </div>
+      {auctionChit &&
+        <Redirect to={{
+          pathname: '/customer/auction/auctionroom',
+          state: { userId: userid, chittyId: chittyId, amount: amount }
+        }} />
+      }
     </section>
   )
 

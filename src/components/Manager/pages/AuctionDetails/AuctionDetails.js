@@ -18,6 +18,12 @@ const AuctionDetails = () => {
     // function refresh() {
     //     window.location.reload(false);
     // }
+  
+    const [amount, setChitAmount] = useState(null);
+    const [chittyId, setChittyId] = useState(null);
+
+
+
 
     const columns = ([
         {
@@ -57,17 +63,18 @@ const AuctionDetails = () => {
 
             const loadedChitties = [];
             const newItemList = [...responseData._embedded.chitty]
-
+            let key2 = 0;
             for (const key in newItemList) {
                 if (newItemList[key].status == "started") {
                     loadedChitties.push({
-                        id: key,
+                        id: key2,
                         chitNumber: newItemList[key].chitNumber,
                         installment: newItemList[key].installment,
                         duration: newItemList[key].duration,
                         totalAmount: newItemList[key].totalAmount,
                         startDate: newItemList[key].startDate,
                     });
+                    key2++;
                 }
             }
             setChits(loadedChitties);
@@ -84,16 +91,19 @@ const AuctionDetails = () => {
         Axios.post(`http://localhost:8080/auction/add`, {
             chittyId: chits[key].chitNumber,
             userId: id,
-            currentBid: chits[key].installment,
+            currentBid: chits[key].totalAmount * 0.05,
         },
         {
             headers:{
               'Authorization':token
               
             }})
+       
             .then(() => {
                 alert("Auction started");
                 setAuctionChit(true);
+                setChittyId(chits[key].chitNumber);
+                setChitAmount(chits[key].totalAmount);
             })
         
     }
@@ -113,7 +123,7 @@ const AuctionDetails = () => {
             {auctionChit &&
                 <Redirect to={{
                     pathname: '/manager/auction/auctionroom',
-                    state: { userId: id, chittyId: chits[0].chitNumber, amount: chits[0].totalAmount }
+                    state: { userId: id, chittyId: chittyId, amount: amount }
                 }} />
             }
         </Fragment>
