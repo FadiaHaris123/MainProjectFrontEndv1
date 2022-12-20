@@ -45,7 +45,7 @@
 
 .bidhistory h3{
     font-family: 'Lora', sans-serif;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 900;
     color: rgb(87, 87, 121);
     letter-spacing: 1px;
@@ -56,7 +56,7 @@
 .buttongrp{
     display: flex;
     position: absolute;
-    margin-top: 28%;
+    margin-top: 25%;
     margin-left: 5%;
     left: 0;
 }
@@ -107,4 +107,21 @@
     border: none;
     margin: 1% 1%;
     width: 100px;
+}
+
+.bidamount{
+    border: none;
+    margin: 2% 3%;
+    padding: 3%;
+    color: green;
+}
+
+.currentBid{
+    font-family: 'Lora', sans-serif;
+    font-size: 25px;
+    font-weight: 900;
+    color: rgb(87, 87, 121);
+    letter-spacing: 1px;
+    left: 0;
+    margin-left: 5px;
 }

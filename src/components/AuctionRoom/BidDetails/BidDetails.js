@@ -29,15 +29,11 @@ const BidDetails = () =>{
     return(
         <React.Fragment>
             <div className={classes.bidcontainer}>
-                <div className={classes.currentbid}>
-                    <h3><IoMdArrowDropupCircle color='green' size={20}/>  Current Bid</h3>
-                    <div className={classes.amount}>6000</div>
-                </div> 
                 <div className={classes.bidhistory}>
                     <h3>Bidding On Air !!!</h3>
                     <div className={classes.currentBid}>
-                        <label>Current Bid Amount :</label>
-                        <input className={classes.bidamount} value={currentAmount} readOnly/>
+                    <label><IoMdArrowDropupCircle color='green' size={20}/>Current Bid Amount</label>
+                    <input className={classes.bidamount} value={currentAmount} readOnly/>
                     </div>
                 </div>
                 <div className={classes.buttongrp}>

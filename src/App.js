@@ -26,21 +26,21 @@ import AuctionDetails from "./components/Manager/pages/AuctionDetails/AuctionDet
 import RazorPay from "./components/Customer/RazorPay/payment"
 import MainManagerPage from "./components/foreman/Manager/MainManagerPage";
 import AuctionRoom from "./components/AuctionRoom/AuctionRoom";
-import Otp from "./components/Customer/Otp/Otp";
+
 
 function App() {
 
-  // const history = useHistory();
-  // const [authenticated, setauthenticated] = useState(null);
-  // useEffect(() => {
-  //   const loggedInUser = localStorage.getItem("authenticated");
-  //   if (loggedInUser) {
-  //     setauthenticated(loggedInUser);
-  //   }
-  // }, []);
-  // if (!authenticated) {
-  //   history.push("/");
-  // } else {
+  const history = useHistory();
+  const [authenticated, setauthenticated] = useState(null);
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("authenticated");
+    if (loggedInUser) {
+      setauthenticated(loggedInUser);
+    }
+  }, []);
+  if (!authenticated) {
+    history.push("/");
+  } else {
     return (
       <Router>
         <Switch>
@@ -65,7 +65,6 @@ function App() {
           <Route path='/customer/availablechits' component={AvailableChits} />
           <Route path='/customer/joinedchits' component={JoinedChits} />
           <Route path='/customer/otp/payment' component={RazorPay} />
-          <Route path='/customer/otp' component={Otp} />
           <Route path='/customer/auction/auctionroom' component={AuctionRoom} />
           <Route path='/customer/chittyform' component={ChittyForm} />
           <Route path='/customer/nomineeform' component={NomineeForm} />
@@ -73,6 +72,6 @@ function App() {
       </Router>
     )
   }
-// }
+}
 
-export default App
+export default App;

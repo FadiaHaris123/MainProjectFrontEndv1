@@ -10,6 +10,9 @@ const JoinedChits = () => {
 
   const columns = ([
     {
+      button:'true'
+    },
+    {
       name: 'Chit Number',
       selector: 'chitNumber',
       sortable: true,
@@ -36,7 +39,7 @@ const JoinedChits = () => {
         throw new Error('Something went wrong!');
       }
       const responseData = await response.json();
-
+      console.log(responseData)
       const loadedJoinedChits = [];
       for (const key in responseData) {
         loadedJoinedChits.push({
@@ -47,13 +50,11 @@ const JoinedChits = () => {
         fetchChitDetails(loadedJoinedChits)
       );
     };
-
     fetchJoinedChits();
   }, []);
 
   const fetchChitDetails = (loadedJoinedChits) => {
     axios.get('http://localhost:8080/api/chitty/').then((response) => {
-
       const newItemList = [...response.data._embedded.chitty]
       const chitDetails = [];
       for (const key2 in loadedJoinedChits) {
@@ -66,8 +67,8 @@ const JoinedChits = () => {
             })
           }
         }
-        chitDetails.map((chits) => {
-          if (chits.startDate == null) {
+        chitDetails.map((chits)=>{
+          if(chits.startDate==null){
             chits.startDate = "Not Started"
           }
         })
@@ -76,22 +77,23 @@ const JoinedChits = () => {
     });
   };
 
+
   return (
     <React.Fragment>
       <Navbar />
       <div className={classes.joinedChitsTable}>
-        <h3 className={classes.heading}>Joined Chits</h3>
-        <DataTable
-          scrollY
-          maxHeight="200px"
-          title=""
-          columns={columns}
-          data={chits}
-          paginationTotalRows={5}
-          paginationRowsPerPageOptions={[1, 5, 10, 15, 20, 50]}
-          pagination
-          highlightOnHover
-        />
+      <h3 className={classes.heading}>Joined Chits</h3>
+      <DataTable
+        scrollY
+        maxHeight="200px"
+        title=""
+        columns={columns}
+        data={chits}
+        paginationTotalRows={5}
+        paginationRowsPerPageOptions={[1, 5, 10, 15, 20, 50]}
+        pagination
+        highlightOnHover
+      />
       </div>
     </React.Fragment>
   )

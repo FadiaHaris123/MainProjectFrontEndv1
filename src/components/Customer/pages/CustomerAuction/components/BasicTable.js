@@ -7,7 +7,7 @@ import DataTable from 'react-data-table-component';
 
 
 const BasicTable = () => {
-
+  
   const userid = window.localStorage.getItem('userId');
   const [chits, setChits] = useState([]);
   const [searchName, setSearchName] = useState("");
