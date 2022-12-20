@@ -41,6 +41,7 @@ const LaunchForm = () => {
     .then(res=>{
       if(res.data != null){
       alert("Chitty launched successfully")
+      form.reset();
       }
       console.log(res.data)
     })
