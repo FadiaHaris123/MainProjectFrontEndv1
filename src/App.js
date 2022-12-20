@@ -57,7 +57,7 @@ function App() {
           <Route path="/manager/assignedchits" component={AssignedChits} />
           <Route path="/manager/changepassword" component={ChangePassword} />
           <Route path="/manager/startchit" component={StartChit} />
-          <Route eaxct path="/manager/auctiondetails" component={AuctionDetails} />
+          <Route path="/manager/auctiondetails" component={AuctionDetails} />
           <Route path="/manager/auction/auctionroom" component={ManagerAuctionRoom} />
           <Route exact path="/customer" component={Customer} />
           <Route exact path='/customer/auction' component={Auction} />

@@ -47,7 +47,7 @@ const JoinedChits = () => {
       }
       setJoinedChits(loadedJoinedChits);
       return (
-        fetchChitDetails(loadedJoinedChits)
+        fetchChitDetails(joinedChits)
       );
     };
 
@@ -55,9 +55,7 @@ const JoinedChits = () => {
   }, []);
 
 
-  const fetchChitDetails = (joinedChits) => {
-
-    
+  const fetchChitDetails = (joinedChits) => {    
     axios.get('http://localhost:8080/api/chitty/').then((response) => {
       
       const newItemList = [...response.data._embedded.chitty]

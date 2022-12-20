@@ -7,103 +7,24 @@ import DataTable from 'react-data-table-component';
 
 
 const BasicTable = () => {
+  const userid = window.localStorage.getItem('userId');
+  const [joinedChits, setJoinedChits] = useState([]);
+  const [chits, setChits] = useState([]);
 
-const [managers, setManager] = useState([]);
-const [isLoading, setIsLoading] = useState(true);
-const [httpError, setHttpError] = useState();
-const [searchName, setSearchName] = useState("");
-
-
-const onSearchHandler = (name)=>{
-    setSearchName(name);
-  }
-
-useEffect(() => {
-  const fetchManagers = async () => {
-    const response = await fetch(
-      'http://localhost:8080/api/managers/search/findByfirstNameContaining?name='+searchName
-    );
-
-    if (!response.ok) {
-      throw new Error('Something went wrong!');
-    }
-
-    const responseData = await response.json();
-
-    const loadedManagers = [];
-    const newItemList = [...responseData._embedded.manager]
-    //manager is the classname
-
-    for (const key in newItemList) {
-      loadedManagers.push({
-        id: key,
-        firstName: newItemList[key].firstName,
-        lastName: newItemList[key].emp_lastname,
-        email: newItemList[key].email,
-      });
-    }
-
-    setManager(loadedManagers);
-    setIsLoading(false);
-  };
-
-  fetchManagers().catch((error) => {
-    setIsLoading(false);
-    setHttpError(error.message);
-  });
-}, [searchName]);
-
-
-
-if (isLoading) {
-  return (
-    <section className={classes.managersLoading}>
-      <p>Loading...</p>
-    </section>
-  );
-}
-
-if (httpError) {
-  return (
-    <section className={classes.managersError}>
-      <p>{httpError}</p>
-    </section>
-  );
-}
-
-const data = [
-  {
-    'Chit Number': "1001",
-    'Eligible Chittals': "25",
-    'Installment No.':"2",
-    'Auction Type': "Online"
-  },
-  {
-    'Chit Number': "1002",
-    'Eligible Chittals': "25",
-    'Installment No.':"2",
-    'Auction Type': "Online"
-  },
-  {
-    'Chit Number': "1001",
-    'Eligible Chittals': "25",
-    'Installment No.':"2",
-    'Auction Type': "Online"
-  }
-]
-
-const columns = [
+const columns = ([
   {
     name: 'Chit Number',
+    selector:'chitNumber',
     sortable: true,
   },
   {
-    name: 'Total Installments',
+    name: 'Total Amount',
+    selector:' ',
     sortable: true,
   },
   {
-    name: 'Auction Type',
-    default: 'Online',
+    name: 'Start date',
+    selector: 'startDate',
     sortable: true,
   },
   {
@@ -112,7 +33,33 @@ const columns = [
     sortable: true,
   },
  
-];
+]);
+
+useEffect(() => {
+  const fetchChits = async () => {
+    const response = await fetch(
+      `http://localhost:8080/api/getchitties/${userid}`
+    );
+    if (!response.ok) {
+      throw new Error('Something went wrong!');
+    }
+    const responseData = await response.json();
+
+    const loadedJoinedChits = [];
+    for (const key in responseData) {
+      loadedJoinedChits.push({
+        chitNumber: responseData[key],
+      });
+    }
+    setJoinedChits(loadedJoinedChits);
+    return (
+      fetchChitDetails(joinedChits)
+    );
+  };
+
+  fetchChits();
+}, []);
+
 
 
 return(
@@ -124,11 +71,10 @@ return(
         maxHeight="200px"
         title=""
         columns={columns}
-        data={data}
+        data={chits}
         paginationTotalRows={5}
-        paginationRowsPerPageOptions={[2,5,8,12,15,20,50]}
+        paginationRowsPerPageOptions={[1, 5, 10, 15, 20, 50]}
         pagination
-        expandableRows 
         highlightOnHover
       />
         </div>
