@@ -49,7 +49,7 @@ function NomineeForm(props) {
             }})
         
             .then(() => {
-                alert("Nominee added");
+                alert("Nominee Details added");
             })
     }
 
@@ -75,7 +75,7 @@ function NomineeForm(props) {
                 }})
                 .then(res => {
                     if (res.data != null) {
-                        alert("Chittal and Nominee Details added successfully")
+                        alert("Chittal information updated successfully")
                     }
                 });
         }
@@ -123,9 +123,9 @@ function NomineeForm(props) {
                 </div>
             </div>
             <div className={classes.footer}>
-
+                <Link to="./components/Customer/pages/JoinedChits/JoinedChits">
                 <button onClick={handleSubmit} type="submit" className={classes.btn}>Submit</button>
-
+                </Link>
             </div>
 
         </div>
