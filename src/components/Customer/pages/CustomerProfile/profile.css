@@ -11,5 +11,26 @@
   
   #button
   {
-    margin:10rem 6rem 2rem 6rem;
+    margin:-20rem 6rem 2rem 35rem;
+    color:white;
+    background-color: green;
+    border-radius: 1rem;
+    border:1px solid rgb(52, 49, 49);
   }
+
+  .vh-100
+{
+  margin-top:-10rem;
+}
+
+.headingofid
+{
+  margin-left:5rem;
+  color:rgb(29, 59, 103);
+}
+
+.containerofid
+{
+  margin-top:10rem;
+  height:20rem;
+}

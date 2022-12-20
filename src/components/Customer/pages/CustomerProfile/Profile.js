@@ -3,96 +3,44 @@ import UserList from "./UserList";
 import './UserList.css'
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 import Users from './Users';
-import Image from '../../../../assets/images/profile2.jpeg';
+import Image from '../../../../assets/images/emma.jpeg';
 import Navbar from '../../Navbar';
 import './profile.css'
 import ReactToPrint from 'react-to-print'
+import axios from 'axios';
 
 function Profile() {
   const componentRef = useRef()
-
+  const userid = window.localStorage.getItem('userId');
   const handlePrint = () => {
     window.print()
   }
   const [details, setDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [name, setName] = useState([]);
+
 
   useEffect(() => {
-    const userdetails = async () => {
-      const response = await fetch(
-        'http://localhost:8080/api/chittal-details/'
-      );
-
-      if (!response.ok) {
-        throw new Error('Something went wrong!');
+    const getData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/user-details/${userid}`);
+        setName(response.data.firstName);
+      } catch (err) {
+        setError(err.message);
+        setName(null);
       }
-
-      const responseData = await response.json();
-
-      const loadeddetails = [];
-      for (const key in responseData) {
-        loadeddetails.push({
-          chittalId: responseData[key].chittalId,
-          age: responseData[key].age,
-          address: responseData[key].address,
-          pincode: responseData[key].pincode,
-          userPhone: responseData[key].pincode,
-          dob: responseData[key].dob,
-          status: responseData[key].status,
-          income : responseData[key].income,
-        });
-      }
-
-      setDetails(loadeddetails);
-      setIsLoading(false);
     };
-
-    userdetails().catch((error) => {
-      setIsLoading(false);
-      setError(error.message);
-    });
+    getData();
   }, []);
-
-  let content;
-  if (details.length > 0) {
-    content = <UserList details={details} />;
-  }
-
-  if (error) {
-    content = <p>{error}</p>;
-  }
-
-  if (isLoading) {
-    content = <p>Loading...</p>;
-  }
-
-  if (isLoading) {
-    return (
-      <section>
-        <p>Loading...</p>
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section>
-        <p>{error}</p>
-      </section>
-    );
-  }
+  
   return (
     <div>
       <Navbar />
       <section className="vh-100" style={{ backgroundColor: '#f4f5f7' }}>
-        <ReactToPrint trigger={() => (
-          <button id="button">Generate PDF</button>
-        )}
-          content={() => componentRef.current}
-        />
+        <div className='containerofid'>
         <MDBContainer ref={componentRef} className="py-5 h-100">
-          <MDBRow className="justify-content-center align-items-center h-100">
+          <MDBRow  className="justify-content-center align-items-center h-100">
             <MDBCol lg="6" className="mb-4 mb-lg-0">
               <MDBCard className="mb-3" style={{ borderRadius: '.5rem' }}>
                 <MDBRow className="g-0">
@@ -103,14 +51,30 @@ function Profile() {
                   </MDBCol>
                   <MDBCol md="8">
                     <MDBCardBody className="p-4">
-                      <MDBTypography tag="h6">{content}</MDBTypography>
+                      <h5 className="headingofid">Eminence Chitty</h5>
+                      <br></br>
+                    <MDBTypography tag="h6">Name : {name}</MDBTypography>
+                      <MDBTypography tag="h6">User ID : {userid}</MDBTypography>
+          
                     </MDBCardBody>
+          
                   </MDBCol>
                 </MDBRow>
               </MDBCard>
             </MDBCol>
           </MDBRow>
+        
+        
+         
         </MDBContainer>
+        <ReactToPrint trigger={() => (
+          <button id="button">Get a copy</button>
+        )}
+          content={() => componentRef.current}
+        />
+        </div>
+        
+       
       </section>
     </div>
   );

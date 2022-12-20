@@ -5,10 +5,10 @@ import {AiOutlineSend} from 'react-icons/ai';
 
 
 
-const BidDetails = () =>{
+const BidDetails = (props) =>{
   
     //initial amount obtained from temporary auction table
-    const [currentAmount,setCurrentAmount] = useState(0)
+    const [currentAmount,setCurrentAmount] = useState(props.amount * 0.05)
     const [customAmount,setCustomAmount] = useState()
     
     const sendValue = (e) =>{
