@@ -25,19 +25,20 @@ const AuctionChitDetails = (props) => {
                     <h4>{amount}</h4>
                 </div>
                 <div className={classes.flexboxes}>
-                    <h3>Ticket No</h3>
-                    <h4>24</h4>
+                    <h3>Total Amount</h3>
+                    <h4>{props.amount}</h4>
                 </div>
                 <div className={classes.flexboxes}>
                     <h3>User Id</h3>
                     <h4>{props.userId}</h4>
                 </div>
                 <div className={classes.flexboxes.timer}>
-                 <h3 className={classes.timer}><Timer/></h3>
+                    <h3 className={classes.timer}><Timer /></h3>
                 </div>
             </div>
         </React.Fragment>
     )
+    
 }
 
 export default AuctionChitDetails;

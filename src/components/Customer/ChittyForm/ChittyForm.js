@@ -60,7 +60,7 @@ function ChittyForm() {
         })
             .then(res => {
                 if (res.data != null) {
-                    alert("Chittal added")
+                    alert("Chittal Details added, Please add Nominee details")
                     fetchChitDetail();
                 }
                 setShowNominee(true);

@@ -13,7 +13,7 @@
   color: #ffffff;
   text-align: center;
   margin-top: -4%;
-  margin-left: 77%;
+  margin-left: 80%;
 }
 
 .navbar .tag {
@@ -99,13 +99,14 @@
 .Collapsible__contentInner {
   margin-top: 2rem;
   text-align: justify;
+
   
   /* position: relative; */
 }
 
 .navbar .img
 {
-  margin-left: 4rem;
+  margin-left: 3rem;
   margin-top:-0.8rem;
  
  

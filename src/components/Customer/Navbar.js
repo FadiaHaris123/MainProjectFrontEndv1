@@ -6,7 +6,7 @@ import { SidebarData } from './SidebarData';
 import { IconContext } from 'react-icons';
 import ProfileOverlay from './pages/CustomerProfile/ProfileOverlay';
 import Collapsible from 'react-collapsible';
-import Image from '../../assets/images/pro1.jpg';
+import Image from '../../assets/images/emma.jpeg';
 import axios from "axios";
 import './Navbar.css'
 

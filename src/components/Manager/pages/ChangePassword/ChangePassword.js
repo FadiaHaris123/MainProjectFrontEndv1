@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { useHistory } from "react-router-dom"
 import Navbar from '../../Navbar'
 
-const ForgotPasswordPage = () => {
+const ChangePasswordPage = () => {
 
     const id = window.localStorage.getItem('managerId');
     const [managerEmail, setManagerEmail] = useState();
@@ -116,4 +116,5 @@ const ForgotPasswordPage = () => {
         </Fragment>
     );
 }
-export default ForgotPasswordPage;
+export default ChangePasswordPage;
+
