@@ -11,13 +11,13 @@ const AuctionDetails = () => {
     // const id = window.localStorage.getItem('managerId');
     // const [auctionChit , setAuctionChit] = useState([]);
     let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
-    // let id = JSON.parse(sessionStorage.getItem('userId'));
-    const id = window.localStorage.getItem('managerId');
+    let id = JSON.parse(sessionStorage.getItem('userId'));
+    // const id = window.localStorage.getItem('managerId');
     const [auctionChit, setAuctionChit] = useState(false);
 
-    function refresh() {
-        window.location.reload(false);
-    }
+    // function refresh() {
+    //     window.location.reload(false);
+    // }
 
     const columns = ([
         {
@@ -71,32 +71,38 @@ const AuctionDetails = () => {
                 }
             }
             setChits(loadedChitties);
-            console.log(chits);
+            // console.log("chits",chits);
         };
         fetchAuctionDetails();
+        
     }, []);
 
     function submit(value) {
+        console.log("chits",chits);
         const key = value;
-        Axios.post('http://localhost:8080/auction/add',
+        // console.log("key" + key)
+        Axios.post(`http://localhost:8080/auction/add`, {
+            chittyId: chits[key].chitNumber,
+            userId: id,
+            currentBid: chits[key].installment,
+        },
         {
             headers:{
               'Authorization':token
               
-            }}, {
-            chittyId: chits[key].chitNumber,
-            userId: id,
-            currentBid: chits[key].installment,
-        })
+            }})
             .then(() => {
                 alert("Auction started");
                 setAuctionChit(true);
             })
+        
     }
 
     return (
         <Fragment>
-            <Navbar /> {refresh}
+            <Navbar />
+            
+             {/* {refresh} */}
             <DataTable
                 scrollY
                 maxHeight="200px"

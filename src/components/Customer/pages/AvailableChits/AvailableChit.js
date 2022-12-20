@@ -78,7 +78,12 @@ const AvailableChit = () => {
                     
                      state: { id1: chit.chitNumber }
                     
-                    }}><button className={classes.joinButton} onClick={SubmitHandler}>Join</button></NavLink>
+                    }}><button className={classes.joinButton} 
+                    
+                    
+                    onClick={SubmitHandler}
+                    
+                    >Join</button></NavLink>
                   </td>
                 </tr>
               )

@@ -51,20 +51,24 @@ const AssignedChits = () => {
             });
         }
         getCategoryId();
+        console.log("chitNo.",chitNumber)
     })
 
     function submit(value) {
         const key = value;
         setChitNumber(chits[key].chitNumber);
+        console.log("chitNo.",chitNumber)
         Axios.get(`http://localhost:8080/chitty/${chitNumber}/category`,
             // 'http://localhost:8080/chitty/' + chitNumber + '/category',
         {
             headers:{
               'Authorization':token
               
-            }}).then((response) => {
-            // setCategoryId(response.data.id)
-        })
+            }})
+            
+        //     .then((response) => {
+        //     // setCategoryId(response.data.id)
+        // })
             .then(() => {
                 Axios.put(url, {
                     chitNumber: chits[key].chitNumber,
