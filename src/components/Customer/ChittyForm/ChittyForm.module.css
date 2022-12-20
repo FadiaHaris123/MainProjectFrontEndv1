@@ -114,3 +114,9 @@ color:rgb(210, 42, 42);
 .nominee{
   margin:0 45%;
 }
+
+.required {
+  content: "*";
+  font-weight: bold;
+  color: rgb(122, 16, 16);
+}

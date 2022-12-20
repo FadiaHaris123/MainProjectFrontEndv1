@@ -28,7 +28,7 @@ const AssignedChits = () => {
         {
             name: 'Start Chit',
             selector: 'start',
-            cell: ({ id, status, started }) => (<button value={id}
+            cell: ({ id, status, started }) => (<button className={classes.assignedbtn} value={id}
                 disabled={status.includes('Not') || started.includes('started') ? true : false}
                 style={{ borderRadius: '10px', backgroundColor: '#103c61', color: '#fff' }}
                 onClick={(e) => submit(e.target.value)}>Start</button>),

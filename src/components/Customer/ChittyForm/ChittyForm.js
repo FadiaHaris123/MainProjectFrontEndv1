@@ -161,26 +161,31 @@ function ChittyForm() {
                     </div>
                     <div>
                         <label className={classes.form__label} for="age"> Age: </label>
+                        <span class="required">*</span>
                         <input className={classes.form__input} type="text" value={chittalData.age} onChange={(e) => handleInputChange(e)} id="age" placeholder="In years" />
                     </div>
 
                     <div className={classes.dob}>
                         <label className={classes.form__label} for="dob"> Date of birth: </label>
+                        <span class="required">*</span>
                         <input className={classes.form__input} type="text" value={chittalData.dob} onChange={(e) => handleInputChange(e)} id="dob" placeholder="yyyy-mm-dd" />
                     </div>
 
                     <div className={classes.address}>
                         <label className={classes.form__label} for="address">Address </label>
+                        <span class="required">*</span>
                         <input type="address" id="address" className={classes.form__input} value={chittalData.address} onChange={(e) => handleInputChange(e)} placeholder="Address" />
                     </div>
 
                     <div className={classes.pincode}>
                         <label className={classes.form__label} for="pincode">Pincode: </label>
+                        <span class="required">*</span>
                         <input type="pincode" id="pinCode" className={classes.form__input} value={chittalData.pinCode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" />
                     </div>
 
                     <div className={classes.userPhone}>
                         <label className={classes.form__label} for="userPhone">Contact number: </label>
+                        <span class="required">*</span>
                         <input type="text" id="userPhone" className={classes.form__input} value={chittalData.userPhone} onChange={(e) => handleInputChange(e)} placeholder="+91 " />
                     </div>
 
@@ -199,6 +204,7 @@ function ChittyForm() {
 
                     <div className={classes.income}>
                         <label className={classes.form__label} for="income">Annual Income: </label>
+                        <span class="required">*</span>
                         <input type="text" id="income" className={classes.form__input} value={chittalData.income} onChange={(e) => handleInputChange(e)} placeholder="₹" />
                     </div>
 

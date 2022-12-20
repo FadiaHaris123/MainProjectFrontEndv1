@@ -1,35 +1,38 @@
-
-
-.container{
-    position: relative;
-    text-align: center;
-    padding: 2%;
-    margin: auto;
-    height: 100vh;
-    background-color: #f4f4f9;
+.heading{
+  text-align: center;
 }
 
-.container h4{
+.container {
+  position: relative;
+  text-align: center;
+  padding: 2%;
+  margin: auto;
+  height: 100vh;
+  background-color: #f4f4f9;
+}
+
+.container h4 {
   font-size: 25px;
   font-family: 'LORA';
   color: #1a1a4d;
   font-family: "Lora";
 }
 
-.container ul{
-    list-style: none;
+.container ul {
+  list-style: none;
 }
+
 .chitsLoading {
-    text-align: center;
-    color: white;
-  }
+  text-align: center;
+  color: white;
+}
 
 .chitsError {
-    text-align: center;
-    color: red;
-  }
+  text-align: center;
+  color: red;
+}
 
-.chitTable{
+.chitTable {
   background-color: #b3b3c6;
   color: black;
   padding: 2%;
@@ -39,10 +42,10 @@
   width: 80%;
   margin-left: 8%;
   margin-top: 2%;
-  font-family: "Lora";
+  margin-left: 30%;
 }
 
-.chitTableHead{
+.chitTableHead {
   border: none;
   border-radius: 20px;
   background-color: #1a1a4d;
@@ -50,34 +53,38 @@
 }
 
 
-.chitTable .th{
+.chitTable .th {
   background-color: rgb(14, 22, 63);
   border-collapse: collapse;
   border-radius: 20px;
 }
 
-.tableBody  tr:hover{background-color: rgb(134, 145, 196);}
+.tableBody tr:hover {
+  background-color: rgb(134, 145, 196);
+}
 
-.tableBody tr:nth-child(even)
- {background-color: #e6e6ed;}
+.tableBody tr:nth-child(even) {
+  background-color: #e6e6ed;
+}
 
-.chitTable th, td {
+.chitTable th,
+td {
   padding: 1.5%;
   text-align: center;
 }
 
-.joinButton{
+.joinButton {
   padding: 5% 20%;
-    border-radius: 10px;
-    background-color: #5a5a8c;
-    color: white;
-    border: none;
+  border-radius: 10px;
+  background-color: #5a5a8c;
+  color: white;
+  border: none;
 }
 
-.joinButton:hover{
+.joinButton:hover {
   padding: 5% 20%;
-    border-radius: 10px;
-    background-color: #0a0a3b;
-    color: white;
-    border: none;
+  border-radius: 10px;
+  background-color: #0a0a3b;
+  color: white;
+  border: none;
 }

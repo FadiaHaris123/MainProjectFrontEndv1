@@ -28,7 +28,7 @@ import AuctionDetails from "./components/Manager/pages/AuctionDetails/AuctionDet
 import RazorPay from "./components/Customer/RazorPay/payment"
 import MainManagerPage from "./components/foreman/Manager/MainManagerPage";
 import AuctionRoom from "./components/AuctionRoom/AuctionRoom";
-import Otp from "./components/Customer/Otp/Otp";
+
 
 
 
@@ -38,12 +38,13 @@ function App() {
   const [authenticated, setauthenticated] = useState(null);
   useEffect(() => {
     const loggedInUser =  `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+    // const loggedInUser = localStorage.getItem("authenticated");
     if (loggedInUser) {
       setauthenticated(loggedInUser);
     }
   }, []);
   if (!authenticated) {
-    history.push("/login");
+    history.push("/");
   } else {
     return (
       <Router>
@@ -61,7 +62,7 @@ function App() {
           <Route path="/manager/assignedchits" component={AssignedChits} />
           <Route path="/manager/changepassword" component={ChangePassword} />
           <Route path="/manager/startchit" component={StartChit} />
-          <Route eaxct path="/manager/auctiondetails" component={AuctionDetails} />
+          <Route path="/manager/auctiondetails" component={AuctionDetails} />
           <Route path="/manager/auction/auctionroom" component={ManagerAuctionRoom} />
           <Route exact path="/customer" component={Customer} />
           <Route exact path='/customer/auction' component={Auction} />
@@ -69,7 +70,6 @@ function App() {
           <Route path='/customer/availablechits' component={AvailableChits} />
           <Route path='/customer/joinedchits' component={JoinedChits} />
           <Route path='/customer/otp/payment' component={RazorPay} />
-          <Route path='/customer/otp' component={Otp} />
           <Route path='/customer/auction/auctionroom' component={AuctionRoom} />
           <Route path='/customer/chittyform' component={ChittyForm} />
           <Route path='/customer/nomineeform' component={NomineeForm} />
@@ -82,4 +82,4 @@ function App() {
   }
 }
 
-export default App
+export default App;
