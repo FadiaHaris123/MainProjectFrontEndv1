@@ -2,16 +2,23 @@ import Header from "./Header";
 import AuctionChitDetails from "./AuctionChitDetails";
 import BidDetails from "../AuctionRoom/BidDetails/BidDetails";
 import styles from './App.module.css';
+import { useLocation } from "react-router-dom";
 
-function AuctionRoom(props) {
+function AuctionRoom() {
 
-    return (
-      <div className={styles.App}>
-        <Header/>
-        <AuctionChitDetails userId={props.userId} chittyId={props.chittyId} amount={props.amount}/>
-        <BidDetails/>
-      </div>
-    );
-  }
+  const location = useLocation();
+  const chittyId = location.state.chittyId;
+  const userId = location.state.userId;
+  const amount = location.state.amount;
+
+  return (
+    <div className={styles.App}>
+      <Header />
+      <AuctionChitDetails userId={userId} chittyId={chittyId} amount={amount} />
+      <BidDetails />
+    </div>
+  );
   
-  export default AuctionRoom;
+}
+
+export default AuctionRoom;

@@ -29,8 +29,9 @@ const JoinedChits = () => {
 
   useEffect(() => {
     const fetchJoinedChits = async () => {
-      const response = await fetch('http://localhost:8080/api/getchitties/' + userid
-        // 'http://localhost:8080/api/getchitties'+userid
+      const response = await fetch(
+        'http://localhost:8080/api/getchitties/2'
+        // `http://localhost:8080/api/getchitties/${userid}`
       );
       if (!response.ok) {
         throw new Error('Something went wrong!');
@@ -53,10 +54,9 @@ const JoinedChits = () => {
     fetchJoinedChits();
   }, []);
 
-
   const fetchChitDetails = (joinedChits) => {
-
     axios.get('http://localhost:8080/api/chitty/').then((response) => {
+
       const newItemList = [...response.data._embedded.chitty]
       const chitDetails = [];
       for (const key in newItemList) {
@@ -68,27 +68,35 @@ const JoinedChits = () => {
           })
           console.log(joinedChits[key])
         }
+        chitDetails.map((chits) => {
+          if (chits.startDate == null) {
+            chits.startDate = "Not Started"
+          }
+        })
         setChits(chitDetails);
       }
 
     });
+
   };
 
   return (
     <React.Fragment>
       <Navbar />
-      <h3>Joined Chits</h3>
-      <DataTable
-        scrollY
-        maxHeight="200px"
-        title=""
-        columns={columns}
-        data={chits}
-        paginationTotalRows={5}
-        paginationRowsPerPageOptions={[1, 5, 10, 15, 20, 50]}
-        pagination
-        highlightOnHover
-      />
+      <div className={classes.joinedChitsTable}>
+        <h3 className={classes.heading}>Joined Chits</h3>
+        <DataTable
+          scrollY
+          maxHeight="200px"
+          title=""
+          columns={columns}
+          data={chits}
+          paginationTotalRows={5}
+          paginationRowsPerPageOptions={[1, 5, 10, 15, 20, 50]}
+          pagination
+          highlightOnHover
+        />
+      </div>
     </React.Fragment>
   )
 }
