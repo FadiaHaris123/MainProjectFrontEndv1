@@ -11,17 +11,24 @@ import axios from "axios";
 import './Navbar.css'
 
 function Navbar() {
-  const userid = window.localStorage.getItem('userId');
+  // const userid = window.localStorage.getItem('userId');
   const [sidebar, setSidebar] = useState(false);
   const [name, setName] = useState([]);
   const [error, setError] = useState([]);
+  let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+  let userid = JSON.parse(sessionStorage.getItem('userId'));
 
   const showSidebar = () => setSidebar(!sidebar);
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/user-details/${userid}`);
+        const response = await axios.get(`http://localhost:8080/user-details/${userid}`,
+        {
+          headers:{
+            'Authorization':token
+            
+          }});
         setName(response.data.firstName);
       } catch (err) {
         setError(err.message);
