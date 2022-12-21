@@ -11,23 +11,24 @@ import { useEffect } from 'react';
 const BidDetails = (props) => {
 
     useEffect(() => {
-        setInterval(async() => {
-        function getId() {
-            axios.get(geturl, {
-                headers: {
-                    'Authorization': token
+        const bidding = setInterval(() => {
+            function getId() {
+                axios.get(geturl, {
+                    headers: {
+                        'Authorization': token
 
-                }
-            }).then((response) => {
-                setId(response.data._embedded.auction[0].id)
-                setCurrentAmount(response.data._embedded.auction[0].currentBid)
-                console.log("data", response.data._embedded.auction[0].id)
-                console.log("au_id", id)
-            });
-        }
-        getId();
-        }, 3);
-    })
+                    }
+                }).then((response) => {
+                    setId(response.data._embedded.auction[0].id)
+                    setCurrentAmount(response.data._embedded.auction[0].currentBid)
+                    console.log("data", response.data._embedded.auction[0].id)
+                    console.log("au_id", id)
+                }); 
+            }
+            getId();
+        }, 50);
+        return () => clearInterval(bidding);
+    }, [])
 
 
     //initial amount obtained from temporary auction table
@@ -40,25 +41,28 @@ const BidDetails = (props) => {
 
 
     const sendValue = (e) => {
-            setCurrentAmount(parseInt(e.target.value) + currentAmount);
-            update(e);
+        setCurrentAmount(parseInt(e.target.value) + currentAmount);
+        update(e);
     }
 
     const update = (e) => {
-        setInterval(async() => {
-        axios.put(url, {
-            id: id,
-            chittyId: props.chittyId,
-            userId: props.userId,
-            currentBid: parseInt(e.target.value) + currentAmount
-        },
-            {
-                headers: {
-                    'Authorization': token
+        // setInterval(() => {
+            axios.put(url, {
+                id: id,
+                chittyId: props.chittyId,
+                userId: props.userId,
+                currentBid: parseInt(e.target.value) + currentAmount
+            },
+                {
+                    headers: {
+                        'Authorization': token
 
-                }
-            })
-        }, 3);
+                    }
+                })
+        // }, 5);
+
+        // return () => clearInterval(bid);
+
     }
 
     const submit = (e) => {
