@@ -10,37 +10,59 @@ import { useEffect } from 'react';
 
 const BidDetails = (props) => {
 
+    useEffect(() => {
+        setInterval(async() => {
+        function getId() {
+            axios.get(geturl, {
+                headers: {
+                    'Authorization': token
+
+                }
+            }).then((response) => {
+                setId(response.data._embedded.auction[0].id)
+                setCurrentAmount(response.data._embedded.auction[0].currentBid)
+                console.log("data", response.data._embedded.auction[0].id)
+                console.log("au_id", id)
+            });
+        }
+        getId();
+        }, 3);
+    })
+
+
     //initial amount obtained from temporary auction table
     const [currentAmount, setCurrentAmount] = useState(props.amount * 0.05)
     const [customAmount, setCustomAmount] = useState()
     const [id, setId] = useState(null)
-    const url = "http://localhost:8080/api/auction/update"
-    const geturl = "http://localhost:8080/api/auction"
+    let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+    const url = `http://localhost:8080/auction/update`
+    const geturl = `http://localhost:8080/auction`
 
-    useEffect(() => {
-        function getId() {
-            axios.get(geturl).then((response) => {
-                setId(response.data._embedded.auction[0].id)
-            });
-        }
-        getId();
-    })
 
     const sendValue = (e) => {
-        setCurrentAmount(parseInt(e.target.value) + currentAmount);
-        update(e);
+            setCurrentAmount(parseInt(e.target.value) + currentAmount);
+            update(e);
     }
 
     const update = (e) => {
+        setInterval(async() => {
         axios.put(url, {
             id: id,
             chittyId: props.chittyId,
             userId: props.userId,
             currentBid: parseInt(e.target.value) + currentAmount
-        })
+        },
+            {
+                headers: {
+                    'Authorization': token
+
+                }
+            })
+        }, 3);
     }
 
     const submit = (e) => {
+
         e.preventDefault();
         setCurrentAmount(currentAmount + parseInt(customAmount))
         axios.put(url, {
@@ -48,7 +70,14 @@ const BidDetails = (props) => {
             chittyId: props.chittyId,
             userId: props.userId,
             currentBid: currentAmount + parseInt(customAmount)
-        })
+        },
+            {
+                headers: {
+                    'Authorization': token
+
+                }
+            })
+
     }
 
     const customAmountHandler = (e) => {

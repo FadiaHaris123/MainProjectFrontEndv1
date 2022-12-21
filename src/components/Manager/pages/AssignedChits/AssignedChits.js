@@ -10,7 +10,9 @@ const AssignedChits = () => {
     const [chits, setChits] = useState([]);
     const [categoryId, setCategoryId] = useState([]);
     const [chitNumber, setChitNumber] = useState([]);
-    const id = window.localStorage.getItem('managerId');
+    // const id = window.localStorage.getItem('managerId');
+    let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+    let id = JSON.parse(sessionStorage.getItem('userId'));
 
     const columns = ([
         {
@@ -35,24 +37,38 @@ const AssignedChits = () => {
         },
     ]);
 
-    const url = "http://localhost:8080/api/chitty/update"
+    const url = "http://localhost:8080/chitty/update"
     const history = useHistory();
 
     useEffect(() => {
         function getCategoryId() {
-            Axios.get('http://localhost:8080/api/chitty/' + chitNumber + '/category').then((response) => {
+            Axios.get(`http://localhost:8080/chitty/${chitNumber}/category`,{
+                headers:{
+                  'Authorization':token
+                  
+                }}).then((response) => {
                 setCategoryId(response.data.id)
             });
         }
         getCategoryId();
+        console.log("chitNo.",chitNumber)
     })
 
     function submit(value) {
         const key = value;
         setChitNumber(chits[key].chitNumber);
-        Axios.get('http://localhost:8080/api/chitty/' + chitNumber + '/category').then((response) => {
-            // setCategoryId(response.data.id)
-        })
+        console.log("chitNo.",chitNumber)
+        Axios.get(`http://localhost:8080/chitty/${chitNumber}/category`,
+            // 'http://localhost:8080/chitty/' + chitNumber + '/category',
+        {
+            headers:{
+              'Authorization':token
+              
+            }})
+            
+        //     .then((response) => {
+        //     // setCategoryId(response.data.id)
+        // })
             .then(() => {
                 Axios.put(url, {
                     chitNumber: chits[key].chitNumber,
@@ -66,7 +82,12 @@ const AssignedChits = () => {
                     launchDate: chits[key].launchDate,
                     startDate: formattedstartDate,
                     status: "started"
-                })
+                },
+                {
+                    headers:{
+                      'Authorization':token
+                      
+                    }})
                     .then(res => {
                         if (res.data != null) {
                             alert("Chitty started successfully")
@@ -92,7 +113,13 @@ const AssignedChits = () => {
     useEffect(() => {
         const fetchAssignedChits = async () => {
             const response = await fetch(
-                'http://localhost:8080/api/managers/' + id + '/chits'
+                // 'http://localhost:8080/managers/' + id + '/chits',
+                `http://localhost:8080/managers/${id}/chits`,
+                {
+                    headers:{
+                      'Authorization':token
+                      
+                    }}
             );
 
             if (!response.ok) {

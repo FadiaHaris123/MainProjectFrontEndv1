@@ -5,8 +5,10 @@ import Axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const LaunchForm = () => {
+  
+  let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+  const url = "http://localhost:8080/chitty/add"
 
-  const url = "http://localhost:8080/api/chitty/add"
   const [data,setData] = useState({
     chitNumber:"",
     currentNumberOfChittal:0,
@@ -37,7 +39,11 @@ const LaunchForm = () => {
     launchDate:formattedlaunchDate,
     startDate:data.startDate,
     status:data.status
-    })
+    },{
+      headers:{
+        'Authorization':token
+        
+      }})
     .then(res=>{
       if(res.data != null){
       alert("Chitty launched successfully")
@@ -51,6 +57,7 @@ const LaunchForm = () => {
       }
       console.log(res.data)
     })
+
     }
  
 
@@ -79,7 +86,11 @@ const LaunchForm = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       const response = await fetch(
-        'http://localhost:8080/api/managers'
+        'http://localhost:8080/managers',{
+          headers:{
+            'Authorization':token
+            
+          }}
       );
 
       if (!response.ok) {
@@ -113,7 +124,12 @@ const LaunchForm = () => {
   useEffect(() => {
     const fetchChittyCategory = async () => {
       const response = await fetch(
-        'http://localhost:8080/api/chittycategory'
+        'http://localhost:8080/chittycategory',
+        {
+          headers:{
+            'Authorization':token
+            
+          }}
       );
 
       if (!response.ok) {

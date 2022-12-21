@@ -6,7 +6,9 @@ import classes from './StartedChits.module.css';
 const StartedChits = () => {
 
     const [chits, setChits] = useState([]);
-    const id = window.localStorage.getItem('managerId');
+    // const id = window.localStorage.getItem('managerId');
+    let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+    let id = JSON.parse(sessionStorage.getItem('userId'));
     const columns = ([
         {
             name: 'Chit Number',
@@ -23,7 +25,13 @@ const StartedChits = () => {
     useEffect(() => {
         const fetchStartedChits = async () => {
             const response = await fetch(
-                'http://localhost:8080/api/managers/' + id + '/chits'
+                `http://localhost:8080/managers/${id}/chits`,
+                {
+                    headers:{
+                      'Authorization':token
+                      
+                    }}
+
             );
 
             if (!response.ok) {

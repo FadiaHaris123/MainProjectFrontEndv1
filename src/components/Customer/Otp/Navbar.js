@@ -3,42 +3,40 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
-import './Navbar.css'
-import axios from "axios";
 import { IconContext } from 'react-icons';
-import { BsFillPersonFill } from "react-icons/ri";
-// import ProfileOverlay from './pages/CustomerProfile/ProfileOverlay';
+import ProfileOverlay from './pages/CustomerProfile/ProfileOverlay';
 import Collapsible from 'react-collapsible';
-
+import Image from '../../assets/images/pro1.jpg';
+import axios from "axios";
+import './Navbar.css'
 
 function Navbar() {
+  // const userid = window.localStorage.getItem('userId');
   const [sidebar, setSidebar] = useState(false);
-  const showSidebar = () => setSidebar(!sidebar);
-  // const id = window.localStorage.getItem('managerId');
-  const [managerName, setManagerName] = useState([]);
+  const [name, setName] = useState([]);
+  const [error, setError] = useState([]);
   let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
   let userid = JSON.parse(sessionStorage.getItem('userId'));
 
-  // useEffect(() => {
-  //   const fetchManagers = async () => {
-  //     const response = await axios.get(
-  //       `http://localhost:8080/managers/${id}`
-  //     );
-  //     setManagerName(response.data.firstName)
-  //   };
-  //   fetchManagers();
-  // }, []);
-  const api=axios.get(`http://localhost:8080/managers/${userid}`,{
-    headers:{
-      'Authorization':token
-      
-    }}
-  )
-    .then(response=>{
-      console.log(response.data)
-      setManagerName(response.data.firstName);
-  
-    })
+  const showSidebar = () => setSidebar(!sidebar);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/user-details/${userid}`,
+        {
+          headers:{
+            'Authorization':token
+            
+          }});
+        setName(response.data.firstName);
+      } catch (err) {
+        setError(err.message);
+        setName(null);
+      }
+    };
+    getData();
+  }, []);
 
   return (
     <IconContext.Provider value={{ color: '#fff' }}>
@@ -46,13 +44,16 @@ function Navbar() {
         <Link to='#' className='menu-bars'>
           <FaIcons.FaBars onClick={showSidebar} />
         </Link>
-        <h1 className='tagName'>Eminence Chitty</h1>
-        <h5 className='tagNamee'>Hi, Mngr. {managerName}  < FaIcons.FaUser /></h5>
-        
-       
-        {/* <Collapsible trigger={<img src="" style={{ width: '50px' }} />}>
+        <h1 className='tag'>Eminence Chitty</h1>
+
+        <h5 className='tagNamee'>Hi, {name} !</h5>
+
+        <div className='img'>
+          <Collapsible trigger={<img src={Image} style={{ width: '50px', height: '70px', border: '1px solid black', borderRadius: '2rem' }} />}>
             <ProfileOverlay />
-          </Collapsible> */}
+          </Collapsible>
+        </div>
+
       </div>
       <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
         <ul className='nav-menu-items' onClick={showSidebar}>
