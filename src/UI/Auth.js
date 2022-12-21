@@ -70,6 +70,7 @@ const Auth = (props) => {
 
   const [emailCurrentState, dispatchEmail] = useReducer(emailHandler, emailInitialState);
   const [passwordCurrentState, dispatchPassword] = useReducer(passwordHandler, passwordInitialState);
+  
 
   const [formIsValid, setFormIsValid] = useState(false);
 
