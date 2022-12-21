@@ -15,7 +15,7 @@ function AuctionRoom() {
       <div className={styles.App}>
         <Header/>
         <AuctionChitDetails userId={userId} chittyId={chittyId} amount={amount}/>
-        <BidDetails amount={amount}/>
+        <BidDetails userId={userId} chittyId={chittyId} amount={amount}/>
       </div>
     );
   }
