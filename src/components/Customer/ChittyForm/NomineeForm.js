@@ -30,7 +30,7 @@ function NomineeForm(props) {
         console.log(newdata)
     }
 
-    function handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setChits(props.chits);
         console.log(token)
@@ -85,36 +85,36 @@ function NomineeForm(props) {
             
                 <h3 className={classes.head1}>Nominee details</h3>
                 <div className={classes.nomineeName}>
-                    <label className={classes.form__label} for="nomineeName">Name </label>
+                    <label className={classes.form__label} for="nomineeName">Name <span class="required">*</span></label>
                     <input type="nomineeName" id="name" className={classes.form__input} value={nomineeData.name} onChange={(e) => handleInputChange(e)} placeholder="Name" />
                 </div>
 
                 <div className={classes.nomineeAge}>
-                    <label className={classes.form__label} for="nomineeAge">Age </label>
+                    <label className={classes.form__label} for="nomineeAge">Age <span className={classes.required}>*</span></label>
                     <input type="nomineeAge" id="age" className={classes.form__input} value={nomineeData.age} onChange={(e) => handleInputChange(e)} placeholder="In years" />
                 </div>
 
                 <div className={classes.nomineedob}>
-                    <label className={classes.form__label} for="nomineedob" id="nomineedob"> Date of birth </label>
+                    <label className={classes.form__label} for="nomineedob" id="nomineedob"> Date of birth <span className={classes.required}>*</span></label>
                     <input className={classes.form__input} type="text" value={nomineeData.dob} onChange={(e) => handleInputChange(e)} id="dob" placeholder="yyyy-mm-dd" />
                 </div>
 
                 <div className={classes.nomineeAddress}>
-                    <label className={classes.form__label} for="nomineeAddress">Address </label>
+                    <label className={classes.form__label} for="nomineeAddress">Address <span className={classes.required}>*</span></label>
                     <input type="nomineeAddress" id="address" className={classes.form__input} value={nomineeData.address} onChange={(e) => handleInputChange(e)} placeholder="Address" />
                 </div>
 
                 <div className={classes.nomineePincode}>
-                    <label className={classes.form__label} for="nomineePincode"> Pincode </label>
+                    <label className={classes.form__label} for="nomineePincode"> Pincode <span className={classes.required}>*</span></label>
                     <input type="nomineePincode" id="pincode" className={classes.form__input} value={nomineeData.pincode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" />
                 </div>
                 <div className={classes.nomineeAd}>
-                    <label className={classes.form__label} for="nomineeAd"> Aadhar </label>
+                    <label className={classes.form__label} for="nomineeAd"> Aadhar <span className={classes.required}>*</span></label>
                     <input type="nomineeAd" id="aadhar" className={classes.form__input} value={nomineeData.aadhar} onChange={(e) => handleInputChange(e)} placeholder="Eg.2054 3605 7419" />
                 </div>
 
                 <div className={classes.nomineePhone}>
-                    <label className={classes.form__label} for="nomineePhone">Contact number </label>
+                    <label className={classes.form__label} for="nomineePhone">Contact number <span className={classes.required}>*</span></label>
                     <input type="nomineePhone" id="phone" className={classes.form__input} value={nomineeData.phone} onChange={(e) => handleInputChange(e)} placeholder="+91  " />
                 </div>
             </div>

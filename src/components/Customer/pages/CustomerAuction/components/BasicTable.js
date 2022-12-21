@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import classes from './BasicTable.module.css';
 import { Link, Redirect } from 'react-router-dom';
-import Search from "./Search";
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 
@@ -127,7 +126,6 @@ const BasicTable = () => {
 
   return (
     <section className={classes.tablecontainer}>
-      <Search search={onSearchHandler} />
       <div className={classes.auctionDetailsTable}>
         <DataTable
           scrollY

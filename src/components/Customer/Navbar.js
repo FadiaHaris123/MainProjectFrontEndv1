@@ -71,14 +71,6 @@ function Navbar() {
     
           <h5 className='tagNamee'>Hi, {name} !</h5>
 
-          <div className='img'>
-            <Collapsible trigger={<img src={Image} style={{ width: '50px', height: '70px', border: '1px solid black', borderRadius: '2rem' }} />}>
-
-              <ProfileOverlay />
-
-            </Collapsible>
-          </div>
-
         <div className='img'>
           <Collapsible trigger={<img src={Image} style={{ width: '50px', height: '50px', border: '1px solid black', borderRadius: '2rem' }} />}>
             <ProfileOverlay />
