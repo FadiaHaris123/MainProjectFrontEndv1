@@ -206,7 +206,7 @@ const LaunchForm = () => {
           id="chitNumber"
           value={data.chitNumber}
           onChange={handle}
-          placeholder="Chitty No.eg:15/22"
+          placeholder="Chitty No.eg:1500"
           required
         ></input><br /><br />
 

@@ -68,7 +68,7 @@ const Manager = () =>
 					Upload employee details
 				</h4>
 				<div className={classes.sample}>
-					<h5>Dowload Template here :</h5>
+					<h5>Download Template here :</h5>
 					<a href='https://experiontechnologies-my.sharepoint.com/personal/anagha_r_experionglobal_com/_layouts/15/download.aspx?e=xXOdny&share=EcX4nadlPPFIrJpxl5LIqsYBJnM1z0lRaIjd061WTjlP8Q'>
 					<img src={image} height="20px" width="20px" alt="img" />
 					</a>

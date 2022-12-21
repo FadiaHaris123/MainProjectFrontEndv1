@@ -51,7 +51,7 @@ const AvailableChit = () => {
   return (
     <React.Fragment>
       <Navbar />
-      <div className={classes.container}>
+      <div className={classes.container1}>
         <h4>Available Chits</h4>
         <table className={classes.chitTable}>
           <tr className={classes.chitTableHead}>

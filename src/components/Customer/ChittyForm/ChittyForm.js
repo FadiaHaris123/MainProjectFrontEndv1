@@ -65,7 +65,6 @@ function ChittyForm() {
     }
 
     function handleSubmit(e) {
-
         e.preventDefault();
         Axios.post(url, {
             userId: id,
@@ -150,50 +149,50 @@ function ChittyForm() {
         <Fragment>
             <Navbar/>
             <h2 className={classes.head}>Chitty Application Form</h2>
-            <div className={classes.form}>
+            <form onSubmit={handleSubmit} className={classes.form}>
                 <br></br>
 
                 <div className={classes.form_body}>
                     <h3 className={classes.head1}>Chittal details</h3>
                     <div>
                         <label className={classes.form__label} for="Name" id="name"> Name: </label>
-                        <input className={classes.form__input}  readOnly id="Name" value={name} />
+                        <input className={classes.form__input}  readOnly id="Name" value={name} required />
                     </div>
                     <div>
-                        <label className={classes.form__label} for="age"> Age: </label>
-                        <span class="required">*</span>
-                        <input className={classes.form__input} type="text" value={chittalData.age} onChange={(e) => handleInputChange(e)} id="age" placeholder="In years" />
+                        <label className={classes.form__label} for="age"> Age:<span class="required">*</span> </label>
+                        
+                        <input className={classes.form__input} type="text" value={chittalData.age} onChange={(e) => handleInputChange(e)} id="age" placeholder="In years" required/>
                     </div>
 
                     <div className={classes.dob}>
-                        <label className={classes.form__label} for="dob"> Date of birth: </label>
-                        <span class="required">*</span>
-                        <input className={classes.form__input} type="text" value={chittalData.dob} onChange={(e) => handleInputChange(e)} id="dob" placeholder="yyyy-mm-dd" />
+                        <label className={classes.form__label} for="dob"> Date of birth:<span class="required">*</span> </label>
+                        
+                        <input className={classes.form__input} type="text" value={chittalData.dob} onChange={(e) => handleInputChange(e)} id="dob" placeholder="yyyy-mm-dd" required/>
                     </div>
 
                     <div className={classes.address}>
-                        <label className={classes.form__label} for="address">Address </label>
-                        <span class="required">*</span>
-                        <input type="address" id="address" className={classes.form__input} value={chittalData.address} onChange={(e) => handleInputChange(e)} placeholder="Address" />
+                        <label className={classes.form__label} for="address">Address <span class="required">*</span></label>
+                        
+                        <input type="address" id="address" className={classes.form__input} value={chittalData.address} onChange={(e) => handleInputChange(e)} placeholder="Address" required/>
                     </div>
 
                     <div className={classes.pincode}>
-                        <label className={classes.form__label} for="pincode">Pincode: </label>
-                        <span class="required">*</span>
-                        <input type="pincode" id="pinCode" className={classes.form__input} value={chittalData.pinCode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" />
+                        <label className={classes.form__label} for="pincode">Pincode: <span class="required">*</span></label>
+                        
+                        <input type="pincode" id="pinCode" className={classes.form__input} value={chittalData.pinCode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" required/>
                     </div>
 
                     <div className={classes.userPhone}>
-                        <label className={classes.form__label} for="userPhone">Contact number: </label>
-                        <span class="required">*</span>
-                        <input type="text" id="userPhone" className={classes.form__input} value={chittalData.userPhone} onChange={(e) => handleInputChange(e)} placeholder="+91 " />
+                        <label className={classes.form__label} for="userPhone">Contact number: <span class="required">*</span> </label>
+                       
+                        <input type="text" id="userPhone" className={classes.form__input} value={chittalData.userPhone} onChange={(e) => handleInputChange(e)} required />
                     </div>
 
                     <br></br>
                     <div className={classes.status}>
                       
                         <label className={classes.form__label}>Marital status:
-                            <select name="" className={classes.form__input} id="status" value={chittalData.status} onChange={(e) => handleInputChange(e)} >
+                            <select name="" className={classes.form__input} id="status" value={chittalData.status} onChange={(e) => handleInputChange(e)} required>
                                 <option>Select marital status</option>
                                 <option value="Single">Single</option>
                                 <option value="Married">Married</option>
@@ -203,38 +202,30 @@ function ChittyForm() {
                     </div>
 
                     <div className={classes.income}>
-                        <label className={classes.form__label} for="income">Annual Income: </label>
-                        <span class="required">*</span>
-                        <input type="text" id="income" className={classes.form__input} value={chittalData.income} onChange={(e) => handleInputChange(e)} placeholder="₹" />
+                        <label className={classes.form__label} for="income">Annual Income: <span class="required">*</span></label>
+                        
+                        <input type="text" id="income" className={classes.form__input} value={chittalData.income} onChange={(e) => handleInputChange(e)} placeholder="₹" required/>
                     </div>
 
                     <div className={classes.Chitty_Type}>
-                        <label className={classes.form__label}>Chitty Type:
-                            {/* <select name="" className={classes.form__input}>
-                                <option disabled={isDisabled}>Select chitty type ⬇️ </option>
-                                <option value="Long Term">Long Term</option>
-                                <option value="Short Term">Short Term</option>
-                                <option value="Multidivision">Multidivision</option>
-                            </select> */}
-                            
-                        </label>
+                        <label className={classes.form__label}>Chitty Type:</label>
                         <input className={classes.form__input}  readOnly  value={categoryName} />
                     </div>
 
                     <div className={classes.aadhar}>
-                        <label className={classes.form__label} for="aadhar">Aadhar number: </label>
-                        <input type="text" id="aadhar" className={classes.form__input} value={chittalData.aadhar} onChange={(e) => handleInputChange(e)} placeholder="Eg.2054 3605 7419 " />
+                        <label className={classes.form__label} for="aadhar">Aadhar number: <span class="required">*</span> </label>
+                        <input type="text" id="aadhar" className={classes.form__input} value={chittalData.aadhar} onChange={(e) => handleInputChange(e)} placeholder="Eg.2054 3605 7419 " re />
                     </div>
                 </div>
 
                 <div className={classes.footer}>
-                    <button onClick={handleSubmit} type="submit" className={classes.btn}>Next</button>
+                    <button type="submit" className={classes.btn}>Next</button>
                 </div>
-            </div>
+            </form>
             <div className={classes.nominee}>
                 {showNominee && <NomineeForm chittalId={chittalId} chits={chits} managerId={managerId} categoryId={categoryId}/>}
             </div>
-            {/* <JoinedChits chittyId = {chittyId}/> */}
+           
         </Fragment>
     )
 }

@@ -1,23 +1,19 @@
 
 
-.container{
-    position: relative;
+.container1{
+    /* position: relative; */
     text-align: center;
     padding: 2%;
     margin: auto;
-    height: 100vh;
+    height: 120vh;
     background-color: #f4f4f9;
 }
 
-.container h4{
+.container1 h4{
   font-size: 25px;
   font-family: 'LORA';
   color: #1a1a4d;
   font-family: "Lora";
-}
-
-.container ul{
-    list-style: none;
 }
 
 .chitsLoading {
@@ -41,6 +37,7 @@
   margin-left: 8%;
   margin-top: 2%;
   font-family: "Lora";
+  position: relative;
 }
 
 .chitTableHead{
