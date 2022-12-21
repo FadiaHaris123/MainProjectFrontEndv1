@@ -1,12 +1,13 @@
-import React, { useState } from "react"
+import React, { useState,useHistory } from "react"
 import { Link } from "react-router-dom"
 import Axios from 'axios';
 
 import Image from '../assets/images/joinus.jpg'
 
 const Auth = (props) => {
+// const history = useHistory();
 
-const url = "http://localhost:8080/api/user-profile"
+const url = "http://localhost:8080/user-profile"
 
 const [data,setData] = useState({
   firstName:"",
@@ -58,7 +59,14 @@ function submit(e){
     mobileNo:parseInt(data.mobileNo),
     passWord:data.passWord,
     roleId:data.roleId
-  })
+  },
+  
+  // {
+  //     headers: { 'Content-Type': 'application/json' },
+  //     withCredentials: true
+  // }
+  
+  )
   .then(res=>{
     if(res.data == "Duplicate email"){
       console.log(res.data)
@@ -66,6 +74,7 @@ function submit(e){
     }
     else{
         alert("Registration Successful")
+        // return (history.push("/"));
     }
   })
 }

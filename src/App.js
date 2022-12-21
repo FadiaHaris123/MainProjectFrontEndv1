@@ -8,6 +8,8 @@ import NomineeForm from "./components/Customer/ChittyForm/NomineeForm";
 import CreateNewPassword from "./UI/ForgetPassword/ResetPassword"
 import registrationForm from "./UI/registrationForm"
 import foreman from "./components/foreman/foreman"
+// import LaunchedChits from "./components/foreman/ManagerDetails/LaunchedChits"
+import ForemanAuction from "./components/foreman/Auction/ForemanAuction"
 import LaunchedChits from "./components/foreman/LaunchedChits/LaunchedChits"
 import ManagerPage from "./components/Manager/ManagerPage"
 import AssignedChits from "./components/Manager/pages/AssignedChits/AssignedChits"
@@ -28,12 +30,15 @@ import MainManagerPage from "./components/foreman/Manager/MainManagerPage";
 import AuctionRoom from "./components/AuctionRoom/AuctionRoom";
 
 
+
+
 function App() {
 
   // const history = useHistory();
   // const [authenticated, setauthenticated] = useState(null);
   // useEffect(() => {
-  //   const loggedInUser = localStorage.getItem("authenticated");
+  //   const loggedInUser =  `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+  //   // const loggedInUser = localStorage.getItem("authenticated");
   //   if (loggedInUser) {
   //     setauthenticated(loggedInUser);
   //   }
@@ -68,10 +73,13 @@ function App() {
           <Route path='/customer/auction/auctionroom' component={AuctionRoom} />
           <Route path='/customer/chittyform' component={ChittyForm} />
           <Route path='/customer/nomineeform' component={NomineeForm} />
+          <Route path='/admin/launchedchits' component={LaunchedChits}/>
+          <Route path='/admin/ForemanAuction' component={ForemanAuction}/>
+          {/* <Route path='/admin/Earnings' component={Earnings}/> */}
         </Switch>
       </Router>
     )
   }
-// }
+//  }
 
 export default App;

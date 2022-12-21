@@ -5,10 +5,12 @@ import Navbar from '../../Navbar'
 
 const ChangePasswordPage = () => {
 
-    const id = window.localStorage.getItem('managerId');
+    // const id = .localStorage.getItem('managerId');
+
+    const id = JSON.parse(sessionStorage.getItem('userId'));
     const [managerEmail, setManagerEmail] = useState();
     const history = useHistory();
-
+    let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
     const [data, setData] = useState({
         currentPassword: "",
         newPassword: "",
@@ -18,7 +20,12 @@ const ChangePasswordPage = () => {
     useEffect(() => {
         const fetchManagers = async () => {
             const response = await fetch(
-                'http://localhost:8080/api/managers'
+                'http://localhost:8080/managers'
+                ,{
+                    headers:{
+                      'Authorization':token
+                      
+                    }}
             );
 
             if (!response.ok) {
@@ -40,8 +47,8 @@ const ChangePasswordPage = () => {
         event.preventDefault();
         if (data != null) {
             if (data.newPassword == data.confirmPassword) {
-                fetch("http://localhost:8080/api/user/change-password", {
-                    headers: { "Content-Type": "application/json" },
+                fetch("http://localhost:8080/user/change-password", {
+                    headers: { "Content-Type": "application/json",'Authorization':token },
                     method: "POST",
                     body: JSON.stringify({
                         email: managerEmail,
@@ -64,6 +71,10 @@ const ChangePasswordPage = () => {
             alert("Enter password")
         }
     };
+    console.log("mail",managerEmail)
+    console.log("new",data.newPassword)
+    console.log("current",data.currentPassword)
+
 
     function passwordChange(e) {
         const newdata = { ...data }

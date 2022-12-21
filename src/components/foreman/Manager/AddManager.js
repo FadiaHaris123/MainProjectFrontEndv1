@@ -3,18 +3,19 @@ import React, { useState } from 'react';
 import classes from './AddManager.module.css';
 import Axios from 'axios';
 
-const AddManager = () => {
-  const url = "http://localhost:8080/api/addmanager"
+const AddManager=()=>{
+	const url = "http://localhost:8080/addmanager"
+let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
 
-  const [data, setData] = useState({
-    emp_id: "",
-    firstName: "",
-    emp_lastname: "",
-    email: "",
-    mobileNumber: "",
-    passWord: "manager@123",
-    roleId: 2
-  })
+const [data,setData] = useState({
+	emp_id:"",
+	firstName:"",
+	emp_lastname:"",
+	email:"",
+	mobileNumber:"",
+	passWord:"$2a$10$z5gwKRfEH3nTy5kquLIdeelC6eGZvyQ4AlKufhbpFWZMCUnQ459.a",
+  roleId:2
+})
 
   function handle(e) {
     const newdata = { ...data }
@@ -22,24 +23,28 @@ const AddManager = () => {
     setData(newdata)
     console.log(newdata)
   }
-
-  function submit(e) {
-    e.preventDefault();
-    Axios.post(url, {
-      emp_id: parseInt(data.emp_id),
-      firstName: data.firstName,
-      emp_lastname: data.emp_lastname,
-      email: data.email,
-      mobileNumber: parseInt(data.mobileNumber),
-      passWord: data.passWord,
-      roleId: data.roleId
-    })
-      .then(res => {
-        if (res.data != null) {
-          alert("Manager added successfully")
-        }
-        console.log(res.data)
-      })
+  
+  function submit(e){
+	e.preventDefault();
+	Axios.post(url,{
+		emp_id:parseInt(data.emp_id),
+		firstName:data.firstName,
+		emp_lastname:data.emp_lastname,
+		email:data.email,
+		mobileNumber:parseInt(data.mobileNumber),
+		passWord:data.passWord,
+    roleId:data.roleId
+	},{
+    headers:{
+      'Authorization':token
+      
+    }})
+	.then(res=>{
+	  if(res.data != null){
+		alert("Manager added successfully")
+	  }
+	  console.log(res.data)
+	})
   }
 
   return (
