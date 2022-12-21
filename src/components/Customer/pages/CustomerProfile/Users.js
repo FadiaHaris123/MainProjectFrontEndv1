@@ -3,7 +3,23 @@ import axios from "axios";
 import React, { useState, useEffect } from 'react';
 
 const Users = (props) => {
-    const userid = window.localStorage.getItem('userid');
+    // const userid = window.localStorage.getItem('userid');
+    let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+    let userid = JSON.parse(sessionStorage.getItem('userId'));
+const [name, setName] = useState([]);
+const [error, setError] = useState([]);
+useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/user-details/${userid}`,
+        {
+          headers:{
+            'Authorization':token
+            
+          }}
+        );
+        setName(response.data.firstName);
+    // const userid = window.localStorage.getItem('userid');
 // const [name, setName] = useState([]);
 // const [error, setError] = useState([]);
 // useEffect(() => {
@@ -20,7 +36,12 @@ const Users = (props) => {
 //     };
 //     getData();
 
-//   }, []);
+  } 
+  catch (err) {
+    setError(err.message);
+    setName(null);
+} 
+}});
     return (
         <div>
             <section id="content" style={{ backgroundColor: '#f4f5f7' }}>

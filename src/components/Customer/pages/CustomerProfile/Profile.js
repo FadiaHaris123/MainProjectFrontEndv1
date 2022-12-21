@@ -10,8 +10,10 @@ import ReactToPrint from 'react-to-print'
 import axios from 'axios';
 
 function Profile() {
+  let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+  let userid = JSON.parse(sessionStorage.getItem('userId'));
   const componentRef = useRef()
-  const userid = window.localStorage.getItem('userId');
+  // const userid = window.localStorage.getItem('userId');
   const handlePrint = () => {
     window.print()
   }
@@ -24,8 +26,14 @@ function Profile() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/user-details/${userid}`);
-        setName(response.data.firstName);
+        const response = await axios.get(`http://localhost:8080/user-details/${userid}`,
+        {
+          headers:{
+            'Authorization':token
+            
+          }});
+        // setName(response.data.firstName);
+        setName(response.data.firstName +" "+ response.data.lastName);
       } catch (err) {
         setError(err.message);
         setName(null);

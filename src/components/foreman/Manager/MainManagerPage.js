@@ -46,7 +46,9 @@ const MainManagerPage = () => {
 
   return (
     <div>
-        <Header></Header>
+        <Header>  </Header>
+        <Navigation/>
+      
         
     <div className={classes.wrap}>
     <div className={classes.tab}>

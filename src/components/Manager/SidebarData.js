@@ -6,12 +6,18 @@ import * as RiIcons from 'react-icons/ri';
 export const SidebarData = [
 
   {
+    title: 'Home',
+    path: '/manager',
+    icon: <RiIcons.RiBankLine />,
+    cName: 'nav-text'
+  },
+  {
     title: 'Assigned Chits',
     path: '/manager/assignedchits',
     icon: <RiIcons.RiPlayListAddFill />,
     cName: 'nav-text'
   },
-
+ 
   {
     title: 'Chits Started',
     path: '/manager/startchit',

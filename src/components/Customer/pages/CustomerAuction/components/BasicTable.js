@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
 import classes from './BasicTable.module.css';
 import { Link, Redirect } from 'react-router-dom';
-import Search from "./Search";
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 
 
 const BasicTable = () => {
 
-  const userid = window.localStorage.getItem('userId');
+  // const userid = window.localStorage.getItem('userId');
+  let userid = JSON.parse(sessionStorage.getItem('userId'));
   const [chits, setChits] = useState([]);
   const [amount, setChitAmount] = useState(null);
   const [chittyId, setChittyId] = useState(null);
   const [searchName, setSearchName] = useState("");
   const [auctionChit, setAuctionChit] = useState(false);
-
+  let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+  console.log("user",userid)
   const columns = [
     {
       name: 'Chit Number',
@@ -45,11 +46,27 @@ const BasicTable = () => {
     setSearchName(name);
   }
 
+// useEffect(() => {
+//   const fetchManagers = async () => {
+//     const response = await fetch(
+//       'http://localhost:8080/managers/search/findByfirstNameContaining?name='+searchName,
+//       {
+//         headers:{
+//           'Authorization':token
+          
+//         }}
+//     );
   useEffect(() => {
     const fetchJoinedChits = async () => {
       const response = await fetch(
-        `http://localhost:8080/api/getchitties/${userid}`
+        `http://localhost:8080/getchitties/${userid}`,
+        {
+          headers:{
+            'Authorization':token
+            
+          }}
       );
+   
       if (!response.ok) {
         throw new Error('Something went wrong!');
       }
@@ -61,16 +78,22 @@ const BasicTable = () => {
           chitNumber: responseData[key],
         });
       }
+      
       return (
         fetchChitDetails(loadedJoinedChits)
       );
     };
-
+ 
     fetchJoinedChits();
   }, []);
 
   const fetchChitDetails = (loadedJoinedChits) => {
-    axios.get('http://localhost:8080/api/chitty/').then((response) => {
+    axios.get(`http://localhost:8080/chitty`,
+    {
+      headers:{
+        'Authorization':token
+        
+      }}).then((response) => {
 
       const newItemList = [...response.data._embedded.chitty]
       const chitDetails = [];
@@ -103,7 +126,6 @@ const BasicTable = () => {
 
   return (
     <section className={classes.tablecontainer}>
-      <Search search={onSearchHandler} />
       <div className={classes.auctionDetailsTable}>
         <DataTable
           scrollY

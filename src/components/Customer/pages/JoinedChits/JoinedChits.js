@@ -3,14 +3,19 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../../Navbar';
 import classes from './JoinedChits.module.css'
 import DataTable from 'react-data-table-component';
+import Axios from 'axios';
 
 const JoinedChits = () => {
-  const userid = window.localStorage.getItem('userId');
+  let userid = JSON.parse(sessionStorage.getItem('userId'));
+  let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+
+  // const userid = window.localStorage.getItem('userId');
+  const [joinedChits, setJoinedChits] = useState([]);
   const [chits, setChits] = useState([]);
 
   const columns = ([
     {
-      button:'true'
+      button: 'true'
     },
     {
       name: 'Chit Number',
@@ -29,12 +34,20 @@ const JoinedChits = () => {
     },
   ]);
 
+
   useEffect(() => {
     const fetchJoinedChits = async () => {
-      const response = await fetch(
-        // 'http://localhost:8080/api/getchitties/2'
-        `http://localhost:8080/api/getchitties/${userid}`
+      const response = await fetch(`http://localhost:8080/getchitties/${userid}`,
+
+        {
+          headers: {
+            'Authorization': token
+
+          }
+        }
+        // 'http://localhost:8080/api/getchitties'+userid
       );
+      console.log("check", response);
       if (!response.ok) {
         throw new Error('Something went wrong!');
       }
@@ -53,28 +66,40 @@ const JoinedChits = () => {
     fetchJoinedChits();
   }, []);
 
+  // console.log(joinedChits[1]);
+  // console.log(joinedChits[1]);
+  // useEffect(() => {
   const fetchChitDetails = (loadedJoinedChits) => {
-    axios.get('http://localhost:8080/api/chitty/').then((response) => {
-      const newItemList = [...response.data._embedded.chitty]
-      const chitDetails = [];
-      for (const key2 in loadedJoinedChits) {
-        for (const key in newItemList) {
-          if (loadedJoinedChits[key2].chitNumber == newItemList[key].chitNumber) {
-            chitDetails.push({
-              chitNumber: newItemList[key].chitNumber,
-              startDate: newItemList[key].startDate,
-              duration: newItemList[key].duration,
-            })
-          }
+
+    // console.log(joinedChits[1]);
+    Axios.get(`http://localhost:8080/chitty/`,
+      {
+        headers: {
+          'Authorization': token
+
         }
-        chitDetails.map((chits)=>{
-          if(chits.startDate==null){
-            chits.startDate = "Not Started"
+      }).then((response) => {
+        // setChits(response.data._embedded.chitty);
+        const newItemList = [...response.data._embedded.chitty]
+        const chitDetails = [];
+        for (const key2 in loadedJoinedChits) {
+          for (const key in newItemList) {
+            if (loadedJoinedChits[key2].chitNumber == newItemList[key].chitNumber) {
+              chitDetails.push({
+                chitNumber: newItemList[key].chitNumber,
+                startDate: newItemList[key].startDate,
+                duration: newItemList[key].duration,
+              })
+            }
           }
-        })
-      }
-      setChits(chitDetails);
-    });
+          chitDetails.map((chits) => {
+            if (chits.startDate == null) {
+              chits.startDate = "Not Started"
+            }
+          })
+        }
+        setChits(chitDetails);
+      });
   };
 
 
@@ -82,18 +107,18 @@ const JoinedChits = () => {
     <React.Fragment>
       <Navbar />
       <div className={classes.joinedChitsTable}>
-      <h3 className={classes.heading}>Joined Chits</h3>
-      <DataTable
-        scrollY
-        maxHeight="200px"
-        title=""
-        columns={columns}
-        data={chits}
-        paginationTotalRows={5}
-        paginationRowsPerPageOptions={[1, 5, 10, 15, 20, 50]}
-        pagination
-        highlightOnHover
-      />
+        <h3 className={classes.heading}>Joined Chits</h3>
+        <DataTable
+          scrollY
+          maxHeight="200px"
+          title=""
+          columns={columns}
+          data={chits}
+          paginationTotalRows={5}
+          paginationRowsPerPageOptions={[1, 5, 10, 15, 20, 50]}
+          pagination
+          highlightOnHover
+        />
       </div>
     </React.Fragment>
   )

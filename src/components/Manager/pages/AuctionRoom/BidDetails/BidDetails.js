@@ -9,13 +9,19 @@ import axios from 'axios';
 
 const BidDetails = () =>{
   
+    let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
     //initial amount obtained from temporary auction table
-    const geturl = "http://localhost:8080/api/auction"
+    const geturl = `http://localhost:8080/auction`
     const [currentBid, setCurrentBid] = useState(null)
 
     useEffect(() => {
         function getId() {
-            axios.get(geturl).then((response) => {
+            axios.get(geturl,{
+                headers:{
+                  'Authorization':token
+                  
+                }}
+                ).then((response) => {
                 setCurrentBid(response.data._embedded.auction[0].currentBid)
             });
         }
