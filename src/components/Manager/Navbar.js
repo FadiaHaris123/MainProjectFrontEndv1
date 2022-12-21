@@ -9,11 +9,16 @@ import { IconContext } from 'react-icons';
 // import ProfileOverlay from './pages/CustomerProfile/ProfileOverlay';
 import Collapsible from 'react-collapsible';
 
+
+    
+
+
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
   const id = window.localStorage.getItem('managerId');
   const [managerName, setManagerName] = useState([]);
+ 
 
   useEffect(() => {
     const fetchManagers = async () => {
@@ -34,6 +39,7 @@ function Navbar() {
         </Link>
         <h1 className='tagName'>Eminence Chitty</h1>
         <h5 className='tagNamee'>Hi, {managerName}</h5>
+        
         {/* <Collapsible trigger={<img src="" style={{ width: '50px' }} />}>
             <ProfileOverlay />
           </Collapsible> */}

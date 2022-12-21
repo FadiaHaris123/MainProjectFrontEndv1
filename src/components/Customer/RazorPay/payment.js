@@ -7,10 +7,11 @@ import { Fragment } from "react"
 import './payment.css';
 import Navbar from '../Navbar';
 
-
 function Payment() {
     const [amount, setamount] = useState('');
-
+    const APP_KEY=process.env.REACT_APP_KEY;
+    const KEY_SECRET=process.env.REACT_APP_API_KEY;
+    
     const handlesubmit = (e) => {
         e.preventDefault();
         if (amount === "") {
@@ -18,8 +19,9 @@ function Payment() {
         }
         else {
             var options = {
-                key: "rzp_test_Au1wTkXhA2NuW3",
-                key_secret: "67EuJFcIfFg1wdZqfKVRaJVa",
+                key:APP_KEY,
+                key_secret:KEY_SECRET,
+                
                 amount: amount * 100,
                 currenty: "INR",
                 name: "Anagha",
@@ -28,9 +30,9 @@ function Payment() {
                     alert(response.razorpay_payment_id);
                 },
                 prefill: {
-                    name: "Anagha",
-                    email: "anagharajeev99@gmail.com",
-                    contact: "6238220612"
+                    name: "",
+                    email: "",
+                    contact: ""
                 },
                 notes: {
                     address: "",
