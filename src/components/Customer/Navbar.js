@@ -80,7 +80,7 @@ function Navbar() {
           </div>
 
         <div className='img'>
-          <Collapsible trigger={<img src={Image} style={{ width: '50px', height: '70px', border: '1px solid black', borderRadius: '2rem' }} />}>
+          <Collapsible trigger={<img src={Image} style={{ width: '50px', height: '50px', border: '1px solid black', borderRadius: '2rem' }} />}>
             <ProfileOverlay />
           </Collapsible>
         </div>

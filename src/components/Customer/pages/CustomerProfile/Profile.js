@@ -32,7 +32,8 @@ function Profile() {
             'Authorization':token
             
           }});
-        setName(response.data.firstName);
+        // setName(response.data.firstName);
+        setName(response.data.firstName +" "+ response.data.lastName);
       } catch (err) {
         setError(err.message);
         setName(null);
