@@ -7,6 +7,7 @@ import AddManager from './AddManager';
 const Manager = () =>
  {
 	const [selectedFile, setState] = useState(null);
+	let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
 
 	// On file select (from the pop up) 
 	const onFileChange = event => {
@@ -21,7 +22,10 @@ const Manager = () =>
 
 		const formData = new FormData();
 		formData.append('file', selectedFile);
-		fetch('http://localhost:8080/api/managers/upload', { method: 'post', body: formData })
+		fetch('http://localhost:8080/managers/upload', { method: 'post',headers:{
+			'Authorization':token
+			
+		  }, body: formData })
 			.then(res => {
 				if (res.ok) {
 					console.log(res.data);
