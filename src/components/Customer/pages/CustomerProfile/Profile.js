@@ -25,7 +25,7 @@ function Profile() {
     const getData = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/api/user-details/${userid}`);
-        setName(response.data.firstName);
+        setName(response.data.firstName +" "+ response.data.lastName);
       } catch (err) {
         setError(err.message);
         setName(null);
