@@ -27,7 +27,7 @@ function NomineeForm(props) {
         console.log(newdata)
     }
 
-    function handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setChits(props.chits);
         Axios.post(url, {
@@ -41,15 +41,8 @@ function NomineeForm(props) {
             aadhar: nomineeData.aadhar
         })
         
-            .then(() => {
-                alert("Nominee Details added");
-            })
-        history.push("/customer/joinedchits")
-    }
 
-    useEffect(() => {
-        const updateChittal = () => {
-            Axios.put('http://localhost:8080/api/chitty/update', {
+        Axios.put('http://localhost:8080/api/chitty/update', {
                 chitNumber: chits.chitNumber,
                 installment: chits.installment,
                 duration: chits.duration,
@@ -64,12 +57,14 @@ function NomineeForm(props) {
             })
                 .then(res => {
                     if (res.data != null) {
-                        alert("Chittal information updated successfully")
+                        alert("Nominee Details added and Chittal information updated successfully")
+                        history.push("/customer/joinedchits")
                     }
                 });
-        }
-        updateChittal();
-    })
+        
+    }
+
+       
     return (
         <Fragment>
         {/* <h3 className={classes.head}>Please fill the nominee details below</h3> */}
@@ -112,9 +107,9 @@ function NomineeForm(props) {
                 </div>
             </div>
             <div className={classes.footer}>
-                {/* <Link to="./components/Customer/pages/JoinedChits/JoinedChits"> */}
+                
                     <button onClick={handleSubmit} type="submit" className={classes.btn}>Submit</button>
-                {/* </Link> */}
+                
             </div>
 
         </div>

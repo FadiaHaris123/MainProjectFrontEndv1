@@ -88,3 +88,15 @@ td {
   color: white;
   border: none;
 }
+
+.joinedChitsTable{
+  padding: 2%;
+  margin: 2%;
+  background-color: #babace;
+}
+
+
+
+.joinedChitsTable h3{
+font-family: 'Lora';
+}

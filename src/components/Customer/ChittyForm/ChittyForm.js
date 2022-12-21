@@ -174,7 +174,7 @@ function ChittyForm() {
             <div className={classes.nominee}>
                 {showNominee && <NomineeForm chittalId={chittalId} chits={chits} managerId={managerId} categoryId={categoryId}/>}
             </div>
-            {/* <JoinedChits chittyId = {chittyId}/> */}
+           
         </Fragment>
     )
 }
