@@ -1,46 +1,33 @@
 import React, { useState, Fragment } from 'react';
-import { useLocation } from "react-router-dom"
 import classes from './ChittyForm.module.css'
-import Header from './Header/Header'
-import Image from './Header/form.jpg'
-import { getByDisplayValue } from '@testing-library/react';
-import { isDOMComponent } from 'react-dom/test-utils';
-import { isDisabled } from '@testing-library/user-event/dist/utils';
 import NomineeForm from './NomineeForm';
 import Axios from 'axios';
-import JoinedChits from '../pages/JoinedChits/JoinedChits';
 import Navbar from '../Navbar';
 
+//Form to add chittal details
 function ChittyForm() {
 
 
     let chittyId = JSON.parse(sessionStorage.getItem('chittyId'));
   
-    
     const url = "http://localhost:8080/chittal/add";
     const [chits, setChits] = useState([]);
     const [chittalId, setChittalId] = useState(0);
     const [name, setName] = useState("");
-    // const [lastname, setLastName] = useState([]);
     const [showNominee, setShowNominee] = useState(false);
     const [managerId, setManagerId] = useState([]);
     const [categoryId, setCategoryId] = useState([]);
     const [categoryName, setCategoryName] = useState([]);
     let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
     let id = JSON.parse(sessionStorage.getItem('userId'));
-    // const id = window.localStorage.getItem('userId');
     const api=Axios.get(`http://localhost:8080/user-details/${id}`,{
   headers:{
     'Authorization':token
-    
   }}
 )
   .then(response=>{
     console.log(response.data)
     setName(response.data.firstName+" "+response.data.lastName);
-    
-
-
   })
 
 
@@ -79,11 +66,10 @@ function ChittyForm() {
             aadhar: chittalData.aadhar
         },{
             headers:{
-              'Authorization':token
-              
+              'Authorization':token  
             }}
         )
-            .then(res => {
+        .then(res => {
                 if (res.data != null) {
                     alert("Chittal Details added, Please add Nominee details")
                     fetchChitDetail();
@@ -98,8 +84,7 @@ function ChittyForm() {
         Axios.get(`http://localhost:8080/chitty/${chittyId}`,
         {
             headers:{
-              'Authorization':token
-              
+              'Authorization':token  
             }}).then((response) => {
             setChits(response.data);
         });
@@ -224,8 +209,7 @@ function ChittyForm() {
             </form>
             <div className={classes.nominee}>
                 {showNominee && <NomineeForm chittalId={chittalId} chits={chits} managerId={managerId} categoryId={categoryId}/>}
-            </div>
-           
+            </div>   
         </Fragment>
     )
 }

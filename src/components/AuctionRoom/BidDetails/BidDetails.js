@@ -9,14 +9,12 @@ import { useEffect } from 'react';
 
 
 const BidDetails = (props) => {
-
     useEffect(() => {
         setInterval(async() => {
         function getId() {
             axios.get(geturl, {
                 headers: {
                     'Authorization': token
-
                 }
             }).then((response) => {
                 setId(response.data._embedded.auction[0].id)
@@ -38,7 +36,6 @@ const BidDetails = (props) => {
     const url = `http://localhost:8080/auction/update`
     const geturl = `http://localhost:8080/auction`
 
-
     const sendValue = (e) => {
             setCurrentAmount(parseInt(e.target.value) + currentAmount);
             update(e);
@@ -55,14 +52,12 @@ const BidDetails = (props) => {
             {
                 headers: {
                     'Authorization': token
-
                 }
             })
         }, 3);
     }
 
     const submit = (e) => {
-
         e.preventDefault();
         setCurrentAmount(currentAmount + parseInt(customAmount))
         axios.put(url, {
@@ -74,10 +69,8 @@ const BidDetails = (props) => {
             {
                 headers: {
                     'Authorization': token
-
                 }
             })
-
     }
 
     const customAmountHandler = (e) => {

@@ -5,7 +5,6 @@ import Axios from 'axios';
 import Image from '../assets/images/joinus.jpg'
 
 const Auth = (props) => {
-// const history = useHistory();
 
 const url = "http://localhost:8080/user-profile"
 
@@ -25,33 +24,9 @@ function handle(e){
   console.log(newdata)
 }
 
+//registration of a user
 function submit(e){
   e.preventDefault();
-  // fetch(url, {
-  //   method: 'POST',
-  //   body: JSON.stringify({
-  //     firstName:data.firstName,
-  //   lastName:data.lastName,
-  //   email:data.email,
-  //   mobileNo:parseInt(data.mobileNo),
-  //   passWord:data.passWord,
-  //   roleId:data.roleId
-  //   }),
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  // }).then((res) => {
-  //     if (res.ok) {
-  //       alert("Registration Successful, Please check your email")
-  //       return res.json();
-  //     } else {
-  //       return res.json().then((data) => {
-  //         let errorMessage = 'Dupilcate Mail Id';
-  //         console.log(data)
-  //         if (data && data.error && data.error.message) {
-  //           errorMessage = data.error.message;
-  //           console.log(JSON.stringify(errorMessage))
-  //         }})}})
   Axios.post(url,{
     firstName:data.firstName,
     lastName:data.lastName,
@@ -60,12 +35,6 @@ function submit(e){
     passWord:data.passWord,
     roleId:data.roleId
   },
-  
-  // {
-  //     headers: { 'Content-Type': 'application/json' },
-  //     withCredentials: true
-  // }
-  
   )
   .then(res=>{
     if(res.data == "Duplicate email"){
@@ -74,7 +43,6 @@ function submit(e){
     }
     else{
         alert("Registration Successful")
-        // return (history.push("/"));
     }
   })
 }
@@ -176,7 +144,6 @@ let [authMode, setAuthMode] = useState("signup")
       </header>
     )
   }
-
 }
 
 
