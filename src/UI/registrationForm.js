@@ -1,11 +1,11 @@
 import React, { useState,useHistory } from "react"
 import { Link } from "react-router-dom"
 import Axios from 'axios';
-
 import Image from '../assets/images/joinus.jpg'
 
+
 const Auth = (props) => {
-// const history = useHistory();
+
 
 const url = "http://localhost:8080/user-profile"
 
@@ -18,6 +18,7 @@ const [data,setData] = useState({
   roleId:3
 })
 
+
 function handle(e){
   const newdata = {...data}
   newdata[e.target.id] = e.target.value 
@@ -25,33 +26,9 @@ function handle(e){
   console.log(newdata)
 }
 
+//registration of a user
 function submit(e){
   e.preventDefault();
-  // fetch(url, {
-  //   method: 'POST',
-  //   body: JSON.stringify({
-  //     firstName:data.firstName,
-  //   lastName:data.lastName,
-  //   email:data.email,
-  //   mobileNo:parseInt(data.mobileNo),
-  //   passWord:data.passWord,
-  //   roleId:data.roleId
-  //   }),
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  // }).then((res) => {
-  //     if (res.ok) {
-  //       alert("Registration Successful, Please check your email")
-  //       return res.json();
-  //     } else {
-  //       return res.json().then((data) => {
-  //         let errorMessage = 'Dupilcate Mail Id';
-  //         console.log(data)
-  //         if (data && data.error && data.error.message) {
-  //           errorMessage = data.error.message;
-  //           console.log(JSON.stringify(errorMessage))
-  //         }})}})
   Axios.post(url,{
     firstName:data.firstName,
     lastName:data.lastName,
@@ -60,12 +37,6 @@ function submit(e){
     passWord:data.passWord,
     roleId:data.roleId
   },
-  
-  // {
-  //     headers: { 'Content-Type': 'application/json' },
-  //     withCredentials: true
-  // }
-  
   )
   .then(res=>{
     if(res.data == "Duplicate email"){
@@ -74,13 +45,11 @@ function submit(e){
     }
     else{
         alert("Registration Successful")
-        // return (history.push("/"));
     }
   })
 }
 
 let [authMode, setAuthMode] = useState("signup")
-
   const changeAuthMode = () => {
     setAuthMode(authMode === "signup" ? "signin" : "signup")
   }
@@ -162,7 +131,7 @@ let [authMode, setAuthMode] = useState("signup")
                 type="password"
                 className="form-control mt-1"
                 placeholder="Password"
-              />
+              /><br></br>
             </div>
             <div className="d-grid gap-2 mt-3">
               <button type="submit" className="btn btn-primary">
@@ -176,7 +145,6 @@ let [authMode, setAuthMode] = useState("signup")
       </header>
     )
   }
-
 }
 
 

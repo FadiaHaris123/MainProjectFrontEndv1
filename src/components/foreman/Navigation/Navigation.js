@@ -16,7 +16,6 @@ const Navigation = () => {
           'http://localhost:8080/chittycategory',{
             headers:{
               'Authorization':token
-              
             }}
         );
   
@@ -47,9 +46,7 @@ const Navigation = () => {
     }, []);
     if (isLoading) {
       return (
-       
           <h1>Loading...</h1>
-       
       );
     }
   
@@ -60,6 +57,12 @@ const Navigation = () => {
       
       );
     }
+
+    const logoutHandler = () => {
+      sessionStorage.removeItem('roleId');
+      sessionStorage.removeItem('userId');
+      sessionStorage.removeItem('jwt');  
+  };
     
 
   return (
@@ -78,17 +81,10 @@ const Navigation = () => {
         <Link to='/admin/launchedchits'>
       <button class={classes.button}>Launched Chits</button>
       </Link>
-          {/* {category.map(category => (
-          <a href="#" value={category.category_name}>{category.category_name}</a>
-        ))} */}
         </div>
       </div>
-     
-      {/* <Link to="/admin">
-        <button class={classes.button}>Home</button>
-      </Link> */}
       <Link to="/">
-        <button class={classes.logout_button}>Log Out</button>
+        <button class={classes.logout_button} onClick={logoutHandler}>Log Out</button>
       </Link>
     </div>
   )

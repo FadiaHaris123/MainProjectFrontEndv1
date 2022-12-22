@@ -3,12 +3,9 @@ import "./App.css"
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from "react-router-dom"
 import Auth from "./UI/Auth"
-import ForgotPassword from "./UI/ForgetPassword/ForgetPassword"
 import NomineeForm from "./components/Customer/ChittyForm/NomineeForm";
-import CreateNewPassword from "./UI/ForgetPassword/ResetPassword"
 import registrationForm from "./UI/registrationForm"
 import foreman from "./components/foreman/foreman"
-// import LaunchedChits from "./components/foreman/ManagerDetails/LaunchedChits"
 import ForemanAuction from "./components/foreman/Auction/ForemanAuction"
 import LaunchedChits from "./components/foreman/LaunchedChits/LaunchedChits"
 import ManagerPage from "./components/Manager/ManagerPage"
@@ -30,29 +27,27 @@ import MainManagerPage from "./components/foreman/Manager/MainManagerPage";
 import AuctionRoom from "./components/AuctionRoom/AuctionRoom";
 
 
-
-
 function App() {
+  const history = useHistory();
+  const [authenticated, setauthenticated] = useState(null);
 
-  // const history = useHistory();
-  // const [authenticated, setauthenticated] = useState(null);
-  // useEffect(() => {
-  //   const loggedInUser =  `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
-  //   // const loggedInUser = localStorage.getItem("authenticated");
-  //   if (loggedInUser) {
-  //     setauthenticated(loggedInUser);
-  //   }
-  // }, []);
-  // if (!authenticated) {
-  //   history.push("/");
-  // } else {
+  useEffect(() => {
+    const loggedInUser =  `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+
+    if (loggedInUser) {
+      setauthenticated(loggedInUser);
+    }
+  }, []);
+
+  if (!authenticated) {
+    history.push("/");
+  } 
+  else {
     return (
       <Router>
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/login" component={Auth} />
-          <Route path="/forgotpassword" component={ForgotPassword} />
-          <Route path="/createnewpassword" component={CreateNewPassword} />
           <Route path="/register" component={registrationForm} />
           <Route exact path="/admin" component={foreman} />
           <Route path='/admin/launchedchits' component={LaunchedChits}/>
@@ -75,11 +70,11 @@ function App() {
           <Route path='/customer/nomineeform' component={NomineeForm} />
           <Route path='/admin/launchedchits' component={LaunchedChits}/>
           <Route path='/admin/ForemanAuction' component={ForemanAuction}/>
-          {/* <Route path='/admin/Earnings' component={Earnings}/> */}
         </Switch>
       </Router>
     )
   }
-//  }
+}
+
 
 export default App;
