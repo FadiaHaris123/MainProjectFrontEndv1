@@ -5,12 +5,13 @@ import { useHistory } from "react-router-dom";
 import classes from './NomineeForm.module.css'
 import Axios from 'axios';
 
+
+//To add nominee details of a particular chittal
 function NomineeForm(props) {
 
     const url = "http://localhost:8080/nominee/add";
     const history = useHistory();
     let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
-    // let id = JSON.parse(sessionStorage.getItem('userId'));
     const [chits, setChits] = useState([]);
     const [nomineeData, setNomineeData] = useState({
         chittalId: "",
@@ -46,9 +47,9 @@ function NomineeForm(props) {
         },
         {
             headers:{
-              'Authorization':token
-              
+              'Authorization':token  
             }})
+            //updating chitty table, updating current number of chittals
             Axios.put('http://localhost:8080/chitty/update', {
                 chitNumber: chits.chitNumber,
                 installment: chits.installment,
@@ -64,12 +65,10 @@ function NomineeForm(props) {
             },
             {
                 headers:{
-                  'Authorization':token
-                  
+                  'Authorization':token  
                 }})
                 .then(res => {
                     if (res.data != null) {
-
                         alert("Nominee details added and Chittal information updated successfully")
                         history.push("/customer/joinedchits")
                     }
@@ -79,10 +78,8 @@ function NomineeForm(props) {
 
     return (
         <Fragment>
-        {/* <h3 className={classes.head}>Please fill the nominee details below</h3> */}
         <div className={classes.form}>
             <div className={classes.nominee}>
-            
                 <h3 className={classes.head1}>Nominee details</h3>
                 <div className={classes.nomineeName}>
                     <label className={classes.form__label} for="nomineeName">Name <span class="required">*</span></label>
@@ -126,7 +123,6 @@ function NomineeForm(props) {
 
         </div>
         </Fragment>
-
     );
 }
 

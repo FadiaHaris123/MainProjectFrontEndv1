@@ -37,8 +37,7 @@ const AuctionChitDetails = (props) => {
                 </div>
             </div>
         </React.Fragment>
-    )
-    
+    )   
 }
 
 export default AuctionChitDetails;

@@ -1,10 +1,11 @@
 import React, { useState,useHistory } from "react"
 import { Link } from "react-router-dom"
 import Axios from 'axios';
-
 import Image from '../assets/images/joinus.jpg'
 
+
 const Auth = (props) => {
+
 
 const url = "http://localhost:8080/user-profile"
 
@@ -16,6 +17,7 @@ const [data,setData] = useState({
   passWord:"",
   roleId:3
 })
+
 
 function handle(e){
   const newdata = {...data}
@@ -48,7 +50,6 @@ function submit(e){
 }
 
 let [authMode, setAuthMode] = useState("signup")
-
   const changeAuthMode = () => {
     setAuthMode(authMode === "signup" ? "signin" : "signup")
   }
@@ -130,7 +131,7 @@ let [authMode, setAuthMode] = useState("signup")
                 type="password"
                 className="form-control mt-1"
                 placeholder="Password"
-              />
+              /><br></br>
             </div>
             <div className="d-grid gap-2 mt-3">
               <button type="submit" className="btn btn-primary">

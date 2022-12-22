@@ -8,6 +8,8 @@ import '../App.css'
 import './Auth.css'
 import classes from './Login.module.css';
 
+
+//Authentication page
 const Auth = (props) => {
 
   let [authMode, setAuthMode] = useState("signin")
@@ -45,7 +47,6 @@ const Auth = (props) => {
   };
 
   const passwordHandler = (prevState, action) => {
-
     if (action.type === 'passwordchange') {
       return {
         enteredPassword: action.payload,

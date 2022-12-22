@@ -7,7 +7,6 @@ import DataTable from 'react-data-table-component';
 
 const BasicTable = () => {
 
-  // const userid = window.localStorage.getItem('userId');
   let userid = JSON.parse(sessionStorage.getItem('userId'));
   const [chits, setChits] = useState([]);
   const [amount, setChitAmount] = useState(null);
@@ -46,16 +45,7 @@ const BasicTable = () => {
     setSearchName(name);
   }
 
-// useEffect(() => {
-//   const fetchManagers = async () => {
-//     const response = await fetch(
-//       'http://localhost:8080/managers/search/findByfirstNameContaining?name='+searchName,
-//       {
-//         headers:{
-//           'Authorization':token
-          
-//         }}
-//     );
+
   useEffect(() => {
     const fetchJoinedChits = async () => {
       const response = await fetch(

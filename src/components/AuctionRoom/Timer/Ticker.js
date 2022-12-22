@@ -7,7 +7,6 @@ const Ticker = ({ futureDate }) => {
     const { minutes, seconds, isTimeUp } = useTicker(futureDate);
     const tickerContents = isTimeUp ? (
         <div className={classes.warning}>Time is up!!!</div>
-        
     ) : (
         <span className={classes.ticker}>
          <TickerCell value={minutes} label=" min" /><span className={classes.separator}>:</span><TickerCell value={seconds} label=" sec" />
