@@ -267,7 +267,6 @@ const LaunchForm = () => {
           ></input>
         )}
 
-      
         <button type="submit">
           Launch
         </button>

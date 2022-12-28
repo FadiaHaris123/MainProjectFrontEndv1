@@ -5,8 +5,7 @@ import Image from '../assets/images/joinus.jpg'
 import validator from 'validator'
 
 const Auth = (props) => {
-
-
+  
   const url = "http://localhost:8080/user-profile"
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -34,7 +33,7 @@ const Auth = (props) => {
     })) {
       setErrorMessage('Strong Password')
     } else {
-      setErrorMessage('Not a Strong Password')
+      setErrorMessage('Not a Strong Password (eg:Eminence@123)')
     }
     const newdata = { ...data }
     newdata[e.target.id] = e.target.value
@@ -151,7 +150,13 @@ const Auth = (props) => {
                     type="password"
                     className="form-control mt-1"
                     placeholder="Password"
-                  /><br></br>
+                  />
+                  {errorMessage === '' ? null :
+                    <span style={{
+                      fontWeight: 'bold',
+                      color: errorMessage.includes('Not') ? 'red' : 'green',
+                    }}>{errorMessage}</span>}
+                  <br></br>
                 </div>
                 <div className="d-grid gap-2 mt-3">
                   <button type="submit" className="btn btn-primary">
@@ -167,8 +172,6 @@ const Auth = (props) => {
   }
 }
 
-
-
 const HeaderStyle = {
   width: "100%",
   height: "100vh",
@@ -180,9 +183,3 @@ const HeaderStyle = {
 }
 
 export default Auth;
-
-
-
-
-
-
