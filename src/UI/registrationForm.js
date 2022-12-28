@@ -151,7 +151,12 @@ const Auth = (props) => {
                     type="password"
                     className="form-control mt-1"
                     placeholder="Password"
-                  /><br></br>
+                  />
+                  {errorMessage === '' ? null :
+                    <span style={{
+                      fontWeight: 'bold',
+                      color: 'red',
+                    }}>{errorMessage}</span>}<br></br>
                 </div>
                 <div className="d-grid gap-2 mt-3">
                   <button type="submit" className="btn btn-primary">
