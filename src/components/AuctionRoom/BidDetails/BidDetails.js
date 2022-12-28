@@ -84,7 +84,7 @@ const BidDetails = (props) => {
                 <div className={classes.bidhistory}>
                     <h3>Bidding On Air !!!</h3>
                     <div className={classes.currentBid}>
-                        <label><IoMdArrowDropupCircle color='green' size={20} />Current Bid Amount</label>
+                        <label><IoMdArrowDropupCircle color='green' size={20} />Current Bid Amount (in ₹)</label>
                         <input className={classes.bidamount} value={currentAmount} readOnly />
                     </div>
                 </div>
@@ -100,7 +100,7 @@ const BidDetails = (props) => {
                         <button type='submit' value={10000} onClick={sendValue}>+10,000</button>
                     </div>
                     <div className={classes.customamount}>
-                        <label>Custom amount </label>
+                        <label>Custom amount (in ₹)</label>
                         <form onSubmit={submit}>
                             <input placeholder='Enter Amount' value={customAmount} onChange={customAmountHandler} />
                             <button className={classes.send} type='submit'><AiOutlineSend size={20} /></button>
