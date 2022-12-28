@@ -2,10 +2,13 @@ import React, { useState,useHistory } from "react"
 import { Link } from "react-router-dom"
 import Axios from 'axios';
 import Image from '../assets/images/joinus.jpg'
+import "./registrationForm.css"
 
 
 const Auth = (props) => {
 
+const [errorMessage, setErrorMessage] = useState('')
+const [passwordError,setPasswordError] = useState('')
 
 const url = "http://localhost:8080/user-profile"
 
@@ -24,29 +27,58 @@ function handle(e){
   newdata[e.target.id] = e.target.value 
   setData(newdata)
   console.log(newdata)
+
+  if(e.target.id === "mobileNo"){
+    validatePhoneNumber(e.target.value)
+  }
+  if(e.target.id === "passWord"){
+    passwordCheck(e.target.value)
+  }
+}
+
+function validatePhoneNumber(value)
+{
+    const indiaRegex = /\d{10}$/;
+    if(value.match(indiaRegex)) {
+        setErrorMessage("")    
+    } else {
+        setErrorMessage("Not Valid Phone Number")
+    }
+}
+
+function passwordCheck(value){
+  if(value.length<6)
+    setPasswordError("Please enter password of length greater than 6")
+  else
+    setPasswordError("")
 }
 
 //registration of a user
-function submit(e){
-  e.preventDefault();
-  Axios.post(url,{
-    firstName:data.firstName,
-    lastName:data.lastName,
-    email:data.email,
-    mobileNo:parseInt(data.mobileNo),
-    passWord:data.passWord,
-    roleId:data.roleId
-  },
-  )
-  .then(res=>{
-    if(res.data == "Duplicate email"){
-      console.log(res.data)
-      alert("Duplicate Email ID entered")
-    }
-    else{
-        alert("Registration Successful")
-    }
-  })
+
+  function submit(e){
+    e.preventDefault();
+    if(errorMessage=="" && passwordError=="" && data.passWord!="" && data.mobileNo!=""){
+      Axios.post(url,{
+        firstName:data.firstName,
+        lastName:data.lastName,
+        email:data.email,
+        mobileNo:parseInt(data.mobileNo),
+        passWord:data.passWord,
+        roleId:data.roleId
+      },
+      )
+      .then(res=>{
+        if(res.data == "Duplicate entry"){
+          console.log(res.data)
+          alert("Duplicate Email ID entered")
+        }
+        else{
+            alert("Registration Successful")
+        }
+      })
+  }
+  else
+    alert("please verify the input values")
 }
 
 let [authMode, setAuthMode] = useState("signup")
@@ -115,11 +147,13 @@ let [authMode, setAuthMode] = useState("signup")
               onChange={(e)=>handle(e)}
               id="mobileNo"
               value={data.mobileNo}
-                type="number"
+                type="text"
+                min="0"
                 className="form-control mt-1"
                 placeholder="Mobile No."
                 required
               />
+              {errorMessage === '' ? null :<span className="errorMessages">{errorMessage}</span>}
             </div>
             <div className="form-group mt-3">
               <label>Password</label>
@@ -131,7 +165,8 @@ let [authMode, setAuthMode] = useState("signup")
                 type="password"
                 className="form-control mt-1"
                 placeholder="Password"
-              /><br></br>
+              />
+              {passwordError === '' ? null :<span className="errorMessages">{passwordError}</span>}<br></br>
             </div>
             <div className="d-grid gap-2 mt-3">
               <button type="submit" className="btn btn-primary">
