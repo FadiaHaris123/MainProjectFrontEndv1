@@ -3,7 +3,18 @@ import * as AiIcons from 'react-icons/ai';
 import { FaGoodreads } from 'react-icons/fa';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
+import { useHistory } from 'react-router-dom';
 
+
+
+// const logoutHandler = () => {
+//   const history = useHistory();
+//   sessionStorage.removeItem('roleId');
+//   sessionStorage.removeItem('userId');
+//   sessionStorage.removeItem('jwt'); 
+   
+
+// };
 export const SidebarData = [
 
   
@@ -50,9 +61,10 @@ export const SidebarData = [
   
   {
     title: 'Log Out',
-    path: '/',
+    path: '/' ,
     icon: <AiIcons.AiOutlineLogout />,
-    cName: 'nav-text'
+    cName: 'nav-text',
+    // cell:()=>(<button onClick={logoutHandler}></button>)
   }
 ];
 
