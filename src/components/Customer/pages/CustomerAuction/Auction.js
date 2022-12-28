@@ -3,6 +3,8 @@ import BasicTable  from './components/BasicTable'
 import Navbar from '../../Navbar';
 import classes from './Auction.module.css';
 
+
+//All the upcoming auctions are displayed
 function Auction() {
   return (
     <div className={classes.auction}>

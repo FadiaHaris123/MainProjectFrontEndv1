@@ -1,13 +1,17 @@
-import React, { useState,useHistory } from "react"
+import React, { useState, useHistory } from "react"
 import { Link } from "react-router-dom"
 import Axios from 'axios';
-
 import Image from '../assets/images/joinus.jpg'
+import "./registrationForm.css"
+
 
 const Auth = (props) => {
-// const history = useHistory();
+
+const [errorMessage, setErrorMessage] = useState('')
+const [passwordError,setPasswordError] = useState('')
 
 const url = "http://localhost:8080/user-profile"
+
 
 const [data,setData] = useState({
   firstName:"",
@@ -18,73 +22,106 @@ const [data,setData] = useState({
   roleId:3
 })
 
+
 function handle(e){
   const newdata = {...data}
   newdata[e.target.id] = e.target.value 
   setData(newdata)
   console.log(newdata)
+
+  if(e.target.id === "mobileNo"){
+    validatePhoneNumber(e.target.value)
+  }
+  if(e.target.id === "passWord"){
+    passwordCheck(e.target.value)
+  }
 }
 
-function submit(e){
-  e.preventDefault();
-  // fetch(url, {
-  //   method: 'POST',
-  //   body: JSON.stringify({
-  //     firstName:data.firstName,
-  //   lastName:data.lastName,
-  //   email:data.email,
-  //   mobileNo:parseInt(data.mobileNo),
-  //   passWord:data.passWord,
-  //   roleId:data.roleId
-  //   }),
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  // }).then((res) => {
-  //     if (res.ok) {
-  //       alert("Registration Successful, Please check your email")
-  //       return res.json();
-  //     } else {
-  //       return res.json().then((data) => {
-  //         let errorMessage = 'Dupilcate Mail Id';
-  //         console.log(data)
-  //         if (data && data.error && data.error.message) {
-  //           errorMessage = data.error.message;
-  //           console.log(JSON.stringify(errorMessage))
-  //         }})}})
-  Axios.post(url,{
-    firstName:data.firstName,
-    lastName:data.lastName,
-    email:data.email,
-    mobileNo:parseInt(data.mobileNo),
-    passWord:data.passWord,
-    roleId:data.roleId
-  },
-  
-  // {
-  //     headers: { 'Content-Type': 'application/json' },
-  //     withCredentials: true
-  // }
-  
-  )
-  .then(res=>{
-    if(res.data == "Duplicate email"){
-      console.log(res.data)
-      alert("Duplicate Email ID entered")
+function validatePhoneNumber(value)
+{
+    const indiaRegex = /\d{10}$/;
+    if(value.match(indiaRegex)) {
+        setErrorMessage("")    
+    } else {
+        setErrorMessage("Not Valid Phone Number")
     }
-    else{
-        alert("Registration Successful")
-        // return (history.push("/"));
-    }
-  })
 }
 
-let [authMode, setAuthMode] = useState("signup")
+function passwordCheck(value){
+  if(value.length<6)
+    setPasswordError("Please enter password of length greater than 6")
+  else
+    setPasswordError("")
+}
 
+//registration of a user
+
+  function submit(e){
+    e.preventDefault();
+    if(errorMessage=="" && passwordError=="" && data.passWord!="" && data.mobileNo!=""){
+      Axios.post(url,{
+        firstName:data.firstName,
+        lastName:data.lastName,
+        email:data.email,
+        mobileNo:parseInt(data.mobileNo),
+        passWord:data.passWord,
+        roleId:data.roleId
+      },
+      )
+      .then(res=>{
+        if(res.data == "Duplicate entry"){
+          console.log(res.data)
+          alert("Duplicate Email ID entered")
+        }
+        else{
+            alert("Registration Successful")
+        }
+      })
+  }
+  else
+    alert("please verify the input values")
+}
+
+
+  function handle(e) {
+    const newdata = { ...data }
+    newdata[e.target.id] = e.target.value
+    setData(newdata)
+    console.log(newdata)
+  }
+
+  //registration of a user
+  function submit(e) {
+    e.preventDefault();
+    if (data.passWord == "" || errorMessage.includes('Not')) {
+      alert("Enter password")
+    } else {
+      Axios.post(url, {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        mobileNo: parseInt(data.mobileNo),
+        passWord: data.passWord,
+        roleId: data.roleId
+      },
+      )
+        .then(res => {
+          if (res.data == "Duplicate email") {
+            console.log(res.data)
+            alert("Duplicate Email ID entered")
+          }
+          else {
+            alert("Registration Successful")
+          }
+        })
+    }
+  }
+
+  let [authMode, setAuthMode] = useState("signup")
   const changeAuthMode = () => {
     setAuthMode(authMode === "signup" ? "signin" : "signup")
   }
-  
+
   if (authMode === "signup") {
     return (
       <header style={ HeaderStyle }>
@@ -146,11 +183,13 @@ let [authMode, setAuthMode] = useState("signup")
               onChange={(e)=>handle(e)}
               id="mobileNo"
               value={data.mobileNo}
-                type="number"
+                type="text"
+                min="0"
                 className="form-control mt-1"
                 placeholder="Mobile No."
                 required
               />
+              {errorMessage === '' ? null :<span className="errorMessages">{errorMessage}</span>}
             </div>
             <div className="form-group mt-3">
               <label>Password</label>
@@ -163,35 +202,35 @@ let [authMode, setAuthMode] = useState("signup")
                 className="form-control mt-1"
                 placeholder="Password"
               />
+              {passwordError === '' ? null :<span className="errorMessages">{passwordError}</span>}<br></br>
             </div>
             <div className="d-grid gap-2 mt-3">
               <button type="submit" className="btn btn-primary">
                 Submit
               </button>
             </div>
+            </div>
+            </form>
           </div>
-        </form>
-      </div>
-      </div>
+        </div>
       </header>
     )
   }
-
 }
-
 
 
 const HeaderStyle = {
   width: "100%",
   height: "100vh",
   background: `url(${Image})`,
-  backgroundPosition:'fixed',
+  backgroundPosition: 'fixed',
   backgroundRepeat: "no-repeat",
   backgroundSize: "100% 100%",
   backgroundAttachment: "fixed"
 }
 
 export default Auth;
+
 
 
 

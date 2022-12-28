@@ -1,46 +1,34 @@
 import React, { useState, Fragment } from 'react';
-import { useLocation } from "react-router-dom"
 import classes from './ChittyForm.module.css'
-import Header from './Header/Header'
-import Image from './Header/form.jpg'
-import { getByDisplayValue } from '@testing-library/react';
-import { isDOMComponent } from 'react-dom/test-utils';
-import { isDisabled } from '@testing-library/user-event/dist/utils';
 import NomineeForm from './NomineeForm';
 import Axios from 'axios';
-import JoinedChits from '../pages/JoinedChits/JoinedChits';
 import Navbar from '../Navbar';
 
+//Form to add chittal details
 function ChittyForm() {
 
+    const [errorMessage, setErrorMessage] = useState('')
 
     let chittyId = JSON.parse(sessionStorage.getItem('chittyId'));
   
-    
     const url = "http://localhost:8080/chittal/add";
     const [chits, setChits] = useState([]);
     const [chittalId, setChittalId] = useState(0);
     const [name, setName] = useState("");
-    // const [lastname, setLastName] = useState([]);
     const [showNominee, setShowNominee] = useState(false);
     const [managerId, setManagerId] = useState([]);
     const [categoryId, setCategoryId] = useState([]);
     const [categoryName, setCategoryName] = useState([]);
     let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
     let id = JSON.parse(sessionStorage.getItem('userId'));
-    // const id = window.localStorage.getItem('userId');
     const api=Axios.get(`http://localhost:8080/user-details/${id}`,{
   headers:{
     'Authorization':token
-    
   }}
 )
   .then(response=>{
     console.log(response.data)
     setName(response.data.firstName+" "+response.data.lastName);
-    
-
-
   })
 
 
@@ -61,8 +49,21 @@ function ChittyForm() {
         const newdata = { ...chittalData }
         newdata[e.target.id] = e.target.value
         setChittalData(newdata)
-        console.log(newdata)
+        if(e.target.id === "userPhone"){
+            validatePhoneNumber(e.target.value)
+        }
     }
+
+    function validatePhoneNumber(value)
+    {
+        const indiaRegex = /\d{10}$/;
+        if(value.match(indiaRegex)) {
+            setErrorMessage("")    
+        } else {
+            setErrorMessage("Not Valid Phone Number")
+        }
+    }
+
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -79,11 +80,10 @@ function ChittyForm() {
             aadhar: chittalData.aadhar
         },{
             headers:{
-              'Authorization':token
-              
+              'Authorization':token  
             }}
         )
-            .then(res => {
+        .then(res => {
                 if (res.data != null) {
                     alert("Chittal Details added, Please add Nominee details")
                     fetchChitDetail();
@@ -98,8 +98,7 @@ function ChittyForm() {
         Axios.get(`http://localhost:8080/chitty/${chittyId}`,
         {
             headers:{
-              'Authorization':token
-              
+              'Authorization':token  
             }}).then((response) => {
             setChits(response.data);
         });
@@ -160,8 +159,7 @@ function ChittyForm() {
                     </div>
                     <div>
                         <label className={classes.form__label} for="age"> Age:<span class="required">*</span> </label>
-                        
-                        <input className={classes.form__input} type="text" value={chittalData.age} onChange={(e) => handleInputChange(e)} id="age" placeholder="In years" required/>
+                        <input className={classes.form__input} type="number" min="18" max="70" value={chittalData.age} onChange={(e) => handleInputChange(e)} id="age" placeholder="In years" required/>
                     </div>
 
                     <div className={classes.dob}>
@@ -171,21 +169,19 @@ function ChittyForm() {
                     </div>
 
                     <div className={classes.address}>
-                        <label className={classes.form__label} for="address">Address <span class="required">*</span></label>
-                        
+                        <label className={classes.form__label} for="address">Address <span class="required">*</span></label> 
                         <input type="address" id="address" className={classes.form__input} value={chittalData.address} onChange={(e) => handleInputChange(e)} placeholder="Address" required/>
                     </div>
 
                     <div className={classes.pincode}>
                         <label className={classes.form__label} for="pincode">Pincode: <span class="required">*</span></label>
-                        
-                        <input type="pincode" id="pinCode" className={classes.form__input} value={chittalData.pinCode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" required/>
+                        <input  id="pinCode" type="number" min="0" className={classes.form__input} value={chittalData.pinCode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" required/>
                     </div>
 
                     <div className={classes.userPhone}>
                         <label className={classes.form__label} for="userPhone">Contact number: <span class="required">*</span> </label>
-                       
-                        <input type="text" id="userPhone" className={classes.form__input} value={chittalData.userPhone} onChange={(e) => handleInputChange(e)} required />
+                        <input type="text"  id="userPhone" className={classes.form__input} value={chittalData.userPhone} onChange={(e) => handleInputChange(e)} required /><br/>
+                        {errorMessage === '' ? null :<span className={classes.errorMessage}>{errorMessage}</span>}
                     </div>
 
                     <br></br>
@@ -203,8 +199,7 @@ function ChittyForm() {
 
                     <div className={classes.income}>
                         <label className={classes.form__label} for="income">Annual Income: <span class="required">*</span></label>
-                        
-                        <input type="text" id="income" className={classes.form__input} value={chittalData.income} onChange={(e) => handleInputChange(e)} placeholder="₹" required/>
+                        <input type="number" min="0" id="income" className={classes.form__input} value={chittalData.income} onChange={(e) => handleInputChange(e)} placeholder="₹" required/>
                     </div>
 
                     <div className={classes.Chitty_Type}>
@@ -214,7 +209,7 @@ function ChittyForm() {
 
                     <div className={classes.aadhar}>
                         <label className={classes.form__label} for="aadhar">Aadhar number: <span class="required">*</span> </label>
-                        <input type="text" id="aadhar" className={classes.form__input} value={chittalData.aadhar} onChange={(e) => handleInputChange(e)} placeholder="Eg.2054 3605 7419 " re />
+                        <input type="number" min="0" id="aadhar" className={classes.form__input} value={chittalData.aadhar} onChange={(e) => handleInputChange(e)} placeholder="Eg.2054 3605 7419 " re />
                     </div>
                 </div>
 
@@ -224,8 +219,7 @@ function ChittyForm() {
             </form>
             <div className={classes.nominee}>
                 {showNominee && <NomineeForm chittalId={chittalId} chits={chits} managerId={managerId} categoryId={categoryId}/>}
-            </div>
-           
+            </div>   
         </Fragment>
     )
 }

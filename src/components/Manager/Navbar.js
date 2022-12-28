@@ -14,24 +14,14 @@ import Collapsible from 'react-collapsible';
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
-  // const id = window.localStorage.getItem('managerId');
   const [managerName, setManagerName] = useState([]);
   let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
   let userid = JSON.parse(sessionStorage.getItem('userId'));
 
-  // useEffect(() => {
-  //   const fetchManagers = async () => {
-  //     const response = await axios.get(
-  //       `http://localhost:8080/managers/${id}`
-  //     );
-  //     setManagerName(response.data.firstName)
-  //   };
-  //   fetchManagers();
-  // }, []);
+
   const api=axios.get(`http://localhost:8080/managers/${userid}`,{
     headers:{
       'Authorization':token
-      
     }}
   )
     .then(response=>{
@@ -47,12 +37,7 @@ function Navbar() {
           <FaIcons.FaBars onClick={showSidebar} />
         </Link>
         <h1 className='tagName'>Eminence Chitty</h1>
-        <h5 className='tagNamee'>Hi, Mngr. {managerName}  < FaIcons.FaUser /></h5>
-        
-       
-        {/* <Collapsible trigger={<img src="" style={{ width: '50px' }} />}>
-            <ProfileOverlay />
-          </Collapsible> */}
+        <h5 className='tagNamee'>Hi, {managerName}  < FaIcons.FaUser /></h5>
       </div>
       <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
         <ul className='nav-menu-items' onClick={showSidebar}>

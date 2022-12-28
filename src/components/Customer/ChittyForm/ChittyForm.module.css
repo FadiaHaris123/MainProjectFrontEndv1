@@ -121,3 +121,8 @@ color:rgb(210, 42, 42);
   font-weight: bold;
   color: rgb(122, 16, 16);
 }
+
+.errorMessage{
+  font-weight: 300;
+  color: red;
+}

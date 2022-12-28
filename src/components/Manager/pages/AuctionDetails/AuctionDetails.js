@@ -112,7 +112,7 @@ const AuctionDetails = () => {
     return (
         <Fragment>
             <Navbar />
-             {/* {refresh} */}
+            <h3 className={classes.heading}>Auction Details</h3>
             <div className={classes.auctionDetails}>
             <DataTable
                 scrollY
