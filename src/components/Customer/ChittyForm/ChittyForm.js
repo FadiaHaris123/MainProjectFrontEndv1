@@ -3,16 +3,19 @@ import classes from './ChittyForm.module.css'
 import NomineeForm from './NomineeForm';
 import Axios from 'axios';
 import Navbar from '../Navbar';
-
+import TextField from '@material-ui/core/TextField';
 //Form to add chittal details
-function ChittyForm() {
+const ChittyForm=()=> {
 
-    const [errorMessage, setErrorMessage] = useState('')
+    const [errorAgeMessage, setErrorAgeMessage] = useState('')
+    const [errorPhoneMessage, setErrorPhoneMessage] = useState('')
 
     let chittyId = JSON.parse(sessionStorage.getItem('chittyId'));
   
     const url = "http://localhost:8080/chittal/add";
     const [chits, setChits] = useState([]);
+
+    
     const [chittalId, setChittalId] = useState(0);
     const [name, setName] = useState("");
     const [showNominee, setShowNominee] = useState(false);
@@ -49,6 +52,9 @@ function ChittyForm() {
         const newdata = { ...chittalData }
         newdata[e.target.id] = e.target.value
         setChittalData(newdata)
+        if(e.target.id === "age"){
+            validateAge(e.target.value)
+        }
         if(e.target.id === "userPhone"){
             validatePhoneNumber(e.target.value)
         }
@@ -56,11 +62,69 @@ function ChittyForm() {
 
     function validatePhoneNumber(value)
     {
-        const indiaRegex = /\d{10}$/;
+        const indiaRegex = /^[0-9]{10}$/;
         if(value.match(indiaRegex)) {
-            setErrorMessage("")    
+            setErrorPhoneMessage("")    
         } else {
-            setErrorMessage("Not Valid Phone Number")
+            setErrorPhoneMessage("Not Valid Phone Number")
+        }
+    }
+    const [dob, setState] = useState('');
+    const [ages,setAges]= useState(0);
+    const calculate_age = (event) => {
+        var today = new Date();
+        var birthDate = new Date(dob);  // create a date object directly from `dob1` argument
+        var age_now = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+        {
+            age_now--;
+        }
+        setAges(age_now)
+        console.log(age_now);
+        const newdata = { ...chittalData }
+        newdata[event.target.id] = age_now
+        setChittalData(newdata)
+      }
+
+
+
+     const handleChange_age = (event) => {
+        const newdata = { ...chittalData }
+        newdata[event.target.id] = event.target.value
+        setChittalData(newdata)
+        console.log("DOB:", event.target.value);
+    
+        setState(event.target.value)
+        
+        //      () => {
+        
+        //   // example of setState callback
+        //   // this will have the latest this.state.dob1
+        //   console.log("ddd",this.state.dob1);
+        // })
+    
+        // call calculate_age with event.target.value
+        // var age_latest = {age_latest: this.calculate_age(event.target.value)}
+        // console.log(age_latest);
+    
+        // this.setState({ age1: age_latest }, () => {
+        //   // this will have the latest this.state.age1
+        //   console.log("Age:", this.state.age1);
+        // })
+      }
+
+      const handleFunction=(event)=> {
+        handleChange_age(event);
+        calculate_age(event);
+    }
+    function validateAge(value)
+    {
+        const indiaRegex = /^[0-9]{2}$/;
+        if(value.match(indiaRegex)) {
+            setErrorAgeMessage("")    
+        } else {
+            setErrorAgeMessage("Not a Valid age")
         }
     }
 
@@ -144,6 +208,8 @@ function ChittyForm() {
     
     console.log(categoryName);
 
+
+
     return (
         <Fragment>
             <Navbar/>
@@ -157,16 +223,41 @@ function ChittyForm() {
                         <label className={classes.form__label} for="Name" id="name"> Name: </label>
                         <input className={classes.form__input}  readOnly id="Name" value={name} required />
                     </div>
-                    <div>
-                        <label className={classes.form__label} for="age"> Age:<span class="required">*</span> </label>
-                        <input className={classes.form__input} type="number" min="18" max="70" value={chittalData.age} onChange={(e) => handleInputChange(e)} id="age" placeholder="In years" required/>
-                    </div>
+             
 
                     <div className={classes.dob}>
                         <label className={classes.form__label} for="dob"> Date of birth:<span class="required">*</span> </label>
                         
-                        <input className={classes.form__input} type="text" value={chittalData.dob} onChange={(e) => handleInputChange(e)} id="dob" placeholder="yyyy-mm-dd" required/>
+                        <input className={classes.form__input} type="date"  value={chittalData.dob} onChange={(e) => handleFunction(e)} id="dob" placeholder="yyyy-mm-dd" required/>
                     </div>
+
+                    <div>
+                        <label className={classes.form__label} for="age"> Age:<span class="required">*</span> </label>
+                       
+                        <input className={classes.form__input} type="text" min="18" max="70" value={ages} id="age" placeholder="In years" readOnly/>
+                    <div>
+                        {errorAgeMessage === '' ? null :<span className={classes.errorMessage}>{errorAgeMessage}</span>}
+                        </div>
+                        
+                    </div>
+                    {/* <div 
+                    style={{
+      margin: 'auto',
+      display: 'block',
+      width: 'fit-content'
+    }}
+    >
+     
+      <TextField
+        id="date"
+        label="Choose your birthdate"
+        type="date"
+        defaultValue="2017-05-24"
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+    </div> */}
 
                     <div className={classes.address}>
                         <label className={classes.form__label} for="address">Address <span class="required">*</span></label> 
@@ -181,7 +272,7 @@ function ChittyForm() {
                     <div className={classes.userPhone}>
                         <label className={classes.form__label} for="userPhone">Contact number: <span class="required">*</span> </label>
                         <input type="text"  id="userPhone" className={classes.form__input} value={chittalData.userPhone} onChange={(e) => handleInputChange(e)} required /><br/>
-                        {errorMessage === '' ? null :<span className={classes.errorMessage}>{errorMessage}</span>}
+                        {errorPhoneMessage === '' ? null :<span className={classes.errorMessage}>{errorPhoneMessage}</span>}
                     </div>
 
                     <br></br>
