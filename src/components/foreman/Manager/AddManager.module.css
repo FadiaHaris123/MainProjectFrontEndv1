@@ -50,3 +50,7 @@
     font-family: 'Lora', serif;
     color: #192d44;
 }
+
+.errormsg {
+    color: 'red';
+}
