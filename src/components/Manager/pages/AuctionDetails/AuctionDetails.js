@@ -96,8 +96,7 @@ const AuctionDetails = () => {
         },
         {
             headers:{
-              'Authorization':token
-              
+              'Authorization':token 
             }})
        
             .then(() => {

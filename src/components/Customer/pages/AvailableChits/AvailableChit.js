@@ -62,7 +62,7 @@ const AvailableChit = () => {
             {chits.map(chit => {
               const SubmitHandler=()=>{
                 console.log("chitty"+chit.chitNumber)
-                sessionStorage.setItem('chittyId', chit.chitNumber);
+                sessionStorage.setItem('chittyId', JSON.stringify(chit.chitNumber));
               }
               return (
                 <tr>
