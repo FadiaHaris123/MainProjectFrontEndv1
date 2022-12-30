@@ -40,7 +40,7 @@ const BidDetails = () => {
                 <div className={classes.bidhistory}>
                     <h3>Bidding On Air !!!</h3>
                     <div className={classes.currentBid}>
-                        <label><IoMdArrowDropupCircle color='green' size={20} />Current Bid Amount</label>
+                        <label><IoMdArrowDropupCircle color='green' size={20} />Current Bid Amount(in ₹)</label>
                         <input className={classes.bidamount} value={currentBid} readOnly />
                     </div>
                 </div>

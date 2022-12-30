@@ -17,15 +17,15 @@ const AuctionChitDetails = (props) => {
                 </div>
                 <div className={classes.flexboxes}>
                     <h3>Maximum Call Allowed</h3>
-                    <h4>{maxAmount}</h4>
+                    <h4>{maxAmount}₹</h4>
                 </div>
                 <div className={classes.flexboxes}>
                     <h3><AiFillCaretDown color="red" /> Bid Starts at</h3>
-                    <h4>{amount}</h4>
+                    <h4>{amount}₹</h4>
                 </div>
                 <div className={classes.flexboxes}>
                     <h3>Total Amount</h3>
-                    <h4>{props.amount}</h4>
+                    <h4>{props.amount}₹</h4>
                 </div>
                 <div className={classes.flexboxes}>
                     <h3>User Id</h3>
