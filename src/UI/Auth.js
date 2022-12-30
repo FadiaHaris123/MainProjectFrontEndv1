@@ -12,6 +12,7 @@ import classes from './Login.module.css';
 //Authentication page
 const Auth = (props) => {
 
+  let [emailError,setEmailError] = useState('')
   let [authMode, setAuthMode] = useState("signin")
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin")
@@ -35,7 +36,6 @@ const Auth = (props) => {
       return {
         enteredEmail: action.payload,
         emailIsValid: action.payload.includes('@')
-
       }
     }
     if (action.type === 'emailvalidity') {
@@ -101,7 +101,6 @@ const Auth = (props) => {
 
 
   const history = useHistory();
-
   const loginHandler = async (e) => {
    
     e.preventDefault();
@@ -126,14 +125,14 @@ const Auth = (props) => {
         console.log(data)
         alert("UnAuthorized")
       }
-      else{
-        alert("hello")
-      }
+      // else{
+      //   alert("hello")
+      // }
       throw error
   })
   let token=null;
   token = JSON.stringify(response?.data?.jwtToken);
-  console.log(token)
+  // console.log(token)
 
    if(token!=null)
    {
@@ -153,7 +152,7 @@ const Auth = (props) => {
     }
     console.log("authorized")
   }
-  props.onLogin(emailCurrentState.enteredEmail, passwordCurrentState.enteredPassword);
+  // props.onLogin(emailCurrentState.enteredEmail, passwordCurrentState.enteredPassword);
 };
     
   return (

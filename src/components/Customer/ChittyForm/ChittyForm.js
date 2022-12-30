@@ -24,13 +24,14 @@ const ChittyForm=()=> {
     const [categoryName, setCategoryName] = useState([]);
     let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
     let id = JSON.parse(sessionStorage.getItem('userId'));
-    const api=Axios.get(`http://localhost:8080/user-details/${id}`,{
-  headers:{
-    'Authorization':token
-  }}
-)
+
+    Axios.get(`http://localhost:8080/user-details/${id}`,{
+    headers:{
+        'Authorization':token
+    }}
+    )
   .then(response=>{
-    console.log(response.data)
+    // console.log(response.data)
     setName(response.data.firstName+" "+response.data.lastName);
   })
 
@@ -133,7 +134,7 @@ const ChittyForm=()=> {
         e.preventDefault();
         Axios.post(url, {
             userId: id,
-            chittyId: parseInt(chittyId),
+            chittyId: chittyId,
             age: parseInt(chittalData.age),
             address: chittalData.address,
             pinCode: chittalData.pinCode,
@@ -163,7 +164,8 @@ const ChittyForm=()=> {
         {
             headers:{
               'Authorization':token  
-            }}).then((response) => {
+        }})
+        .then((response) => {
             setChits(response.data);
         });
         getManagerId();
@@ -173,8 +175,7 @@ const ChittyForm=()=> {
         Axios.get(`http://localhost:8080/chitty/${chittyId}/manager`,
         {
             headers:{
-              'Authorization':token
-              
+              'Authorization':token 
             }}).then((response) => {
             setManagerId(response.data.emp_id);
         });
@@ -186,16 +187,13 @@ const ChittyForm=()=> {
         {
             headers:{
               'Authorization':token
-              
-            }}).then((response) => {
+            }})
+            .then((response) => {
             setCategoryId(response.data.id);
-        
         });
     }
 
     
-    
-    const getCategoryName =
         Axios.get(`http://localhost:8080/chitty/${chittyId}/category`,
         {
             headers:{
@@ -203,10 +201,7 @@ const ChittyForm=()=> {
               
             }}).then((response) => {
             setCategoryName(response.data.categoryName);
-        
         });
-    
-    console.log(categoryName);
 
 
 
@@ -266,7 +261,7 @@ const ChittyForm=()=> {
 
                     <div className={classes.pincode}>
                         <label className={classes.form__label} for="pincode">Pincode: <span class="required">*</span></label>
-                        <input  id="pinCode" type="number" min="0" className={classes.form__input} value={chittalData.pinCode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" required/>
+                        <input  id="pinCode" type="text"  maxlength="6" className={classes.form__input} value={chittalData.pinCode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" required/>
                     </div>
 
                     <div className={classes.userPhone}>
@@ -290,7 +285,7 @@ const ChittyForm=()=> {
 
                     <div className={classes.income}>
                         <label className={classes.form__label} for="income">Annual Income: <span class="required">*</span></label>
-                        <input type="number" min="0" id="income" className={classes.form__input} value={chittalData.income} onChange={(e) => handleInputChange(e)} placeholder="₹" required/>
+                        <input type="text"  id="income" className={classes.form__input} value={chittalData.income} onChange={(e) => handleInputChange(e)} placeholder="₹" required/>
                     </div>
 
                     <div className={classes.Chitty_Type}>
@@ -300,7 +295,7 @@ const ChittyForm=()=> {
 
                     <div className={classes.aadhar}>
                         <label className={classes.form__label} for="aadhar">Aadhar number: <span class="required">*</span> </label>
-                        <input type="number" min="0" id="aadhar" className={classes.form__input} value={chittalData.aadhar} onChange={(e) => handleInputChange(e)} placeholder="Eg.2054 3605 7419 " re />
+                        <input type="text" id="aadhar" maxlength="12" className={classes.form__input} value={chittalData.aadhar} onChange={(e) => handleInputChange(e)} placeholder="Eg.2054 3605 7419 " re />
                     </div>
                 </div>
 

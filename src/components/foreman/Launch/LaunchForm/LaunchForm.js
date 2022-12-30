@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom/client";
 import classes from './LaunchForm.module.css';
 import Axios from 'axios';
-import { Link } from 'react-router-dom';
+
 
 const LaunchForm = () => {
-  
+
+  const [autoChitId,setAutoChitId] = useState("");
   let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
+  const getchittyurl = "http://localhost:8080/chitty"
   const url = "http://localhost:8080/chitty/add"
 
   const [data,setData] = useState({
@@ -28,7 +30,7 @@ const LaunchForm = () => {
     function submit(e){
     e.preventDefault();
     Axios.post(url,{
-    chitNumber:parseInt(data.chitNumber),
+    chitNumber:autoChitId,
     installment:parseInt(amount),
     duration:parseInt(installments),
     manager:parseInt(employeeId),
@@ -42,14 +44,11 @@ const LaunchForm = () => {
     },{
       headers:{
         'Authorization':token
-        
       }})
     .then(res=>{
       if(res.data != null){
       alert("Chitty launched successfully")
-      setData({
-        chitNumber:""
-      })
+      setAutoChitId('')
       setTotalAmount('')
       setInstallments('')
       setAmount('')
@@ -57,7 +56,6 @@ const LaunchForm = () => {
       }
       console.log(res.data)
     })
-
     }
  
 
@@ -84,12 +82,45 @@ const LaunchForm = () => {
   const [httpError, setHttpError] = useState();
 
   useEffect(() => {
+    const fetchChittiess = async () => {
+      const response = await fetch(
+        getchittyurl,{
+          headers:{
+            'Authorization':token
+          }}
+      );
+
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
+
+      const responseData = await response.json();
+      // console.log(responseData._embedded.chitty)
+      // console.log(responseData._embedded.chitty.length)
+      const loadedManager = [];
+      if(responseData._embedded.chitty.length === 0){
+        setAutoChitId("EM" + 1 + "_" + year);
+        // console.log(1 + "/" + year)
+      }
+      else{
+        const chitNewNum = responseData._embedded.chitty.length + 1;
+        setAutoChitId("EM" + chitNewNum + "_" + year);
+        // console.log(responseData._embedded.chitty.length + 1 + "/" + year)
+      }
+    };
+
+    fetchChittiess().catch((error) => {
+      setIsLoading(false);
+      setHttpError(error.message);
+    });
+  }, []);
+
+  useEffect(() => {
     const fetchEmployees = async () => {
       const response = await fetch(
         'http://localhost:8080/managers',{
           headers:{
             'Authorization':token
-            
           }}
       );
 
@@ -127,8 +158,7 @@ const LaunchForm = () => {
         'http://localhost:8080/chittycategory',
         {
           headers:{
-            'Authorization':token
-            
+            'Authorization':token 
           }}
       );
 
@@ -150,7 +180,6 @@ const LaunchForm = () => {
 
 
       setCategory(loadedCategory);
-
       setIsLoading(false);
     };
 
@@ -177,23 +206,23 @@ const LaunchForm = () => {
   }
   const handleChanger = (event) => {
     setChittyCategoryId(event.target.value);
-    console.log("select"+event.target.value);
+    // console.log("select"+event.target.value);
   }
 
  
   const installmentsHandler = (event) => {
     setInstallments(parseInt(event.target.value))
-    console.log(event.target.value)
+    // console.log(event.target.value)
   }
 
   const amountHandler = (event) => {
     setAmount(parseInt(event.target.value))
-    console.log(event.target.value)
+    // console.log(event.target.value)
   }
 
   const totalAmountHandler = () => {
     setTotalAmount(parseInt(installments * amount))
-    console.log(parseInt(installments + amount))
+    // console.log(parseInt(installments * amount))
   }
 
 
@@ -204,10 +233,8 @@ const LaunchForm = () => {
         <input className="minimal"
           name="chitty_no"
           id="chitNumber"
-          value={data.chitNumber}
-          onChange={handle}
-          placeholder="Chitty No.eg:1500"
-          required
+          placeholder='chit number/year'
+          value={autoChitId}
         ></input><br /><br />
 
 
@@ -256,7 +283,7 @@ const LaunchForm = () => {
             onClick={totalAmountHandler}
             readOnly
             required
-          ></input>
+          />
         ) : (
           <input 
             name="total"
@@ -264,7 +291,7 @@ const LaunchForm = () => {
             onClick={totalAmountHandler}
             readOnly
             required
-          ></input>
+          />
         )}
 
       

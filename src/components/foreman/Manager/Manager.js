@@ -69,7 +69,7 @@ const Manager = () =>
 				</h4>
 				<div className={classes.sample}>
 					<h5>Download Template here :</h5>
-					<a href='https://experiontechnologies-my.sharepoint.com/personal/anagha_r_experionglobal_com/_layouts/15/download.aspx?e=xXOdny&share=EcX4nadlPPFIrJpxl5LIqsYBJnM1z0lRaIjd061WTjlP8Q'>
+					<a href='https://experiontechnologies-my.sharepoint.com/personal/fadia_haris_experionglobal_com/_layouts/15/download.aspx?e=RlnbwR&share=EX7Iv_icVfRGqTNCAqtQ4IYBiV8EGdoDm-9lZYkkhAeqbg'>
 					<img src={image} height="20px" width="20px" alt="img" />
 					</a>
 
