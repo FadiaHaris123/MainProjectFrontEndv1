@@ -1,27 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Montserrat&family=Teko:wght@500&display=swap');
 
 
-.manage{
+.manage {
     background-image: url("../../../assets/images/foremanbg.jpg");
-    text-align:center;
+    text-align: center;
     box-sizing: border-box;
     align-items: center;
     position: relative;
     height: 100vh;
-  }
+}
 
-  .upload
-  {
-      text-align: center;
-      box-shadow: 0 0px 10px rgba(40, 40, 40, 0.75);
-      border-radius: 1cm;
-      padding: 20px;
-      width: 50%;
-      height: 80vh;
-      margin: 7% 25%;
-  }
+.upload {
+    text-align: center;
+    box-shadow: 0 0px 10px rgba(40, 40, 40, 0.75);
+    border-radius: 1cm;
+    padding: 20px;
+    width: 50%;
+    height: 80vh;
+    margin: 7% 25%;
+}
 
-  .upload button{
+.upload button {
     background-color: #192d44;
     padding: 2% 2%;
     margin: 75px 100px;
@@ -34,7 +33,7 @@
     border-radius: 5px;
 }
 
-.upload button:hover{
+.upload button:hover {
     background-color: #3457a9;
     padding: 2% 2%;
     margin: 75px 100px;
@@ -46,7 +45,11 @@
     border-radius: 5px;
 }
 
-.filedata{
+.filedata {
     font-family: 'Lora', serif;
     color: #192d44;
+}
+
+.errormsg {
+    color: #c31c10;
 }

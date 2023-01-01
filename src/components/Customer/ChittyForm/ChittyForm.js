@@ -7,6 +7,7 @@ import Navbar from '../Navbar';
 //Form to add chittal details
 function ChittyForm() {
 
+    console.log("In chitty form")
     const [errorMessage, setErrorMessage] = useState('')
     let chittyId = JSON.parse(sessionStorage.getItem('chittyId'));
   
@@ -69,7 +70,7 @@ function ChittyForm() {
         e.preventDefault();
         Axios.post(url, {
             userId: id,
-            chittyId: parseInt(chittyId),
+            chittyId: chittyId,
             age: parseInt(chittalData.age),
             address: chittalData.address,
             pinCode: chittalData.pinCode,
@@ -169,7 +170,7 @@ function ChittyForm() {
 
                     <div className={classes.pincode}>
                         <label className={classes.form__label} for="pincode">Pincode: <span class="required">*</span></label>
-                        <input  id="pinCode" type="number" min="0" maxlength="6" className={classes.form__input} value={chittalData.pinCode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" required/>
+                        <input  id="pinCode" type="text"  maxlength="6" className={classes.form__input} value={chittalData.pinCode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" required/>
                     </div>
 
                     <div className={classes.userPhone}>
@@ -193,7 +194,7 @@ function ChittyForm() {
 
                     <div className={classes.income}>
                         <label className={classes.form__label} for="income">Annual Income: <span class="required">*</span></label>
-                        <input type="number" min="0" id="income" className={classes.form__input} value={chittalData.income} onChange={(e) => handleInputChange(e)} placeholder="₹" required/>
+                        <input type="text"  id="income" className={classes.form__input} value={chittalData.income} onChange={(e) => handleInputChange(e)} placeholder="₹" required/>
                     </div>
 
                     <div className={classes.Chitty_Type}>
@@ -203,7 +204,7 @@ function ChittyForm() {
 
                     <div className={classes.aadhar}>
                         <label className={classes.form__label} for="aadhar">Aadhar number: <span class="required">*</span> </label>
-                        <input type="number" min="0" id="aadhar" maxlength="12" className={classes.form__input} value={chittalData.aadhar} onChange={(e) => handleInputChange(e)} placeholder="Eg.2054 3605 7419 " re />
+                        <input type="text" id="aadhar" maxlength="12" className={classes.form__input} value={chittalData.aadhar} onChange={(e) => handleInputChange(e)} placeholder="Eg.2054 3605 7419 " re />
                     </div>
                 </div>
 
