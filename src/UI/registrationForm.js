@@ -184,7 +184,7 @@ function passwordCheck(value){
               id="mobileNo"
               value={data.mobileNo}
                 type="text"
-                min="0"
+                maxLength={10}
                 className="form-control mt-1"
                 placeholder="Mobile No."
                 required

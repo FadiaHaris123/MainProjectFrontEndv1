@@ -132,7 +132,7 @@ const Auth = (props) => {
   })
   let token=null;
   token = JSON.stringify(response?.data?.jwtToken);
-  console.log(token)
+  // console.log(token)
 
    if(token!=null)
    {
@@ -152,7 +152,7 @@ const Auth = (props) => {
     }
     console.log("authorized")
   }
-  props.onLogin(emailCurrentState.enteredEmail, passwordCurrentState.enteredPassword);
+  // props.onLogin(emailCurrentState.enteredEmail, passwordCurrentState.enteredPassword);
 };
     
   return (
