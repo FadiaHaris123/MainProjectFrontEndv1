@@ -38,9 +38,11 @@ function App() {
   //     setauthenticated(loggedInUser);
   //   }
   // }, []);
+
   // if (!authenticated) {
   //   history.push("/");
-  // } else {
+  // } 
+  // else {
     return (
       <Router>
         <Switch>
@@ -72,6 +74,7 @@ function App() {
       </Router>
     )
   }
-//  }
+// }
+
 
 export default App;
