@@ -3,9 +3,9 @@ import ReactDOM from "react-dom/client";
 import classes from './LaunchForm.module.css';
 import Axios from 'axios';
 
-
 const LaunchForm = () => {
 
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [autoChitId,setAutoChitId] = useState("");
   let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
   const getchittyurl = "http://localhost:8080/chitty"
@@ -226,7 +226,7 @@ const LaunchForm = () => {
 
 
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={handleSubmit(submit)}>
       <div className={classes.forms}>
 
         <input className="minimal"
@@ -236,7 +236,7 @@ const LaunchForm = () => {
           value={autoChitId}
         ></input><br /><br />
 
-
+<Form.Field>
         <select className={classes.minimal} onChange={handleChanger}  required>
           <option>Select Chitty Category</option>
           {category.map(category => (
@@ -244,6 +244,8 @@ const LaunchForm = () => {
           ))
           }
         </select><br /><br />
+        </Form.Field>
+        {errors.firstName && <p>Please check the chitty category</p>}
 
         <select className={classes.minimal} onChange={handleChange}  required>
           <option>Chitty Manager</option>
