@@ -69,7 +69,7 @@ const AddManager = () => {
       if (values == '') {
         errors.emp_lastname = "Last Name is required!";
       } else if (symbols.test(values) || numbers.test(values)) {
-        errors.firstName = "Last Name is invalid";
+        errors.emp_lastname = "Last Name is invalid";
       }
     } else if (id == "email") {
       if (values == '') {
@@ -117,7 +117,7 @@ const AddManager = () => {
     if (!values.emp_lastname) {
       errors.emp_lastname = "Last Name is required!";
     } else if (symbols.test(values.emp_lastname) || numbers.test(values.emp_lastname)) {
-      errors.firstName = "Last Name is invalid";
+      errors.emp_lastname = "Last Name is invalid";
     }
     if (!values.email) {
       errors.email = "Email is required!";

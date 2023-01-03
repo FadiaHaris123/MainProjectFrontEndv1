@@ -139,7 +139,7 @@ const Auth = (props) => {
     sessionStorage.setItem('jwt', JSON.stringify(response?.data?.jwtToken));
     sessionStorage.setItem('userId', JSON.stringify(response?.data?.userId));
     sessionStorage.setItem('roleId', JSON.stringify(response?.data?.roleId));
-    alert("Authorised User");
+    // alert("Authorised User");
     if(response?.data?.roleId==1)
     {
       history.push("/admin");
