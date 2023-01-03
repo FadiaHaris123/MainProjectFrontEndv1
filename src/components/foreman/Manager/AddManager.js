@@ -56,6 +56,7 @@ const AddManager = () => {
     const mail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     const symbols = /[!@#$%^&*(),.?":{}|<>]/g;
     const numbers = /\d+/g;
+   
     if (id == "firstName") {
       if (values == '') {
         errors.firstName = "First Name is required!";
@@ -104,6 +105,8 @@ const AddManager = () => {
     const mail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     const symbols = /[!@#$%^&*(),.?":{}|<>]/g;
     const numbers = /\d+/g;
+
+   
     if (!values.firstName) {
       errors.firstName = "First Name is required!";
     } else if (symbols.test(values.firstName) || numbers.test(values.firstName)) {
