@@ -146,7 +146,7 @@ const ChittyForm = () => {
         const errors = {};
         console.log("check" + values)
         const alphabets = /[a-zA-Z\s]/
-        const add_check=/(?!^\d+$)^[a-zA-Z0-9_-]{8,}$/ 
+        const add_check=/(?!^\d+$)^[a-zA-Z0-9\s,'-]{8,}$/ 
         const pin=/^[0-9]{6}$/
         const salary=/^[0-9]{3,}$/
         const aadhar=/(^[0-9]{4}[0-9]{4}[0-9]{4}$)|(^[0-9]{4}\s[0-9]{4}\s[0-9]{4}$)/
@@ -227,7 +227,7 @@ const ChittyForm = () => {
         const errors = {};
       
         const phone=/^[0-9]{10}$/
-        const add_check=/(?!^\d+$)^[a-zA-Z0-9_-]{8,}$/ 
+        const add_check=/(?!^\d+$)^[a-zA-Z0-9\s,'-]{8,}$/ 
         const pin=/^[0-9]{6}$/
         const salary=/^[0-9]{3,}$/
         const aadhar=/(^[0-9]{4}[0-9]{4}[0-9]{4}$)|(^[0-9]{4}\s[0-9]{4}\s[0-9]{4}$)/
