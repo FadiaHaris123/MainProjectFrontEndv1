@@ -9,14 +9,12 @@ import { useEffect } from 'react';
 
 
 const BidDetails = (props) => {
-
     useEffect(() => {
         const bidding = setInterval(() => {
             function getId() {
                 axios.get(geturl, {
                     headers: {
                         'Authorization': token
-
                     }
                 }).then((response) => {
                     setId(response.data._embedded.auction[0].id)
@@ -39,14 +37,12 @@ const BidDetails = (props) => {
     const url = `http://localhost:8080/auction/update`
     const geturl = `http://localhost:8080/auction`
 
-
     const sendValue = (e) => {
         setCurrentAmount(parseInt(e.target.value) + currentAmount);
         update(e);
     }
 
     const update = (e) => {
-        // setInterval(() => {
             axios.put(url, {
                 id: id,
                 chittyId: props.chittyId,
@@ -56,17 +52,11 @@ const BidDetails = (props) => {
                 {
                     headers: {
                         'Authorization': token
-
                     }
                 })
-        // }, 5);
-
-        // return () => clearInterval(bid);
-
     }
 
     const submit = (e) => {
-
         e.preventDefault();
         setCurrentAmount(currentAmount + parseInt(customAmount))
         axios.put(url, {
@@ -78,10 +68,8 @@ const BidDetails = (props) => {
             {
                 headers: {
                     'Authorization': token
-
                 }
             })
-
     }
 
     const customAmountHandler = (e) => {
@@ -96,7 +84,7 @@ const BidDetails = (props) => {
                 <div className={classes.bidhistory}>
                     <h3>Bidding On Air !!!</h3>
                     <div className={classes.currentBid}>
-                        <label><IoMdArrowDropupCircle color='green' size={20} />Current Bid Amount</label>
+                        <label><IoMdArrowDropupCircle color='green' size={20} />Current Bid Amount (in ₹)</label>
                         <input className={classes.bidamount} value={currentAmount} readOnly />
                     </div>
                 </div>
@@ -112,7 +100,7 @@ const BidDetails = (props) => {
                         <button type='submit' value={10000} onClick={sendValue}>+10,000</button>
                     </div>
                     <div className={classes.customamount}>
-                        <label>Custom amount </label>
+                        <label>Custom amount (in ₹)</label>
                         <form onSubmit={submit}>
                             <input placeholder='Enter Amount' value={customAmount} onChange={customAmountHandler} />
                             <button className={classes.send} type='submit'><AiOutlineSend size={20} /></button>

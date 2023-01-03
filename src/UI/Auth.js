@@ -8,13 +8,16 @@ import '../App.css'
 import './Auth.css'
 import classes from './Login.module.css';
 
+
+//Authentication page
 const Auth = (props) => {
 
+  let [emailError,setEmailError] = useState('')
   let [authMode, setAuthMode] = useState("signin")
-  // const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated") || false));
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin")
   }
+
   const emailInitialState = {
     enteredEmail: '',
     emailIsValid: null
@@ -25,6 +28,7 @@ const Auth = (props) => {
     passwordIsValid: null
   };
 
+  //email and password validation
 
   const emailHandler = (prevState, action) => {
 
@@ -32,7 +36,6 @@ const Auth = (props) => {
       return {
         enteredEmail: action.payload,
         emailIsValid: action.payload.includes('@')
-
       }
     }
     if (action.type === 'emailvalidity') {
@@ -41,14 +44,9 @@ const Auth = (props) => {
         emailIsValid: prevState.enteredEmail.includes('@')
       }
     }
-    // return {
-    //   enteredEmail: '',
-    //   emailIsValid: false
-    // }
   };
 
   const passwordHandler = (prevState, action) => {
-
     if (action.type === 'passwordchange') {
       return {
         enteredPassword: action.payload,
@@ -61,17 +59,11 @@ const Auth = (props) => {
         passwordIsValid: prevState.enteredPassword.trim().length > 6
       }
     }
-    // return {
-    //   enteredPassword: '',
-    //   passwordIsValid: false
-    // }
   };
 
 
   const [emailCurrentState, dispatchEmail] = useReducer(emailHandler, emailInitialState);
   const [passwordCurrentState, dispatchPassword] = useReducer(passwordHandler, passwordInitialState);
-  
-
   const [formIsValid, setFormIsValid] = useState(false);
 
 
@@ -80,7 +72,6 @@ const Auth = (props) => {
   useEffect(() => {
     const identifier = setTimeout(() => {
       console.log("validity check");
-
       setFormIsValid(
         emailCurrentState.enteredEmail.includes('@') && passwordCurrentState.enteredPassword.trim().length >= 6
       );
@@ -89,8 +80,7 @@ const Auth = (props) => {
       console.log('CLEANUP');
       clearTimeout(identifier);
     };
-
-  }, [emailCurrentState, passwordCurrentState]);
+  },[emailCurrentState, passwordCurrentState]);
 
 
   const emailChangeHandler = (event) => {
@@ -109,38 +99,23 @@ const Auth = (props) => {
     dispatchPassword({ type: 'passwordvalidity' })
   };
 
-  // const submitHandler = (event) => {
-  //   event.preventDefault();
-  //   props.onLogin(emailCurrentState.enteredEmail, passwordCurrentState.enteredPassword);
-  // };
 
-  let [mail, setMailMode] = useState("")
-  let [password, setPasswordMode] = useState("")
   const history = useHistory();
-
   const loginHandler = async (e) => {
    
     e.preventDefault();
-    // setMailMode(emailCurrentState.enteredEmail);
-    // setPasswordMode(passwordCurrentState.enteredPassword);
     const data =JSON.stringify({
       email: emailCurrentState.enteredEmail,
       password: passwordCurrentState.enteredPassword
   }) ;
-  // console.log(data);
+
   const response = await axios.post("http://localhost:8080/authenticate",data
-  //  JSON.stringify(data),
 ,
   {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true
   }).then()
-    //alert("checking"))
   .catch(function(error) {
-    // if (axios.isAxiosError(error)) {
-      // // Handle 400
-      // console.log(error)
-      // console.log("message",error.response?.data)
       if(error.response)
       {
         console.log("data",error.response.data)
@@ -150,84 +125,36 @@ const Auth = (props) => {
         console.log(data)
         alert("UnAuthorized")
       }
-
-      else{
-        alert("hello")
-      }
-      // else
-      // alert("Authorized gfhjj")
+      // else{
+      //   alert("hello")
+      // }
       throw error
-    // }
-    // } else {
-    //   // Handle else
-    // }
-    // console.log(reason.message)
   })
   let token=null;
   token = JSON.stringify(response?.data?.jwtToken);
-  console.log(token)
-  // console.log(response.ok)
+  // console.log(token)
 
    if(token!=null)
    {
     sessionStorage.setItem('jwt', JSON.stringify(response?.data?.jwtToken));
-    
     sessionStorage.setItem('userId', JSON.stringify(response?.data?.userId));
     sessionStorage.setItem('roleId', JSON.stringify(response?.data?.roleId));
-    alert("Authorised User");
+    // alert("Authorised User");
     if(response?.data?.roleId==1)
     {
-      // setauthenticated(true)
-      // localStorage.setItem("authenticated", true);
       history.push("/admin");
     }
-  
     else if(response?.data?.roleId==2){
-      // setauthenticated(true)
-      // localStorage.setItem("authenticated", true);
       history.push("/manager");
     }
-  
     else{
-      // setauthenticated(true)
-      // localStorage.setItem("authenticated", true);
       history.push("/customer");
     }
     console.log("authorized")
   }
-  
-  // else{
-  //   // alert("Unauthorised User");
-  //   // console.log("unauthorized")
-  //   throw new console.error();
-  // }
-  
-  
-  props.onLogin(emailCurrentState.enteredEmail, passwordCurrentState.enteredPassword);
- 
+  // props.onLogin(emailCurrentState.enteredEmail, passwordCurrentState.enteredPassword);
 };
     
-  //   Axios.post('http://localhost:8080/api/user/userlogin', {
-  //     email: mail,
-  //     userPassword: password
-  //   })
-  //     .then(res => {
-  //       if (res.data.roleId == 1) {
-  //         history.push("/admin");
-  //       }
-  //       if (res.data.roleId == 2) {
-  //         console.log(res.data.userId);
-  //         localStorage.setItem('managerId', res.data.userId);
-  //         history.push("/manager");
-  //       }
-  //       if (res.data.roleId == 3) {
-  //         console.log(res.data.userId);
-  //         localStorage.setItem('userId', res.data.userId);
-  //         history.push("/customer");
-  //       }
-  //     })
-
-  // };
   return (
     <header style={HeaderStyle}>
       <div className="overlays">

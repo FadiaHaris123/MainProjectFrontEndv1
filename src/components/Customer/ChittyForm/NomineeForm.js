@@ -5,12 +5,13 @@ import { useHistory } from "react-router-dom";
 import classes from './NomineeForm.module.css'
 import Axios from 'axios';
 
+
+//To add nominee details of a particular chittal
 function NomineeForm(props) {
 
     const url = "http://localhost:8080/nominee/add";
     const history = useHistory();
     let token = `Bearer ${JSON.parse(sessionStorage.getItem('jwt'))}`;
-    // let id = JSON.parse(sessionStorage.getItem('userId'));
     const [chits, setChits] = useState([]);
     const [nomineeData, setNomineeData] = useState({
         chittalId: "",
@@ -46,9 +47,9 @@ function NomineeForm(props) {
         },
         {
             headers:{
-              'Authorization':token
-              
+              'Authorization':token  
             }})
+            //updating chitty table, updating current number of chittals
             Axios.put('http://localhost:8080/chitty/update', {
                 chitNumber: chits.chitNumber,
                 installment: chits.installment,
@@ -64,12 +65,10 @@ function NomineeForm(props) {
             },
             {
                 headers:{
-                  'Authorization':token
-                  
+                  'Authorization':token  
                 }})
                 .then(res => {
                     if (res.data != null) {
-
                         alert("Nominee details added and Chittal information updated successfully")
                         history.push("/customer/joinedchits")
                     }
@@ -79,19 +78,17 @@ function NomineeForm(props) {
 
     return (
         <Fragment>
-        {/* <h3 className={classes.head}>Please fill the nominee details below</h3> */}
         <div className={classes.form}>
             <div className={classes.nominee}>
-            
                 <h3 className={classes.head1}>Nominee details</h3>
                 <div className={classes.nomineeName}>
                     <label className={classes.form__label} for="nomineeName">Name <span class="required">*</span></label>
-                    <input type="nomineeName" id="name" className={classes.form__input} value={nomineeData.name} onChange={(e) => handleInputChange(e)} placeholder="Name" />
+                    <input type="text" id="name" className={classes.form__input} value={nomineeData.name} onChange={(e) => handleInputChange(e)} placeholder="Name" />
                 </div>
 
                 <div className={classes.nomineeAge}>
                     <label className={classes.form__label} for="nomineeAge">Age <span className={classes.required}>*</span></label>
-                    <input type="nomineeAge" id="age" className={classes.form__input} value={nomineeData.age} onChange={(e) => handleInputChange(e)} placeholder="In years" />
+                    <input type="text" maxlength="3" id="age" className={classes.form__input} value={nomineeData.age} onChange={(e) => handleInputChange(e)} placeholder="In years" />
                 </div>
 
                 <div className={classes.nomineedob}>
@@ -101,21 +98,21 @@ function NomineeForm(props) {
 
                 <div className={classes.nomineeAddress}>
                     <label className={classes.form__label} for="nomineeAddress">Address <span className={classes.required}>*</span></label>
-                    <input type="nomineeAddress" id="address" className={classes.form__input} value={nomineeData.address} onChange={(e) => handleInputChange(e)} placeholder="Address" />
+                    <input type="text" id="address" className={classes.form__input} value={nomineeData.address} onChange={(e) => handleInputChange(e)} placeholder="Address" />
                 </div>
 
                 <div className={classes.nomineePincode}>
                     <label className={classes.form__label} for="nomineePincode"> Pincode <span className={classes.required}>*</span></label>
-                    <input type="nomineePincode" id="pincode" className={classes.form__input} value={nomineeData.pincode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" />
+                    <input type="text"maxlength="6" id="pincode" className={classes.form__input} value={nomineeData.pincode} onChange={(e) => handleInputChange(e)} placeholder="Eg.695005" />
                 </div>
                 <div className={classes.nomineeAd}>
                     <label className={classes.form__label} for="nomineeAd"> Aadhar <span className={classes.required}>*</span></label>
-                    <input type="nomineeAd" id="aadhar" className={classes.form__input} value={nomineeData.aadhar} onChange={(e) => handleInputChange(e)} placeholder="Eg.2054 3605 7419" />
+                    <input type="text" id="aadhar" maxlength="12" className={classes.form__input} value={nomineeData.aadhar} onChange={(e) => handleInputChange(e)} placeholder="Eg.2054 3605 7419" />
                 </div>
 
                 <div className={classes.nomineePhone}>
                     <label className={classes.form__label} for="nomineePhone">Contact number <span className={classes.required}>*</span></label>
-                    <input type="nomineePhone" id="phone" className={classes.form__input} value={nomineeData.phone} onChange={(e) => handleInputChange(e)} placeholder="+91  " />
+                    <input type="text" maxlength="10" id="phone" className={classes.form__input} value={nomineeData.phone} onChange={(e) => handleInputChange(e)} placeholder="+91  " />
                 </div>
             </div>
             <div className={classes.footer}>
@@ -126,7 +123,6 @@ function NomineeForm(props) {
 
         </div>
         </Fragment>
-
     );
 }
 
