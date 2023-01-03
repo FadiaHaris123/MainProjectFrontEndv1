@@ -44,6 +44,13 @@ const Navigation = () => {
         setHttpError(error.message);
       });
     }, []);
+
+  //   const logoutHandler = () => {
+  //     sessionStorage.removeItem('roleId');
+  //     sessionStorage.removeItem('userId');
+  //     sessionStorage.removeItem('jwt');   
+  // };
+  
     if (isLoading) {
       return (
           <h1>Loading...</h1>
@@ -84,7 +91,7 @@ const Navigation = () => {
         </div>
       </div>
       <Link to="/">
-        <button class={classes.logout_button} onClick={logoutHandler}>Log Out</button>
+        <button class={classes.logout_button}  onClick={logoutHandler}>Log Out</button>
       </Link>
     </div>
   )

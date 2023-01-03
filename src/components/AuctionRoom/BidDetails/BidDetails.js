@@ -41,6 +41,7 @@ const BidDetails = (props) => {
         setCurrentAmount(parseInt(e.target.value) + currentAmount);
         update(e);
     }
+    
 
     const update = (e) => {
             axios.put(url, {
@@ -76,6 +77,7 @@ const BidDetails = (props) => {
         setCustomAmount(e.target.value)
         console.log(e.target.value)
     }
+ 
 
 
     return (
